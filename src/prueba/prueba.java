@@ -8,4 +8,5 @@ public class prueba {
 
 	private String pruebaAGCC;
 	private String soy_alvaro;
+	private String Alo_Presidente;
 }
