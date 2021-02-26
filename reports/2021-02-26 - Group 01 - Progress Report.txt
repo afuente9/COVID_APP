@@ -1,0 +1,17 @@
+This week we expected to be able to do...
+the tables, the uml and the use-case
+Optional: Reasons why
+---------------------
+
+This week we did...
+the tables, the uml and the use-case
+
+
+Optional: Reasons why
+---------------------
+
+Next weeks we will do...
+start with SQL
+
+Optional: Reasons why
+---------------------
