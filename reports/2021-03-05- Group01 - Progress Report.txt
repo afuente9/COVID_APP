@@ -1,0 +1,17 @@
+This week we expected to be able to do...
+The PDF explaining how the app works and start programing the DDL 
+
+Optional: Reasons why
+---------------------
+
+This week we did...
+The PDF explaining how the app works and programming the POJOS and tables on DDL 
+
+Optional: Reasons why
+---------------------
+
+Next weeks we will do...
+The mockup of the UI and prepare the presentation for explaining the idea to the class
+
+Optional: Reasons why
+---------------------
