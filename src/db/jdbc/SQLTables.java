@@ -45,7 +45,9 @@ public class SQLTables {
 					+ " alive 				boolean  	 NOT NULL," 
 					+ " hospital  			TEXT	 	 NOT NULL,"
 					+ " score 				int			 NOT NULL,"
-					+ " id_adm				INTEGER		 REFERENCES administration(id))";
+					+ " id_adm				INTEGER		 REFERENCES administration(id))"
+					+ " vaccinated			boolean		 NOT NULL"
+					+ " bloodType			TEXT		 NOT NULL";
 			stmt2.executeUpdate(sql2);
 			stmt2.close();
 

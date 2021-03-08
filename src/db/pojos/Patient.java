@@ -20,28 +20,33 @@ public class Patient implements Serializable{
 	private String hospital;
 	private int score;
 	private List<Patient> patients;
+	private boolean is_vaccinated;
+	private String bloodType;
 	
 	public Patient() {
 		super();
 		this.patients = new ArrayList<Patient>();
 	}
 
-	public Patient(Integer _id, String _hos_location, String _name, Date _birthday, long _social_security, float _heigh,
-			float _weight, Sex _sex, boolean _infected, boolean _alive, String _hospital, int _score) {
+	public Patient(Integer id, String hos_location, String name, Date birthday, long social_security, float heigh,
+			float weight, Sex sex, boolean infected, boolean alive, String hospital, int score, List<Patient> patients,
+			boolean is_vaccinated, String bloodType) {
 		super();
-		this.id = _id;
-		this.hos_location = _hos_location;
-		this.name = _name;
-		this.birthday = _birthday;
-		this.social_security = _social_security;
-		this.heigh = _heigh;
-		this.weight = _weight;
-		this.sex = _sex;
-		this.infected = _infected;
-		this.alive = _alive;
-		this.hospital = _hospital;
-		this.score = _score;
-		this.patients = new ArrayList<Patient>();
+		this.id = id;
+		this.hos_location = hos_location;
+		this.name = name;
+		this.birthday = birthday;
+		this.social_security = social_security;
+		this.heigh = heigh;
+		this.weight = weight;
+		this.sex = sex;
+		this.infected = infected;
+		this.alive = alive;
+		this.hospital = hospital;
+		this.score = score;
+		this.patients = patients;
+		this.is_vaccinated = is_vaccinated;
+		this.bloodType = bloodType;
 	}
 
 	@Override
@@ -216,5 +221,21 @@ public class Patient implements Serializable{
 
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+	public String getBloodType() {
+		return bloodType;
+	}
+
+	public void setBloodType(String bloodType) {
+		this.bloodType = bloodType;
+	}
+
+	public boolean isIs_vaccinated() {
+		return is_vaccinated;
+	}
+
+	public void setIs_vaccinated(boolean is_vaccinated) {
+		this.is_vaccinated = is_vaccinated;
 	}
 }
