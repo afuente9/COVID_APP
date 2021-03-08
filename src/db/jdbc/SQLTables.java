@@ -126,7 +126,9 @@ public class SQLTables {
 			System.out.println("Database connection closed.");
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			if(!e.getMessage().contains("already exist")) {
+				e.printStackTrace();
+			}
 		}
 	}
 
