@@ -92,7 +92,7 @@ public class SQLTables {
 			stmt7.close();
 			
 			Statement stmt8 = c.createStatement();
-			String sql8 = "CREATE TABLE doc_pat " 
+			String sql8 = "CREATE TABLE pat_doc " 
 					+ "(id_doc       	INTEGER  	REFERENCES doctors(id),"
 					+ " id_pat 			INTEGER	 	REFERENCES pathient(id),"
 					+ " PRIMARY KEY (id_doc, id_pat))";
