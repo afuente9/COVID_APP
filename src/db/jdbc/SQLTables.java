@@ -45,9 +45,9 @@ public class SQLTables {
 					+ " alive 				boolean  	 NOT NULL," 
 					+ " hospital  			TEXT	 	 NOT NULL,"
 					+ " score 				int			 NOT NULL,"
-					+ " id_adm				INTEGER		 REFERENCES administration(id))"
-					+ " vaccinated			boolean		 NOT NULL"
-					+ " bloodType			TEXT		 NOT NULL";
+					+ " id_adm				INTEGER		 REFERENCES administration(id),"
+					+ " vaccinated			boolean		 NOT NULL,"
+					+ " bloodType			TEXT		 NOT NULL)";
 			stmt2.executeUpdate(sql2);
 			stmt2.close();
 
@@ -92,7 +92,7 @@ public class SQLTables {
 			stmt7.close();
 			
 			Statement stmt8 = c.createStatement();
-			String sql8 = "CREATE TABLE doc-pat " 
+			String sql8 = "CREATE TABLE doc_pat " 
 					+ "(id_doc       	INTEGER  	REFERENCES doctors(id),"
 					+ " id_pat 			INTEGER	 	REFERENCES pathient(id),"
 					+ " PRIMARY KEY (id_doc, id_pat))";
@@ -100,7 +100,7 @@ public class SQLTables {
 			stmt8.close();
 			
 			Statement stmt9 = c.createStatement();
-			String sql9 = "CREATE TABLE pat-patho " 
+			String sql9 = "CREATE TABLE pat_patho " 
 					+ "(id_pat       	INTEGER  	REFERENCES pathient(id),"
 					+ " id_patho 		INTEGER	 	REFERENCES other_pathologies(id),"
 					+ " PRIMARY KEY (id_pat, id_patho))";
@@ -108,7 +108,7 @@ public class SQLTables {
 			stmt9.close();
 
 			Statement stmt10 = c.createStatement();
-			String sql10 = "CREATE TABLE pat-medi " 
+			String sql10 = "CREATE TABLE pat_medi " 
 					+ "(id_pat       	INTEGER  	REFERENCES pathient(id),"
 					+ " id_medi 		INTEGER	 	REFERENCES medication(id),"
 					+ " PRIMARY KEY (id_pat, id_medi))";
@@ -116,7 +116,7 @@ public class SQLTables {
 			stmt10.close();
 			
 			Statement stmt11 = c.createStatement();
-			String sql11 = "CREATE TABLE pat-medi " 
+			String sql11 = "CREATE TABLE pat_lab " 
 					+ "(id_pat       	INTEGER  	REFERENCES pathient(id),"
 					+ " id_lab 			INTEGER	 	REFERENCES lab(id),"
 					+ " PRIMARY KEY (id_pat, id_lab))";

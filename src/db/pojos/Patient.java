@@ -20,7 +20,7 @@ public class Patient implements Serializable{
 	private String hospital;
 	private int score;
 	private List<Patient> patients;
-	private boolean is_vaccinated;
+	private boolean vaccinated;
 	private String bloodType;
 	
 	public Patient() {
@@ -45,7 +45,7 @@ public class Patient implements Serializable{
 		this.hospital = hospital;
 		this.score = score;
 		this.patients = patients;
-		this.is_vaccinated = is_vaccinated;
+		this.vaccinated = is_vaccinated;
 		this.bloodType = bloodType;
 	}
 
@@ -231,11 +231,11 @@ public class Patient implements Serializable{
 		this.bloodType = bloodType;
 	}
 
-	public boolean isIs_vaccinated() {
-		return is_vaccinated;
+	public boolean Is_vaccinated() {
+		return vaccinated;
 	}
 
 	public void setIs_vaccinated(boolean is_vaccinated) {
-		this.is_vaccinated = is_vaccinated;
+		this.vaccinated = is_vaccinated;
 	}
 }
