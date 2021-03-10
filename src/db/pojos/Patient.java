@@ -12,7 +12,7 @@ public class Patient implements Serializable{
 	private String name;
 	private Date birthday;
 	private long social_security;
-	private float heigh;
+	private float height;
 	private float weight;
 	private Sex sex;
 	private boolean infected;
@@ -27,8 +27,18 @@ public class Patient implements Serializable{
 		super();
 		this.patients = new ArrayList<Patient>();
 	}
+	
+	
 
-	public Patient(Integer id, String hos_location, String name, Date birthday, long social_security, float heigh,
+	public Patient(Integer id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+
+
+
+	public Patient(Integer id, String hos_location, String name, Date birthday, long social_security, float height,
 			float weight, Sex sex, boolean infected, boolean alive, String hospital, int score, List<Patient> patients,
 			boolean is_vaccinated, String bloodType) {
 		super();
@@ -37,7 +47,7 @@ public class Patient implements Serializable{
 		this.name = name;
 		this.birthday = birthday;
 		this.social_security = social_security;
-		this.heigh = heigh;
+		this.height = height;
 		this.weight = weight;
 		this.sex = sex;
 		this.infected = infected;
@@ -55,7 +65,7 @@ public class Patient implements Serializable{
 		int result = 1;
 		result = prime * result + (alive ? 1231 : 1237);
 		result = prime * result + ((birthday == null) ? 0 : birthday.hashCode());
-		result = prime * result + Float.floatToIntBits(heigh);
+		result = prime * result + Float.floatToIntBits(height);
 		result = prime * result + ((hos_location == null) ? 0 : hos_location.hashCode());
 		result = prime * result + ((hospital == null) ? 0 : hospital.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -85,7 +95,7 @@ public class Patient implements Serializable{
 				return false;
 		} else if (!birthday.equals(other.birthday))
 			return false;
-		if (Float.floatToIntBits(heigh) != Float.floatToIntBits(other.heigh))
+		if (Float.floatToIntBits(height) != Float.floatToIntBits(other.height))
 			return false;
 		if (hos_location == null) {
 			if (other.hos_location != null)
@@ -130,7 +140,7 @@ public class Patient implements Serializable{
 	@Override
 	public String toString() {
 		return "Patient [id=" + id + ", hos_location=" + hos_location + ", name=" + name + ", birthday=" + birthday
-				+ ", social_security=" + social_security + ", heigh=" + heigh + ", weight=" + weight + ", sex=" + sex
+				+ ", social_security=" + social_security + ", height=" + height + ", weight=" + weight + ", sex=" + sex
 				+ ", infected=" + infected + ", alive=" + alive + ", hospital=" + hospital + ", score=" + score
 				+ ", patients=" + patients + "]";
 	}
@@ -167,12 +177,12 @@ public class Patient implements Serializable{
 		this.social_security = social_security;
 	}
 
-	public float getHeigh() {
-		return heigh;
+	public float getheight() {
+		return height;
 	}
 
-	public void setHeigh(float heigh) {
-		this.heigh = heigh;
+	public void setheight(float height) {
+		this.height = height;
 	}
 
 	public float getWeight() {

@@ -2,19 +2,50 @@ package db.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
-public class SQLTables {
+import db.pojos.Patient;
 
-	public static void main(String args[]) {
+public class JDBCManagment {
+	
+	private Connection c;
+	
+	// Open database connection
+	public void connect() {
 		try {
-			// Open database connection
 			Class.forName("org.sqlite.JDBC");
 			Connection c = DriverManager.getConnection("jdbc:sqlite:./database/covid.database");
 			c.createStatement().execute("PRAGMA foreign_keys = ON");
 			System.out.println("Database connection opened");
-
-			// Create tables: begin
+		}
+		catch(SQLException E) {
+			System.out.println("There was a database exception.");
+			E.printStackTrace();
+		}
+		catch (Exception e) {
+			System.out.println("There was a general exception.");
+			e.printStackTrace();
+		}
+		
+	}
+	
+	// Close database connection
+	public void disconnect() {
+		try {
+			c.close();
+		} catch (SQLException e) {
+			System.out.println("There was a problem while closing the database connection.");
+			e.printStackTrace();
+		}
+	}
+	
+	// Create tables:
+	public void creatTables() {
+		try {
 			Statement stmt1 = c.createStatement();
 			String sql1 = "CREATE TABLE doctors " 
 					+ "(id       			INTEGER  	 PRIMARY KEY AUTOINCREMENT,"
@@ -123,15 +154,51 @@ public class SQLTables {
 			stmt11.executeUpdate(sql11);
 			stmt11.close();
 			
-			// Close database connection
-			c.close();
-			System.out.println("Database connection closed.");
-
 		} catch (Exception e) {
 			if(!e.getMessage().contains("already exist")) {
 				e.printStackTrace();
 			}
 		}
 	}
+	
+	public void addPatient(Patient p) {
+		Statement stmt;
+		try {
+			stmt = c.createStatement();
+			String sql = "INSERT INTO Patient (name, birthday, social_security, height, weight, sex, infected, alive, hospital, hos_location "
+					+ "VALUES ('" + p.getName() + ", " + p.getBirthday() + ", " + p.getSocial_security() + ", " + p.getheight() + ", " + p.getSex() + ", " 
+					+ p.isInfected() + ", " + p.isAlive() + ", " + p.getHospital() + ", " + p.getHos_location() + "')";
+			stmt.executeUpdate(sql);
+			stmt.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public List<Patient> searchPatientByName(String name){
+		List<Patient> patients = new ArrayList<Patient>();
+		Statement stmt;
+		try {
+			stmt = c.createStatement();
+			String sql = "SELECT * FROM  patients WHERE name LIKE '%" + name + "%'";
+			ResultSet rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				String patientname = rs.getString("name");
+				Patient patient = new Patient(id, patientname); //TODO add all atributes
+				patients.add(patient); 
+			}
+			rs.close();
+			stmt.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return patients;
+	}
+
+	
+	
 
 }
