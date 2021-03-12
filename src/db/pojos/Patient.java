@@ -11,7 +11,7 @@ public class Patient implements Serializable{
 	private String hos_location;
 	private String name;
 	private Date birthday;
-	private long social_security;
+	private String social_security;
 	private float height;
 	private float weight;
 	private Sex sex;
@@ -19,9 +19,10 @@ public class Patient implements Serializable{
 	private boolean alive;
 	private String hospital;
 	private int score;
-	private List<Patient> patients;
 	private boolean vaccinated;
 	private String bloodType;
+	private List<Patient> patients;
+	
 	
 	public Patient() {
 		super();
@@ -30,15 +31,32 @@ public class Patient implements Serializable{
 	
 	
 
-	public Patient(Integer id, String name) {
+
+
+	public Patient(Integer id, String hos_location, String name, Date birthday, String social_security, float height,
+			float weight, Sex sex, boolean infected, boolean alive, String hospital, boolean vaccinated,
+			String bloodType) {
 		super();
 		this.id = id;
+		this.hos_location = hos_location;
 		this.name = name;
+		this.birthday = birthday;
+		this.social_security = social_security;
+		this.height = height;
+		this.weight = weight;
+		this.sex = sex;
+		this.infected = infected;
+		this.alive = alive;
+		this.hospital = hospital;
+		this.vaccinated = vaccinated;
+		this.bloodType = bloodType;
 	}
 
 
 
-	public Patient(Integer id, String hos_location, String name, Date birthday, long social_security, float height,
+
+
+	public Patient(Integer id, String hos_location, String name, Date birthday, String social_security, float height,
 			float weight, Sex sex, boolean infected, boolean alive, String hospital, int score, List<Patient> patients,
 			boolean is_vaccinated, String bloodType) {
 		super();
@@ -58,6 +76,7 @@ public class Patient implements Serializable{
 		this.vaccinated = is_vaccinated;
 		this.bloodType = bloodType;
 	}
+	
 
 	@Override
 	public int hashCode() {
@@ -65,6 +84,7 @@ public class Patient implements Serializable{
 		int result = 1;
 		result = prime * result + (alive ? 1231 : 1237);
 		result = prime * result + ((birthday == null) ? 0 : birthday.hashCode());
+		result = prime * result + ((bloodType == null) ? 0 : bloodType.hashCode());
 		result = prime * result + Float.floatToIntBits(height);
 		result = prime * result + ((hos_location == null) ? 0 : hos_location.hashCode());
 		result = prime * result + ((hospital == null) ? 0 : hospital.hashCode());
@@ -74,10 +94,12 @@ public class Patient implements Serializable{
 		result = prime * result + ((patients == null) ? 0 : patients.hashCode());
 		result = prime * result + score;
 		result = prime * result + ((sex == null) ? 0 : sex.hashCode());
-		result = prime * result + (int) (social_security ^ (social_security >>> 32));
+		result = prime * result + ((social_security == null) ? 0 : social_security.hashCode());
+		result = prime * result + (vaccinated ? 1231 : 1237);
 		result = prime * result + Float.floatToIntBits(weight);
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -94,6 +116,11 @@ public class Patient implements Serializable{
 			if (other.birthday != null)
 				return false;
 		} else if (!birthday.equals(other.birthday))
+			return false;
+		if (bloodType == null) {
+			if (other.bloodType != null)
+				return false;
+		} else if (!bloodType.equals(other.bloodType))
 			return false;
 		if (Float.floatToIntBits(height) != Float.floatToIntBits(other.height))
 			return false;
@@ -128,14 +155,21 @@ public class Patient implements Serializable{
 			return false;
 		if (sex != other.sex)
 			return false;
-		if (social_security != other.social_security)
+		if (social_security == null) {
+			if (other.social_security != null)
+				return false;
+		} else if (!social_security.equals(other.social_security))
+			return false;
+		if (vaccinated != other.vaccinated)
 			return false;
 		if (Float.floatToIntBits(weight) != Float.floatToIntBits(other.weight))
 			return false;
 		return true;
 	}
-	
-	
+
+
+
+
 
 	@Override
 	public String toString() {
@@ -169,11 +203,11 @@ public class Patient implements Serializable{
 		this.birthday = birthday;
 	}
 
-	public long getSocial_security() {
+	public String getSocial_security() {
 		return social_security;
 	}
 
-	public void setSocial_security(long social_security) {
+	public void setSocial_security(String social_security) {
 		this.social_security = social_security;
 	}
 

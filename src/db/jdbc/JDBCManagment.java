@@ -6,9 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 
 import db.pojos.Patient;
+import db.pojos.Sex;
 
 public class JDBCManagment {
 	
@@ -43,6 +45,17 @@ public class JDBCManagment {
 		}
 	}
 	
+	private String chanBool(boolean n) {
+		String res;
+		if(n) {
+			res = "True";
+		}
+		else {
+			res = "False";
+		}
+		return res;
+	}
+	
 	// Create tables:
 	public void creatTables() {
 		try {
@@ -51,13 +64,9 @@ public class JDBCManagment {
 					+ "(id       			INTEGER  	 PRIMARY KEY AUTOINCREMENT,"
 					+ " name     			TEXT    	 NOT NULL," 
 					+ " speciality 			TEXT  		 NOT NULL,"
+					+ " birth_date			DATE		 NOT NULL,"		
 					+ " collegiate_number	int 		 NOT NULL,"
-					+ " social_security 	TEXT  		 NOT NULL,"
-					+ " heigh 				float  		 NOT NULL," 
-					+ " weight 				float  		 NOT NULL,"
-					+ " sex 				Sex  		 NOT NULL," 
-					+ " infected 			boolean  	 NOT NULL,"
-					+ " alive 				boolean  	 NOT NULL," 
+					+ " sex 				TEXT	 	 NOT NULL," 
 					+ " hospital  			TEXT		 NOT NULL)";
 			stmt1.executeUpdate(sql1);
 			stmt1.close();
@@ -71,7 +80,7 @@ public class JDBCManagment {
 					+ " social_security   	TEXT  	 	 NOT NULL,"
 					+ " heigh 				float   	 NOT NULL," 
 					+ " weight 				float   	 NOT NULL,"
-					+ " sex 				Sex   		 NOT NULL," 
+					+ " sex 			    TEXT	   	 NOT NULL," 
 					+ " infected 			boolean  	 NOT NULL,"
 					+ " alive 				boolean  	 NOT NULL," 
 					+ " hospital  			TEXT	 	 NOT NULL,"
@@ -95,7 +104,8 @@ public class JDBCManagment {
 			Statement stmt4 = c.createStatement();
 			String sql4 = "CREATE TABLE shipment " 
 					+ "(id       		INTEGER  	PRIMARY KEY AUTOINCREMENT,"
-					+ " vacciness  		int	 	 	NOT NULL,"
+					+ " vacciness  		INTEGER	 	NOT NULL,"
+					+ " date			DATE		NOT NULL"		
 					+ " id_lab			INTEGER		REFERENCES lab(id),"
 					+ " id_adm			INTEGER		REFERENCES administration(id))";
 			stmt4.executeUpdate(sql4);
@@ -127,7 +137,7 @@ public class JDBCManagment {
 					+ "(id_doc       	INTEGER  	REFERENCES doctors(id),"
 					+ " id_pat 			INTEGER	 	REFERENCES pathient(id),"
 					+ " PRIMARY KEY (id_doc, id_pat))";
-			stmt8.executeUpdate(sql8); //TODO syntax error
+			stmt8.executeUpdate(sql8); 
 			stmt8.close();
 			
 			Statement stmt9 = c.createStatement();
@@ -164,10 +174,17 @@ public class JDBCManagment {
 	public void addPatient(Patient p) {
 		Statement stmt;
 		try {
+			String sexo;
+			if(p.getSex().equals(Sex.Male)) {
+				sexo = "M";
+			}
+			else {
+				sexo = "F";
+			}
 			stmt = c.createStatement();
-			String sql = "INSERT INTO Patient (name, birthday, social_security, height, weight, sex, infected, alive, hospital, hos_location "
-					+ "VALUES ('" + p.getName() + ", " + p.getBirthday() + ", " + p.getSocial_security() + ", " + p.getheight() + ", " + p.getSex() + ", " 
-					+ p.isInfected() + ", " + p.isAlive() + ", " + p.getHospital() + ", " + p.getHos_location() + "')";
+			String sql = "INSERT INTO Patient (name, birthday, social_security, height, weight, sex, infected, alive, hospital, hos_location, bloodType, vaccinated"
+					+ "VALUES ('" + p.getName() + ", " + p.getBirthday() + ", " + p.getSocial_security() + ", " + p.getheight() + ", " + sexo + ", " 
+					+ p.isInfected() + ", " + p.isAlive() + ", " + p.getHospital() + ", " + p.getHos_location() + ", " + p.getBloodType() + ", " + p.Is_vaccinated() +"')";
 			stmt.executeUpdate(sql);
 			stmt.close();
 		}
@@ -186,8 +203,26 @@ public class JDBCManagment {
 			while(rs.next()) {
 				int id = rs.getInt("id");
 				String patientname = rs.getString("name");
-				Patient patient = new Patient(id, patientname); //TODO add all atributes
-				patients.add(patient); 
+				Date birthday = rs.getDate("birthday");
+				String social_security = rs.getString("social_security");
+				float height = rs.getFloat("height");
+				float weight = rs.getFloat("weight");
+				Sex sexo;
+				if(rs.getString("sex").equalsIgnoreCase("m")) {
+					sexo = Sex.Male;
+				}
+				else {
+					sexo = Sex.Female;
+				}
+				boolean infec = rs.getBoolean("infected");
+				boolean alive = rs.getBoolean("alive");
+				String hosp = rs.getString("hospital");
+				String loc_hosp = rs.getString("hos_location");
+				String blood = rs.getString("bloodType");
+				boolean vaccin = rs.getBoolean("vaccinated");
+				
+				
+				Patient patient = new Patient(id, loc_hosp, patientname, birthday, social_security, height, weight, sexo, infec, alive, hosp, vaccin, blood);
 			}
 			rs.close();
 			stmt.close();
