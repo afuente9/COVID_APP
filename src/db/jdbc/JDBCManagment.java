@@ -9,8 +9,14 @@ import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
 
+import db.pojos.Administration;
+import db.pojos.Doctor;
+import db.pojos.Lab;
+import db.pojos.Medication;
+import db.pojos.Other_Pathologies;
 import db.pojos.Patient;
 import db.pojos.Sex;
+import db.pojos.Shipment;
 
 public class JDBCManagment {
 	
@@ -185,6 +191,99 @@ public class JDBCManagment {
 			String sql = "INSERT INTO Patient (name, birthday, social_security, height, weight, sex, infected, alive, hospital, hos_location, bloodType, vaccinated"
 					+ "VALUES ('" + p.getName() + ", " + p.getBirthday() + ", " + p.getSocial_security() + ", " + p.getheight() + ", " + sexo + ", " 
 					+ p.isInfected() + ", " + p.isAlive() + ", " + p.getHospital() + ", " + p.getHos_location() + ", " + p.getBloodType() + ", " + p.Is_vaccinated() +"')";
+			stmt.executeUpdate(sql);
+			stmt.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void addDoctor(Doctor d) {
+		Statement stmt;
+		try {
+			String sexo;
+			if(d.getSex().equals(Sex.Male)) {
+				sexo = "M";
+			}
+			else {
+				sexo = "F";
+			}
+			stmt = c.createStatement();
+			String sql = "INSERT INTO Doctor (name, speciality, birth_date, collegiate_number, sex, hospital"
+					+ "VALUES ('" + d.getName() + ", " + d.getSpeciality() + ", " + d.getBirthday() + ", " + d.getCollegiate_number() + ", " + sexo + ", " 
+					+  d.getHospital() + "')";
+			stmt.executeUpdate(sql);
+			stmt.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void addLab(Lab l) {
+		Statement stmt;
+		try {
+			stmt = c.createStatement();
+			String sql = "INSERT INTO Laboratory (name, adress, cif, vacciness"
+					+ "VALUES ('" + l.getName() + ", " + l.getAddress()+ ", " + l.getCif() + ", " + l.getVaccines_produce() + "')";
+			stmt.executeUpdate(sql);
+			stmt.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void addShipment(Shipment s){
+		Statement stmt;
+		try {
+			stmt = c.createStatement();
+			String sql = "INSERT INTO Shipment (vacciness, date, id_lab, id_adm"
+					+ "VALUES ('" + s.getVaccines() + ", " + s.getDate_ship()+ ", " + s.getBirthday() + ", " + s.getCollegiate_number() + ", " + sexo + ", " 
+					+  s.getHospital() + "')";
+			stmt.executeUpdate(sql);
+			stmt.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void addGoverment(Administration a){
+		Statement stmt;
+		try {
+			stmt = c.createStatement();
+			String sql = "INSERT INTO Administration (total_vacciness"
+					+ "VALUES ('" + a.getVaccines() + "')";
+			stmt.executeUpdate(sql);
+			stmt.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void addOtherPathologies(Other_Pathologies op){
+		Statement stmt;
+		try {
+			stmt = c.createStatement();
+			String sql = "INSERT INTO Other_Pathologies (name"
+					+ "VALUES ('" + op.getName() + "')";
+			stmt.executeUpdate(sql);
+			stmt.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void addMedication(Medication m){
+		Statement stmt;
+		try {
+			stmt = c.createStatement();
+			String sql = "INSERT INTO Medication (name"
+					+ "VALUES ('" + m.getName() + "')";
 			stmt.executeUpdate(sql);
 			stmt.close();
 		}

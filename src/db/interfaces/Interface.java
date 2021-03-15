@@ -14,15 +14,15 @@ public interface Interface {
 	public Patient getPatient(int id);
 	public List <Patient> searchPatientByName(String name);
 	
-	public void addDoctor(Doctor d); // TODO create 
+	public void addDoctor(Doctor d);  
 	 
-	public void addLab(Lab l); // TODO create 
+	public void addLab(Lab l);  
 	
-	public void addShipment(Shipment s); // TODO create 
+	public void addShipment(Shipment s); // TODO create (id's)
 	
-	public void addGoverment(Administration a); // TODO create 
+	public void addGoverment(Administration a);
 	
-	public void addOtherPathologies(Other_Pathologies op); // TODO create 
+	public void addOtherPathologies(Other_Pathologies op); 
 	
-	public void addMedication(Medication m); // TODO create 
+	public void addMedication(Medication m);  
 }
