@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
-
 import db.pojos.Administration;
 import db.pojos.Doctor;
 import db.pojos.Lab;
@@ -71,7 +70,7 @@ public class JDBCManagment {
 					+ " name     			TEXT    	 NOT NULL," 
 					+ " speciality 			TEXT  		 NOT NULL,"
 					+ " birth_date			DATE		 NOT NULL,"		
-					+ " collegiate_number	int 		 NOT NULL,"
+					+ " collegiate_number	INTEGER 		 NOT NULL,"
 					+ " sex 				TEXT	 	 NOT NULL," 
 					+ " hospital  			TEXT		 NOT NULL)";
 			stmt1.executeUpdate(sql1);
@@ -90,7 +89,7 @@ public class JDBCManagment {
 					+ " infected 			boolean  	 NOT NULL,"
 					+ " alive 				boolean  	 NOT NULL," 
 					+ " hospital  			TEXT	 	 NOT NULL,"
-					+ " score 				int			 NOT NULL,"
+					+ " score 				INTEGER		 NOT NULL,"
 					+ " id_adm				INTEGER		 REFERENCES administration(id),"
 					+ " vaccinated			boolean		 NOT NULL,"
 					+ " bloodType			TEXT		 NOT NULL)";
@@ -120,7 +119,7 @@ public class JDBCManagment {
 			Statement stmt5 = c.createStatement();
 			String sql5 = "CREATE TABLE administration "
 					+ "(id       				INTEGER  	PRIMARY KEY AUTOINCREMENT,"
-					+ " total_vacciness  		int	 	 	NOT NULL)";
+					+ " total_vacciness  		INTEGER	 	NOT NULL)";
 			stmt5.executeUpdate(sql5);
 			stmt5.close();
 
@@ -240,8 +239,7 @@ public class JDBCManagment {
 		try {
 			stmt = c.createStatement();
 			String sql = "INSERT INTO Shipment (vacciness, date, id_lab, id_adm"
-					+ "VALUES ('" + s.getVaccines() + ", " + s.getDate_ship()+ ", " + s.getBirthday() + ", " + s.getCollegiate_number() + ", " + sexo + ", " 
-					+  s.getHospital() + "')";
+					+ "VALUES ('" + s.getVaccines() + ", " + s.getDate_ship()+ " )"; // TODO ADD THE FOREING KEYS WITH AN UPDATE
 			stmt.executeUpdate(sql);
 			stmt.close();
 		}

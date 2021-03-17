@@ -29,9 +29,6 @@ public class Patient implements Serializable{
 		this.patients = new ArrayList<Patient>();
 	}
 	
-	
-
-
 
 	public Patient(Integer id, String hos_location, String name, Date birthday, String social_security, float height,
 			float weight, Sex sex, boolean infected, boolean alive, String hospital, boolean vaccinated,
@@ -51,9 +48,6 @@ public class Patient implements Serializable{
 		this.vaccinated = vaccinated;
 		this.bloodType = bloodType;
 	}
-
-
-
 
 
 	public Patient(Integer id, String hos_location, String name, Date birthday, String social_security, float height,
@@ -168,9 +162,6 @@ public class Patient implements Serializable{
 	}
 
 
-
-
-
 	@Override
 	public String toString() {
 		return "Patient [id=" + id + ", hos_location=" + hos_location + ", name=" + name + ", birthday=" + birthday
@@ -179,106 +170,132 @@ public class Patient implements Serializable{
 				+ ", patients=" + patients + "]";
 	}
 
+	
 	public String getHos_location() {
 		return hos_location;
 	}
 
+	
 	public void setHos_location(String hos_location) {
 		this.hos_location = hos_location;
 	}
 
+	
 	public String getName() {
 		return name;
 	}
 
+	
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	
 	public Date getBirthday() {
 		return birthday;
 	}
 
+	
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
 
+	
 	public String getSocial_security() {
 		return social_security;
 	}
 
+	
 	public void setSocial_security(String social_security) {
 		this.social_security = social_security;
 	}
 
+	
 	public float getheight() {
 		return height;
 	}
 
+	
 	public void setheight(float height) {
 		this.height = height;
 	}
 
+	
 	public float getWeight() {
 		return weight;
 	}
 
+	
 	public void setWeight(float weight) {
 		this.weight = weight;
 	}
 
+	
 	public Sex getSex() {
 		return sex;
 	}
 
+	
 	public void setSex(Sex sex) {
 		this.sex = sex;
 	}
 
+	
 	public boolean isInfected() {
 		return infected;
 	}
 
+	
 	public void setInfected(boolean infected) {
 		this.infected = infected;
 	}
 
+	
 	public boolean isAlive() {
 		return alive;
 	}
 
+	
 	public void setAlive(boolean alive) {
 		this.alive = alive;
 	}
 
+	
 	public String getHospital() {
 		return hospital;
 	}
 
+	
 	public void setHospital(String hospital) {
 		this.hospital = hospital;
 	}
 
+	
 	public int getScore() {
 		return score;
 	}
 
+	
 	public void setScore(int score) {
 		this.score = score;
 	}
 
+	
 	public String getBloodType() {
 		return bloodType;
 	}
 
+	
 	public void setBloodType(String bloodType) {
 		this.bloodType = bloodType;
 	}
 
+	
 	public boolean Is_vaccinated() {
 		return vaccinated;
 	}
 
+	
 	public void setIs_vaccinated(boolean is_vaccinated) {
 		this.vaccinated = is_vaccinated;
 	}
