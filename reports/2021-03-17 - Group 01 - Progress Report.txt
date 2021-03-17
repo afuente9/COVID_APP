@@ -1,0 +1,17 @@
+This week we expected to be able to do...
+Create the DML and start programing the UI 
+
+Optional: Reasons why
+---------------------
+
+This week we did...
+Finish the CREATE and the INSERT 
+
+Optional: Reasons why
+---------------------
+
+Next weeks we will do...
+Start programming the UI
+
+Optional: Reasons why
+We were having troubles deciding if we should use Swing or JavaFX
