@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
+
+import db.interfaces.Interface;
 import db.pojos.Administration;
 import db.pojos.Doctor;
 import db.pojos.Lab;
@@ -17,7 +19,7 @@ import db.pojos.Patient;
 import db.pojos.Sex;
 import db.pojos.Shipment;
 
-public class JDBCManagment {
+public class JDBCManagment implements Interface{
 	
 	private Connection c;
 	
@@ -328,6 +330,12 @@ public class JDBCManagment {
 			e.printStackTrace();
 		}
 		return patients;
+	}
+
+	@Override
+	public Patient getPatient(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
