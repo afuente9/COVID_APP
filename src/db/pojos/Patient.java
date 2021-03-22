@@ -21,7 +21,8 @@ public class Patient implements Serializable{
 	private int score;
 	private boolean vaccinated;
 	private String bloodType;
-	private List<Patient> patients;
+	private List<Patient> patients; // TODO Hay que quitar esto y crear un metodo enJDBCManagment
+	// TODO añadir una lista de patologias y medicamentos
 	
 	
 	public Patient() {

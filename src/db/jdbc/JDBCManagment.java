@@ -27,7 +27,7 @@ public class JDBCManagment implements Interface{
 	public void connect() {
 		try {
 			Class.forName("org.sqlite.JDBC");
-			Connection c = DriverManager.getConnection("jdbc:sqlite:./database/covid.database");
+			c = DriverManager.getConnection("jdbc:sqlite:./database/covid.database");
 			c.createStatement().execute("PRAGMA foreign_keys = ON");
 			System.out.println("Database connection opened");
 		}
@@ -72,7 +72,7 @@ public class JDBCManagment implements Interface{
 					+ " name     			TEXT    	 NOT NULL," 
 					+ " speciality 			TEXT  		 NOT NULL,"
 					+ " birth_date			DATE		 NOT NULL,"		
-					+ " collegiate_number	INTEGER 		 NOT NULL,"
+					+ " collegiate_number	INTEGER 	 NOT NULL,"
 					+ " sex 				TEXT	 	 NOT NULL," 
 					+ " hospital  			TEXT		 NOT NULL)";
 			stmt1.executeUpdate(sql1);
