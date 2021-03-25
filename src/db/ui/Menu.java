@@ -1,14 +1,18 @@
 package db.ui;
 
 import java.io.*;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import db.interfaces.Cov_Manager;
 import db.jdbc.JDBCManagment;
 
 public class Menu {
+	
 	private static Cov_Manager inter = new JDBCManagment();
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	
+	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
 	
 	public static void main(String[] args) throws Exception {
 		inter.connect();
@@ -47,7 +51,7 @@ public class Menu {
 		System.out.println("Please, input the person info:");
 		System.out.print("Name: ");
 		String p_name = reader.readLine();
-		//inter.addPatient(new Patient(name));
+		//inter.addPatient(new Patient (p_name));
 	}
 	
 
