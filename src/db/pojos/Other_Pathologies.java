@@ -61,6 +61,10 @@ public class Other_Pathologies implements Serializable{
 	public String toString() {
 		return "Other_Pathologies [id=" + id + ", Name=" + Name + ", other_path=" + other_path + "]";
 	}
+	
+	public Integer getId() {
+		return id;
+	}
 
 	public String getName() {
 		return Name;

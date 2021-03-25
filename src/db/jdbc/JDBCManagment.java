@@ -2,6 +2,7 @@ package db.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
 
-import db.interfaces.Interface;
+import db.interfaces.Cov_Manager;
 import db.pojos.Administration;
 import db.pojos.Doctor;
 import db.pojos.Lab;
@@ -19,7 +20,7 @@ import db.pojos.Patient;
 import db.pojos.Sex;
 import db.pojos.Shipment;
 
-public class JDBCManagment implements Interface{
+public class JDBCManagment implements Cov_Manager{
 	
 	private Connection c;
 	
@@ -72,7 +73,7 @@ public class JDBCManagment implements Interface{
 					+ " name     			TEXT    	 NOT NULL," 
 					+ " speciality 			TEXT  		 NOT NULL,"
 					+ " birth_date			DATE		 NOT NULL,"		
-					+ " collegiate_number	INTEGER 	 NOT NULL,"
+					+ " collegiate_number	LONG	 	 NOT NULL," // TODO ASK IF IT IS POSIBLE TO USE LONG IN TABLES
 					+ " sex 				TEXT	 	 NOT NULL," 
 					+ " hospital  			TEXT		 NOT NULL)";
 			stmt1.executeUpdate(sql1);
@@ -104,7 +105,7 @@ public class JDBCManagment implements Interface{
 					+ " name     		TEXT    	 NOT NULL," 
 					+ " adress	 		TEXT	 	 NOT NULL,"
 					+ " cif			    TEXT  	 	 NOT NULL," 
-					+ " vacciness  		TEXT	 	 NOT NULL)";
+					+ " vacciness  		INTEGER	 	 NOT NULL)";
 			stmt3.executeUpdate(sql3);
 			stmt3.close();
 
@@ -179,7 +180,6 @@ public class JDBCManagment implements Interface{
 	}
 	
 	public void addPatient(Patient p) {
-		Statement stmt;
 		try {
 			String sexo;
 			if(p.getSex().equals(Sex.Male)) {
@@ -188,12 +188,23 @@ public class JDBCManagment implements Interface{
 			else {
 				sexo = "F";
 			}
-			stmt = c.createStatement();
 			String sql = "INSERT INTO Patient (name, birthday, social_security, height, weight, sex, infected, alive, hospital, hos_location, bloodType, vaccinated"
-					+ "VALUES ('" + p.getName() + ", " + p.getBirthday() + ", " + p.getSocial_security() + ", " + p.getheight() + ", " + sexo + ", " 
-					+ p.isInfected() + ", " + p.isAlive() + ", " + p.getHospital() + ", " + p.getHos_location() + ", " + p.getBloodType() + ", " + p.Is_vaccinated() +"')";
-			stmt.executeUpdate(sql);
-			stmt.close();
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, p.getName());
+			prep.setDate(2, p.getBirthday());
+			prep.setString(3, p.getSocial_security());
+			prep.setFloat(4, p.getheight());
+			prep.setFloat(5, p.getWeight());
+			prep.setString(6, sexo);
+			prep.setBoolean(7, p.isInfected());
+			prep.setBoolean(8, p.isAlive());
+			prep.setString(9, p.getHospital());
+			prep.setString(10, p.getHos_location());
+			prep.setString(11, p.getBloodType());
+			prep.setBoolean(12, p.Is_vaccinated());
+			prep.executeUpdate();
+			prep.close();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -201,7 +212,6 @@ public class JDBCManagment implements Interface{
 	}
 	
 	public void addDoctor(Doctor d) {
-		Statement stmt;
 		try {
 			String sexo;
 			if(d.getSex().equals(Sex.Male)) {
@@ -210,12 +220,16 @@ public class JDBCManagment implements Interface{
 			else {
 				sexo = "F";
 			}
-			stmt = c.createStatement();
-			String sql = "INSERT INTO Doctor (name, speciality, birth_date, collegiate_number, sex, hospital"
-					+ "VALUES ('" + d.getName() + ", " + d.getSpeciality() + ", " + d.getBirthday() + ", " + d.getCollegiate_number() + ", " + sexo + ", " 
-					+  d.getHospital() + "')";
-			stmt.executeUpdate(sql);
-			stmt.close();
+			String sql = "INSERT INTO Doctor (name, speciality, birth_date, collegiate_number, sex, hospital) VALUES (?, ?, ?, ?, ?, ?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, d.getName());
+			prep.setString(2, d.getSpeciality());
+			prep.setDate(3, d.getBirthday());
+			prep.setLong(4, d.getCollegiate_number());
+			prep.setString(5, sexo);
+			prep.setString(6, d.getHospital());
+			prep.executeUpdate();
+			prep.close();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -223,13 +237,15 @@ public class JDBCManagment implements Interface{
 	}
 	
 	public void addLab(Lab l) {
-		Statement stmt;
 		try {
-			stmt = c.createStatement();
-			String sql = "INSERT INTO Laboratory (name, adress, cif, vacciness"
-					+ "VALUES ('" + l.getName() + ", " + l.getAddress()+ ", " + l.getCif() + ", " + l.getVaccines_produce() + "')";
-			stmt.executeUpdate(sql);
-			stmt.close();
+			String sql = "INSERT INTO Laboratory (name, adress, cif, vacciness) VALUES (?, ?, ?, ?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, l.getName());
+			prep.setString(2, l.getAddress());
+			prep.setString(3, l.getCif());
+			prep.setInt(4, l.getVaccines_produce());
+			prep.executeUpdate();
+			prep.close();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -241,7 +257,7 @@ public class JDBCManagment implements Interface{
 		try {
 			stmt = c.createStatement();
 			String sql = "INSERT INTO Shipment (vacciness, date, id_lab, id_adm"
-					+ "VALUES ('" + s.getVaccines() + ", " + s.getDate_ship()+ " )"; // TODO ADD THE FOREING KEYS WITH AN UPDATE
+					+ "VALUES ('" + s.getVaccines() + ", " + s.getDate_ship()+ " )"; // TODO ADD THE FOREING KEYS WITH AN UPDATE 
 			stmt.executeUpdate(sql);
 			stmt.close();
 		}
@@ -251,13 +267,12 @@ public class JDBCManagment implements Interface{
 	}
 	
 	public void addGoverment(Administration a){
-		Statement stmt;
 		try {
-			stmt = c.createStatement();
-			String sql = "INSERT INTO Administration (total_vacciness"
-					+ "VALUES ('" + a.getVaccines() + "')";
-			stmt.executeUpdate(sql);
-			stmt.close();
+			String sql = "INSERT INTO Administration (total_vacciness) VALUES (?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, a.getVaccines());
+			prep.executeUpdate();
+			prep.close();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -265,13 +280,12 @@ public class JDBCManagment implements Interface{
 	}
 	
 	public void addOtherPathologies(Other_Pathologies op){
-		Statement stmt;
 		try {
-			stmt = c.createStatement();
-			String sql = "INSERT INTO Other_Pathologies (name"
-					+ "VALUES ('" + op.getName() + "')";
-			stmt.executeUpdate(sql);
-			stmt.close();
+			String sql = "INSERT INTO Other_Pathologies (name) VALUES (?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, op.getName());
+			prep.executeUpdate();
+			prep.close();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -279,13 +293,12 @@ public class JDBCManagment implements Interface{
 	}
 	
 	public void addMedication(Medication m){
-		Statement stmt;
 		try {
-			stmt = c.createStatement();
-			String sql = "INSERT INTO Medication (name"
-					+ "VALUES ('" + m.getName() + "')";
-			stmt.executeUpdate(sql);
-			stmt.close();
+			String sql = "INSERT INTO Medication (name) VALUES (?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, m.getName());
+			prep.executeUpdate();
+			prep.close();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -294,11 +307,11 @@ public class JDBCManagment implements Interface{
 	
 	public List<Patient> searchPatientByName(String name){
 		List<Patient> patients = new ArrayList<Patient>();
-		Statement stmt;
 		try {
-			stmt = c.createStatement();
-			String sql = "SELECT * FROM  patients WHERE name LIKE '%" + name + "%'";
-			ResultSet rs = stmt.executeQuery(sql);
+			String sql = "SELECT * FROM  patients WHERE name LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, "%" + name + "%");
+			ResultSet rs = prep.executeQuery();
 			while(rs.next()) {
 				int id = rs.getInt("id");
 				String patientname = rs.getString("name");
@@ -322,9 +335,10 @@ public class JDBCManagment implements Interface{
 				
 				
 				Patient patient = new Patient(id, loc_hosp, patientname, birthday, social_security, height, weight, sexo, infec, alive, hosp, vaccin, blood);
+				patients.add(patient);
 			}
 			rs.close();
-			stmt.close();
+			prep.close();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -334,11 +348,106 @@ public class JDBCManagment implements Interface{
 
 	@Override
 	public Patient getPatient(int id) {
-		// TODO Auto-generated method stub
+		try {
+			String sql = "SELECT * FROM patients WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, id);
+			ResultSet rs = prep.executeQuery();
+			if(rs.next()) {
+				String patientName = rs.getString("name"); // TODO WE HAVE TO THINK OF HOW MANY ATRIBUTTES OF A PATIENT WE WANT TO SEARCH FOR AND GET THEM
+				return new Patient(id, patientName);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
-	
-	
+	@Override
+	public List<Patient> getPatientsOfDoctor(int doc_id) {
+		List<Patient> patients = new ArrayList<Patient>();
+		try {
+			String sql = "SELECT * FROM pat_doc WHERE id_doc = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, doc_id);
+			ResultSet rs = prep.executeQuery();
+			while(rs.next()) {
+				int patientId = rs.getInt("id_pat");
+				patients.add(this.getPatient(patientId));
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return patients;
+	}
 
+	@Override
+	public Doctor getDoctor(int id) {
+		try {
+			String sql = "SELECT * FROM doctors WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, id);
+			ResultSet rs = prep.executeQuery();
+			if(rs.next()) {
+				String doctorName = rs.getString("name"); // TODO WE HAVE TO THINK OF HOW MANY ATRIBUTTES OF A DOCTOR WE WANT TO SEARCH FOR AND GET THEM
+				return new Doctor(id, doctorName);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public List<Doctor> getDoctorsOfPatient(int pat_id) {
+		List<Doctor> doctors = new ArrayList<Doctor>();
+		try {
+			String sql = "SELECT * FROM pat_doc WHERE id_pat = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, pat_id);
+			ResultSet rs = prep.executeQuery();
+			while(rs.next()) {
+				int doctorId = rs.getInt("id_doc");
+				doctors.add(this.getDoctor(doctorId));
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return doctors;
+	}
+
+	@Override
+	public void assignPatho(Patient p, Other_Pathologies op) {
+		try {
+			String sql = "INSERT INTO pat_patho (id_pat, id_patho) VALUES (?, ?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, p.getId());
+			prep.setInt(2, op.getId());
+			prep.executeUpdate();
+			prep.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void assignMed(Patient p, Medication m) {
+		try {
+			String sql = "INSERT INTO pat_medi (id_pat, id_medi) VALUES (?, ?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, p.getId());
+			prep.setInt(2, m.getId());
+			prep.executeUpdate();
+			prep.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 }

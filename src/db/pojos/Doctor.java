@@ -19,8 +19,13 @@ public class Doctor implements Serializable{
 	public Doctor() {
 		super();
 	}
-
 	
+	public Doctor(Integer id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

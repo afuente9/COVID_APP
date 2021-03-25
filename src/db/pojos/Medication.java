@@ -62,6 +62,10 @@ public class Medication implements Serializable{
 		return "Medication [id=" + id + ", name=" + name + ", medications=" + medications + "]";
 	}
 
+	public Integer getId() {
+		return id;
+	}
+	
 	public String getName() {
 		return name;
 	}

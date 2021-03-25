@@ -71,7 +71,13 @@ public class Patient implements Serializable{
 		this.vaccinated = is_vaccinated;
 		this.bloodType = bloodType;
 	}
-	
+
+	public Patient(Integer id, String patientName) {
+		super();
+		this.id = id;
+		this.name = patientName;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -172,6 +178,11 @@ public class Patient implements Serializable{
 	}
 
 	
+	
+	public Integer getId() {
+		return id;
+	}
+
 	public String getHos_location() {
 		return hos_location;
 	}
