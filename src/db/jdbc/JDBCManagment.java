@@ -243,11 +243,7 @@ public class JDBCManagment implements Cov_Manager{
 	
 	public void addShipment(Shipment s, Lab l, Administration a){
 		try {
-<<<<<<< HEAD
 			String sql = "INSERT INTO Shipment (vacciness, date, id_lab, id_adm) VALUES (?,?,?,?)";
-=======
-			String sql = "INSERT INTO Shipment (vacciness, date, id_lab, id_adm) VALUES (?,?,?,?)"; 
->>>>>>> branch 'master' of https://github.com/afuente9/COVID_APP
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, s.getVaccines());
 			prep.setDate(2, s.getDate_ship());
