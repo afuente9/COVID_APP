@@ -53,17 +53,6 @@ public class JDBCManagment implements Cov_Manager{
 		}
 	}
 	
-	private String chanBool(boolean n) {
-		String res;
-		if(n) {
-			res = "True";
-		}
-		else {
-			res = "False";
-		}
-		return res;
-	}
-	
 	// Create tables:
 	public void creatTables() {
 		try {
@@ -73,7 +62,7 @@ public class JDBCManagment implements Cov_Manager{
 					+ " name     			TEXT    	 NOT NULL," 
 					+ " speciality 			TEXT  		 NOT NULL,"
 					+ " birth_date			DATE		 NOT NULL,"		
-					+ " collegiate_number	LONG	 	 NOT NULL," // TODO ASK IF IT IS POSIBLE TO USE LONG IN TABLES
+					+ " collegiate_number	TEXT	 	 NOT NULL," 
 					+ " sex 				TEXT	 	 NOT NULL," 
 					+ " hospital  			TEXT		 NOT NULL)";
 			stmt1.executeUpdate(sql1);
@@ -225,7 +214,7 @@ public class JDBCManagment implements Cov_Manager{
 			prep.setString(1, d.getName());
 			prep.setString(2, d.getSpeciality());
 			prep.setDate(3, d.getBirthday());
-			prep.setLong(4, d.getCollegiate_number());
+			prep.setString(4, d.getCollegiate_number());
 			prep.setString(5, sexo);
 			prep.setString(6, d.getHospital());
 			prep.executeUpdate();
@@ -252,14 +241,16 @@ public class JDBCManagment implements Cov_Manager{
 		}
 	}
 	
-	public void addShipment(Shipment s){
-		Statement stmt;
+	public void addShipment(Shipment s, Lab l, Administration a){
 		try {
-			stmt = c.createStatement();
-			String sql = "INSERT INTO Shipment (vacciness, date, id_lab, id_adm"
-					+ "VALUES ('" + s.getVaccines() + ", " + s.getDate_ship()+ " )"; // TODO ADD THE FOREING KEYS WITH AN UPDATE 
-			stmt.executeUpdate(sql);
-			stmt.close();
+			String sql = "INSERT INTO Shipment (vacciness, date, id_lab, id_adm) VALUES (?,?,?,?)"; // TODO ADD THE FOREING KEYS WITH AN UPDATE 
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, s.getVaccines());
+			prep.setDate(2, s.getDate_ship());
+			prep.setInt(3, l.getId());
+			prep.setInt(4, a.getId());
+			prep.executeUpdate();
+			prep.close();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -354,7 +345,18 @@ public class JDBCManagment implements Cov_Manager{
 			prep.setInt(1, id);
 			ResultSet rs = prep.executeQuery();
 			if(rs.next()) {
-				String patientName = rs.getString("name"); // TODO WE HAVE TO THINK OF HOW MANY ATRIBUTTES OF A PATIENT WE WANT TO SEARCH FOR AND GET THEM
+				String patientName = rs.getString("name");
+				String hos_loc = rs.getString("hos_location");
+				Date bdate = rs.getDate("birthday");
+				String socsec = rs.getString("social_security");
+				float high = rs.getFloat("heigh");
+				float weig = rs.getFloat("weight");
+				String sexo = rs.getString("sex");
+				boolean infec = rs.getBoolean("infected");
+				boolean vivo = rs.getBoolean("alive");
+				String hos = rs.getString("hospital");
+				Integer marca = rs.getInt("score");
+				
 				return new Patient(id, patientName);
 			}
 		}
@@ -449,5 +451,11 @@ public class JDBCManagment implements Cov_Manager{
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public Lab getLab(String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

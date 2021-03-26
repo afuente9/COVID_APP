@@ -31,10 +31,12 @@ public interface Cov_Manager {
 	public List<Doctor> getDoctorsOfPatient(int pat_id);
 	
 	// Add a new lab
-	public void addLab(Lab l);  
+	public void addLab(Lab l);
+	//Gets the lab 
+	public Lab getLab(String name);
 	
-	// Add a new patient
-	public void addShipment(Shipment s); // TODO create (id's)
+	// Add a new shipment
+	public void addShipment(Shipment s, Lab l, Administration a); // TODO create (id's)
 	
 	// Add a new Government
 	public void addGoverment(Administration a);

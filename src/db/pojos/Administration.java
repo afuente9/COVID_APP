@@ -47,7 +47,10 @@ public class Administration implements Serializable{
 		return "Administration [id=" + id + ", vaccines=" + vaccines + "]";
 	}
 
-
+	public Integer getId() {
+		return id;
+	}
+	
 	public int getVaccines() {
 		return vaccines;
 	}

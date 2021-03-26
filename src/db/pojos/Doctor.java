@@ -11,7 +11,7 @@ public class Doctor implements Serializable{
 	private String speciality;
 	private String name;
 	private Date birthday;
-	private long collegiate_number;
+	private String collegiate_number;
 	private Sex sex;
 	private String hospital;
 	private List<Doctor> doctors;
@@ -26,12 +26,15 @@ public class Doctor implements Serializable{
 		this.name = name;
 	}
 
+	
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((birthday == null) ? 0 : birthday.hashCode());
-		result = prime * result + (int) (collegiate_number ^ (collegiate_number >>> 32));
+		result = prime * result + ((collegiate_number == null) ? 0 : collegiate_number.hashCode());
 		result = prime * result + ((doctors == null) ? 0 : doctors.hashCode());
 		result = prime * result + ((hospital == null) ? 0 : hospital.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -41,7 +44,6 @@ public class Doctor implements Serializable{
 		return result;
 	}
 
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -56,7 +58,10 @@ public class Doctor implements Serializable{
 				return false;
 		} else if (!birthday.equals(other.birthday))
 			return false;
-		if (collegiate_number != other.collegiate_number)
+		if (collegiate_number == null) {
+			if (other.collegiate_number != null)
+				return false;
+		} else if (!collegiate_number.equals(other.collegiate_number))
 			return false;
 		if (doctors == null) {
 			if (other.doctors != null)
@@ -87,7 +92,6 @@ public class Doctor implements Serializable{
 			return false;
 		return true;
 	}
-
 
 	@Override
 	public String toString() {
@@ -126,16 +130,13 @@ public class Doctor implements Serializable{
 		this.birthday = birthday;
 	}
 
-	
-	public long getCollegiate_number() {
+	public String getCollegiate_number() {
 		return collegiate_number;
 	}
 
-	
-	public void setCollegiate_number(long collegiate_number) {
+	public void setCollegiate_number(String collegiate_number) {
 		this.collegiate_number = collegiate_number;
 	}
-
 
 	public Sex getSex() {
 		return sex;

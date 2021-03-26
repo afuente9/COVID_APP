@@ -77,7 +77,9 @@ public class Lab implements Serializable{
 		return true;
 	}
 
-
+	public Integer getId() {
+		return id;
+	}
 
 	public int getVaccines_produce() {
 		return vaccines_produce;
