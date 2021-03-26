@@ -33,10 +33,10 @@ public interface Cov_Manager {
 	// Add a new lab
 	public void addLab(Lab l);
 	//Gets the lab 
-	public Lab getLab(String name);
+	public Lab getLab(int id);
 	
 	// Add a new shipment
-	public void addShipment(Shipment s, Lab l, Administration a); // TODO create (id's)
+	public void addShipment(Shipment s, Lab l, Administration a);
 	
 	// Add a new Government
 	public void addGoverment(Administration a);

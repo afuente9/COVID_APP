@@ -243,7 +243,7 @@ public class JDBCManagment implements Cov_Manager{
 	
 	public void addShipment(Shipment s, Lab l, Administration a){
 		try {
-			String sql = "INSERT INTO Shipment (vacciness, date, id_lab, id_adm) VALUES (?,?,?,?)"; // TODO ADD THE FOREING KEYS WITH AN UPDATE 
+			String sql = "INSERT INTO Shipment (vacciness, date, id_lab, id_adm) VALUES (?,?,?,?)"; 
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, s.getVaccines());
 			prep.setDate(2, s.getDate_ship());
@@ -352,13 +352,23 @@ public class JDBCManagment implements Cov_Manager{
 				float high = rs.getFloat("heigh");
 				float weig = rs.getFloat("weight");
 				String sexo = rs.getString("sex");
+				Sex sexoo;
+				if (sexo.equalsIgnoreCase("M")) {
+					 sexoo= Sex.Male;
+				}
+				else {
+					 sexoo= Sex.Female;
+				}
 				boolean infec = rs.getBoolean("infected");
 				boolean vivo = rs.getBoolean("alive");
 				String hos = rs.getString("hospital");
-				Integer marca = rs.getInt("score");
-				
-				return new Patient(id, patientName);
+				boolean vacc = rs.getBoolean("vaccinated");
+				String sangre= rs.getString("bloodType");
+				return new Patient(id,hos_loc, patientName, bdate, socsec,high, weig, sexoo,
+						infec, vivo, hos, vacc, sangre);
 			}
+			prep.close();
+			rs.close();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -454,8 +464,25 @@ public class JDBCManagment implements Cov_Manager{
 	}
 
 	@Override
-	public Lab getLab(String name) {
-		// TODO Auto-generated method stub
+	public Lab getLab(int id) {
+		try {
+			String sql = "SELECT * FROM lab WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, id);
+			ResultSet rs = prep.executeQuery();
+			if(rs.next()) {
+				String lab_name = rs.getString("name");
+				String direccion = rs.getString("adress");
+				String doc = rs.getString("cif");
+				Integer vacc = rs.getInt("vacciness");
+				return new Lab(id, vacc, direccion, lab_name, doc);
+			}
+			prep.close();
+			rs.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 }
