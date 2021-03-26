@@ -1,0 +1,17 @@
+This week we expected to be able to do...
+Start programming the UI
+
+Optional: Reasons why
+---------------------
+
+This week we did...
+Create all the SELECT and INSERT, taking care of SQLInyection, for the tables
+
+Optional: Reasons why
+---------------------
+
+Next weeks we will do...
+The GUI, the menu and test all the app
+
+Optional: Reasons why
+---------------------
