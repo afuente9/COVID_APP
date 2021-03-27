@@ -32,8 +32,10 @@ public interface Cov_Manager {
 	
 	// Add a new lab
 	public void addLab(Lab l);
-	//Gets the lab 
+	// Gets the lab 
 	public Lab getLab(int id);
+	// Show all labs
+	public List<Lab> showLabs();
 	
 	// Add a new shipment
 	public void addShipment(Shipment s, Lab l, Administration a);

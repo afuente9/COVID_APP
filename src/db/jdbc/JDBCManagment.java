@@ -31,6 +31,7 @@ public class JDBCManagment implements Cov_Manager{
 			c = DriverManager.getConnection("jdbc:sqlite:./database/covid.database");
 			c.createStatement().execute("PRAGMA foreign_keys = ON");
 			System.out.println("Database connection opened");
+			this.creatTables();
 		}
 		catch(SQLException E) {
 			System.out.println("There was a database exception.");
@@ -75,7 +76,7 @@ public class JDBCManagment implements Cov_Manager{
 					+ " hos_location 		TEXT  		 NOT NULL,"
 					+ " birthday			DATE  		 NOT NULL," 
 					+ " social_security   	TEXT  	 	 NOT NULL,"
-					+ " heigh 				float   	 NOT NULL," 
+					+ " height 				float   	 NOT NULL," 
 					+ " weight 				float   	 NOT NULL,"
 					+ " sex 			    TEXT	   	 NOT NULL," 
 					+ " infected 			boolean  	 NOT NULL,"
@@ -102,7 +103,7 @@ public class JDBCManagment implements Cov_Manager{
 			String sql4 = "CREATE TABLE shipment " 
 					+ "(id       		INTEGER  	PRIMARY KEY AUTOINCREMENT,"
 					+ " vacciness  		INTEGER	 	NOT NULL,"
-					+ " date			DATE		NOT NULL"		
+					+ " date			DATE		NOT NULL,"		
 					+ " id_lab			INTEGER		REFERENCES lab(id),"
 					+ " id_adm			INTEGER		REFERENCES administration(id))";
 			stmt4.executeUpdate(sql4);
@@ -177,8 +178,8 @@ public class JDBCManagment implements Cov_Manager{
 			else {
 				sexo = "F";
 			}
-			String sql = "INSERT INTO Patient (name, birthday, social_security, height, weight, sex, infected, alive, hospital, hos_location, bloodType, vaccinated"
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO patients (name, birthday, social_security, height, weight, sex, infected, alive, hospital, hos_location, score, bloodType, vaccinated)"
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, p.getName());
 			prep.setDate(2, p.getBirthday());
@@ -190,8 +191,9 @@ public class JDBCManagment implements Cov_Manager{
 			prep.setBoolean(8, p.isAlive());
 			prep.setString(9, p.getHospital());
 			prep.setString(10, p.getHos_location());
-			prep.setString(11, p.getBloodType());
-			prep.setBoolean(12, p.Is_vaccinated());
+			prep.setInt(11, 0); // TODO hay que insertar formula del score para poder introducir bien los pacientes en la tabla
+			prep.setString(12, p.getBloodType());
+			prep.setBoolean(13, p.Is_vaccinated());
 			prep.executeUpdate();
 			prep.close();
 		}
@@ -475,7 +477,7 @@ public class JDBCManagment implements Cov_Manager{
 				String direccion = rs.getString("adress");
 				String doc = rs.getString("cif");
 				Integer vacc = rs.getInt("vacciness");
-				return new Lab(id, vacc, direccion, lab_name, doc);
+				return new Lab(id, lab_name, direccion, doc, vacc);
 			}
 			prep.close();
 			rs.close();
@@ -484,5 +486,30 @@ public class JDBCManagment implements Cov_Manager{
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public List<Lab> showLabs() {
+		List<Lab> labs = new ArrayList<Lab>();
+		try {
+			String lab_name = "";
+			String sql = "SELECT * FROM lab WHERE name = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, lab_name);
+			ResultSet rs = prep.executeQuery();
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				String Lname = rs.getString("name");
+				String Ladress = rs.getString("adress");
+				String Lcif = rs.getString("cif");
+				int Lvacciness = rs.getInt("vacciness");
+				Lab lab = new Lab(id, Lname, Ladress, Lcif, Lvacciness);
+				labs.add(lab);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return labs;
 	}
 }

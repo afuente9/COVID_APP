@@ -16,18 +16,14 @@ public class Lab implements Serializable{
 		super();
 	}
 	
-	
-	
 
-
-
-	public Lab(int id, int vaccines_produce, String address, String name, String cif) {
+	public Lab(int id2, String lname, String ladress, String lcif, int lvacciness) {
 		super();
-		this.id = id;
-		this.vaccines_produce = vaccines_produce;
-		this.address = address;
-		this.name = name;
-		this.cif = cif;
+		this.id = id2;
+		this.name = lname;
+		this.address = ladress;
+		this.cif = lcif;
+		this.vaccines_produce = lvacciness;
 	}
 
 

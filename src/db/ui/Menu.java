@@ -1,8 +1,10 @@
 package db.ui;
 
 import java.io.*;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import db.pojos.*;
 
 import db.interfaces.Cov_Manager;
 import db.jdbc.JDBCManagment;
@@ -12,7 +14,7 @@ public class Menu {
 	private static Cov_Manager inter = new JDBCManagment();
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	
-	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
+	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	
 	public static void main(String[] args) throws Exception {
 		inter.connect();
@@ -51,7 +53,30 @@ public class Menu {
 		System.out.println("Please, input the person info:");
 		System.out.print("Name: ");
 		String p_name = reader.readLine();
-		//inter.addPatient(new Patient (p_name));
+		System.out.print("Birthday (yyyy-mm-dd): ");
+		LocalDate p_bday = LocalDate.parse(reader.readLine(), formatter);
+		System.out.print("Social Security Number [(nn)nnnnnnnnnnn]: ");
+		String p_ss = reader.readLine();
+		System.out.print("Height (m.cm): ");
+		Float p_height = Float.parseFloat(reader.readLine());
+		System.out.print("Weight: ");
+		Float p_weight = Float.parseFloat(reader.readLine());
+		System.out.print("Sex (male, female): ");
+		Sex p_sex = Sex.parse(reader.readLine());
+		System.out.print("Infected (True or False): ");
+		Boolean p_infected = Boolean.parseBoolean(reader.readLine());
+		System.out.print("Alive (True or False): ");
+		Boolean p_alive = Boolean.parseBoolean(reader.readLine());
+		System.out.print("Hospital: ");
+		String p_hos = reader.readLine();
+		System.out.print("Hospital location: ");
+		String p_hosL = reader.readLine();
+		System.out.print("Blood type: ");
+		String p_blood = reader.readLine();
+		System.out.print("Is vaccinated (True or False): ");
+		Boolean p_vaccinated = Boolean.parseBoolean(reader.readLine());
+		
+		inter.addPatient(new Patient (p_hosL, p_name, Date.valueOf(p_bday), p_ss, p_height, p_weight, p_sex, p_infected, p_alive, p_hos, p_vaccinated, p_blood));
 	}
 	
 
