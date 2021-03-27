@@ -26,7 +26,17 @@ public class Doctor implements Serializable{
 		this.name = name;
 	}
 
-	
+	public Doctor(Integer id, String name, Sex sex, Date birthday, String collegiate_number, String spetiality, String hospital) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.sex= sex;
+		this.birthday=birthday;
+		this.collegiate_number=collegiate_number;
+		this.speciality=spetiality;
+		this.hospital=hospital;
+				
+	}
 
 
 	@Override
