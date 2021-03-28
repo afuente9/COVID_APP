@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import db.pojos.*;
 
 public class SignUpDoctorController {
@@ -35,6 +36,7 @@ public class SignUpDoctorController {
     	String spetiality = SpetialityTextField.getText();
     	String hospital = HospitalTextField.getText();
 
+
     	String sex_text = SexTextField.getText();
     	db.pojos.Sex sex= Sex.valueOf(sex_text);
     	Date date = Date.valueOf(date_text);
@@ -43,13 +45,14 @@ public class SignUpDoctorController {
     	Doctor d_new= new Doctor(id,name,sex,date,colnum,spetiality,hospital);
     	//añadir doctor a la lista de doctores
     	//popup registrado correctamente
-    	//cerrar ventana (utilities)
+    	Stage stage = (Stage) this.NameTextField.getScene().getWindow();
+		stage.close();    	
     }
 
     @FXML
     void OnCancelClick(ActionEvent event) {
-    	//cerrar ventana (utilities)
-
+    Stage stage = (Stage) this.NameTextField.getScene().getWindow();
+	stage.close();
     }
     
 

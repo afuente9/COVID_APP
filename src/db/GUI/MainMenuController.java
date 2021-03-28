@@ -6,6 +6,8 @@ import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 public class MainMenuController {
 	@FXML
     private PasswordField PasswordTextField;
@@ -15,25 +17,31 @@ public class MainMenuController {
 
     @FXML
     void OnSignUpClick(ActionEvent event) {
-		//System.out.println(UserTextField.getText());
-/*String a= UserTextField.getText();
-String b= "gege";
-me reconoce el texto pero no me lo compara bien:/
-    	/*if(a==b) {
-    		System.out.println("ererererererererer");
-    	}*/
-    	//INTENTAR ABRIR OTRA PESTAÑA DIFERENTE NO ME SALE
-		try {
-			Pane root = (Pane)FXMLLoader.load(getClass().getResource("ChooseSignUpView.fxml"));
-			Scene scene = new Scene(root,700,700);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			//primaryStage.setScene(scene);
-			//primaryStage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
+			String name= "ChooseSignUpView.fxml";
+			ChooseSignUpController controller = null;
+			openWindow(name,controller);
 		}
 
+
+    
+    void openWindow(String name,Object controller) {
+    	try {
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+    	Parent root;
+    	
+    		root = loader.load();
+    	
+    	  controller = loader.getController();
+    	Scene scene = new Scene(root);
+    	Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.showAndWait();
+    	} catch (IOException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}
 
     }
 }
