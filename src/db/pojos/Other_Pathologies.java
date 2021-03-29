@@ -19,6 +19,11 @@ public class Other_Pathologies implements Serializable{
 		Name = name;
 		this.other_path = other_path;
 	}
+	public Other_Pathologies(Integer id, String name) {
+		super();
+		this.id = id;
+		Name = name;
+	}
 
 	@Override
 	public int hashCode() {

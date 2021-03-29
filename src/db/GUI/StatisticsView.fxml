@@ -32,49 +32,46 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="516.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="db.GUI.MainMenuController">
+<VBox prefHeight="516.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="db.GUI.StatisticsController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="451.0" prefWidth="697.0" VBox.vgrow="ALWAYS">
       <children>
-            <Label layoutX="320.0" layoutY="25.0" text="Welcome">
+            <Button fx:id="backfromstatistics" layoutX="556.0" layoutY="426.0" mnemonicParsing="false" onAction="#backfromstatistics" prefHeight="43.0" prefWidth="79.0" text="Back" />
+            <Label layoutX="57.0" layoutY="35.0" text="Type of patients: ">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="370.0" layoutY="216.0" text="Password:">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="370.0" layoutY="126.0" text="User:">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="408.0" fitWidth="319.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Imagen1.png" />
-               </image>
-            </ImageView>
-            <PasswordField fx:id="PasswordTextField" layoutX="394.0" layoutY="258.0" prefHeight="27.0" prefWidth="175.0" />
-            <TextField fx:id="UserTextField" layoutX="394.0" layoutY="169.0" prefHeight="26.0" prefWidth="175.0" />
-            <Button layoutX="475.0" layoutY="444.0" mnemonicParsing="false" onAction="#OnSignUpClick" prefHeight="43.0" prefWidth="79.0" text="Sign up" />
-            <Button layoutX="590.0" layoutY="444.0" mnemonicParsing="false" onAction="#OnEnterUser" prefHeight="43.0" prefWidth="79.0" text="Enter" />
-            <Label layoutX="14.0" layoutY="466.0" text="COVIDIST" textOverrun="CLIP">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
+            <Button layoutX="83.0" layoutY="98.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="175.0" text="View important info" />
+            <ChoiceBox fx:id="typeofpatient" layoutX="258.0" layoutY="40.0" prefWidth="150.0" />
+            <CheckBox layoutX="96.0" layoutY="149.0" mnemonicParsing="false" text="By age" />
+            <CheckBox layoutX="96.0" layoutY="185.0" mnemonicParsing="false" text="By weight" />
+            <CheckBox layoutX="96.0" layoutY="418.0" mnemonicParsing="false" text="By other pathologies" />
+            <CheckBox layoutX="96.0" layoutY="378.0" mnemonicParsing="false" text="By medication" />
+            <CheckBox layoutX="96.0" layoutY="336.0" mnemonicParsing="false" text="By patient location" />
+            <CheckBox layoutX="96.0" layoutY="222.0" mnemonicParsing="false" text="By height" />
+            <CheckBox layoutX="96.0" layoutY="258.0" mnemonicParsing="false" text="By sex" />
+            <CheckBox layoutX="96.0" layoutY="298.0" mnemonicParsing="false" text="By hospital" />
+            <Button fx:id="pdfbutton" layoutX="96.0" layoutY="448.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="175.0" text="Generate a pdf" />
+            <LineChart layoutX="373.0" layoutY="101.0" prefHeight="314.0" prefWidth="391.0">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </LineChart>
       </children>
     </AnchorPane>
   </children>

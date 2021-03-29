@@ -19,6 +19,11 @@ public class Medication implements Serializable{
 		this.name = name;
 		this.medications = medications;
 	}
+	public Medication(Integer id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
 
 	@Override
 	public int hashCode() {

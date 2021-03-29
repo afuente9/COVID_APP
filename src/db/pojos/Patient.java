@@ -21,8 +21,10 @@ public class Patient implements Serializable{
 	private int score;
 	private boolean vaccinated;
 	private String bloodType;
+	private List<Medication> medication=new ArrayList();
+	private List<Other_Pathologies> other_pathologies=new ArrayList();
+
 	private List<Patient> patients; // TODO Hay que quitar esto y crear un metodo enJDBCManagment
-	// TODO añadir una lista de patologias y medicamentos
 	
 	
 	public Patient() {
@@ -33,9 +35,10 @@ public class Patient implements Serializable{
 	
 	
 
-	public Patient(String hos_location, String name, Date birthday, String social_security, float height, float weight,
-			Sex sex, boolean infected, boolean alive, String hospital, boolean vaccinated, String bloodType) {
+	public Patient(Integer id,String hos_location, String name, Date birthday, String social_security, float height, float weight,
+			Sex sex, boolean infected, boolean alive, String hospital, boolean vaccinated, String bloodType,List<Medication> medication,List<Other_Pathologies> other_pathologies) {
 		super();
+		this.id=id;
 		this.hos_location = hos_location;
 		this.name = name;
 		this.birthday = birthday;
@@ -48,6 +51,9 @@ public class Patient implements Serializable{
 		this.hospital = hospital;
 		this.vaccinated = vaccinated;
 		this.bloodType = bloodType;
+		this.medication=medication;
+		this.other_pathologies=other_pathologies;
+		
 	}
 
 

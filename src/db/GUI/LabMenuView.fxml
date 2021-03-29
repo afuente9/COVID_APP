@@ -34,47 +34,33 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="516.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="db.GUI.MainMenuController">
+<VBox prefHeight="516.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="db.GUI.LabMenuController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="451.0" prefWidth="697.0" VBox.vgrow="ALWAYS">
       <children>
-            <Label layoutX="320.0" layoutY="25.0" text="Welcome">
+            <Label fx:id="LabName" layoutX="66.0" layoutY="33.0" text="Lab name">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="370.0" layoutY="216.0" text="Password:">
+            <Button layoutX="659.0" layoutY="441.0" mnemonicParsing="false" onAction="#outfromlab" prefHeight="43.0" prefWidth="79.0" text="Sign out" />
+            <Button fx:id="viewStatistics" layoutX="79.0" layoutY="140.0" mnemonicParsing="false" onAction="#viewStatisticsButton" prefHeight="43.0" prefWidth="250.0" text="View statistics" />
+            <Label layoutX="66.0" layoutY="82.0" text="What would you like to do?" textOverrun="CLIP">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="370.0" layoutY="126.0" text="User:">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="408.0" fitWidth="319.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Imagen1.png" />
-               </image>
-            </ImageView>
-            <PasswordField fx:id="PasswordTextField" layoutX="394.0" layoutY="258.0" prefHeight="27.0" prefWidth="175.0" />
-            <TextField fx:id="UserTextField" layoutX="394.0" layoutY="169.0" prefHeight="26.0" prefWidth="175.0" />
-            <Button layoutX="475.0" layoutY="444.0" mnemonicParsing="false" onAction="#OnSignUpClick" prefHeight="43.0" prefWidth="79.0" text="Sign up" />
-            <Button layoutX="590.0" layoutY="444.0" mnemonicParsing="false" onAction="#OnEnterUser" prefHeight="43.0" prefWidth="79.0" text="Enter" />
-            <Label layoutX="14.0" layoutY="466.0" text="COVIDIST" textOverrun="CLIP">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
+            <Button fx:id="SearchModify_Patient" layoutX="79.0" layoutY="208.0" mnemonicParsing="false" onAction="#searchpatientbutton" prefHeight="43.0" prefWidth="250.0" text="Search  patient" />
+            <Button fx:id="ModifyData" layoutX="79.0" layoutY="278.0" mnemonicParsing="false" onAction="#sendshipmentbutton" prefHeight="43.0" prefWidth="250.0" text="Send new shipment" />
+            <ImageView fx:id="Doctor_Picture" fitHeight="150.0" fitWidth="200.0" layoutX="515.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="ModifyData1" layoutX="78.0" layoutY="344.0" mnemonicParsing="false" onAction="#addvaccinesbutton" prefHeight="43.0" prefWidth="250.0" text="Add new batch of vaccines" />
+            <Button fx:id="ModifyData2" layoutX="78.0" layoutY="411.0" mnemonicParsing="false" onAction="#modifylabdatabutton" prefHeight="43.0" prefWidth="250.0" text="Modify laboratory data" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="515.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" />
       </children>
     </AnchorPane>
   </children>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="516.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="db.GUI.AddPatientController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="451.0" prefWidth="697.0" VBox.vgrow="ALWAYS">
+      <children>
+            <Label layoutX="26.0" layoutY="11.0" text="Introduce the data of the new patient">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="NamePatientTextField" layoutX="111.0" layoutY="59.0" prefHeight="26.0" prefWidth="175.0" />
+            <Button layoutX="572.0" layoutY="444.0" mnemonicParsing="false" onAction="#OnAcceptPatient" prefHeight="43.0" prefWidth="79.0" text="Accept" />
+            <Button layoutX="687.0" layoutY="444.0" mnemonicParsing="false" onAction="#OnCancelPatient" prefHeight="43.0" prefWidth="79.0" text="Back" />
+            <Label layoutX="47.0" layoutY="401.0" text="Other pathologies:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="47.0" layoutY="362.0" text="Medication:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="48.0" layoutY="329.0" prefHeight="27.0" prefWidth="58.0" text="Place:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="45.0" layoutY="295.0" text="Hospital:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="43.0" layoutY="254.0" text="Blood group:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="43.0" layoutY="218.0" text="Weight:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="42.0" layoutY="186.0" text="Height:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="42.0" layoutY="154.0" text="Social security number:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="42.0" layoutY="124.0" text="Birth date:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="42.0" layoutY="93.0" text="Sex:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="42.0" layoutY="59.0" text="Name:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="SexPatientTextField" layoutX="103.0" layoutY="93.0" prefHeight="26.0" prefWidth="175.0" />
+            <TextField fx:id="BirthDatePatientTextField" layoutX="155.0" layoutY="124.0" prefHeight="26.0" prefWidth="175.0" />
+            <TextField fx:id="SSNumPatientTextField" layoutX="254.0" layoutY="156.0" prefHeight="26.0" prefWidth="175.0" />
+            <TextField fx:id="HeihtPatientTextField" layoutX="125.0" layoutY="187.0" prefHeight="26.0" prefWidth="175.0" />
+            <TextField fx:id="WeightPatientTextField" layoutX="125.0" layoutY="220.0" prefHeight="26.0" prefWidth="175.0" />
+            <TextField fx:id="BloodPatientTextField" layoutX="167.0" layoutY="254.0" prefHeight="26.0" prefWidth="175.0" />
+            <TextField fx:id="HospitalPatientTextField" layoutX="125.0" layoutY="295.0" prefHeight="26.0" prefWidth="175.0" />
+            <TextField fx:id="PlacePatientTextField" layoutX="107.0" layoutY="329.0" prefHeight="26.0" prefWidth="175.0" />
+            <TextField fx:id="MedicationPatientTextField" layoutX="167.0" layoutY="363.0" prefHeight="26.0" prefWidth="175.0" />
+            <TextField fx:id="OtherPathologiesPatientTextField" layoutX="224.0" layoutY="401.0" prefHeight="26.0" prefWidth="175.0" />
+            <Button layoutX="354.0" layoutY="361.0" mnemonicParsing="false" onAction="#OnAddMedication" prefHeight="26.0" prefWidth="31.0" text="+">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button layoutX="413.0" layoutY="399.0" mnemonicParsing="false" onAction="#OnAddPathology" prefHeight="26.0" prefWidth="31.0" text="+">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Accordion layoutX="444.0" layoutY="292.0" />
+            <Accordion layoutX="460.0" layoutY="255.0" />
+          <TitledPane fx:id="SeeAllMedication" expanded="false" layoutX="399.0" layoutY="363.0" text="See all">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button layoutX="37.0" layoutY="6.0" mnemonicParsing="false" onAction="#Deletemedbynum" prefHeight="0.0" prefWidth="70.0" text="Delete">
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                        <TextField fx:id="DeleteMedNum" layoutX="122.0" layoutY="4.0" prefHeight="26.0" prefWidth="31.0" />
+                        <ScrollPane layoutX="-3.0" layoutY="35.0" prefHeight="138.0" prefWidth="202.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Label fx:id="AllMedLabel" alignment="TOP_CENTER" prefHeight="207.0" prefWidth="183.0">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+            <TitledPane fx:id="SeeAllMedication1" expanded="false" layoutX="460.0" layoutY="401.0" text="See all">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button layoutX="37.0" layoutY="6.0" mnemonicParsing="false" onAction="#DeletePathbyNum" prefHeight="0.0" prefWidth="70.0" text="Delete">
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                        <TextField fx:id="DeletePathologynum" layoutX="122.0" layoutY="4.0" prefHeight="26.0" prefWidth="31.0" />
+                        <ScrollPane layoutX="-3.0" layoutY="35.0" prefHeight="138.0" prefWidth="202.0">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Label fx:id="pathologylabel" alignment="TOP_CENTER" prefHeight="207.0" prefWidth="183.0">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </TitledPane>
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>
