@@ -98,7 +98,7 @@ public class AddPatientController {
         boolean alive=true;
         int score=0;
         boolean vaccinated=false;
-        //id=listadepacientes.size();
+        // TODO id=listadepacientes.size();
     	
     	
     	Patient p_new= new Patient(id,Place_Text,Name_Text,date,SSNum_Text,height,weight,sex,infected,alive,Hospital_Text,vaccinated,Blood_Text,medication_list,other_pathologies_list);
@@ -124,7 +124,7 @@ public class AddPatientController {
     	
     	
     	else {
-    		//mensaje error ya se ha añadido esa medication
+    		// TODO mensaje error ya se ha añadido esa medication
     	}
     	
 
@@ -171,7 +171,7 @@ public class AddPatientController {
     		
     	}
     	else {
-    		//mensaje error ya se ha añadido esa patologia
+    		//TODO mensaje error ya se ha añadido esa patologia
 
     	}
     	

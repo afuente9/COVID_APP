@@ -24,7 +24,7 @@ public class ChooseSignUpController {
 
 	@FXML
 	void OnSignUpAsDoctorClick(ActionEvent event) {
-//abre registro doctor
+// TODO abre registro doctor
 		
 		
 		String name = "SignUpDoctorView.fxml";
@@ -36,7 +36,7 @@ public class ChooseSignUpController {
 
 	@FXML
 	void OnSignUpAsLaboratoryClick(ActionEvent event) {
-//abre registrar lab
+// TODO abre registrar lab
 		String name = "SignUpLaboratoryView.fxml";
 		SignUpLaboratoryController controller = null;
 		openWindow(name, controller);

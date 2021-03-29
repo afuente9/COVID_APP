@@ -15,7 +15,8 @@ public class Doctor implements Serializable{
 	private Sex sex;
 	private String hospital;
 	private List<Doctor> doctors;
-	
+	// TODO array de bytes para l foto
+
 	public Doctor() {
 		super();
 	}

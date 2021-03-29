@@ -11,7 +11,8 @@ public class Lab implements Serializable{
 	private String name;
 	private String cif;
 	private List<Lab> labs;
-	
+	// TODO array de bytes para la foto
+
 	public Lab() {
 		super();
 	}

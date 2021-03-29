@@ -23,7 +23,6 @@ public class Patient implements Serializable{
 	private String bloodType;
 	private List<Medication> medication=new ArrayList();
 	private List<Other_Pathologies> other_pathologies=new ArrayList();
-
 	private List<Patient> patients; // TODO Hay que quitar esto y crear un metodo enJDBCManagment
 	
 	
