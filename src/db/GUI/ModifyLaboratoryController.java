@@ -47,6 +47,7 @@ public class ModifyLaboratoryController {
 String newadress= newadresslab.getText();
 oldlabadress.setText(newadress);
 lmodif.setAddress(newadress);
+newadresslab.setText("");
 
     }
 
@@ -55,6 +56,7 @@ lmodif.setAddress(newadress);
     	String newcif= newciflab.getText();
     	oldlabcif.setText(newcif);
     	lmodif.setCif(newcif);
+    	newciflab.setText("");
     }
 
     @FXML
@@ -62,6 +64,7 @@ lmodif.setAddress(newadress);
     	String newname= newnamelab.getText();
     	oldlabname.setText(newname);
     	lmodif.setName(newname);
+    	newnamelab.setText("");
     }
 
 	

@@ -62,6 +62,7 @@ Doctor dmodif;
 String newDate= ModifyDateTextField.getText();
 dmodif.setBirthday(Date.valueOf(newDate));
 OldBDate.setText(newDate);
+ModifyDateTextField.setText("");
     }
 
     @FXML
@@ -69,6 +70,7 @@ OldBDate.setText(newDate);
 String new_colnum= ModifyColNumTextField.getText();
 dmodif.setCollegiate_number(new_colnum);
 OldColNum.setText(new_colnum);
+ModifyColNumTextField.setText("");
     }
 
     @FXML
@@ -76,6 +78,7 @@ OldColNum.setText(new_colnum);
     	String new_hospital= ModifyHospitalTextField.getText();
     	dmodif.setCollegiate_number(new_hospital);
     	OldHospi.setText(new_hospital);
+    	ModifyHospitalTextField.setText("");
     }
 
     @FXML
@@ -86,7 +89,8 @@ OldColNum.setText(new_colnum);
 
     	dmodif.setName(new_name);
     	OldName.setText(new_name);
-    	//DoctorMenuController.DoctorName.setText(new_name);
+    	//DoctorMenuController.DoctorName.setText(new_name); refresh o algo para la pantalla principal
+    	ModifyNameTextField.setText("");
     	
     }
 
@@ -97,7 +101,7 @@ OldColNum.setText(new_colnum);
     	String newSex= ModifySexTextField.getText();
     	dmodif.setSex(Sex.valueOf(newSex));
     	OldSex.setText(newSex);
-
+    	ModifySexTextField.setText("");
     }
 
     @FXML
@@ -105,6 +109,7 @@ OldColNum.setText(new_colnum);
     	String new_spetiality= ModifySpetialityTextField.getText();
     	dmodif.setSpeciality(new_spetiality);
     	OldSpetiality.setText(new_spetiality);
+    	ModifySpetialityTextField.setText("");
     }
 
     @FXML
