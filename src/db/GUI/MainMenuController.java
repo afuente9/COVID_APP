@@ -32,7 +32,8 @@ public class MainMenuController {
     void OnEnterUser(ActionEvent event) {
     	System.out.println(UserTextField.getText());
 		if(UserTextField.getText().equals("doctor")&&PasswordTextField.getText().equals("doctor")) {
-			Doctor d = new Doctor(0,"lucas",Sex.valueOf("Male"),Date.valueOf("2000-10-10"),"34234","cardio","La Paz");
+			byte[] image=null;
+			Doctor d = new Doctor(0,"cardio","lucas",Date.valueOf("2000-10-10"),"34234",Sex.valueOf("Male"),"La Paz",image);
 			String name= "DoctorMenuView.fxml";
 			DoctorMenuController controller = null;
 			try {
@@ -63,7 +64,8 @@ public class MainMenuController {
 		if(UserTextField.getText().equals("lab")&&PasswordTextField.getText().equals("lab")) {
 			String name= "LabMenuView.fxml";
 			LabMenuController controller = null;
-			Lab l_new= new Lab(0,"Pfizer","28223, Pozuelo","23433453F",0);
+			byte[] image= null;
+			Lab l_new= new Lab(0,0,"28223, Pozuelo","Pfizer","23433453F",image);
 			try {
 	    		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
 	    	Parent root;

@@ -42,7 +42,8 @@ public class SignUpDoctorController {
     	Date date = Date.valueOf(date_text);
         int id=0;
        //id = getlistadedoctores().length(); 
-    	Doctor d_new= new Doctor(id,name,sex,date,colnum,spetiality,hospital);
+    	byte[] image=null;
+    	Doctor d_new= new Doctor(id,spetiality,name,date,colnum,sex,hospital,image);
     	//añadir doctor a la lista de doctores
     	//popup registrado correctamente
     	Stage stage = (Stage) this.NameTextField.getScene().getWindow();

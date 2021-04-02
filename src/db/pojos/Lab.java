@@ -18,14 +18,13 @@ public class Lab implements Serializable{
 	}
 
 
-	public Lab(int id, int vaccines_produce, String address, String name, String cif, List<Lab> labs, byte[] image) {
+	public Lab(int id, int vaccines_produce, String address, String name, String cif,  byte[] image) {
 		super();
 		this.id = id;
 		this.vaccines_produce = vaccines_produce;
 		this.address = address;
 		this.name = name;
 		this.cif = cif;
-		this.labs = labs;
 		this.image = image;
 	}
 

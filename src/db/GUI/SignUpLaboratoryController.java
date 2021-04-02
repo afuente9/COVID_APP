@@ -26,7 +26,8 @@ public class SignUpLaboratoryController {
     	String adress = AdressTextField.getText();
     	 int id=0;
     	 int number_vaccines=0;
-      	Lab l_new= new Lab(id,name,cif_text,adress,number_vaccines);
+    	 byte[] image=null;
+      	Lab l_new= new Lab(id,number_vaccines,adress,name,cif_text, image);
       	//addlab to the list of labs
     	Stage stage = (Stage) this.CifTextField.getScene().getWindow();
 		stage.close();
