@@ -59,13 +59,14 @@ public class JDBCManagment implements Cov_Manager{
 		try {
 			Statement stmt1 = c.createStatement();
 			String sql1 = "CREATE TABLE doctors " 
-					+ "(id       			INTEGER  	 PRIMARY KEY AUTOINCREMENT,"
-					+ " name     			TEXT    	 NOT NULL," 
-					+ " speciality 			TEXT  		 NOT NULL,"
-					+ " birth_date			DATE		 NOT NULL,"		
-					+ " collegiate_number	TEXT	 	 NOT NULL," 
-					+ " sex 				TEXT	 	 NOT NULL," 
-					+ " hospital  			TEXT		 NOT NULL)";
+					+ "(id       			INTEGER  	 	PRIMARY KEY AUTOINCREMENT,"
+					+ " name     			TEXT    	 	NOT NULL," 
+					+ " speciality 			TEXT  		 	NOT NULL,"
+					+ " birth_date			DATE		 	NOT NULL,"		
+					+ " collegiate_number	TEXT	 	 	NOT NULL," 
+					+ " sex 				TEXT	 	 	NOT NULL," 
+					+ " hospital  			TEXT		 	NOT NULL"
+					+ " image 				LONGVARBINARY   NOT NULL)";
 			stmt1.executeUpdate(sql1);
 			stmt1.close();
 
@@ -91,11 +92,12 @@ public class JDBCManagment implements Cov_Manager{
 
 			Statement stmt3 = c.createStatement();
 			String sql3 = "CREATE TABLE lab " 
-					+ "(id       		INTEGER  	 PRIMARY KEY AUTOINCREMENT,"
-					+ " name     		TEXT    	 NOT NULL," 
-					+ " adress	 		TEXT	 	 NOT NULL,"
-					+ " cif			    TEXT  	 	 NOT NULL," 
-					+ " vacciness  		INTEGER	 	 NOT NULL)";
+					+ "(id       		INTEGER  	 	PRIMARY KEY AUTOINCREMENT,"
+					+ " name     		TEXT    	 	NOT NULL," 
+					+ " adress	 		TEXT	 	 	NOT NULL,"
+					+ " cif			    TEXT  	 	 	NOT NULL," 
+					+ " vacciness  		INTEGER	 	 	NOT NULL"
+					+ " image 			LONGVARBINARY   NOT NULL)";
 			stmt3.executeUpdate(sql3);
 			stmt3.close();
 
@@ -111,8 +113,9 @@ public class JDBCManagment implements Cov_Manager{
 
 			Statement stmt5 = c.createStatement();
 			String sql5 = "CREATE TABLE administration "
-					+ "(id       				INTEGER  	PRIMARY KEY AUTOINCREMENT,"
-					+ " total_vacciness  		INTEGER	 	NOT NULL)";
+					+ "(id       				INTEGER  		PRIMARY KEY AUTOINCREMENT,"
+					+ " total_vacciness  		INTEGER	 		NOT NULL"
+					+ " image 				    LONGVARBINARY   NOT NULL)";
 			stmt5.executeUpdate(sql5);
 			stmt5.close();
 
@@ -211,7 +214,7 @@ public class JDBCManagment implements Cov_Manager{
 			else {
 				sexo = "F";
 			}
-			String sql = "INSERT INTO Doctor (name, speciality, birth_date, collegiate_number, sex, hospital) VALUES (?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO Doctor (name, speciality, birth_date, collegiate_number, sex, hospital, image) VALUES (?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, d.getName());
 			prep.setString(2, d.getSpeciality());
@@ -219,6 +222,7 @@ public class JDBCManagment implements Cov_Manager{
 			prep.setString(4, d.getCollegiate_number());
 			prep.setString(5, sexo);
 			prep.setString(6, d.getHospital());
+			//TODO insertar imagen en tabla prep.set(7, d.getImage());
 			prep.executeUpdate();
 			prep.close();
 		}
@@ -235,6 +239,7 @@ public class JDBCManagment implements Cov_Manager{
 			prep.setString(2, l.getAddress());
 			prep.setString(3, l.getCif());
 			prep.setInt(4, l.getVaccines_produce());
+			//TODO insertar imagen en tabla prep.set(5, l.getImage());
 			prep.executeUpdate();
 			prep.close();
 		}
@@ -264,6 +269,7 @@ public class JDBCManagment implements Cov_Manager{
 			String sql = "INSERT INTO Administration (total_vacciness) VALUES (?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, a.getVaccines());
+			//TODO insertar imagen en tabla prep.set(2, a.getImage());
 			prep.executeUpdate();
 			prep.close();
 		}
@@ -477,6 +483,7 @@ public class JDBCManagment implements Cov_Manager{
 				String direccion = rs.getString("adress");
 				String doc = rs.getString("cif");
 				Integer vacc = rs.getInt("vacciness");
+				//TODO SELECT image
 				return new Lab(id, lab_name, direccion, doc, vacc);
 			}
 			prep.close();
@@ -503,6 +510,7 @@ public class JDBCManagment implements Cov_Manager{
 				String Ladress = rs.getString("adress");
 				String Lcif = rs.getString("cif");
 				int Lvacciness = rs.getInt("vacciness");
+				//TODO SELECT image
 				Lab lab = new Lab(id, Lname, Ladress, Lcif, Lvacciness);
 				labs.add(lab);
 			}

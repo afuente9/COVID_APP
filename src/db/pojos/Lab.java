@@ -11,24 +11,23 @@ public class Lab implements Serializable{
 	private String name;
 	private String cif;
 	private List<Lab> labs;
-	// TODO array de bytes para la foto
+	byte[] image;
 
 	public Lab() {
 		super();
 	}
-	
 
-	public Lab(int id2, String lname, String ladress, String lcif, int lvacciness) {
+
+	public Lab(int id, int vaccines_produce, String address, String name, String cif, List<Lab> labs, byte[] image) {
 		super();
-		this.id = id2;
-		this.name = lname;
-		this.address = ladress;
-		this.cif = lcif;
-		this.vaccines_produce = lvacciness;
+		this.id = id;
+		this.vaccines_produce = vaccines_produce;
+		this.address = address;
+		this.name = name;
+		this.cif = cif;
+		this.labs = labs;
+		this.image = image;
 	}
-
-
-
 
 
 

@@ -6,7 +6,7 @@ public class Administration implements Serializable{
 
 	private Integer id;
 	private int vaccines;
-	// TODO array de bytes para l foto
+	byte[] image;
 
 	
 	public Administration() {

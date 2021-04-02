@@ -15,7 +15,7 @@ public class Doctor implements Serializable{
 	private Sex sex;
 	private String hospital;
 	private List<Doctor> doctors;
-	// TODO array de bytes para l foto
+	byte[] image;
 
 	public Doctor() {
 		super();
@@ -27,18 +27,22 @@ public class Doctor implements Serializable{
 		this.name = name;
 	}
 
-	public Doctor(Integer id, String name, Sex sex, Date birthday, String collegiate_number, String spetiality, String hospital) {
+	
+
+
+	public Doctor(Integer id, String speciality, String name, Date birthday, String collegiate_number, Sex sex,
+			String hospital, List<Doctor> doctors, byte[] image) {
 		super();
 		this.id = id;
+		this.speciality = speciality;
 		this.name = name;
-		this.sex= sex;
-		this.birthday=birthday;
-		this.collegiate_number=collegiate_number;
-		this.speciality=spetiality;
-		this.hospital=hospital;
-				
+		this.birthday = birthday;
+		this.collegiate_number = collegiate_number;
+		this.sex = sex;
+		this.hospital = hospital;
+		this.doctors = doctors;
+		this.image = image;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -177,4 +181,14 @@ public class Doctor implements Serializable{
 	public void setDoctors(List<Doctor> doctors) {
 		this.doctors = doctors;
 	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+	
+	
 }

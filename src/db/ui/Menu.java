@@ -4,6 +4,8 @@ import java.io.*;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import db.pojos.*;
 
 import db.interfaces.Cov_Manager;
@@ -80,9 +82,13 @@ public class Menu {
 	}
 	
 
-	private static void searchPatients() {
-		// TODO Auto-generated method stub
-		
+	private static void searchPatients() throws Exception {
+		// TODO terminar metodo
+		System.out.println("Please, input the person info:");
+		System.out.print("Name: ");
+		String p_name = reader.readLine();
+		/*List<Patient> result = searchPatientByName(p_name);
+		result.toString();*/
 	}
 	
 	
