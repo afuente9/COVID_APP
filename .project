@@ -20,4 +20,11 @@
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/db/GUI/teeeeeeeest.java</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/teeeeeeeest.java</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
