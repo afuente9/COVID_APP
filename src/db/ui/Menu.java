@@ -12,6 +12,8 @@ import db.interfaces.Cov_Manager;
 import db.jdbc.JDBCManagment;
 
 public class Menu {
+	//public Day today=ultimo dia añadido a la lista de dias;
+
 	
 	private static Cov_Manager inter = new JDBCManagment();
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -20,6 +22,11 @@ public class Menu {
 	
 	public static void main(String[] args) throws Exception {
 		inter.connect();
+		/*if (today.getDate() != LocalDate.now()) {
+			newDay();
+		
+		}
+		*/
 		do {
 			System.out.println("Choose an option:		");
 			System.out.println("1. Add a patient		");
@@ -106,4 +113,40 @@ public class Menu {
 		String l_name = reader.readLine();
 		//inter.addPatient(new Patient(name));
 	}
+	public void newDay() { 
+		
+		//  esto pasara if today != LocalDate.now() 
+		
+		//calcular la media de muertos de los ultimos 7 dias
+		
+				float average=0;
+				
+				// calcular el average que tenemos este dia
+				
+				
+				/*
+				 * float suma=0;
+				 * for (int i=listadedias.size; i>listadedias.size-7;i--){
+				 * suma+=listadedias.getdia.getnumerodemuertos();
+				 * }
+				 * average= suma/7;
+				 * 
+				 */
+				
+						//crear un nuevo dia
+					//	Day newToday= new Day(id,LocalDate.now(),getnumerodemuertosahoramismo, average);
+				//this.today=  newtoday;
+						//añadir newtoday a la lista de dias
+						
+				//recorrer la lista de pacientes para calcularles el score TODO mirar cual es mas optima para recorrer, arraylist o linkedlist
+				/* for(int i=0;i<listadepacientes.size;i++{
+				 * 
+				 *(paquete estadisticas) calculateScore(listadepacientes.get(i),newtoday,todaslaslistasdeporcentagesobtenidosenstadisticas);
+				 * 
+				 * }
+				 * Score.setFirstTime(false); alomejor hay que cambiar boolean por Bool para que funcione
+				 */
+				
+				
+			}
 }

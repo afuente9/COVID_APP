@@ -1,13 +1,16 @@
 package db.pojos;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Day {
+	private Integer id;
 private int deaths;
 private float average;
-private Date date;
+private LocalDate date;
 
-public Day(Date date, int deaths, float average) {
+public Day(Integer id,LocalDate date, int deaths, float average) {
+	this.id=id;
 	this.date=date;
 	this.deaths=deaths;
 	this.average=average;
@@ -21,7 +24,7 @@ public float getAverage() {
 	return average;
 }
 
-public Date getDate() {
+public LocalDate getDate() {
 	return date;
 }
 
@@ -33,7 +36,7 @@ public void setAverage(float average) {
 	this.average = average;
 }
 
-public void setDate(Date date) {
+public void LocalDate(LocalDate date) {
 	this.date = date;
 }
 

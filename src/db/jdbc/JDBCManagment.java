@@ -6,12 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
 
 import db.interfaces.Cov_Manager;
 import db.pojos.Administration;
+import db.pojos.Day;
 import db.pojos.Doctor;
 import db.pojos.Lab;
 import db.pojos.Medication;
@@ -304,6 +306,8 @@ public class JDBCManagment implements Cov_Manager{
 		}
 	}
 	
+	//TODO ADD DAY
+	
 	public List<Patient> searchPatientByName(String name){
 		List<Patient> patients = new ArrayList<Patient>();
 		try {
@@ -520,4 +524,6 @@ public class JDBCManagment implements Cov_Manager{
 		}
 		return labs;
 	}
+	
+	
 }

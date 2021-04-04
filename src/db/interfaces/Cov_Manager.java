@@ -5,6 +5,7 @@ import java.util.List;
 import db.pojos.*;
 
 public interface Cov_Manager {
+	//TODO añadir lista de dias y añadir metodo addDay
 
 	// Connects with the database and, if needed, performs necessary setup
 	public void connect();

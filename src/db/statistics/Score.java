@@ -9,11 +9,12 @@ import db.pojos.Doctor;
 import db.pojos.Patient;
 
 public class Score {
-Patient p=null;
+	public boolean firstTime=true;
+	
+/* DE MOMENTO NO USO ESTO
 public void calculateValues() {
 	int score=0;
-//TODO traerse todos los porcentages de las estadisticas
-	/*float percentage0to15yearsInfected=0;
+	float percentage0to15yearsInfected=0;
 	float percentage15to30yearsInfected=0;
 	float percentage30to60yearsInfected=0;
 	float percentage70to99yearsInfected=0;
@@ -34,7 +35,7 @@ public void calculateValues() {
 	
 	float percentageMenInfected=0;
 	float percentageWomenInfected=0;
-	*/
+	
 	 List<Float> percentageAgeInfected= new ArrayList<Float>();
 	 List<Float> percentageWeightInfected= new ArrayList<Float>();
 	 List<Float> percentageHeightInfected= new ArrayList<Float>();
@@ -65,19 +66,28 @@ public void calculateValues() {
 	
 	
 }
+*/
 
-public int calculateScore(Patient p,List<Float> percentageAgeInfectedList,Day d) {
+public void calculateScore(Patient p,Day d,List<Float> percentageAgeInfectedList) {
+	/*
+	 * PARA LOS CASOS DONDE HAY INTERVALOS COMO AGE, WEIGHT Y HEIGHT USAREMOS LISTAS DE LA MISMA MANERA QUE YA ESTÁ IMPLEMENTADO EN AGE
+	 * PARA LOS DEMÁS CASOS, USAREMOS DICCIONARIOS DONDE LE PASAREMOS EL TIPO QUE TIENE EL PACIENTE COMO KEY, Y NOS DEVOLVERA EL PORCENTAJE
+	 * POR EJEMPLO EN SEXO, HOSPITAL, MEDICACION ETC. ASI SOLUCIONAMOS EL TEMA DE NO SABER CUANTOS TIPOS DIFERENTES TENEMOS
+	 * EN LOS QUE USAMOS DICCIONARIOS, TENDREMOS QUE COGER TODOS LOS PORCENTAJES PARA MIRAR CUAL ES EL MAXIMO Y EL MINIMO. 
+	 * A MALAS, PASAMOS TODOS A UNA LISTA Y LUEGO USAMOS LOS METODOS MIN Y MAX YA CREADOS.
+	
+	*/
 	//TODO AL FINAL DEL TODo CUANDO SE VERIFIQUE QUE TODo FUNCIONA!! simplificar variables 
-	//TODO REPETIR PARA TODOS LOS TIPOS TRAYENDO TODAS LAS LISTAS 
-	/* Necesitamos poder controlar que dia es hoy para saber el average. 
-	 * Justo antes de que la aplicacion cambie de dia tiene que crear un nuevo Day metiendole el numero de muertos que hay en ese momento y 
-	 * calculando el average con el numero de muertos de los pasados 7 dias.
-	 * Justo despues se actualiza el score de todos los pacietnes con los nuevos datos
-	 * 
-	 * No vamos a poder controlar cuando se cambia de dia porque la aplicacion no va a estar conectada 24 horas. Hay que actualizar los datos al
-	 * iniciar la aplicacion controlando si ha pasado o no un dia nuevo para ver si hay que actualizar los scores y el getaverage 
-	 * 
-	 */
+	
+	
+	float percentageAgeDifference=0;
+	if(firstTime==true) {
+		 percentageAgeDifference= calculateDiferencesList(percentageAgeInfectedList);
+		// diferencialista2= calculateDiferencesList(lista2);...
+		//diferenciadiccionario1=calculateDiferencesDictionary(diccionario1)... asi con todos
+		firstTime=false;
+	}
+	
 	double [] contributions= new double[20];
 	int  score=0;
 	double exponente = -0.039*d.getAverage()+5;
@@ -86,20 +96,24 @@ public int calculateScore(Patient p,List<Float> percentageAgeInfectedList,Day d)
 	double InfectedScore=1-DeadScore;
 
 
-	int age=p.getTheAge(p.getBirthday());
-	
-	float percentageAge= getAgePercentage(age,percentageAgeInfectedList);
-	
-	float agePoints= ((getMaxNum(percentageAgeInfectedList)-getMinNum(percentageAgeInfectedList))*percentageAge);
+	int age=p.getTheAge(p.getBirthday());//obtenemos la edad del paci
+    float percentageAge= getAgePercentage(age,percentageAgeInfectedList);//miramos en que intervalo esta y sacamos de la lista  el porcentage de ese intervalo 
+    float agePoints= (percentageAgeDifference*percentageAge);
 	float exponent=1+(percentageAgeInfectedList.size()/10);
 	double basicScore= Math.pow(agePoints,exponent);
 	double finalAgeScoreInfected=basicScore*InfectedScore;
 	
-	
+	//TODO repetir para todas las listas Y DICCIONARIOS
+
 	
 	score=getFinalScore(contributions);
-	return score;
-	
+    p.setScore(score);	
+}
+public boolean getFirstTime() {
+	return firstTime;
+}
+public void setFirstTime(boolean firstTime) {
+	this.firstTime = firstTime;
 }
 public float getAgePercentage (int age,List<Float> percentageAgeInfected) {
 	
@@ -155,5 +169,11 @@ public int getFinalScore(double [] contributions) {
 	}
 	return (int) score;
 }
+public float calculateDiferencesList(List<Float> list) {
+	float difference=0;
+	difference= getMaxNum(list)-getMinNum(list);
+	return difference;
+}
+
 
 }
