@@ -1,6 +1,7 @@
 package db.pojos;
 
 import java.io.Serializable;
+
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -223,6 +224,8 @@ public class Patient implements Serializable{
 	public String getName() {
 		return name;
 	}
+	
+	
 
 	
 	public void setName(String name) {
@@ -337,5 +340,18 @@ public class Patient implements Serializable{
 	
 	public void setIs_vaccinated(boolean is_vaccinated) {
 		this.vaccinated = is_vaccinated;
+	}
+
+
+
+
+	
+
+
+
+
+	public int getTheAge(Date birthday2) {
+		// TODO coge el bday y devuelve la edad
+		return 0;
 	}
 }
