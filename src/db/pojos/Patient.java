@@ -3,6 +3,7 @@ package db.pojos;
 import java.io.Serializable;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -342,16 +343,8 @@ public class Patient implements Serializable{
 		this.vaccinated = is_vaccinated;
 	}
 
-
-
-
-	
-
-
-
-
 	public int getTheAge(Date birthday2) {
-		// TODO coge el bday y devuelve la edad
-		return 0;
+		LocalDate temp = LocalDate.now().minusYears(birthday2.toLocalDate().getYear());
+		return temp.getYear();
 	}
 }

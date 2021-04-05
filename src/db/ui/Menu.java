@@ -115,7 +115,7 @@ public class Menu {
 	}
 	public void newDay() { 
 		
-		//  esto pasara if today != LocalDate.now() 
+		//TODO  esto pasara if today != LocalDate.now() 
 		
 		//calcular la media de muertos de los ultimos 7 dias
 		

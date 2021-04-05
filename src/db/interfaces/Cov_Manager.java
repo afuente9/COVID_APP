@@ -1,11 +1,14 @@
 package db.interfaces;
 
-import java.util.List;
+import java.util.*;
 
 import db.pojos.*;
 
 public interface Cov_Manager {
-	//TODO añadir lista de dias y añadir metodo addDay
+	// Add a new day 
+	public void addDay(Day f);
+	// Get a list of all the days
+	public List<Day> getDay(int id);
 
 	// Connects with the database and, if needed, performs necessary setup
 	public void connect();
