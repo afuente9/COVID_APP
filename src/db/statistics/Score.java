@@ -79,9 +79,16 @@ public void calculateScore(Patient p,Day d,List<Float> percentageAgeInfectedList
 	*/
 	//TODO AL FINAL DEL TODo CUANDO SE VERIFIQUE QUE TODo FUNCIONA!! simplificar variables 
 	
-	
+	double DeadScore=0;
+	double InfectedScore=0;
 	float percentageAgeDifference=0;
 	if(firstTime==true) {
+		//calcular el infected score y el dead score solo lo tiene que hacer una vez al dia y usarel mismo valor para todos los pacientes
+		double exponente = -0.039*d.getAverage()+5;
+		double denominadorDeathScore=1+Math.pow(2.71828,exponente);
+		 DeadScore=((35/denominadorDeathScore)+65)/100;
+		 InfectedScore=1-DeadScore;
+		
 		 percentageAgeDifference= calculateDiferencesList(percentageAgeInfectedList);
 		// diferencialista2= calculateDiferencesList(lista2);...
 		//diferenciadiccionario1=calculateDiferencesDictionary(diccionario1)... asi con todos
@@ -90,10 +97,7 @@ public void calculateScore(Patient p,Day d,List<Float> percentageAgeInfectedList
 	
 	double [] contributions= new double[20];
 	int  score=0;
-	double exponente = -0.039*d.getAverage()+5;
-	double denominadorDeathScore=1+Math.pow(2.71828,exponente);
-	double DeadScore=((35/denominadorDeathScore)+65)/100;
-	double InfectedScore=1-DeadScore;
+	
 
 
 	int age=p.getTheAge(p.getBirthday());//obtenemos la edad del paci
@@ -102,6 +106,7 @@ public void calculateScore(Patient p,Day d,List<Float> percentageAgeInfectedList
 	float exponent=1+(percentageAgeInfectedList.size()/10);
 	double basicScore= Math.pow(agePoints,exponent);
 	double finalAgeScoreInfected=basicScore*InfectedScore;
+	
 	
 	//TODO repetir para todas las listas Y DICCIONARIOS
 
