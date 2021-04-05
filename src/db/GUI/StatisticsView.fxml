@@ -55,7 +55,7 @@
             </Label>
             <Button layoutX="83.0" layoutY="98.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="175.0" text="View important info" />
             <ChoiceBox fx:id="typeofpatient" layoutX="258.0" layoutY="40.0" prefWidth="150.0" />
-            <CheckBox layoutX="96.0" layoutY="149.0" mnemonicParsing="false" text="By age" />
+            <CheckBox layoutX="96.0" layoutY="149.1" mnemonicParsing="false" text="By age" />
             <CheckBox layoutX="96.0" layoutY="185.0" mnemonicParsing="false" text="By weight" />
             <CheckBox layoutX="96.0" layoutY="418.0" mnemonicParsing="false" text="By other pathologies" />
             <CheckBox layoutX="96.0" layoutY="378.0" mnemonicParsing="false" text="By medication" />

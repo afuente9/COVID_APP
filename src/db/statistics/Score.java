@@ -52,7 +52,7 @@ public void calculateValues() {
 	 List<Float> percentageSexDead= new ArrayList<Float>();
 	 List<Float> percentageHospitalDead= new ArrayList<Float>();
 	 List<Float> percentageLocationDead= new ArrayList<Float>();
-	 	 List<Float> percentageBloodTypeDead= new ArrayList<Float>();
+	 	 List<Float> percentageBloodTypeDead= new ArrayList<Float>() ;
 
 	 List<Float> percentageMedicationDead= new ArrayList<Float>();
 	 List<Float> percentagePathologiesDead= new ArrayList<Float>();
