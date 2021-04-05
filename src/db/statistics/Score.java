@@ -41,22 +41,23 @@ public void calculateValues() {
 	 List<Float> percentageHeightInfected= new ArrayList<Float>();
 	 List<Float> percentageSexInfected= new ArrayList<Float>();
 	 List<Float> percentageHospitalInfected= new ArrayList<Float>();
-	 List<Float> percentageBloodTypeInfected= new ArrayList<Float>();
+	 
 	 List<Float> percentageLocationInfected= new ArrayList<Float>();
 	 List<Float> percentageMedicationInfected= new ArrayList<Float>();
 	 List<Float> percentagePathologiesInfected= new ArrayList<Float>();
-	 
+	 	 List<Float> percentageBloodTypeInfected= new ArrayList<Float>();
+
 	 List<Float> percentageAgeDead= new ArrayList<Float>();
 	 List<Float> percentageWeightDead= new ArrayList<Float>();
 	 List<Float> percentageHeightDead= new ArrayList<Float>();
 	 List<Float> percentageSexDead= new ArrayList<Float>();
 	 List<Float> percentageHospitalDead= new ArrayList<Float>();
 	 List<Float> percentageLocationDead= new ArrayList<Float>();
-	 	 List<Float> percentageBloodTypeDead= new ArrayList<Float>() ;
 
 	 List<Float> percentageMedicationDead= new ArrayList<Float>();
 	 List<Float> percentagePathologiesDead= new ArrayList<Float>();
-	 
+	 	 	 List<Float> percentageBloodTypeDead= new ArrayList<Float>() ;
+
 	 
 	
 	 

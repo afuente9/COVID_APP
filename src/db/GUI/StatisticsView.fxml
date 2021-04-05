@@ -72,7 +72,7 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </LineChart>
-            <CheckBox layoutX="96.0" layoutY="448.0" mnemonicParsing="false" text="By blood type" />
+            <CheckBox layoutX="106.0" layoutY="448.0" mnemonicParsing="false" text="By blood type" />
       </children>
     </AnchorPane>
   </children>
