@@ -1,76 +1,99 @@
 package db.pojos;
 
 import java.sql.Date;
-import java.time.LocalDate;
+import java.util.*;
 
 public class Day {
 	private Integer id;
-private int deaths;
-private float average;
-private LocalDate date;
+	private int deaths;
+	private float average;
+	private Date date;
+	private List<Day> savedDates = new ArrayList();
 
-public Day(Integer id,LocalDate date, int deaths, float average) {
-	this.id=id;
-	this.date=date;
-	this.deaths=deaths;
-	this.average=average;
-}
+	public Day(Integer id, int deaths, float average, Date date) {
+		super();
+		this.id = id;
+		this.deaths = deaths;
+		this.average = average;
+		this.date = date;
+	}
 
-public int getDeaths() {
-	return deaths;
-}
+	public List<Day> getSavedDates() {
+		return savedDates;
+	}
 
-public float getAverage() {
-	return average;
-}
+	public int getDeaths() {
+		return deaths;
+	}
 
-public LocalDate getDate() {
-	return date;
-}
+	public float getAverage() {
+		return average;
+	}
 
-public void setDeaths(int deaths) {
-	this.deaths = deaths;
-}
+	public Date getDate() {
+		return date;
+	}
 
-public void setAverage(float average) {
-	this.average = average;
-}
+	public void setDeaths(int deaths) {
+		this.deaths = deaths;
+	}
 
-public void LocalDate(LocalDate date) {
-	this.date = date;
-}
+	public void setAverage(float average) {
+		this.average = average;
+	}
 
-@Override
-public int hashCode() {
-	// TODO Auto-generated method stub
-	return super.hashCode();
-}
+	public void setSavedDates(List<Day> savedDates) {
+		this.savedDates = savedDates;
+	}
 
-@Override
-public boolean equals(Object obj) {
-	// TODO Auto-generated method stub
-	return super.equals(obj);
-}
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
-@Override
-protected Object clone() throws CloneNotSupportedException {
-	// TODO Auto-generated method stub
-	return super.clone();
-}
+	public void LocalDate(Date date) {
+		this.date = date;
+	}
 
-@Override
-public String toString() {
-	// TODO Auto-generated method stub
-	return super.toString();
-}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Float.floatToIntBits(average);
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + deaths;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
 
-@Override
-protected void finalize() throws Throwable {
-	// TODO Auto-generated method stub
-	super.finalize();
-}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Day other = (Day) obj;
+		if (Float.floatToIntBits(average) != Float.floatToIntBits(other.average))
+			return false;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
+			return false;
+		if (deaths != other.deaths)
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
 
-
-
+	@Override
+	public String toString() {
+		return "Day [id=" + id + ", deaths=" + deaths + ", average=" + average + ", date=" + date + "]";
+	}
 
 }
