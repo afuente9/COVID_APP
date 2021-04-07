@@ -100,6 +100,24 @@ public class Patient implements Serializable{
 		this.vaccinated = is_vaccinated;
 		this.bloodType = bloodType;
 	}
+	
+	// NO TOCAR ESTE CONSTRUCTOR QUE ES IMPORTANTE!!!!
+	public Patient(String hos_location, String name, Date birthday, String social_security, float height, float weight,
+ 			Sex sex, boolean infected, boolean alive, String hospital, boolean vaccinated, String bloodType) {
+ 		super();
+ 		this.hos_location = hos_location;
+ 		this.name = name;
+ 		this.birthday = birthday;
+ 		this.social_security = social_security;
+ 		this.height = height;
+ 		this.weight = weight;
+ 		this.sex = sex;
+ 		this.infected = infected;
+ 		this.alive = alive;
+ 		this.hospital = hospital;
+ 		this.vaccinated = vaccinated;
+ 		this.bloodType = bloodType;
+ 	}
 
 	public Patient(Integer id, String patientName) {
 		super();
