@@ -1,0 +1,14 @@
+This week we expected to be able to do...
+The GUI, the menu and test all the app 
+
+This week we did...
+The GUI, the menu and test all the app and presenting the proyect to the class
+
+Optional: Reasons why
+---------------------
+
+Next weeks we will do...
+Finish the DML part that are missing
+
+Optional: Reasons why
+---------------------
