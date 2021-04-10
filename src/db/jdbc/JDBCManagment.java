@@ -449,9 +449,16 @@ public class JDBCManagment implements Cov_Manager {
 				String direccion = rs.getString("adress");
 				String doc = rs.getString("cif");
 				Integer vacc = rs.getInt("vacciness");
-				// TODO SELECT image
-				// return new Lab(id, lab_name, direccion, doc, vacc);
-				return new Lab();
+				byte[] pic = rs.getBytes("image");
+				//TODO test, if doesn't work
+				/*
+				 * InputStream blobStream = rs.getBinaryStream("photo");
+				 * byte[] pic = new byte[blobStream.available()];
+				 * blobStream.read(pic);
+
+				 * */
+				return new Lab(id, vacc, direccion, lab_name, doc, pic);
+				
 			}
 			prep.close();
 			rs.close();
@@ -476,9 +483,16 @@ public class JDBCManagment implements Cov_Manager {
 				String Ladress = rs.getString("adress");
 				String Lcif = rs.getString("cif");
 				int Lvacciness = rs.getInt("vacciness");
-				// TODO SELECT image
-				// Lab lab = new Lab(id, Lname, Ladress, Lcif, Lvacciness);
-				// labs.add(lab);
+				byte[] pic = rs.getBytes("image");
+				//TODO test, if doesn't work
+				/*
+				 * InputStream blobStream = rs.getBinaryStream("photo");
+				 * byte[] pic = new byte[blobStream.available()];
+				 * blobStream.read(pic);
+
+				 * */
+				Lab lab = new Lab(id, Lvacciness, Ladress, Lname, Lcif, pic);
+				labs.add(lab);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
