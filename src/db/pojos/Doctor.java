@@ -44,7 +44,7 @@ public class Doctor implements Serializable{
 		this.image = image;
 	}
 
-	public Doctor(String d_name, String d_speciality, Date d_bday, String d_cn, String d_hosp, Sex d_sex) {
+	public Doctor(String d_name, String d_speciality, Date d_bday, String d_cn, String d_hosp, Sex d_sex, byte[] imagen) {
 		super();
 		this.speciality = d_speciality;
 		this.name = d_name;
@@ -52,6 +52,7 @@ public class Doctor implements Serializable{
 		this.collegiate_number = d_cn;
 		this.sex = d_sex;
 		this.hospital = d_hosp;
+		this.image = imagen;
 	}
 
 	@Override

@@ -112,10 +112,10 @@ public class Menu {
 		String d_cn = reader.readLine();
 		System.out.print("Hospital: ");
 		String d_hosp = reader.readLine();
-		
+		byte[] d_imagen = null;
 		System.out.print("Sex (male, female): ");
 		Sex d_sex = Sex.parse(reader.readLine());
-		inter.addDoctor(new Doctor(d_name, d_speciality, Date.valueOf(d_bday), d_cn, d_hosp, d_sex));
+		inter.addDoctor(new Doctor(d_name, d_speciality, Date.valueOf(d_bday), d_cn, d_hosp, d_sex, d_imagen));
 	}
 	
 	
