@@ -10,7 +10,7 @@ public class Lab implements Serializable{
 	private String address;
 	private String name;
 	private String cif;
-	private List<Lab> labs;
+	private List<Lab> labs; //TODO quitar esto de aquí
 	byte[] image;
 
 	public Lab() {
@@ -28,6 +28,14 @@ public class Lab implements Serializable{
 		this.image = image;
 	}
 
+	public Lab(String l_name, String l_address, String l_cif, int l_vac, byte[] imagen) {
+		super();
+		this.vaccines_produce = l_vac;
+		this.address = l_address;
+		this.name = l_name;
+		this.cif = l_cif;
+		this.image = imagen;
+	}
 
 
 	@Override

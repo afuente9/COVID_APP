@@ -12,7 +12,7 @@ import db.interfaces.Cov_Manager;
 import db.jdbc.JDBCManagment;
 
 public class Menu {
-	//public Day today=ultimo dia añadido a la lista de dias;
+	//public Day today=ultimo dia aï¿½adido a la lista de dias;
 
 	
 	private static Cov_Manager inter = new JDBCManagment();
@@ -48,9 +48,6 @@ public class Menu {
 				break;
 			case 4:
 				addLab();
-				break;
-				case 5:
-					searchPatients();
 				break;
 			case 0:
 				inter.disconnect();
@@ -122,10 +119,17 @@ public class Menu {
 	
 	
 	private static void addLab() throws Exception{
-		System.out.println("Please, input the person info:");
+		System.out.println("Please, input the LAB info:");
 		System.out.print("Name: ");
 		String l_name = reader.readLine();
-		//inter.addPatient(new Patient(name));
+		System.out.print("Adress: ");
+		String l_adress = reader.readLine();
+		System.out.print("CIF: ");
+		String l_cif = reader.readLine();
+		System.out.print("Vaccines: ");
+		int l_vac = Integer.parseInt(reader.readLine());
+		byte[] l_imagen = null;
+		inter.addLab(new Lab(l_name, l_adress, l_cif, l_vac, l_imagen));
 	}
 	public void newDay() { 
 		
@@ -150,7 +154,7 @@ public class Menu {
 						//crear un nuevo dia
 					//	Day newToday= new Day(id,LocalDate.now(),getnumerodemuertosahoramismo, average);
 				//this.today=  newtoday;
-						//añadir newtoday a la lista de dias
+						//aï¿½adir newtoday a la lista de dias
 						
 				//recorrer la lista de pacientes para calcularles el score TODO mirar cual es mas optima para recorrer, arraylist o linkedlist
 				/* for(int i=0;i<listadepacientes.size;i++{
