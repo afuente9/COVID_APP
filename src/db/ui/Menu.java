@@ -48,18 +48,13 @@ public class Menu {
 				break;
 			case 4:
 				addLab();
-<<<<<<< HEAD
+				break;
 				case 5:
 					searchPatients();
-					
-				case 0:
-=======
 				break;
 			case 0:
->>>>>>> branch 'master' of https://github.com/afuente9/COVID_APP
 				inter.disconnect();
 				System.exit(0);
-				break;
 			default:
 				break;
 			}
