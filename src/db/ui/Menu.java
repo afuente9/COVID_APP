@@ -45,8 +45,10 @@ public class Menu {
 				break;
 			case 3:
 				addDoctor();
+				break;
 			case 4:
 				addLab();
+				break;
 			case 0:
 				inter.disconnect();
 				System.exit(0);
@@ -90,20 +92,30 @@ public class Menu {
 	
 
 	private static void searchPatients() throws Exception {
-		// TODO terminar metodo
 		System.out.println("Please, input the person info:");
 		System.out.print("Name: ");
 		String p_name = reader.readLine();
-		/*List<Patient> result = searchPatientByName(p_name);
-		result.toString();*/
+		List<Patient> result = inter.searchPatientByName(p_name);
+		System.out.println("Those are the patients: \n" + result.toString());
 	}
 	
 	
 	private static void addDoctor() throws Exception{
-		System.out.println("Please, input the person info:");
+		System.out.println("Please, input the DOCTOR info:");
 		System.out.print("Name: ");
 		String d_name = reader.readLine();
-		//inter.addPatient(new Patient(name));
+		System.out.print("Speciality: ");
+		String d_speciality = reader.readLine();
+		System.out.print("Birthday (yyyy-mm-dd): ");
+		LocalDate d_bday = LocalDate.parse(reader.readLine(), formatter);
+		System.out.print("Collegiate number: ");
+		String d_cn = reader.readLine();
+		System.out.print("Hospital: ");
+		String d_hosp = reader.readLine();
+		
+		System.out.print("Sex (male, female): ");
+		Sex d_sex = Sex.parse(reader.readLine());
+		inter.addDoctor(new Doctor(d_name, d_speciality, Date.valueOf(d_bday), d_cn, d_hosp, d_sex));
 	}
 	
 	
