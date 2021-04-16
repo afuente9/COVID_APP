@@ -25,10 +25,12 @@ public class Patient implements Serializable{
 	private String bloodType;
 	private List<Medication> medication=new ArrayList();
 	private List<Other_Pathologies> other_pathologies=new ArrayList();
+	private List<Patient> patients; // TODO Hay que quitar esto y crear un metodo enJDBCManagment
 	
 	
 	public Patient() {
 		super();
+		this.patients = new ArrayList<Patient>();
 	}
 	
 	
@@ -79,7 +81,8 @@ public class Patient implements Serializable{
 
 
 	public Patient(Integer id, String hos_location, String name, Date birthday, String social_security, float height,
-			float weight, Sex sex, boolean infected, boolean alive, String hospital, int score, boolean is_vaccinated, String bloodType) {
+			float weight, Sex sex, boolean infected, boolean alive, String hospital, int score, List<Patient> patients,
+			boolean is_vaccinated, String bloodType) {
 		super();
 		this.id = id;
 		this.hos_location = hos_location;
@@ -93,6 +96,7 @@ public class Patient implements Serializable{
 		this.alive = alive;
 		this.hospital = hospital;
 		this.score = score;
+		this.patients = patients;
 		this.vaccinated = is_vaccinated;
 		this.bloodType = bloodType;
 	}
@@ -135,6 +139,7 @@ public class Patient implements Serializable{
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + (infected ? 1231 : 1237);
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((patients == null) ? 0 : patients.hashCode());
 		result = prime * result + score;
 		result = prime * result + ((sex == null) ? 0 : sex.hashCode());
 		result = prime * result + ((social_security == null) ? 0 : social_security.hashCode());
@@ -189,6 +194,11 @@ public class Patient implements Serializable{
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (patients == null) {
+			if (other.patients != null)
+				return false;
+		} else if (!patients.equals(other.patients))
+			return false;
 		if (score != other.score)
 			return false;
 		if (sex != other.sex)
@@ -210,7 +220,8 @@ public class Patient implements Serializable{
 	public String toString() {
 		return "Patient [id=" + id + ", hos_location=" + hos_location + ", name=" + name + ", birthday=" + birthday
 				+ ", social_security=" + social_security + ", height=" + height + ", weight=" + weight + ", sex=" + sex
-				+ ", infected=" + infected + ", alive=" + alive + ", hospital=" + hospital + ", score=" + score;
+				+ ", infected=" + infected + ", alive=" + alive + ", hospital=" + hospital + ", score=" + score
+				+ ", patients=" + patients + "]";
 	}
 
 	

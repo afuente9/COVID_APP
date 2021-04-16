@@ -12,7 +12,7 @@ import db.interfaces.Cov_Manager;
 import db.jdbc.JDBCManagment;
 
 public class Menu {
-	//public Day today=ultimo dia aï¿½adido a la lista de dias;
+	//public Day today=ultimo dia añadido a la lista de dias;
 
 	
 	private static Cov_Manager inter = new JDBCManagment();
@@ -49,10 +49,12 @@ public class Menu {
 			case 4:
 				addLab();
 				break;
+				case 5:
+					searchPatients();
+				break;
 			case 0:
 				inter.disconnect();
 				System.exit(0);
-				break;
 			default:
 				break;
 			}
@@ -87,7 +89,7 @@ public class Menu {
 		System.out.print("Is vaccinated (True or False): ");
 		Boolean p_vaccinated = Boolean.parseBoolean(reader.readLine());
 		
-		inter.addPatient(new Patient (p_hosL, p_name, Date.valueOf(p_bday), p_ss, p_height, p_weight, p_sex, p_infected, p_alive, p_hos, p_vaccinated, p_blood));
+		//inter.addPatient(new Patient (p_hosL, p_name, Date.valueOf(p_bday), p_ss, p_height, p_weight, p_sex, p_infected, p_alive, p_hos, p_vaccinated, p_blood));
 	}
 	
 
@@ -148,7 +150,7 @@ public class Menu {
 						//crear un nuevo dia
 					//	Day newToday= new Day(id,LocalDate.now(),getnumerodemuertosahoramismo, average);
 				//this.today=  newtoday;
-						//aï¿½adir newtoday a la lista de dias
+						//añadir newtoday a la lista de dias
 						
 				//recorrer la lista de pacientes para calcularles el score TODO mirar cual es mas optima para recorrer, arraylist o linkedlist
 				/* for(int i=0;i<listadepacientes.size;i++{

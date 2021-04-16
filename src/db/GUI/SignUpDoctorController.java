@@ -43,9 +43,11 @@ public class SignUpDoctorController {
         int id=0;
        //id = getlistadedoctores().length(); 
     	byte[] image=null;
-    	Doctor d_new= new Doctor(id,spetiality,name,date,colnum,sex,hospital,image);
+    	Doctor d_new= new Doctor(id,name,spetiality,date,colnum,sex,hospital,image);
     	//añadir doctor a la lista de doctores
-    	//popup registrado correctamente
+    	Main.getInter().addDoctor(d_new);
+
+
     	Stage stage = (Stage) this.NameTextField.getScene().getWindow();
 		stage.close();    	
     }

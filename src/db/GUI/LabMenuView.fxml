@@ -34,6 +34,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -61,6 +62,12 @@
             <Button fx:id="ModifyData1" layoutX="78.0" layoutY="344.0" mnemonicParsing="false" onAction="#addvaccinesbutton" prefHeight="43.0" prefWidth="250.0" text="Add new batch of vaccines" />
             <Button fx:id="ModifyData2" layoutX="78.0" layoutY="411.0" mnemonicParsing="false" onAction="#modifylabdatabutton" prefHeight="43.0" prefWidth="250.0" text="Modify laboratory data" />
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="515.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="150.0" fitWidth="228.0" layoutX="510.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../UrIyLwR6sReaoXgCUiugovs15nl99q61FXIm6mNi.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="576.0" layoutY="195.0" mnemonicParsing="false" text="Change picture" />
       </children>
     </AnchorPane>
   </children>

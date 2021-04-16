@@ -63,7 +63,7 @@
             <CheckBox layoutX="96.0" layoutY="222.0" mnemonicParsing="false" text="By height" />
             <CheckBox layoutX="96.0" layoutY="258.0" mnemonicParsing="false" text="By sex" />
             <CheckBox layoutX="96.0" layoutY="298.0" mnemonicParsing="false" text="By hospital" />
-            <Button fx:id="pdfbutton" layoutX="96.0" layoutY="475.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="175.0" text="Generate a pdf" />
+            <Button fx:id="pdfbutton" layoutX="96.0" layoutY="475.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="175.0" text="*************" />
             <LineChart layoutX="373.0" layoutY="101.0" prefHeight="314.0" prefWidth="391.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />

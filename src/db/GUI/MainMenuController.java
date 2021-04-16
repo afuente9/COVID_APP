@@ -33,7 +33,7 @@ public class MainMenuController {
     	System.out.println(UserTextField.getText());
 		if(UserTextField.getText().equals("doctor")&&PasswordTextField.getText().equals("doctor")) {
 			byte[] image=null;
-			Doctor d = new Doctor(0,"cardio","lucas",Date.valueOf("2000-10-10"),"34234",Sex.valueOf("Male"),"La Paz",image);
+			Doctor d = new Doctor(0,"cardio","Lucas Pérez",Date.valueOf("2000-10-10"),"34234",Sex.valueOf("Male"),"La Paz",image);
 			String name= "DoctorMenuView.fxml";
 			DoctorMenuController controller = null;
 			try {
