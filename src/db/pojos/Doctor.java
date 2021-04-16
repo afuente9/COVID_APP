@@ -2,6 +2,7 @@ package db.pojos;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -14,8 +15,8 @@ public class Doctor implements Serializable{
 	private String collegiate_number;
 	private Sex sex;
 	private String hospital;
-	private List<Doctor> doctors;
-	byte[] image;
+	private List<Doctor> doctors; // TODO hay que quitar esto de aqui
+	private byte[] image;
 
 	public Doctor() {
 		super();
@@ -41,6 +42,16 @@ public class Doctor implements Serializable{
 		this.sex = sex;
 		this.hospital = hospital;
 		this.image = image;
+	}
+
+	public Doctor(String d_name, String d_speciality, Date d_bday, String d_cn, String d_hosp, Sex d_sex) {
+		super();
+		this.speciality = d_speciality;
+		this.name = d_name;
+		this.birthday = d_bday;
+		this.collegiate_number = d_cn;
+		this.sex = d_sex;
+		this.hospital = d_hosp;
 	}
 
 	@Override
