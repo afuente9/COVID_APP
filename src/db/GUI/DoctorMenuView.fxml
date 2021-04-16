@@ -34,6 +34,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -58,6 +59,17 @@
             <Button fx:id="SearchModify_Patient" layoutX="79.0" layoutY="247.0" mnemonicParsing="false" onAction="#OnSearchPatient" prefHeight="43.0" prefWidth="250.0" text="Search or modify patient" />
             <Button fx:id="ModifyData" layoutX="79.0" layoutY="324.0" mnemonicParsing="false" onAction="#OnModifyData" prefHeight="43.0" prefWidth="250.0" text="Modify my own data" />
             <ImageView fx:id="Doctor_Picture" fitHeight="150.0" fitWidth="200.0" layoutX="515.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="161.0" fitWidth="147.0" layoutX="543.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../foto-EnriqueDeJuan-269x300.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="567.0" layoutY="206.0" mnemonicParsing="false" text="Change picture" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="549.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../lucas.png" />
+               </image>
+            </ImageView>
       </children>
     </AnchorPane>
   </children>

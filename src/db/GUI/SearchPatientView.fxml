@@ -86,7 +86,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="318.0" prefWidth="730.0">
                      <children>
-                        <TableView prefHeight="310.0" prefWidth="719.0">
+                        <TableView fx:id="tablePatients" prefHeight="310.0" prefWidth="719.0">
                           <columns>
                             <TableColumn prefWidth="100.0" text="Name" />
                             <TableColumn prefWidth="41.60003662109375" text="Age" />
