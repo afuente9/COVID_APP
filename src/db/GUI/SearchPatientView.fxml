@@ -79,8 +79,8 @@
                </styleClass>
             </ChoiceBox>
             <TextField layoutX="338.0" layoutY="133.0" />
-            <DatePicker layoutX="223.0" layoutY="78.0" />
-            <DatePicker layoutX="441.0" layoutY="78.0" />
+            <DatePicker fx:id="dateFrom" layoutX="223.0" layoutY="78.0" />
+            <DatePicker fx:id="dateTo" layoutX="441.0" layoutY="78.0" />
             <Button layoutX="509.0" layoutY="128.0" mnemonicParsing="false" onAction="#ModifySearch" prefHeight="35.0" prefWidth="54.0" text="Search" />
             <ScrollPane layoutX="35.0" layoutY="178.0" prefHeight="323.0" prefWidth="729.0">
               <content>
@@ -104,6 +104,7 @@
                   </AnchorPane>
               </content>
             </ScrollPane>
+            <Button layoutX="631.0" layoutY="78.0" mnemonicParsing="false" onAction="#Filterclick" text="Filter" />
       </children>
     </AnchorPane>
   </children>

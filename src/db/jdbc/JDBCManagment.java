@@ -265,7 +265,26 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 	}
-
+//TODO search patient by each feature. Se puede hacer algo así? Si no se puede, hay que hacer un metodo para cada feature
+	/*
+	  public List<Patient> searchPatientByFeature(String feature, String type) {
+		List<Patient> patients = new ArrayList<Patient>();
+		try {
+			String sql = "SELECT * FROM  patients WHERE ? LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, "%" + feature + "%");
+			prep.setString(2, "%" + type + "%"); 
+			
+	  public List<Patient> searchPatientByFeature(String feature, String type) {
+		List<Patient> patients = new ArrayList<Patient>();
+		try {
+			String sql = "SELECT * FROM  patients WHERE " + feature + " LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, "%" + type + "%");
+	  
+	
+	 */
+	
 	public List<Patient> searchPatientByName(String name) {
 		List<Patient> patients = new ArrayList<Patient>();
 		try {

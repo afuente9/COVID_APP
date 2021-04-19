@@ -2,6 +2,7 @@ package db.GUI;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -98,11 +99,11 @@ public class AddPatientController {
         boolean alive=true;
         int score=0;
         boolean vaccinated=false;
-        // TODO id=listadepacientes.size();
+        LocalDate dateIntroduced= LocalDate.now();
     	
-    	
-    	Patient p_new= new Patient(id,Place_Text,Name_Text,date,SSNum_Text,height,weight,sex,infected,alive,Hospital_Text,vaccinated,Blood_Text,medication_list,other_pathologies_list);
-    	Main.getInter().addPatient(p_new);
+    	//TODO ARREGLAR EL CONSTRUCTOR DE PACIENTES PARA METER LAS LISTAS Y EL  LOCALDATE INTRODUCED
+    	//Patient p_new= new Patient(Place_Text,Name_Text,date,SSNum_Text,height,weight,sex,infected,alive,Hospital_Text,vaccinated,Blood_Text,medication_list,other_pathologies_list);
+    	//Main.getInter().addPatient(p_new);
     }
 
     @FXML

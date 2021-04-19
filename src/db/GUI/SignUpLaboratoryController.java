@@ -18,18 +18,18 @@ public class SignUpLaboratoryController {
 
     @FXML
     void OnAcceptLabClick(ActionEvent event) {
-    	System.out.println("hola");
-
+//TODO Comprobar si funciona 
     	System.out.println(CifTextField.getText());
     String name = NameTextField.getText();
     	String cif_text = CifTextField.getText();
     	String adress = AdressTextField.getText();
-    	 int id=0;
+    	 
     	 int number_vaccines=0;
     	 byte[] image=null;
-      	Lab l_new= new Lab(id,number_vaccines,adress,name,cif_text, image);
-      	//addlab to the list of labs
-    	Stage stage = (Stage) this.CifTextField.getScene().getWindow();
+      	Lab l_new= new Lab(name,adress,cif_text,number_vaccines, image);
+		Main.getInter().addLab(l_new);
+
+      	Stage stage = (Stage) this.CifTextField.getScene().getWindow();
 		stage.close();
 		
     }

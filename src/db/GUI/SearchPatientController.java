@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
@@ -25,7 +26,11 @@ public class SearchPatientController implements Initializable {
     private ChoiceBox<String> SearchOptions;
     @FXML
     private TableView<?> tablePatients;
+    @FXML
+    private DatePicker dateFrom;
 
+    @FXML
+    private DatePicker dateTo;
     @FXML
     void BackFromModify(ActionEvent event) {
     	Stage stage = (Stage) this.SearchOptions.getScene().getWindow();
@@ -35,13 +40,22 @@ public class SearchPatientController implements Initializable {
     @FXML
     void ModifySearch(ActionEvent event) {
 
-//System.out.println(SearchOptions.getValue());
-    	//Select de la base de datos todos los pacientes que lo cumplan
+        //SearchOptions.getValue();
+    	// TODO Select de la base de datos todos los pacientes que lo cumplan
     	
-    }@FXML
+    	
+    }
+    @FXML
+    void Filterclick(ActionEvent event) {
+//TODO Select patients where dateintroduced>datefrom y < date to e imprimir
+    }
+    
+    @FXML
     void ModifyPatient(ActionEvent event) {
+    	//TODO metodo modificar paciente
 
     }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     	loadData();

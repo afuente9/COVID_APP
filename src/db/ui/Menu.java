@@ -119,6 +119,7 @@ public class Menu {
 	
 	
 	private static void addLab() throws Exception{
+		//TODO añade laboratorios?
 		System.out.println("Please, input the LAB info:");
 		System.out.print("Name: ");
 		String l_name = reader.readLine();

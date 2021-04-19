@@ -22,7 +22,8 @@ public class Patient implements Serializable{
 	private String hospital;
 	private int score;
 	private boolean vaccinated;
-	private String bloodType;
+	private String bloodType;	
+	private LocalDate dateIntroduced;
 	private List<Medication> medication=new ArrayList();
 	private List<Other_Pathologies> other_pathologies=new ArrayList();
 	private List<Patient> patients; // TODO Hay que quitar esto y crear un metodo enJDBCManagment
@@ -102,6 +103,9 @@ public class Patient implements Serializable{
 	}
 	
 	// NO TOCAR ESTE CONSTRUCTOR QUE ES IMPORTANTE!!!!
+	//TODO AÑADIR LAS LISTAS DE PATOLOGÍAS Y MEDICACIÓN
+	//TODO AÑADIR LOCALDATE Date INTRODUCED PARA QUE LUEGO LOS PODAMOS FILTRAR 
+	
 	public Patient(String hos_location, String name, Date birthday, String social_security, float height, float weight,
  			Sex sex, boolean infected, boolean alive, String hospital, boolean vaccinated, String bloodType) {
  		super();
