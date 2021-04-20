@@ -32,7 +32,7 @@ public class Menu {
 			System.out.println("1. Add a patient		");
 			System.out.println("2. Search patients		");
 			System.out.println("3. Add a doctor			");
-			System.out.println("3. Add a lab			");
+			System.out.println("4. Add a lab			");
 			System.out.println("0. Exit					");
 			
 			int choice = Integer.parseInt(reader.readLine());
@@ -86,7 +86,7 @@ public class Menu {
 		System.out.print("Is vaccinated (True or False): ");
 		Boolean p_vaccinated = Boolean.parseBoolean(reader.readLine());
 		
-		//inter.addPatient(new Patient (p_hosL, p_name, Date.valueOf(p_bday), p_ss, p_height, p_weight, p_sex, p_infected, p_alive, p_hos, p_vaccinated, p_blood));
+		inter.addPatient(new Patient (p_hosL, p_name, Date.valueOf(p_bday), p_ss, p_height, p_weight, p_sex, p_infected, p_alive, p_hos, p_vaccinated, p_blood));
 	}
 	
 
@@ -111,15 +111,26 @@ public class Menu {
 		String d_cn = reader.readLine();
 		System.out.print("Hospital: ");
 		String d_hosp = reader.readLine();
-		byte[] d_imagen = null;
 		System.out.print("Sex (male, female): ");
 		Sex d_sex = Sex.parse(reader.readLine());
-		inter.addDoctor(new Doctor(d_name, d_speciality, Date.valueOf(d_bday), d_cn, d_hosp, d_sex, d_imagen));
+		System.out.print("Do you want to add a photo? (Yes/No): ");
+		String YesNo = reader.readLine();
+		if(YesNo.equalsIgnoreCase("no")) {
+			inter.addDoctor(new Doctor(d_name, d_speciality, Date.valueOf(d_bday), d_cn, d_hosp, d_sex), YesNo);
+		}
+		else {
+			System.out.print("Type the file name as it appears in folder /photos, including extension: ");
+			String fileName = reader.readLine();
+			File photo = new File("./photos/" + fileName);
+			InputStream streamBlob = new FileInputStream(photo);
+			byte[] d_imagen = new byte[streamBlob.available()];
+			inter.addDoctor(new Doctor(d_name, d_speciality, Date.valueOf(d_bday), d_cn, d_hosp, d_sex, d_imagen), YesNo);
+		}
 	}
 	
 	
 	private static void addLab() throws Exception{
-		//TODO añade laboratorios?
+		//TODO aï¿½ade laboratorios?
 		System.out.println("Please, input the LAB info:");
 		System.out.print("Name: ");
 		String l_name = reader.readLine();
@@ -129,8 +140,15 @@ public class Menu {
 		String l_cif = reader.readLine();
 		System.out.print("Vaccines: ");
 		int l_vac = Integer.parseInt(reader.readLine());
-		byte[] l_imagen = null;
-		inter.addLab(new Lab(l_name, l_adress, l_cif, l_vac, l_imagen));
+		System.out.print("Do you want to add a photo? (Yes/No): ");
+		String YesNo = reader.readLine();
+		if(YesNo.equalsIgnoreCase("no")) {
+			inter.addLab(new Lab(l_name, l_adress, l_cif, l_vac), YesNo);
+		}
+		else {
+			byte[] l_imagen = null;
+			inter.addLab(new Lab(l_name, l_adress, l_cif, l_vac, l_imagen), YesNo);
+		}
 	}
 	public void newDay() { 
 		

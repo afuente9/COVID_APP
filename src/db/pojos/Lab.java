@@ -141,6 +141,17 @@ public class Lab implements Serializable{
 	public void setLabs(List<Lab> labs) {
 		this.labs = labs;
 	}
+
+
+	public byte[] getImage() {
+		return image;
+	}
+
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+	
 	
 	
 }
