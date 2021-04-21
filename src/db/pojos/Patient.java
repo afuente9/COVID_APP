@@ -24,12 +24,16 @@ public class Patient implements Serializable{
 	private boolean vaccinated;
 	private String bloodType;	
 	private LocalDate dateIntroduced;
-	private List<Medication> medication=new ArrayList();
-	private List<Other_Pathologies> other_pathologies=new ArrayList();
+	private List<Medication> medication;
+	private List<Other_Pathologies> other_pathologies;
+	private List<Doctor> doctors;
 	
 	
 	public Patient() {
 		super();
+		this.medication = new ArrayList<Medication>();
+		this.other_pathologies = new ArrayList<Other_Pathologies>();
+		this.doctors = new ArrayList<Doctor>();
 	}
 	
 	

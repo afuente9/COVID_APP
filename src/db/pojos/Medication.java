@@ -1,15 +1,18 @@
 package db.pojos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Medication implements Serializable{
 	
 	private Integer id;
 	private String name;
+	private List<Patient> patients;
 	
 	public Medication() {
 		super();
+		this.patients = new ArrayList<Patient>();
 	}
 
 	public Medication(Integer id, String name) {
