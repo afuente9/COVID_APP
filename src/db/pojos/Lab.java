@@ -1,6 +1,7 @@
 package db.pojos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -10,11 +11,12 @@ public class Lab implements Serializable{
 	private String address;
 	private String name;
 	private String cif;
-	private List<Lab> labs; //TODO quitar esto de aquí
 	byte[] image;
+	private List<Patient> patients;
 
 	public Lab() {
 		super();
+		this.patients = new ArrayList<Patient>();
 	}
 
 
@@ -38,10 +40,19 @@ public class Lab implements Serializable{
 	}
 
 
+	public Lab(String l_name, String l_adress, String l_cif, int l_vac) {
+		super();
+		this.vaccines_produce = l_vac;
+		this.address = l_adress;
+		this.name = l_name;
+		this.cif = l_cif;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Lab [id=" + id + ", vaccines_produce=" + vaccines_produce + ", address=" + address + ", name=" + name
-				+ ", cif=" + cif + ", labs=" + labs + "]";
+				+ ", cif=" + cif + "]";
 	}
 
 
@@ -53,7 +64,6 @@ public class Lab implements Serializable{
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((cif == null) ? 0 : cif.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((labs == null) ? 0 : labs.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + vaccines_produce;
 		return result;
@@ -81,11 +91,6 @@ public class Lab implements Serializable{
 		} else if (!cif.equals(other.cif))
 			return false;
 		if (id != other.id)
-			return false;
-		if (labs == null) {
-			if (other.labs != null)
-				return false;
-		} else if (!labs.equals(other.labs))
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -134,13 +139,14 @@ public class Lab implements Serializable{
 		this.cif = cif;
 	}
 
-	public List<Lab> getLabs() {
-		return labs;
+
+	public byte[] getImage() {
+		return image;
 	}
 
-	public void setLabs(List<Lab> labs) {
-		this.labs = labs;
+
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
-	
 	
 }

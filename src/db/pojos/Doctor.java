@@ -3,6 +3,7 @@ package db.pojos;
 import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,11 +16,12 @@ public class Doctor implements Serializable{
 	private String collegiate_number;
 	private Sex sex;
 	private String hospital;
-	private List<Doctor> doctors; // TODO hay que quitar esto de aqui
 	private byte[] image;
+	private List<Patient> patients;
 
 	public Doctor() {
 		super();
+		this.patients = new ArrayList<Patient>();
 	}
 	
 	public Doctor(Integer id, String name) {
@@ -55,13 +57,22 @@ public class Doctor implements Serializable{
 		this.image = imagen;
 	}
 
+	public Doctor(String d_name, String d_speciality, Date d_bday, String d_cn, String d_hosp, Sex d_sex) {
+		super();
+		this.speciality = d_speciality;
+		this.name = d_name;
+		this.birthday = d_bday;
+		this.collegiate_number = d_cn;
+		this.sex = d_sex;
+		this.hospital = d_hosp;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((birthday == null) ? 0 : birthday.hashCode());
 		result = prime * result + ((collegiate_number == null) ? 0 : collegiate_number.hashCode());
-		result = prime * result + ((doctors == null) ? 0 : doctors.hashCode());
 		result = prime * result + ((hospital == null) ? 0 : hospital.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -88,11 +99,6 @@ public class Doctor implements Serializable{
 			if (other.collegiate_number != null)
 				return false;
 		} else if (!collegiate_number.equals(other.collegiate_number))
-			return false;
-		if (doctors == null) {
-			if (other.doctors != null)
-				return false;
-		} else if (!doctors.equals(other.doctors))
 			return false;
 		if (hospital == null) {
 			if (other.hospital != null)
@@ -122,8 +128,7 @@ public class Doctor implements Serializable{
 	@Override
 	public String toString() {
 		return "Doctor [id=" + id + ", speciality=" + speciality + ", name=" + name + ", birthday=" + birthday
-				+ ", collegiate_number=" + collegiate_number + ", sex=" + sex + ", hospital=" + hospital + ", doctors="
-				+ doctors + "]";
+				+ ", collegiate_number=" + collegiate_number + ", sex=" + sex + ", hospital=" + hospital + "]";
 	}
 
 
@@ -183,15 +188,6 @@ public class Doctor implements Serializable{
 		this.hospital = hospital;
 	}
 
-	
-	public List<Doctor> getDoctors() {
-		return doctors;
-	}
-
-	
-	public void setDoctors(List<Doctor> doctors) {
-		this.doctors = doctors;
-	}
 
 	public byte[] getImage() {
 		return image;

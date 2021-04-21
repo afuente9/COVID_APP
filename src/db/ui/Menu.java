@@ -4,6 +4,7 @@ import java.io.*;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import db.pojos.*;
@@ -32,7 +33,8 @@ public class Menu {
 			System.out.println("1. Add a patient		");
 			System.out.println("2. Search patients		");
 			System.out.println("3. Add a doctor			");
-			System.out.println("3. Add a lab			");
+			System.out.println("4. Add a lab			");
+			System.out.println("5. Add a medication		");
 			System.out.println("0. Exit					");
 			
 			int choice = Integer.parseInt(reader.readLine());
@@ -49,6 +51,9 @@ public class Menu {
 			case 4:
 				addLab();
 				break;
+			case 5:
+				addMedication();
+				break;
 			case 0:
 				inter.disconnect();
 				System.exit(0);
@@ -57,6 +62,20 @@ public class Menu {
 			}
 		}
 		while(true);
+	}
+
+	private static void addMedication() throws Exception{ //TODO mirar bien como implementar el añadir una medicacion
+		List<Medication> med = new ArrayList<Medication>();
+		String n_med = "";
+		do {
+			System.out.println("Please intoduce the");
+			n_med = reader.readLine();
+			Medication m = new Medication(n_med);
+			med.add(m);
+			inter.addMedication(m);
+		}while(!n_med.isEmpty());
+		
+		System.out.println(med);
 	}
 
 	private static void addPatient() throws Exception{
@@ -85,8 +104,13 @@ public class Menu {
 		String p_blood = reader.readLine();
 		System.out.print("Is vaccinated (True or False): ");
 		Boolean p_vaccinated = Boolean.parseBoolean(reader.readLine());
+		System.out.print("Do you want to add any medication? (True or False): ");
+		Boolean p_med = Boolean.parseBoolean(reader.readLine());
+		if(p_med.TRUE) {
+			addMedication();
+		}
 		
-		//inter.addPatient(new Patient (p_hosL, p_name, Date.valueOf(p_bday), p_ss, p_height, p_weight, p_sex, p_infected, p_alive, p_hos, p_vaccinated, p_blood));
+		inter.addPatient(new Patient (p_hosL, p_name, Date.valueOf(p_bday), p_ss, p_height, p_weight, p_sex, p_infected, p_alive, p_hos, p_vaccinated, p_blood));
 	}
 	
 
@@ -111,15 +135,27 @@ public class Menu {
 		String d_cn = reader.readLine();
 		System.out.print("Hospital: ");
 		String d_hosp = reader.readLine();
-		byte[] d_imagen = null;
 		System.out.print("Sex (male, female): ");
 		Sex d_sex = Sex.parse(reader.readLine());
-		inter.addDoctor(new Doctor(d_name, d_speciality, Date.valueOf(d_bday), d_cn, d_hosp, d_sex, d_imagen));
+		System.out.print("Do you want to add a photo? (Yes/No): ");
+		String YesNo = reader.readLine();
+		if(YesNo.equalsIgnoreCase("no")) {
+			inter.addDoctor(new Doctor(d_name, d_speciality, Date.valueOf(d_bday), d_cn, d_hosp, d_sex), YesNo);
+		}
+		else {
+			System.out.print("Type the file name as it appears in folder /photos, including extension: ");
+			String fileName = reader.readLine();
+			File photo = new File(fileName);
+			InputStream streamBlob = new FileInputStream(photo);
+			byte[] d_imagen = new byte[streamBlob.available()];
+			//streamBlob.read(bytesBlob); // TODO preguntar donde hay que poner esto exactamente, aquí o en addLab de JDBC
+			//streamBlob.close();
+			inter.addDoctor(new Doctor(d_name, d_speciality, Date.valueOf(d_bday), d_cn, d_hosp, d_sex, d_imagen), YesNo);
+		}
 	}
 	
 	
 	private static void addLab() throws Exception{
-		//TODO a�ade laboratorios?
 		System.out.println("Please, input the LAB info:");
 		System.out.print("Name: ");
 		String l_name = reader.readLine();
@@ -129,8 +165,21 @@ public class Menu {
 		String l_cif = reader.readLine();
 		System.out.print("Vaccines: ");
 		int l_vac = Integer.parseInt(reader.readLine());
-		byte[] l_imagen = null;
-		inter.addLab(new Lab(l_name, l_adress, l_cif, l_vac, l_imagen));
+		System.out.print("Do you want to add a photo? (Yes/No): ");
+		String YesNo = reader.readLine();
+		if(YesNo.equalsIgnoreCase("no")) {
+			inter.addLab(new Lab(l_name, l_adress, l_cif, l_vac), YesNo);
+		}
+		else {
+			System.out.print("Type the file name as it appears in folder /photos, including extension: ");
+			String fileName = reader.readLine();
+			File photo = new File(fileName);
+			InputStream streamBlob = new FileInputStream(photo);
+			byte[] l_imagen = new byte[streamBlob.available()];
+			//streamBlob.read(bytesBlob); // TODO preguntar donde hay que poner esto exactamente, aquí o en addLab de JDBC
+			//streamBlob.close();
+			inter.addLab(new Lab(l_name, l_adress, l_cif, l_vac, l_imagen), YesNo);
+		}
 	}
 	public void newDay() { 
 		
