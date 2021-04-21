@@ -7,22 +7,20 @@ public class Medication implements Serializable{
 	
 	private Integer id;
 	private String name;
-	private List<Medication> medications;
 	
 	public Medication() {
 		super();
 	}
 
-	public Medication(Integer id, String name, List<Medication> medications) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.medications = medications;
-	}
 	public Medication(Integer id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
+	}
+	
+	public Medication(String n_med) {
+		super();
+		this.name = n_med;
 	}
 
 	@Override
@@ -30,7 +28,6 @@ public class Medication implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((medications == null) ? 0 : medications.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
@@ -49,11 +46,6 @@ public class Medication implements Serializable{
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (medications == null) {
-			if (other.medications != null)
-				return false;
-		} else if (!medications.equals(other.medications))
-			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -64,7 +56,7 @@ public class Medication implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Medication [id=" + id + ", name=" + name + ", medications=" + medications + "]";
+		return "Medication [id=" + id + ", name=" + name + "]";
 	}
 
 	public Integer getId() {
@@ -78,15 +70,4 @@ public class Medication implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public List<Medication> getMedications() {
-		return medications;
-	}
-
-	public void setMedications(List<Medication> medications) {
-		this.medications = medications;
-	}
-	
-	
-	
 }

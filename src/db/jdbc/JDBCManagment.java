@@ -51,7 +51,7 @@ public class JDBCManagment implements Cov_Manager {
 					+ " collegiate_number	TEXT	 	 	NOT NULL," 
 					+ " sex 				TEXT	 	 	NOT NULL,"
 					+ " hospital  			TEXT		 	NOT NULL,"
-					+ " image 				LONGVARBINARY   NOT NULL)";
+					+ " image 				LONGVARBINARY   NULL)";//TODO preguntar si esto es un BLOOB o un LONGVARBINARY
 			stmt1.executeUpdate(sql1);
 			stmt1.close();
 
@@ -82,7 +82,7 @@ public class JDBCManagment implements Cov_Manager {
 					+ " adress	 		TEXT	 	 	NOT NULL,"
 					+ " cif			    TEXT  	 	 	NOT NULL," 
 					+ " vacciness  		INTEGER	 	 	NOT NULL,"
-					+ " image 			LONGVARBINARY   NOT NULL)";
+					+ " image 			LONGVARBINARY   NULL)"; //TODO preguntar si esto es un BLOOB o un LONGVARBINARY
 			stmt3.executeUpdate(sql3);
 			stmt3.close();
 
@@ -100,7 +100,7 @@ public class JDBCManagment implements Cov_Manager {
 			String sql5 = "CREATE TABLE administration "
 					+ "(id       				INTEGER  		PRIMARY KEY AUTOINCREMENT,"
 					+ " total_vacciness  		INTEGER	 		NOT NULL,"
-					+ " image 				    LONGVARBINARY   NOT NULL)";
+					+ " image 				    LONGVARBINARY   NULL)";//TODO preguntar si esto es un BLOOB o un LONGVARBINARY
 			stmt5.executeUpdate(sql5);
 			stmt5.close();
 
@@ -207,7 +207,7 @@ public class JDBCManagment implements Cov_Manager {
 				sexo = "F";
 			}
 			if(YesNo.equalsIgnoreCase("no")) {
-				String sql = "INSERT INTO Doctor (name, speciality, birth_date, collegiate_number, sex, hospital) VALUES (?, ?, ?, ?, ?, ?)";
+				String sql = "INSERT INTO doctors (name, speciality, birth_date, collegiate_number, sex, hospital) VALUES (?, ?, ?, ?, ?, ?)";
 				PreparedStatement prep = c.prepareStatement(sql);
 				prep.setString(1, d.getName());
 				prep.setString(2, d.getSpeciality());
@@ -215,13 +215,12 @@ public class JDBCManagment implements Cov_Manager {
 				prep.setString(4, d.getCollegiate_number());
 				prep.setString(5, sexo);
 				prep.setString(6, d.getHospital());
-				prep.setBytes(7, d.getImage());
 				prep.executeUpdate();
 				prep.close();
 			}
 			else {
-				String sql = "INSERT INTO Doctor (name, speciality, birth_date, collegiate_number, sex, hospital, image) VALUES (?, ?, ?, ?, ?, ?, ?)";
-				PreparedStatement prep = c.prepareStatement(sql); //TODO preparedStatement ERROR
+				String sql = "INSERT INTO doctors (name, speciality, birth_date, collegiate_number, sex, hospital, image) VALUES (?, ?, ?, ?, ?, ?, ?)";
+				PreparedStatement prep = c.prepareStatement(sql);
 				prep.setString(1, d.getName());
 				prep.setString(2, d.getSpeciality());
 				prep.setDate(3, d.getBirthday());
@@ -237,17 +236,30 @@ public class JDBCManagment implements Cov_Manager {
 		}
 	}
 
-	public void addLab(Lab l) {
+	public void addLab(Lab l, String YesNo) {
 		try {
-			String sql = "INSERT INTO Laboratory (name, adress, cif, vacciness, image) VALUES (?, ?, ?, ?, ?)";
-			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, l.getName());
-			prep.setString(2, l.getAddress());
-			prep.setString(3, l.getCif());
-			prep.setInt(4, l.getVaccines_produce());
-			prep.setBytes(5, l.getImage());
-			prep.executeUpdate();
-			prep.close();
+			if(YesNo.equalsIgnoreCase("no")) {
+				String sql = "INSERT INTO lab (name, adress, cif, vacciness) VALUES (?, ?, ?, ?)";
+				PreparedStatement prep = c.prepareStatement(sql);
+				prep.setString(1, l.getName());
+				prep.setString(2, l.getAddress());
+				prep.setString(3, l.getCif());
+				prep.setInt(4, l.getVaccines_produce());
+				prep.executeUpdate();
+				prep.close();
+			}
+			else {
+				String sql = "INSERT INTO lab (name, adress, cif, vacciness, image) VALUES (?, ?, ?, ?, ?)";
+				PreparedStatement prep = c.prepareStatement(sql);
+				prep.setString(1, l.getName());
+				prep.setString(2, l.getAddress());
+				prep.setString(3, l.getCif());
+				prep.setInt(4, l.getVaccines_produce());
+				prep.setBytes(5, l.getImage());
+				prep.executeUpdate();
+				prep.close();
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

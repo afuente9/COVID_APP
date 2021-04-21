@@ -55,6 +55,16 @@ public class Doctor implements Serializable{
 		this.image = imagen;
 	}
 
+	public Doctor(String d_name, String d_speciality, Date d_bday, String d_cn, String d_hosp, Sex d_sex) {
+		super();
+		this.speciality = d_speciality;
+		this.name = d_name;
+		this.birthday = d_bday;
+		this.collegiate_number = d_cn;
+		this.sex = d_sex;
+		this.hospital = d_hosp;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

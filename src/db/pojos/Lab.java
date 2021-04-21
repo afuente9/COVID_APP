@@ -38,6 +38,15 @@ public class Lab implements Serializable{
 	}
 
 
+	public Lab(String l_name, String l_adress, String l_cif, int l_vac) {
+		super();
+		this.vaccines_produce = l_vac;
+		this.address = l_adress;
+		this.name = l_name;
+		this.cif = l_cif;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Lab [id=" + id + ", vaccines_produce=" + vaccines_produce + ", address=" + address + ", name=" + name
