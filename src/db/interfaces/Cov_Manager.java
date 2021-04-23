@@ -59,4 +59,10 @@ public interface Cov_Manager {
 	// Assign a pathology to a patient
 	public void assignMed(Patient p, Medication m);
 	
+	// Delete a medication from the list using the name
+	public void deleteMedByName(Medication m);
+	
+	// Delete a pathology from the list using the name
+		public void deletePathologyByName(Other_Pathologies op);
+	
 }

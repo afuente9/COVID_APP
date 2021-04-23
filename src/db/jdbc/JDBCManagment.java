@@ -240,7 +240,6 @@ public class JDBCManagment implements Cov_Manager {
 	}
 
 	//TODO UPDATE goverment vaccines used, patient (pic from whatsapp group), all doctor including image, all lab
-	//TODO DELETE Medications, other pathologies
 	
 	public void addOtherPathologies(Other_Pathologies op) {
 		try {
@@ -547,6 +546,36 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 		return savedDays;
+	}
+
+	@Override
+	public void deleteMedByName(Medication m) {
+		String sql = "DELETE FROM medication WHERE name = ?";
+		PreparedStatement prep;
+		try {
+			prep = c.prepareStatement(sql);
+			prep.setString(1, m.getName());
+			prep.executeUpdate();
+			prep.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void deletePathologyByName(Other_Pathologies op) {
+		String sql = "DELETE FROM medication WHERE name = ?";
+		PreparedStatement prep;
+		try {
+			prep = c.prepareStatement(sql);
+			prep.setString(1, op.getName());
+			prep.executeUpdate();
+			prep.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }
