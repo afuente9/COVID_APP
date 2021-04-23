@@ -1,0 +1,13 @@
+This week we expected to be able to do...
+Finish the DML parts that are missing
+This week we did...
+Nothing
+
+Optional: Reasons why
+Exams
+
+Next weeks we will do...
+Start with the selects, adds and modify for the Gui
+
+Optional: Reasons why
+---------------------
