@@ -24,7 +24,7 @@ public interface Cov_Manager {
 	public List <Patient> searchPatientByName(String name);
 	
 	// Add a new doctor
-	public void addDoctor(Doctor d, String YesNo);
+	public void addDoctor(Doctor d);
 	// Get a particular doctor
 	public Doctor getDoctor(int id);
 	
@@ -35,7 +35,7 @@ public interface Cov_Manager {
 	public List<Doctor> getDoctorsOfPatient(int pat_id);
 	
 	// Add a new lab
-	public void addLab(Lab l, String YesNo);
+	public void addLab(Lab l);
 	// Gets the lab 
 	public Lab getLab(int id);
 	// Show all labs

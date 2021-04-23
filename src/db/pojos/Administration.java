@@ -62,4 +62,16 @@ public class Administration implements Serializable{
 		this.vaccines = vaccines;
 	}
 
+
+	public byte[] getImage() {
+		return image;
+	}
+
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+	
+	
+
 }
