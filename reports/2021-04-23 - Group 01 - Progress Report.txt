@@ -1,0 +1,13 @@
+This week we expected to be able to do...
+Finish the add, select and modify methods for the Gui
+This week we did...
+Some of the adds and selects
+
+Optional: Reasons why
+---------------------
+
+Next weeks we will do...
+Finish the resty of the adds, selects and modifys for the Gui
+
+Optional: Reasons why
+---------------------

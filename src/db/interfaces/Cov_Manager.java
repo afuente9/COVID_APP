@@ -26,7 +26,7 @@ public interface Cov_Manager {
 		public List <Patient> searchPatientGeneric(String feature, String type);
 		
 	// Add a new doctor
-	public void addDoctor(Doctor d, String YesNo);
+	public void addDoctor(Doctor d);
 	// Get a particular doctor
 	public Doctor getDoctor(int id);
 	
@@ -37,7 +37,7 @@ public interface Cov_Manager {
 	public List<Doctor> getDoctorsOfPatient(int pat_id);
 	
 	// Add a new lab
-	public void addLab(Lab l, String YesNo);
+	public void addLab(Lab l);
 	// Gets the lab 
 	public Lab getLab(int id);
 	// Show all labs
@@ -60,5 +60,11 @@ public interface Cov_Manager {
 	
 	// Assign a pathology to a patient
 	public void assignMed(Patient p, Medication m);
+	
+	// Delete a medication from the list using the name
+	public void deleteMedByName(Medication m);
+	
+	// Delete a pathology from the list using the name
+		public void deletePathologyByName(Other_Pathologies op);
 	
 }

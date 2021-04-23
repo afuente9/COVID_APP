@@ -56,41 +56,29 @@ public class JDBCManagment implements Cov_Manager {
 			stmt1.close();
 
 			Statement stmt2 = c.createStatement();
-			String sql2 = "CREATE TABLE patients " 
-					+ "(id       			INTEGER  	 PRIMARY KEY AUTOINCREMENT,"
-					+ " name     			TEXT    	 NOT NULL," 
-					+ " hos_location 		TEXT  		 NOT NULL,"
-					+ " birthday			DATE  		 NOT NULL," 
-					+ " social_security   	TEXT  	 	 NOT NULL,"
-					+ " height 				float   	 NOT NULL," 
-					+ " weight 				float   	 NOT NULL,"
-					+ " sex 			    TEXT	   	 NOT NULL," 
-					+ " infected 			boolean  	 NOT NULL,"
-					+ " alive 				boolean  	 NOT NULL," 
-					+ " hospital  			TEXT	 	 NOT NULL,"
+			String sql2 = "CREATE TABLE patients " + "(id       			INTEGER  	 PRIMARY KEY AUTOINCREMENT,"
+					+ " name     			TEXT    	 NOT NULL," + " hos_location 		TEXT  		 NOT NULL,"
+					+ " birthday			DATE  		 NOT NULL," + " social_security   	TEXT  	 	 NOT NULL,"
+					+ " height 				float   	 NOT NULL," + " weight 				float   	 NOT NULL,"
+					+ " sex 			    TEXT	   	 NOT NULL," + " infected 			boolean  	 NOT NULL,"
+					+ " alive 				boolean  	 NOT NULL," + " hospital  			TEXT	 	 NOT NULL,"
 					+ " score 				INTEGER		 NOT NULL,"
 					+ " id_adm				INTEGER		 REFERENCES administration(id),"
-					+ " vaccinated			boolean		 NOT NULL," 
-					+ " bloodType			TEXT		 NOT NULL)";
+					+ " vaccinated			boolean		 NOT NULL," + " bloodType			TEXT		 NOT NULL)";
 			stmt2.executeUpdate(sql2);
 			stmt2.close();
 
 			Statement stmt3 = c.createStatement();
-			String sql3 = "CREATE TABLE lab " 
-					+ "(id       		INTEGER  	 	PRIMARY KEY AUTOINCREMENT,"
-					+ " name     		TEXT    	 	NOT NULL,"
-					+ " adress	 		TEXT	 	 	NOT NULL,"
-					+ " cif			    TEXT  	 	 	NOT NULL," 
-					+ " vacciness  		INTEGER	 	 	NOT NULL,"
-					+ " image 			LONGVARBINARY   NULL)"; //TODO preguntar si esto es un BLOOB o un LONGVARBINARY
+			String sql3 = "CREATE TABLE lab " + "(id       		INTEGER  	 	PRIMARY KEY AUTOINCREMENT,"
+					+ " name     		TEXT    	 	NOT NULL," + " adress	 		TEXT	 	 	NOT NULL,"
+					+ " cif			    TEXT  	 	 	NOT NULL," + " vacciness  		INTEGER	 	 	NOT NULL,"
+					+ " image 			BLOB   			NULL)";
 			stmt3.executeUpdate(sql3);
 			stmt3.close();
 
 			Statement stmt4 = c.createStatement();
-			String sql4 = "CREATE TABLE shipment " 
-					+ "(id       		INTEGER  	PRIMARY KEY AUTOINCREMENT,"
-					+ " vacciness  		INTEGER	 	NOT NULL," 
-					+ " date			DATE		NOT NULL,"
+			String sql4 = "CREATE TABLE shipment " + "(id       		INTEGER  	PRIMARY KEY AUTOINCREMENT,"
+					+ " vacciness  		INTEGER	 	NOT NULL," + " date			DATE		NOT NULL,"
 					+ " id_lab			INTEGER		REFERENCES lab(id),"
 					+ " id_adm			INTEGER		REFERENCES administration(id))";
 			stmt4.executeUpdate(sql4);
@@ -99,46 +87,38 @@ public class JDBCManagment implements Cov_Manager {
 			Statement stmt5 = c.createStatement();
 			String sql5 = "CREATE TABLE administration "
 					+ "(id       				INTEGER  		PRIMARY KEY AUTOINCREMENT,"
-					+ " total_vacciness  		INTEGER	 		NOT NULL,"
-					+ " image 				    LONGVARBINARY   NULL)";//TODO preguntar si esto es un BLOOB o un LONGVARBINARY
+					+ " total_vacciness  		INTEGER	 		NOT NULL," + " image 				    BLOB   NULL)";
 			stmt5.executeUpdate(sql5);
 			stmt5.close();
 
 			Statement stmt6 = c.createStatement();
-			String sql6 = "CREATE TABLE other_pathologies " 
-					+ "(id       		INTEGER  	 PRIMARY KEY AUTOINCREMENT,"
+			String sql6 = "CREATE TABLE other_pathologies " + "(id       		INTEGER  	 PRIMARY KEY AUTOINCREMENT,"
 					+ " name  			TEXT	 	 NOT NULL)";
 			stmt6.executeUpdate(sql6);
 			stmt6.close();
 
 			Statement stmt7 = c.createStatement();
-			String sql7 = "CREATE TABLE medication " 
-					+ "(id       		INTEGER  	PRIMARY KEY AUTOINCREMENT,"
+			String sql7 = "CREATE TABLE medication " + "(id       		INTEGER  	PRIMARY KEY AUTOINCREMENT,"
 					+ " name  			TEXT	 	NOT NULL)";
 			stmt7.executeUpdate(sql7);
 			stmt7.close();
 
 			Statement stmt8 = c.createStatement();
-			String sql8 = "CREATE TABLE pat_doc " 
-					+ "(id_doc       	INTEGER  	REFERENCES doctors(id),"
-					+ " id_pat 			INTEGER	 	REFERENCES pathient(id)," 
-					+ " PRIMARY KEY (id_doc, id_pat))";
+			String sql8 = "CREATE TABLE pat_doc " + "(id_doc       	INTEGER  	REFERENCES doctors(id),"
+					+ " id_pat 			INTEGER	 	REFERENCES pathient(id)," + " PRIMARY KEY (id_doc, id_pat))";
 			stmt8.executeUpdate(sql8);
 			stmt8.close();
 
 			Statement stmt9 = c.createStatement();
-			String sql9 = "CREATE TABLE pat_patho "
-					+ "(id_pat       	INTEGER  	REFERENCES pathient(id),"
+			String sql9 = "CREATE TABLE pat_patho " + "(id_pat       	INTEGER  	REFERENCES pathient(id),"
 					+ " id_patho 		INTEGER	 	REFERENCES other_pathologies(id),"
 					+ " PRIMARY KEY (id_pat, id_patho))";
 			stmt9.executeUpdate(sql9);
 			stmt9.close();
 
 			Statement stmt10 = c.createStatement();
-			String sql10 = "CREATE TABLE pat_medi "
-					+ "(id_pat       	INTEGER  	REFERENCES pathient(id),"
-					+ " id_medi 		INTEGER	 	REFERENCES medication(id)," 
-					+ " PRIMARY KEY (id_pat, id_medi))";
+			String sql10 = "CREATE TABLE pat_medi " + "(id_pat       	INTEGER  	REFERENCES pathient(id),"
+					+ " id_medi 		INTEGER	 	REFERENCES medication(id)," + " PRIMARY KEY (id_pat, id_medi))";
 			stmt10.executeUpdate(sql10);
 			stmt10.close();
 
@@ -151,10 +131,8 @@ public class JDBCManagment implements Cov_Manager {
 			stmt11.close();
 
 			Statement stmt12 = c.createStatement();
-			String sql12 = "CREATE TABLE days " 
-					+ "(id       	    INTEGER  	PRIMARY KEY AUTOINCREMENT,"
-					+ " deaths 			INTEGER	 	NOT NULL," 
-					+ " average			FLOAT		NOT NULL,"
+			String sql12 = "CREATE TABLE days " + "(id       	    INTEGER  	PRIMARY KEY AUTOINCREMENT,"
+					+ " deaths 			INTEGER	 	NOT NULL," + " average			FLOAT		NOT NULL,"
 					+ " daytime			DATE 		NOT NULL)";
 			stmt11.executeUpdate(sql12);
 			stmt11.close();
@@ -198,7 +176,7 @@ public class JDBCManagment implements Cov_Manager {
 		}
 	}
 
-	public void addDoctor(Doctor d, String YesNo) {
+	public void addDoctor(Doctor d) {
 		try {
 			String sexo;
 			if (d.getSex().equals(Sex.Male)) {
@@ -206,60 +184,34 @@ public class JDBCManagment implements Cov_Manager {
 			} else {
 				sexo = "F";
 			}
-			if(YesNo.equalsIgnoreCase("no")) {
-				String sql = "INSERT INTO doctors (name, speciality, birth_date, collegiate_number, sex, hospital) VALUES (?, ?, ?, ?, ?, ?)";
-				PreparedStatement prep = c.prepareStatement(sql);
-				prep.setString(1, d.getName());
-				prep.setString(2, d.getSpeciality());
-				prep.setDate(3, d.getBirthday());
-				prep.setString(4, d.getCollegiate_number());
-				prep.setString(5, sexo);
-				prep.setString(6, d.getHospital());
-				prep.executeUpdate();
-				prep.close();
-			}
-			else {
-				String sql = "INSERT INTO doctors (name, speciality, birth_date, collegiate_number, sex, hospital, image) VALUES (?, ?, ?, ?, ?, ?, ?)";
-				PreparedStatement prep = c.prepareStatement(sql);
-				prep.setString(1, d.getName());
-				prep.setString(2, d.getSpeciality());
-				prep.setDate(3, d.getBirthday());
-				prep.setString(4, d.getCollegiate_number());
-				prep.setString(5, sexo);
-				prep.setString(6, d.getHospital());
-				prep.setBytes(7, d.getImage());
-				prep.executeUpdate();
-				prep.close();
-			}
+			String sql = "INSERT INTO doctors (name, speciality, birth_date, collegiate_number, sex, hospital) VALUES (?, ?, ?, ?, ?, ?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, d.getName());
+			prep.setString(2, d.getSpeciality());
+			prep.setDate(3, d.getBirthday());
+			prep.setString(4, d.getCollegiate_number());
+			prep.setString(5, sexo);
+			prep.setString(6, d.getHospital());
+			prep.executeUpdate();
+			prep.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void addLab(Lab l, String YesNo) {
+	@Override
+	public void addLab(Lab l) {
 		try {
-			if(YesNo.equalsIgnoreCase("no")) {
-				String sql = "INSERT INTO lab (name, adress, cif, vacciness) VALUES (?, ?, ?, ?)";
-				PreparedStatement prep = c.prepareStatement(sql);
-				prep.setString(1, l.getName());
-				prep.setString(2, l.getAddress());
-				prep.setString(3, l.getCif());
-				prep.setInt(4, l.getVaccines_produce());
-				prep.executeUpdate();
-				prep.close();
-			}
-			else {
-				String sql = "INSERT INTO lab (name, adress, cif, vacciness, image) VALUES (?, ?, ?, ?, ?)";
-				PreparedStatement prep = c.prepareStatement(sql);
-				prep.setString(1, l.getName());
-				prep.setString(2, l.getAddress());
-				prep.setString(3, l.getCif());
-				prep.setInt(4, l.getVaccines_produce());
-				prep.setBytes(5, l.getImage());
-				prep.executeUpdate();
-				prep.close();
-			}
-			
+
+			String sql = "INSERT INTO lab (name, adress, cif, vacciness) VALUES (?, ?, ?, ?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, l.getName());
+			prep.setString(2, l.getAddress());
+			prep.setString(3, l.getCif());
+			prep.setInt(4, l.getVaccines_produce());
+			prep.executeUpdate();
+			prep.close();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -293,6 +245,8 @@ public class JDBCManagment implements Cov_Manager {
 		}
 	}
 
+	//TODO UPDATE goverment vaccines used, patient (pic from whatsapp group), all doctor including image, all lab
+	
 	public void addOtherPathologies(Other_Pathologies op) {
 		try {
 			String sql = "INSERT INTO Other_Pathologies (name) VALUES (?)";
@@ -318,24 +272,20 @@ public class JDBCManagment implements Cov_Manager {
 	}
 //TODO search patient by each feature. Se puede hacer algo as�? Si no se puede, hay que hacer un metodo para cada feature
 	/*
-	  public List<Patient> searchPatientByFeature(String feature, String type) {
-		List<Patient> patients = new ArrayList<Patient>();
-		try {
-			String sql = "SELECT * FROM  patients WHERE ? LIKE ?";
-			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, "%" + feature + "%");
-			prep.setString(2, "%" + type + "%"); 
-			
-	  public List<Patient> searchPatientByFeature(String feature, String type) {
-		List<Patient> patients = new ArrayList<Patient>();
-		try {
-			String sql = "SELECT * FROM  patients WHERE " + feature + " LIKE ?";
-			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, "%" + type + "%");
-	  
-	
+	 * public List<Patient> searchPatientByFeature(String feature, String type) {
+	 * List<Patient> patients = new ArrayList<Patient>(); try { String sql =
+	 * "SELECT * FROM  patients WHERE ? LIKE ?"; PreparedStatement prep =
+	 * c.prepareStatement(sql); prep.setString(1, "%" + feature + "%");
+	 * prep.setString(2, "%" + type + "%");
+	 * 
+	 * public List<Patient> searchPatientByFeature(String feature, String type) {
+	 * List<Patient> patients = new ArrayList<Patient>(); try { String sql =
+	 * "SELECT * FROM  patients WHERE " + feature + " LIKE ?"; PreparedStatement
+	 * prep = c.prepareStatement(sql); prep.setString(1, "%" + type + "%");
+	 * 
+	 * 
 	 */
-	
+
 	public List<Patient> searchPatientByName(String name) {
 		List<Patient> patients = new ArrayList<Patient>();
 		try {
@@ -438,7 +388,7 @@ public class JDBCManagment implements Cov_Manager {
 			prep.setInt(1, id);
 			ResultSet rs = prep.executeQuery();
 			if (rs.next()) {
-				String doctorName = rs.getString("name"); 
+				String doctorName = rs.getString("name");
 				String espe = rs.getString("speciality");
 				Date nacido = rs.getDate("birth_date");
 				String numCol = rs.getString("collegiate_number");
@@ -520,15 +470,14 @@ public class JDBCManagment implements Cov_Manager {
 				String doc = rs.getString("cif");
 				Integer vacc = rs.getInt("vacciness");
 				byte[] pic = rs.getBytes("image");
-				//TODO test, if doesn't work
+				// TODO test, if doesn't work
 				/*
-				 * InputStream blobStream = rs.getBinaryStream("photo");
-				 * byte[] pic = new byte[blobStream.available()];
-				 * blobStream.read(pic);
-
-				 * */
+				 * InputStream blobStream = rs.getBinaryStream("photo"); byte[] pic = new
+				 * byte[blobStream.available()]; blobStream.read(pic);
+				 * 
+				 */
 				return new Lab(id, vacc, direccion, lab_name, doc, pic);
-				
+
 			}
 			prep.close();
 			rs.close();
@@ -554,13 +503,12 @@ public class JDBCManagment implements Cov_Manager {
 				String Lcif = rs.getString("cif");
 				int Lvacciness = rs.getInt("vacciness");
 				byte[] pic = rs.getBytes("image");
-				//TODO test, if doesn't work
+				// TODO test, if doesn't work
 				/*
-				 * InputStream blobStream = rs.getBinaryStream("photo");
-				 * byte[] pic = new byte[blobStream.available()];
-				 * blobStream.read(pic);
-
-				 * */
+				 * InputStream blobStream = rs.getBinaryStream("photo"); byte[] pic = new
+				 * byte[blobStream.available()]; blobStream.read(pic);
+				 * 
+				 */
 				Lab lab = new Lab(id, Lvacciness, Ladress, Lname, Lcif, pic);
 				labs.add(lab);
 			}
@@ -605,7 +553,36 @@ public class JDBCManagment implements Cov_Manager {
 		}
 		return savedDays;
 	}
-	
+	@Override
+	public void deleteMedByName(Medication m) {
+		String sql = "DELETE FROM medication WHERE name = ?";
+		PreparedStatement prep;
+		try {
+			prep = c.prepareStatement(sql);
+			prep.setString(1, m.getName());
+			prep.executeUpdate();
+			prep.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void deletePathologyByName(Other_Pathologies op) {
+		String sql = "DELETE FROM medication WHERE name = ?";
+		PreparedStatement prep;
+		try {
+			prep = c.prepareStatement(sql);
+			prep.setString(1, op.getName());
+			prep.executeUpdate();
+			prep.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
 	@Override
 	public List<Patient> searchPatientGeneric(String feature, String type) {
 		List<Patient> patients = new ArrayList<Patient>();

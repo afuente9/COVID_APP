@@ -64,16 +64,16 @@ public class Menu {
 		while(true);
 	}
 
-	private static void addMedication() throws Exception{ //TODO mirar bien como implementar el añadir una medicacion
+	private static void addMedication() throws Exception{ 
 		List<Medication> med = new ArrayList<Medication>();
 		String n_med = "";
-		do {
+		while(!n_med.isEmpty()) {
 			System.out.println("Please intoduce the");
 			n_med = reader.readLine();
 			Medication m = new Medication(n_med);
 			med.add(m);
 			inter.addMedication(m);
-		}while(!n_med.isEmpty());
+		}
 		
 		System.out.println(med);
 	}
@@ -146,21 +146,7 @@ public class Menu {
 		String d_hosp = reader.readLine();
 		System.out.print("Sex (male, female): ");
 		Sex d_sex = Sex.parse(reader.readLine());
-		System.out.print("Do you want to add a photo? (Yes/No): ");
-		String YesNo = reader.readLine();
-		if(YesNo.equalsIgnoreCase("no")) {
-			inter.addDoctor(new Doctor(d_name, d_speciality, Date.valueOf(d_bday), d_cn, d_hosp, d_sex), YesNo);
-		}
-		else {
-			System.out.print("Type the file name as it appears in folder /photos, including extension: ");
-			String fileName = reader.readLine();
-			File photo = new File(fileName);
-			InputStream streamBlob = new FileInputStream(photo);
-			byte[] d_imagen = new byte[streamBlob.available()];
-			//streamBlob.read(bytesBlob); // TODO preguntar donde hay que poner esto exactamente, aquí o en addLab de JDBC
-			//streamBlob.close();
-			inter.addDoctor(new Doctor(d_name, d_speciality, Date.valueOf(d_bday), d_cn, d_hosp, d_sex, d_imagen), YesNo);
-		}
+		inter.addDoctor(new Doctor(d_name, d_speciality, Date.valueOf(d_bday), d_cn, d_hosp, d_sex));
 	}
 	
 	
@@ -174,21 +160,7 @@ public class Menu {
 		String l_cif = reader.readLine();
 		System.out.print("Vaccines: ");
 		int l_vac = Integer.parseInt(reader.readLine());
-		System.out.print("Do you want to add a photo? (Yes/No): ");
-		String YesNo = reader.readLine();
-		if(YesNo.equalsIgnoreCase("no")) {
-			inter.addLab(new Lab(l_name, l_adress, l_cif, l_vac), YesNo);
-		}
-		else {
-			System.out.print("Type the file name as it appears in folder /photos, including extension: ");
-			String fileName = reader.readLine();
-			File photo = new File(fileName);
-			InputStream streamBlob = new FileInputStream(photo);
-			byte[] l_imagen = new byte[streamBlob.available()];
-			//streamBlob.read(bytesBlob); // TODO preguntar donde hay que poner esto exactamente, aquí o en addLab de JDBC
-			//streamBlob.close();
-			inter.addLab(new Lab(l_name, l_adress, l_cif, l_vac, l_imagen), YesNo);
-		}
+		inter.addLab(new Lab(l_name, l_adress, l_cif, l_vac));
 	}
 	public void newDay() { 
 		
