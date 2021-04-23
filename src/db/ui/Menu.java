@@ -43,7 +43,7 @@ public class Menu {
 				addPatient();
 				break;
 			case 2:
-				searchPatients();
+				searchPatientGeneric();
 				break;
 			case 3:
 				addDoctor();
@@ -119,6 +119,15 @@ public class Menu {
 		System.out.print("Name: ");
 		String p_name = reader.readLine();
 		List<Patient> result = inter.searchPatientByName(p_name);
+		System.out.println("Those are the patients: \n" + result.toString());
+	}
+	private static void searchPatientGeneric() throws Exception {
+		System.out.println("Please, input the person info:");
+		System.out.print("feature: ");
+		String feature = reader.readLine();
+		System.out.print("type: ");
+		String type = reader.readLine();
+		List<Patient> result = inter.searchPatientGeneric(feature,type);
 		System.out.println("Those are the patients: \n" + result.toString());
 	}
 	

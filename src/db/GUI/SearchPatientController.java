@@ -15,6 +15,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class SearchPatientController implements Initializable {
@@ -24,6 +25,8 @@ public class SearchPatientController implements Initializable {
  
     @FXML
     private ChoiceBox<String> SearchOptions;
+    @FXML
+    private TextField typeTextfield;
     @FXML
     private TableView<?> tablePatients;
     @FXML
@@ -39,7 +42,10 @@ public class SearchPatientController implements Initializable {
 
     @FXML
     void ModifySearch(ActionEvent event) {
-
+    	String feature = SearchOptions.getValue();
+		String type = typeTextfield.getText();
+		List<Patient> result = Main.getInter().searchPatientGeneric(feature,type);
+		System.out.println("Those are the patients: \n" + result.toString());
         //SearchOptions.getValue();
     	// TODO Select de la base de datos todos los pacientes que lo cumplan
     	

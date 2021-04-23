@@ -605,4 +605,65 @@ public class JDBCManagment implements Cov_Manager {
 		}
 		return savedDays;
 	}
+	
+	@Override
+	public List<Patient> searchPatientGeneric(String feature, String type) {
+		List<Patient> patients = new ArrayList<Patient>();
+		
+		try {
+			
+
+			 if(feature=="SS num") {
+				feature="social_security";
+			}
+			
+			
+			String sql = "SELECT * FROM  patients WHERE "+feature+ " LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+
+			prep.setString(1, "%" + type + "%");
+			 if(feature=="Infected") {
+				boolean newbool= Boolean.parseBoolean(type);
+				prep.setBoolean(1,  newbool );
+
+			}
+			 if (feature== "Age") {
+					//TODO sacar fecha de nacimiento
+				 //Date d = 
+					prep.setDate(1, d);
+
+					}
+			
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String patientname = rs.getString("name");
+				Date birthday = rs.getDate("birthday");
+				String social_security = rs.getString("social_security");
+				float height = rs.getFloat("height");
+				float weight = rs.getFloat("weight");
+				Sex sexo;
+				if (rs.getString("sex").equalsIgnoreCase("m")) {
+					sexo = Sex.Male;
+				} else {
+					sexo = Sex.Female;
+				}
+				boolean infec = rs.getBoolean("infected");
+				boolean alive = rs.getBoolean("alive");
+				String hosp = rs.getString("hospital");
+				String loc_hosp = rs.getString("hos_location");
+				String blood = rs.getString("bloodType");
+				boolean vaccin = rs.getBoolean("vaccinated");
+
+				Patient patient = new Patient(id, loc_hosp, patientname, birthday, social_security, height, weight,
+						sexo, infec, alive, hosp, vaccin, blood);
+				patients.add(patient);
+			}
+			rs.close();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return patients;		
+	}
 }

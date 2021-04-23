@@ -78,7 +78,7 @@
                   <String fx:value="Date introduced" />
                </styleClass>
             </ChoiceBox>
-            <TextField layoutX="338.0" layoutY="133.0" />
+            <TextField fx:id="typeTextfield" layoutX="338.0" layoutY="133.0" />
             <DatePicker fx:id="dateFrom" layoutX="223.0" layoutY="78.0" />
             <DatePicker fx:id="dateTo" layoutX="441.0" layoutY="78.0" />
             <Button layoutX="509.0" layoutY="128.0" mnemonicParsing="false" onAction="#ModifySearch" prefHeight="35.0" prefWidth="54.0" text="Search" />

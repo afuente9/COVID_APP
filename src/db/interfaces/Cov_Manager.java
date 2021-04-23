@@ -21,8 +21,10 @@ public interface Cov_Manager {
 	public Patient getPatient(int id);
 	// Search patient by name
 	// If name is empty or null, returns all people
-	public List <Patient> searchPatientByName(String name);
-	
+		public List <Patient> searchPatientByName(String name);
+//en pruebas
+		public List <Patient> searchPatientGeneric(String feature, String type);
+		
 	// Add a new doctor
 	public void addDoctor(Doctor d, String YesNo);
 	// Get a particular doctor
