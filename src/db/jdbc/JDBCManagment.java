@@ -588,28 +588,40 @@ public class JDBCManagment implements Cov_Manager {
 		List<Patient> patients = new ArrayList<Patient>();
 		
 		try {
-			
-
+			String sql;
+			if (feature== "Age") {
+				//TODO NO FUNCIONA
+			 feature="birthday";
+			 sql = "SELECT * FROM  patients WHERE "+feature+ " = '?' ";
+				}
+			else {
+				sql = "SELECT * FROM  patients WHERE "+feature+ " LIKE ?";
+			}
 			 if(feature=="SS num") {
 				feature="social_security";
 			}
-			
-			
-			String sql = "SELECT * FROM  patients WHERE "+feature+ " LIKE ?";
-			PreparedStatement prep = c.prepareStatement(sql);
+				
+				PreparedStatement prep = c.prepareStatement(sql);
 
-			prep.setString(1, "%" + type + "%");
+			if (feature== "birthday") {
+					//TODO sacar fecha de nacimiento
+				 Date today= Date.valueOf(LocalDate.now());
+				 Date d=new Date(today.getYear()-Integer.parseInt(type),today.getMonth(),today.getMonth());
+				 prep.setDate(1, d);
+
+					}
+			
+
 			 if(feature=="Infected") {
 				boolean newbool= Boolean.parseBoolean(type);
 				prep.setBoolean(1,  newbool );
 
 			}
-			 if (feature== "Age") {
-					//TODO sacar fecha de nacimiento
-				 //Date d = 
-					prep.setDate(1, d);
-
-					}
+			
+			 else {
+					prep.setString(1, "%" + type + "%");
+ 
+			 }
 			
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
