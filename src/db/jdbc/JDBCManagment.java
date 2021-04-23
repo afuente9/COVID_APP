@@ -239,6 +239,9 @@ public class JDBCManagment implements Cov_Manager {
 		}
 	}
 
+	//TODO UPDATE goverment vaccines used, patient (pic from whatsapp group), all doctor including image, all lab
+	//TODO DELETE Medications, other pathologies
+	
 	public void addOtherPathologies(Other_Pathologies op) {
 		try {
 			String sql = "INSERT INTO Other_Pathologies (name) VALUES (?)";
