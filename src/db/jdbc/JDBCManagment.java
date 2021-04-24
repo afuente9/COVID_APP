@@ -304,6 +304,21 @@ public class JDBCManagment implements Cov_Manager {
 		
 		
 	}
+	@Override
+	public void modifyLab(int iden, String atrib, String value) {
+		try {
+			String sql;
+				 sql = "UPDATE lab SET "+atrib+" = ? WHERE id = "+iden; 
+			PreparedStatement prep = c.prepareStatement(sql);
+				 prep.setString(1, value);
+			prep.executeUpdate();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
 //TODO search patient by each feature. Se puede hacer algo as�? Si no se puede, hay que hacer un metodo para cada feature
 	/*
 	 * public List<Patient> searchPatientByFeature(String feature, String type) {

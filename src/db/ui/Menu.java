@@ -37,6 +37,8 @@ public class Menu {
 			System.out.println("5. Add a medication		");
 			System.out.println("6. Modify doctor        ");
 			System.out.println("7. Get doctor           ");
+			System.out.println("8. Modify lab      ");
+			System.out.println("9. Get lab           ");
 			System.out.println("0. Exit					");
 			
 			int choice = Integer.parseInt(reader.readLine());
@@ -62,6 +64,12 @@ public class Menu {
 			case 7:
 				getDoc();
 				break;
+			case 8:
+				modifyLab();
+				break;
+			case 9:
+				getLab();
+				break;
 			case 0:
 				inter.disconnect();
 				System.exit(0);
@@ -77,6 +85,19 @@ public class Menu {
 			System.out.print("Doctor id: ");
 			int iden = Integer.parseInt(reader.readLine());
 			System.out.print(inter.getDoctor(iden).toString());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	private static void getLab() {
+		try {
+			System.out.print("Laboratory id: ");
+			int iden = Integer.parseInt(reader.readLine());
+			System.out.print(inter.getLab(iden).toString());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -204,7 +225,22 @@ public class Menu {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		
+	}
+		private static void modifyLab() {
+			try {
+				System.out.print("Laboratory id: ");
+				int iden = Integer.parseInt(reader.readLine());
+				System.out.println("Which atribute want you to change? (name, cif or adress)");//vacciness No se si necesitamos algo que modifique el nº de vacunas en este 
+				String atrib = reader.readLine();											  //methode o si hay que crear uno nuevo exclusivo para ello
+				System.out.println("Introduce the new value: ");
+				String valor = reader.readLine();
+				inter.modifyLab(iden, atrib, valor);
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+			
 		
 	}
 	

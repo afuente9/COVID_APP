@@ -70,4 +70,7 @@ public interface Cov_Manager {
 	//Modifies a doctor information
 	public void modifyDoctor(int iden, String atrib, String value);
 	
+	//Modifies a laboratory information
+	public void modifyLab(int iden, String atrib, String value);
+	
 }
