@@ -51,17 +51,23 @@ public class JDBCManagment implements Cov_Manager {
 					+ " collegiate_number	TEXT	 	 	NOT NULL," 
 					+ " sex 				TEXT	 	 	NOT NULL,"
 					+ " hospital  			TEXT		 	NOT NULL,"
-					+ " image 				LONGVARBINARY   NULL)";//TODO preguntar si esto es un BLOOB o un LONGVARBINARY
+					+ " image 				BLOB   			NULL)";
 			stmt1.executeUpdate(sql1);
 			stmt1.close();
 
 			Statement stmt2 = c.createStatement();
-			String sql2 = "CREATE TABLE patients " + "(id       			INTEGER  	 PRIMARY KEY AUTOINCREMENT,"
-					+ " name     			TEXT    	 NOT NULL," + " hos_location 		TEXT  		 NOT NULL,"
-					+ " birthday			DATE  		 NOT NULL," + " social_security   	TEXT  	 	 NOT NULL,"
-					+ " height 				float   	 NOT NULL," + " weight 				float   	 NOT NULL,"
-					+ " sex 			    TEXT	   	 NOT NULL," + " infected 			boolean  	 NOT NULL,"
-					+ " alive 				boolean  	 NOT NULL," + " hospital  			TEXT	 	 NOT NULL,"
+			String sql2 = "CREATE TABLE patients " 
+					+ "(id       			INTEGER  	 PRIMARY KEY AUTOINCREMENT,"
+					+ " name     			TEXT    	 NOT NULL," 
+					+ " hos_location 		TEXT  		 NOT NULL,"
+					+ " birthday			DATE  		 NOT NULL," 
+					+ " social_security   	TEXT  	 	 NOT NULL,"
+					+ " height 				float   	 NOT NULL," 
+					+ " weight 				float   	 NOT NULL,"
+					+ " sex 			    TEXT	   	 NOT NULL," 
+					+ " infected 			boolean  	 NOT NULL,"
+					+ " alive 				boolean  	 NOT NULL," 
+					+ " hospital  			TEXT	 	 NOT NULL,"
 					+ " score 				INTEGER		 NOT NULL,"
 					+ " id_adm				INTEGER		 REFERENCES administration(id),"
 					+ " vaccinated			boolean		 NOT NULL," + " bloodType			TEXT		 NOT NULL)";
@@ -69,9 +75,12 @@ public class JDBCManagment implements Cov_Manager {
 			stmt2.close();
 
 			Statement stmt3 = c.createStatement();
-			String sql3 = "CREATE TABLE lab " + "(id       		INTEGER  	 	PRIMARY KEY AUTOINCREMENT,"
-					+ " name     		TEXT    	 	NOT NULL," + " adress	 		TEXT	 	 	NOT NULL,"
-					+ " cif			    TEXT  	 	 	NOT NULL," + " vacciness  		INTEGER	 	 	NOT NULL,"
+			String sql3 = "CREATE TABLE lab " 
+					+ "(id       		INTEGER  	 	PRIMARY KEY AUTOINCREMENT,"
+					+ " name     		TEXT    	 	NOT NULL," 
+					+ " adress	 		TEXT	 	 	NOT NULL,"
+					+ " cif			    TEXT  	 	 	NOT NULL," 
+					+ " vacciness  		INTEGER	 	 	NOT NULL,"
 					+ " image 			BLOB   			NULL)";
 			stmt3.executeUpdate(sql3);
 			stmt3.close();
@@ -176,6 +185,21 @@ public class JDBCManagment implements Cov_Manager {
 		}
 	}
 
+	/* TODO checklist
+	 * - Cambiar foto (no prioritario)
+- AddPatients (faltan los medicamentos y otras enfermedades)
+- SelectPatients según fechaIntroduccion
+- SelectPatients según sus atributos
+- ModifyPatient todos sus atributos
+- ModifyDoc todos sus atributos
+- ModifyLab datosLab, nVacc
+- Select nVacc from Gov
+- Select patients by score for Gov
+- Modify nVacc from Gov
+- Select Shipment by name
+	 * 
+	 * */
+	
 	public void addDoctor(Doctor d) {
 		try {
 			String sexo;
@@ -237,7 +261,6 @@ public class JDBCManagment implements Cov_Manager {
 			String sql = "INSERT INTO Administration (total_vacciness) VALUES (?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, a.getVaccines());
-			// TODO insertar imagen en tabla prep.set(2, a.getImage());
 			prep.executeUpdate();
 			prep.close();
 		} catch (Exception e) {
@@ -477,7 +500,6 @@ public class JDBCManagment implements Cov_Manager {
 				 * 
 				 */
 				return new Lab(id, vacc, direccion, lab_name, doc, pic);
-
 			}
 			prep.close();
 			rs.close();
@@ -604,11 +626,12 @@ public class JDBCManagment implements Cov_Manager {
 				PreparedStatement prep = c.prepareStatement(sql);
 
 			if (feature== "birthday") {
-					//TODO sacar fecha de nacimiento
+					//TODO testear sacar fecha de nacimiento 
+					
 				 Date today= Date.valueOf(LocalDate.now());
-				 Date d=new Date(today.getYear()-Integer.parseInt(type),today.getMonth(),today.getMonth());
+				 LocalDate temp = today.toLocalDate().minusYears(Integer.parseInt(type));				 
+				 Date d= Date.valueOf(temp);
 				 prep.setDate(1, d);
-
 					}
 			
 
