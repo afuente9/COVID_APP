@@ -41,11 +41,12 @@ public class SignUpDoctorController {
     	db.pojos.Sex sex= Sex.valueOf(sex_text);
     	Date date = Date.valueOf(date_text);
         int id=0;
-       //id = getlistadedoctores().length(); 
     	byte[] image=null;
     	Doctor d_new= new Doctor(name,spetiality,date,colnum,hospital,sex,image);
     	//añadir doctor a la lista de doctores
     	Main.getInter().addDoctor(d_new);
+    	System.out.println("eriguerngiuegherui");
+    	
 
 
     	Stage stage = (Stage) this.NameTextField.getScene().getWindow();
