@@ -280,25 +280,29 @@ public class JDBCManagment implements Cov_Manager {
 
 	// TODO PULIR
 	@Override
-	public void modifyDoctor(Doctor d, String atrib, String value) {
-
-		if (atrib.equalsIgnoreCase("birth_date")) {
-			Date fecha = Date.valueOf(value);
-			d.setBirthday(fecha);
-		} else if (atrib.equalsIgnoreCase("name")) {
-			d.setName(value);
-
-		} else if (atrib.equalsIgnoreCase("speciality")) {
-			d.setSpeciality(value);
-
-		} else if (atrib.equalsIgnoreCase("collegiate_number")) {
-			d.setCollegiate_number(value);
-
-		} else if (atrib.equalsIgnoreCase("hospital")) {
-			d.setHospital(value);
-
+	public void modifyDoctor(int iden, String atrib, String value) {
+		try {
+			String sql;
+			Date fecha = null;
+			if (atrib.equalsIgnoreCase("birth_date")) {
+				 fecha = Date.valueOf(value);
+				 sql = "UPDATE doctors SET "+atrib+" = ? WHERE id = "+iden;
+			} else {
+				 sql = "UPDATE doctors SET "+atrib+" = ? WHERE id = "+iden;
+			} 
+			PreparedStatement prep = c.prepareStatement(sql);
+			if (atrib.equalsIgnoreCase("birth_date")) {
+				prep.setDate(1, fecha);
+			} else {
+				 prep.setString(1, value);
+			} 
+			prep.executeUpdate();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-
+		
+		
 	}
 //TODO search patient by each feature. Se puede hacer algo as�? Si no se puede, hay que hacer un metodo para cada feature
 	/*

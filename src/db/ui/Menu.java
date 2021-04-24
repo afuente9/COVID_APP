@@ -35,6 +35,8 @@ public class Menu {
 			System.out.println("3. Add a doctor			");
 			System.out.println("4. Add a lab			");
 			System.out.println("5. Add a medication		");
+			System.out.println("6. Modify doctor        ");
+			System.out.println("7. Get doctor           ");
 			System.out.println("0. Exit					");
 			
 			int choice = Integer.parseInt(reader.readLine());
@@ -54,6 +56,12 @@ public class Menu {
 			case 5:
 				addMedication();
 				break;
+			case 6:
+				modifyDoctor();
+				break;
+			case 7:
+				getDoc();
+				break;
 			case 0:
 				inter.disconnect();
 				System.exit(0);
@@ -64,6 +72,11 @@ public class Menu {
 		while(true);
 	}
 
+	private static void getDoc() {
+		System.out.println(inter.getDoctor(2).toString());
+		
+	}
+	
 	private static void addMedication() throws Exception{ 
 		List<Medication> med = new ArrayList<Medication>();
 		String n_med = "";
@@ -162,6 +175,13 @@ public class Menu {
 		int l_vac = Integer.parseInt(reader.readLine());
 		inter.addLab(new Lab(l_name, l_adress, l_cif, l_vac));
 	}
+	
+	private static void modifyDoctor() {
+		String atrib = "name";
+		String valor = "pepe";		
+		inter.modifyDoctor(2, atrib, valor);
+	}
+	
 	public void newDay() { 
 		
 		//TODO  esto pasara if today != LocalDate.now() 

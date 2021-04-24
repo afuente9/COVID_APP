@@ -68,6 +68,6 @@ public interface Cov_Manager {
 	public void deletePathologyByName(Other_Pathologies op);
 	
 	//Modifies a doctor information
-	public void modifyDoctor(Doctor d, String atrib, String value);
+	public void modifyDoctor(int iden, String atrib, String value);
 	
 }
