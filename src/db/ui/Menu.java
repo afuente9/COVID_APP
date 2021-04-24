@@ -73,7 +73,15 @@ public class Menu {
 	}
 
 	private static void getDoc() {
-		System.out.println(inter.getDoctor(2).toString());
+		try {
+			System.out.print("Doctor id: ");
+			int iden = Integer.parseInt(reader.readLine());
+			System.out.print(inter.getDoctor(iden).toString());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		
 	}
 	
@@ -177,9 +185,27 @@ public class Menu {
 	}
 	
 	private static void modifyDoctor() {
-		String atrib = "name";
-		String valor = "pepe";		
-		inter.modifyDoctor(2, atrib, valor);
+		try {
+			System.out.print("Doctor id: ");
+			int iden = Integer.parseInt(reader.readLine());
+			System.out.println("Which atribute want you to change? (name, collegiate_number, sex, birth_date, speciality or hospital)");
+			String atrib = reader.readLine();
+			System.out.println("Introduce the new value: ");
+			if (atrib.equalsIgnoreCase("sex")) {
+				System.out.println("Male (M) or female (F): ");
+				System.out.println("WARNING: if the value introduces is not the ones indicated, female will be setted");
+			}
+			else if(atrib.equalsIgnoreCase("birth_date")) {
+				System.out.print("Birthday (yyyy-mm-dd): ");
+			}
+			String valor = reader.readLine();
+			inter.modifyDoctor(iden, atrib, valor);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	public void newDay() { 
@@ -188,7 +214,7 @@ public class Menu {
 		
 		//calcular la media de muertos de los ultimos 7 dias
 		
-				float average=0;
+				//float average=0;
 				
 				// calcular el average que tenemos este dia
 				
