@@ -43,31 +43,22 @@ public class JDBCManagment implements Cov_Manager {
 	public void creatTables() {
 		try {
 			Statement stmt1 = c.createStatement();
-			String sql1 = "CREATE TABLE doctors " 
-					+ "(id       			INTEGER  	 	PRIMARY KEY AUTOINCREMENT,"
+			String sql1 = "CREATE TABLE doctors " + "(id       			INTEGER  	 	PRIMARY KEY AUTOINCREMENT,"
 					+ " name     			TEXT    	 	NOT NULL,"
 					+ " speciality 			TEXT  		 	NOT NULL,"
 					+ " birth_date			DATE		 	NOT NULL,"
-					+ " collegiate_number	TEXT	 	 	NOT NULL," 
-					+ " sex 				TEXT	 	 	NOT NULL,"
-					+ " hospital  			TEXT		 	NOT NULL,"
-					+ " image 				BLOB   			NULL)";
+					+ " collegiate_number	TEXT	 	 	NOT NULL," + " sex 				TEXT	 	 	NOT NULL,"
+					+ " hospital  			TEXT		 	NOT NULL," + " image 				BLOB   			NULL)";
 			stmt1.executeUpdate(sql1);
 			stmt1.close();
 
 			Statement stmt2 = c.createStatement();
-			String sql2 = "CREATE TABLE patients " 
-					+ "(id       			INTEGER  	 PRIMARY KEY AUTOINCREMENT,"
-					+ " name     			TEXT    	 NOT NULL," 
-					+ " hos_location 		TEXT  		 NOT NULL,"
-					+ " birthday			DATE  		 NOT NULL," 
-					+ " social_security   	TEXT  	 	 NOT NULL,"
-					+ " height 				float   	 NOT NULL," 
-					+ " weight 				float   	 NOT NULL,"
-					+ " sex 			    TEXT	   	 NOT NULL," 
-					+ " infected 			boolean  	 NOT NULL,"
-					+ " alive 				boolean  	 NOT NULL," 
-					+ " hospital  			TEXT	 	 NOT NULL,"
+			String sql2 = "CREATE TABLE patients " + "(id       			INTEGER  	 PRIMARY KEY AUTOINCREMENT,"
+					+ " name     			TEXT    	 NOT NULL," + " hos_location 		TEXT  		 NOT NULL,"
+					+ " birthday			DATE  		 NOT NULL," + " social_security   	TEXT  	 	 NOT NULL,"
+					+ " height 				float   	 NOT NULL," + " weight 				float   	 NOT NULL,"
+					+ " sex 			    TEXT	   	 NOT NULL," + " infected 			boolean  	 NOT NULL,"
+					+ " alive 				boolean  	 NOT NULL," + " hospital  			TEXT	 	 NOT NULL,"
 					+ " score 				INTEGER		 NOT NULL,"
 					+ " id_adm				INTEGER		 REFERENCES administration(id),"
 					+ " vaccinated			boolean		 NOT NULL," + " bloodType			TEXT		 NOT NULL)";
@@ -75,12 +66,9 @@ public class JDBCManagment implements Cov_Manager {
 			stmt2.close();
 
 			Statement stmt3 = c.createStatement();
-			String sql3 = "CREATE TABLE lab " 
-					+ "(id       		INTEGER  	 	PRIMARY KEY AUTOINCREMENT,"
-					+ " name     		TEXT    	 	NOT NULL," 
-					+ " adress	 		TEXT	 	 	NOT NULL,"
-					+ " cif			    TEXT  	 	 	NOT NULL," 
-					+ " vacciness  		INTEGER	 	 	NOT NULL,"
+			String sql3 = "CREATE TABLE lab " + "(id       		INTEGER  	 	PRIMARY KEY AUTOINCREMENT,"
+					+ " name     		TEXT    	 	NOT NULL," + " adress	 		TEXT	 	 	NOT NULL,"
+					+ " cif			    TEXT  	 	 	NOT NULL," + " vacciness  		INTEGER	 	 	NOT NULL,"
 					+ " image 			BLOB   			NULL)";
 			stmt3.executeUpdate(sql3);
 			stmt3.close();
@@ -132,10 +120,8 @@ public class JDBCManagment implements Cov_Manager {
 			stmt10.close();
 
 			Statement stmt11 = c.createStatement();
-			String sql11 = "CREATE TABLE pat_lab " 
-					+ "(id_pat       	INTEGER  	REFERENCES pathient(id),"
-					+ " id_lab 			INTEGER	 	REFERENCES lab(id)," 
-					+ " PRIMARY KEY (id_pat, id_lab))";
+			String sql11 = "CREATE TABLE pat_lab " + "(id_pat       	INTEGER  	REFERENCES pathient(id),"
+					+ " id_lab 			INTEGER	 	REFERENCES lab(id)," + " PRIMARY KEY (id_pat, id_lab))";
 			stmt11.executeUpdate(sql11);
 			stmt11.close();
 
@@ -152,6 +138,8 @@ public class JDBCManagment implements Cov_Manager {
 			}
 		}
 	}
+
+	// TODO INSERT & SELECT pat_medi, pat_pathologies
 
 	public void addPatient(Patient p) {
 		try {
@@ -185,21 +173,16 @@ public class JDBCManagment implements Cov_Manager {
 		}
 	}
 
-	/* TODO checklist
-	 * - Cambiar foto (no prioritario)
-- AddPatients (faltan los medicamentos y otras enfermedades)
-- SelectPatients según fechaIntroduccion
-- SelectPatients según sus atributos
-- ModifyPatient todos sus atributos
-- ModifyDoc todos sus atributos
-- ModifyLab datosLab, nVacc
-- Select nVacc from Gov
-- Select patients by score for Gov
-- Modify nVacc from Gov
-- Select Shipment by name
+	/*
+	 * TODO checklist - Cambiar foto (no prioritario) - AddPatients (faltan los
+	 * medicamentos y otras enfermedades) - SelectPatients según fechaIntroduccion -
+	 * SelectPatients según sus atributos - ModifyPatient todos sus atributos -
+	 * ModifyDoc todos sus atributos - ModifyLab datosLab, nVacc - Select nVacc from
+	 * Gov - Select patients by score for Gov - Modify nVacc from Gov - Select
+	 * Shipment by name
 	 * 
-	 * */
-	
+	 */
+
 	public void addDoctor(Doctor d) {
 		try {
 			String sexo;
@@ -268,8 +251,9 @@ public class JDBCManagment implements Cov_Manager {
 		}
 	}
 
-	//TODO UPDATE goverment vaccines used, patient (pic from whatsapp group), all doctor including image, all lab
-	
+	// TODO UPDATE goverment vaccines used, patient (pic from whatsapp group), all
+	// doctor including image, all lab
+
 	public void addOtherPathologies(Other_Pathologies op) {
 		try {
 			String sql = "INSERT INTO Other_Pathologies (name) VALUES (?)";
@@ -292,6 +276,29 @@ public class JDBCManagment implements Cov_Manager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	// TODO PULIR
+	@Override
+	public void modifyDoctor(Doctor d, String atrib, String value) {
+
+		if (atrib.equalsIgnoreCase("birth_date")) {
+			Date fecha = Date.valueOf(value);
+			d.setBirthday(fecha);
+		} else if (atrib.equalsIgnoreCase("name")) {
+			d.setName(value);
+
+		} else if (atrib.equalsIgnoreCase("speciality")) {
+			d.setSpeciality(value);
+
+		} else if (atrib.equalsIgnoreCase("collegiate_number")) {
+			d.setCollegiate_number(value);
+
+		} else if (atrib.equalsIgnoreCase("hospital")) {
+			d.setHospital(value);
+
+		}
+
 	}
 //TODO search patient by each feature. Se puede hacer algo asï¿½? Si no se puede, hay que hacer un metodo para cada feature
 	/*
@@ -575,6 +582,7 @@ public class JDBCManagment implements Cov_Manager {
 		}
 		return savedDays;
 	}
+
 	@Override
 	public void deleteMedByName(Medication m) {
 		String sql = "DELETE FROM medication WHERE name = ?";
@@ -587,7 +595,7 @@ public class JDBCManagment implements Cov_Manager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override
@@ -602,50 +610,48 @@ public class JDBCManagment implements Cov_Manager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override
 	public List<Patient> searchPatientGeneric(String feature, String type) {
 		List<Patient> patients = new ArrayList<Patient>();
-		
+
 		try {
 			String sql;
-			if (feature== "Age") {
-				//TODO NO FUNCIONA
-			 feature="birthday";
-			 sql = "SELECT * FROM  patients WHERE "+feature+ " = '?' ";
-				}
+			if (feature == "Age") {
+				// TODO NO FUNCIONA
+				feature = "birthday";
+				sql = "SELECT * FROM  patients WHERE " + feature + " = '?' ";
+			} else {
+				sql = "SELECT * FROM  patients WHERE " + feature + " LIKE ?";
+			}
+			if (feature == "SS num") {
+				feature = "social_security";
+			}
+
+			PreparedStatement prep = c.prepareStatement(sql);
+
+			if (feature == "birthday") {
+				// TODO testear sacar fecha de nacimiento
+
+				Date today = Date.valueOf(LocalDate.now());
+				LocalDate temp = today.toLocalDate().minusYears(Integer.parseInt(type));
+				Date d = Date.valueOf(temp);
+				prep.setDate(1, d);
+			}
+
+			if (feature == "Infected") {
+				boolean newbool = Boolean.parseBoolean(type);
+				prep.setBoolean(1, newbool);
+
+			}
+
 			else {
-				sql = "SELECT * FROM  patients WHERE "+feature+ " LIKE ?";
-			}
-			 if(feature=="SS num") {
-				feature="social_security";
-			}
-				
-				PreparedStatement prep = c.prepareStatement(sql);
-
-			if (feature== "birthday") {
-					//TODO testear sacar fecha de nacimiento 
-					
-				 Date today= Date.valueOf(LocalDate.now());
-				 LocalDate temp = today.toLocalDate().minusYears(Integer.parseInt(type));				 
-				 Date d= Date.valueOf(temp);
-				 prep.setDate(1, d);
-					}
-			
-
-			 if(feature=="Infected") {
-				boolean newbool= Boolean.parseBoolean(type);
-				prep.setBoolean(1,  newbool );
+				prep.setString(1, "%" + type + "%");
 
 			}
-			
-			 else {
-					prep.setString(1, "%" + type + "%");
- 
-			 }
-			
+
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -676,6 +682,6 @@ public class JDBCManagment implements Cov_Manager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return patients;		
+		return patients;
 	}
 }
