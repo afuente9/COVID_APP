@@ -61,10 +61,10 @@ public interface Cov_Manager {
 	public void addMedication(Medication m);
 	
 	// Assign a pathology to a patient
-	public void assignPatho(Patient p, Other_Pathologies op);
+	public void assignPatho(int id, Other_Pathologies op);
 	
 	// Assign a pathology to a patient
-	public void assignMed(Patient p, Medication m);
+	public void assignMed(int id, Medication m);
 
 	// Delete a medication from the list using the name
 	public void deleteMedByName(Medication m);
@@ -83,5 +83,7 @@ public interface Cov_Manager {
 	
 	//Gets the medication based on the name
 	public Medication getMedication(String name);
+	Patient getLastPatient();
+	Medication getLastMedication();
 	
 }

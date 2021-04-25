@@ -182,14 +182,14 @@ public class Menu {
 			if(check.equalsIgnoreCase("true")) {
 				System.out.println("Select the medication (write the name): ");
 				String med_name = reader.readLine();
-				inter.assignMed(inter.getPatient(id_pac), inter.getMedication(med_name));
+			//	inter.assignMed(inter.getPatient(id_pac), inter.getMedication(med_name));
 			}
 			else {
 				System.out.println("Write the name of the medication: ");
 				String n_med = reader.readLine();
 				Medication m = new Medication(n_med);		
 				inter.addMedication(m);
-				inter.assignMed(inter.getPatient(id_pac), inter.getMedication(n_med));
+				//inter.assignMed(inter.getPatient(id_pac), inter.getMedication(n_med));
 			}
 		}
 	}

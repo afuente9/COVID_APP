@@ -84,10 +84,7 @@ public class AddPatientController {
     @FXML
     private DialogPane AllMedDialog;
 
-    @FXML
-    void OnAcceptPatient(ActionEvent event) {
-    	//p_new
-    }
+   
     @FXML
     void onConfirmWithoutMedPat(ActionEvent event) {
     
@@ -137,7 +134,7 @@ public class AddPatientController {
     	if(!medication_list.contains(m_new)) {
     	medication_list.add(m_new);
         Main.getInter().addMedication(m_new);
-        Main.getInter().assignMed(p_new, m_new);
+        Main.getInter().assignMed(Main.getInter().getLastPatient().getId(), Main.getInter().getLastMedication());
     	MedicationPatientTextField.setText("");
     		
     		Iterator iter = medication_list.iterator();

@@ -395,7 +395,45 @@ public class JDBCManagment implements Cov_Manager {
 		}
 		return null;
 	}
+	@Override
+	public Patient getLastPatient() {
+		try {
+			String sql = "SELECT * FROM patients WHERE id = (SELECT MAX(id) FROM patients)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			if (rs.next()) {
+				Integer id = rs.getInt("id");
 
+				String patientName = rs.getString("name");
+				String hos_loc = rs.getString("hos_location");
+				Date bdate = rs.getDate("birthday");
+				String socsec = rs.getString("social_security");
+				float high = rs.getFloat("height");
+				float weig = rs.getFloat("weight");
+				String sexo = rs.getString("sex");
+				Sex sexoo;
+				if (sexo.equalsIgnoreCase("M")) {
+					sexoo = Sex.Male;
+				} else {
+					sexoo = Sex.Female;
+				}
+				boolean infec = rs.getBoolean("infected");
+				boolean vivo = rs.getBoolean("alive");
+				String hos = rs.getString("hospital");
+				boolean vacc = rs.getBoolean("vaccinated");
+				String sangre = rs.getString("bloodType");
+				System.out.println(new  Patient(id, hos_loc, patientName, bdate, socsec, high, weig, sexoo, infec, vivo, hos, vacc,
+						sangre));
+				return new Patient(id, hos_loc, patientName, bdate, socsec, high, weig, sexoo, infec, vivo, hos, vacc,
+						sangre);
+			}
+			prep.close();
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	@Override
 	public List<Patient> getPatientsOfDoctor(int doc_id) {
 		List<Patient> patients = new ArrayList<Patient>();
@@ -463,11 +501,11 @@ public class JDBCManagment implements Cov_Manager {
 	}
 
 	@Override
-	public void assignPatho(Patient p, Other_Pathologies op) {
+	public void assignPatho(int id, Other_Pathologies op) {
 		try {
 			String sql = "INSERT INTO pat_patho (id_pat, id_patho) VALUES (?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setInt(1, p.getId());
+			prep.setInt(1, id);
 			prep.setInt(2, op.getId());
 			prep.executeUpdate();
 			prep.close();
@@ -477,14 +515,20 @@ public class JDBCManagment implements Cov_Manager {
 	}
 
 	@Override
-	public void assignMed(Patient p, Medication m) {
+	public void assignMed(int id, Medication m) {
 		try {
+
+
 			String sql = "INSERT INTO pat_medi (id_pat, id_medi) VALUES (?, ?)";
+
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setInt(1, p.getId());
+			prep.setInt(1, id);
+
 			prep.setInt(2, m.getId());
 			prep.executeUpdate();
+
 			prep.close();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -732,6 +776,25 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 		return medicaciones;
+	}
+	@Override
+	
+	public Medication getLastMedication() {
+		try {
+			String sql = "SELECT * FROM medication WHERE id = (SELECT MAX(id) FROM medication)";
+			PreparedStatement prep= c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			if(rs.next()) {
+				Integer id_med = rs.getInt("id");
+				String nombre = rs.getString("name");
+				return new Medication(id_med, nombre);
+			}
+			rs.close();
+			prep.close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;		
 	}
 
 	@Override
