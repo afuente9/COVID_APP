@@ -178,8 +178,8 @@ public class Menu {
 			System.out.println("Now the medications: ");
 			System.out.println(inter.searchMedicationByName("").toString());
 			System.out.print("Does the medication exist? (True or False): ");
-			Boolean check = Boolean.parseBoolean(reader.readLine());
-			if(check.TRUE) {
+			String check = reader.readLine();
+			if(check.equalsIgnoreCase("true")) {
 				System.out.println("Select the medication (write the name): ");
 				String med_name = reader.readLine();
 				inter.assignMed(inter.getPatient(id_pac), inter.getMedication(med_name));
@@ -269,7 +269,7 @@ public class Menu {
 			try {
 				System.out.print("Laboratory id: ");
 				int iden = Integer.parseInt(reader.readLine());
-				System.out.println("Which atribute want you to change? (name, cif or adress)");//vacciness No se si necesitamos algo que modifique el nº de vacunas en este 
+				System.out.println("Which atribute want you to change? (name, cif or adress)");//vacciness No se si necesitamos algo que modifique el nï¿½ de vacunas en este 
 				String atrib = reader.readLine();											  //methode o si hay que crear uno nuevo exclusivo para ello
 				System.out.println("Introduce the new value: ");
 				String valor = reader.readLine();

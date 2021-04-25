@@ -144,7 +144,6 @@ public class JDBCManagment implements Cov_Manager {
 	}
 
 	// TODO INSERT & SELECT pat_medi, pat_pathologies
-
 	public void addPatient(Patient p) {
 		try {
 			String sexo;
@@ -179,8 +178,8 @@ public class JDBCManagment implements Cov_Manager {
 
 	/*
 	 * TODO checklist - Cambiar foto (no prioritario) - AddPatients (faltan los
-	 * medicamentos y otras enfermedades) - SelectPatients según fechaIntroduccion -
-	 * SelectPatients según sus atributos - ModifyPatient todos sus atributos -
+	 * medicamentos y otras enfermedades) - SelectPatients segï¿½n fechaIntroduccion -
+	 * SelectPatients segï¿½n sus atributos - ModifyPatient todos sus atributos -
 	 * ModifyDoc todos sus atributos - ModifyLab datosLab, nVacc - Select nVacc from
 	 * Gov - Select patients by score for Gov - Modify nVacc from Gov - Select
 	 * Shipment by name
@@ -257,7 +256,6 @@ public class JDBCManagment implements Cov_Manager {
 
 	// TODO UPDATE goverment vaccines used, patient (pic from whatsapp group), all
 	// doctor including image, all lab
-
 	public void addOtherPathologies(Other_Pathologies op) {
 		try {
 			String sql = "INSERT INTO Other_Pathologies (name) VALUES (?)";
@@ -738,20 +736,21 @@ public class JDBCManagment implements Cov_Manager {
 
 	@Override
 	public Medication getMedication(String name) {
-		Medication nueva=null;
 		try {
 			String sql = "SELECT * FROM medication WHERE name LIKE ?";
 			PreparedStatement prep= c.prepareStatement(sql);
 			prep.setString(1, "%" + name + "%");
 			ResultSet rs = prep.executeQuery();
-			Integer id_med = rs.getInt("id");
-			String nombre = rs.getString("name");
-			nueva = new Medication(id_med, nombre);
+			if(rs.next()) {
+				Integer id_med = rs.getInt("id");
+				String nombre = rs.getString("name");
+				return new Medication(id_med, nombre);
+			}
 			rs.close();
 			prep.close();
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		return nueva;		
+		return null;		
 	}
 }
