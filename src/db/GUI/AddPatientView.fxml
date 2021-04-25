@@ -54,12 +54,12 @@
             <TextField fx:id="NamePatientTextField" layoutX="111.0" layoutY="59.0" prefHeight="26.0" prefWidth="175.0" />
             <Button layoutX="572.0" layoutY="444.0" mnemonicParsing="false" onAction="#OnAcceptPatient" prefHeight="43.0" prefWidth="79.0" text="Accept" />
             <Button layoutX="687.0" layoutY="444.0" mnemonicParsing="false" onAction="#OnCancelPatient" prefHeight="43.0" prefWidth="79.0" text="Back" />
-            <Label layoutX="47.0" layoutY="401.0" text="Other pathologies:">
+            <Label layoutX="47.0" layoutY="416.0" text="Other pathologies:">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="47.0" layoutY="362.0" text="Medication:">
+            <Label layoutX="47.0" layoutY="377.0" text="Medication:">
                <font>
                   <Font size="18.0" />
                </font>
@@ -117,21 +117,21 @@
             <TextField fx:id="BloodPatientTextField" layoutX="167.0" layoutY="254.0" prefHeight="26.0" prefWidth="175.0" />
             <TextField fx:id="HospitalPatientTextField" layoutX="125.0" layoutY="295.0" prefHeight="26.0" prefWidth="175.0" />
             <TextField fx:id="PlacePatientTextField" layoutX="107.0" layoutY="329.0" prefHeight="26.0" prefWidth="175.0" />
-            <TextField fx:id="MedicationPatientTextField" layoutX="167.0" layoutY="363.0" prefHeight="26.0" prefWidth="175.0" />
-            <TextField fx:id="OtherPathologiesPatientTextField" layoutX="224.0" layoutY="401.0" prefHeight="26.0" prefWidth="175.0" />
-            <Button layoutX="354.0" layoutY="361.0" mnemonicParsing="false" onAction="#OnAddMedication" prefHeight="26.0" prefWidth="31.0" text="+">
+            <TextField fx:id="MedicationPatientTextField" disable="true" layoutX="167.0" layoutY="378.0" prefHeight="26.0" prefWidth="175.0" />
+            <TextField fx:id="OtherPathologiesPatientTextField" disable="true" layoutX="224.0" layoutY="416.0" prefHeight="26.0" prefWidth="175.0" />
+            <Button fx:id="addMed" disable="true" layoutX="354.0" layoutY="376.0" mnemonicParsing="false" onAction="#OnAddMedication" prefHeight="26.0" prefWidth="31.0" text="+">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button layoutX="413.0" layoutY="399.0" mnemonicParsing="false" onAction="#OnAddPathology" prefHeight="26.0" prefWidth="31.0" text="+">
+            <Button fx:id="addPat" disable="true" layoutX="413.0" layoutY="414.0" mnemonicParsing="false" onAction="#OnAddPathology" prefHeight="26.0" prefWidth="31.0" text="+">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
             <Accordion layoutX="444.0" layoutY="292.0" />
             <Accordion layoutX="460.0" layoutY="255.0" />
-          <TitledPane fx:id="SeeAllMedication" expanded="false" layoutX="399.0" layoutY="363.0" text="See all">
+          <TitledPane fx:id="SeeAllMedication" disable="true" expanded="false" layoutX="399.0" layoutY="378.0" text="See all">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -158,7 +158,7 @@
                   </AnchorPane>
             </content>
           </TitledPane>
-            <TitledPane fx:id="SeeAllMedication1" expanded="false" layoutX="460.0" layoutY="401.0" text="See all">
+            <TitledPane fx:id="SeeAllMedication1" disable="true" expanded="false" layoutX="460.0" layoutY="416.0" text="See all">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -185,6 +185,7 @@
                   </AnchorPane>
                </content>
             </TitledPane>
+            <Button layoutX="316.0" layoutY="330.0" mnemonicParsing="false" onAction="#onConfirmWithoutMedPat" text="Confirm" />
       </children>
     </AnchorPane>
   </children>

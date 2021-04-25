@@ -11,11 +11,13 @@ import db.pojos.Medication;
 import db.pojos.Other_Pathologies;
 import db.pojos.Patient;
 import db.pojos.Sex;
+import db.ui.Menu;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -48,7 +50,11 @@ public class AddPatientController {
 
     @FXML
     private TextField HospitalPatientTextField;
+    @FXML
+    private Button addMed;
 
+    @FXML
+    private Button addPat;
     @FXML
     private TextField PlacePatientTextField;
 
@@ -58,7 +64,7 @@ public class AddPatientController {
     private TitledPane SeeAllMedication;
 
     @FXML
-    private TitledPane SeeAllOtherPath;
+    private TitledPane SeeAllMedication1;
     @FXML
     private Label AllMedLabel;
 
@@ -69,6 +75,7 @@ public class AddPatientController {
 
     @FXML
     private Label pathologylabel;
+    Patient p_new;
 
     @FXML
     private TextField OtherPathologiesPatientTextField;
@@ -79,7 +86,11 @@ public class AddPatientController {
 
     @FXML
     void OnAcceptPatient(ActionEvent event) {
-
+    	//p_new
+    }
+    @FXML
+    void onConfirmWithoutMedPat(ActionEvent event) {
+    
     	String Name_Text= NamePatientTextField.getText();
     	String Sex_Text= SexPatientTextField.getText();
     	String BirthDate_Text= BirthDatePatientTextField.getText();
@@ -103,18 +114,32 @@ public class AddPatientController {
     	
     	//TODO ARREGLAR EL CONSTRUCTOR DE PACIENTES PARA METER LAS LISTAS Y EL  LOCALDATE INTRODUCED
         
-    	Patient p_new= new Patient(Place_Text,Name_Text,date,SSNum_Text,height,weight,sex,infected,alive,Hospital_Text,vaccinated,Blood_Text/*,medication_list,other_pathologies_list*/);
+        p_new= new Patient(Place_Text,Name_Text,date,SSNum_Text,height,weight,sex,infected,alive,Hospital_Text,vaccinated,Blood_Text/*,medication_list,other_pathologies_list*/);
     	Main.getInter().addPatient(p_new);
+    
+    	OtherPathologiesPatientTextField.setDisable(false);
+    	MedicationPatientTextField.setDisable(false);
+    	addPat.setDisable(false);
+    	addMed.setDisable(false);
+    	SeeAllMedication1.setDisable(false);
+    	SeeAllMedication.setDisable(false);
+    	
+    	System.out.println("el ide ifernfierufnerui"+p_new.getId());
+    	
+    	
+    
     }
-
     @FXML
     void OnAddMedication(ActionEvent event) {
     	String medicationName= MedicationPatientTextField.getText();
     	int medicationId=medication_list.size();
     	Medication m_new= new Medication(medicationId,medicationName);
     	if(!medication_list.contains(m_new)) {
-    		medication_list.add(m_new);
-    		MedicationPatientTextField.setText("");
+    	medication_list.add(m_new);
+        Main.getInter().addMedication(m_new);
+        Main.getInter().assignMed(p_new, m_new);
+    	MedicationPatientTextField.setText("");
+    		
     		Iterator iter = medication_list.iterator();
     		String medications="";
     		while (iter.hasNext()) {

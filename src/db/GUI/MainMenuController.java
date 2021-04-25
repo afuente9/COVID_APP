@@ -27,11 +27,19 @@ public class MainMenuController {
 			openWindow(name,controller);
 			
 		}
+    @FXML
+    void onClose(ActionEvent event) {
+    	Stage stage = (Stage) this.PasswordTextField.getScene().getWindow();
+    	stage.close();
+    	
+    	Main.getInter().disconnect();
+		System.exit(0);
+    }
 
     @FXML
     void OnEnterUser(ActionEvent event) {
     	System.out.println(UserTextField.getText());
-		if(UserTextField.getText().equals("doctor")&&PasswordTextField.getText().equals("doctor")) {
+		if(UserTextField.getText().equals("")&&PasswordTextField.getText().equals("")) {
 			byte[] image=null;
 			Doctor d = new Doctor(0,"cardio","Lucas Pérez",Date.valueOf("2000-10-10"),"34234",Sex.valueOf("Male"),"La Paz",image);
 			String name= "DoctorMenuView.fxml";
