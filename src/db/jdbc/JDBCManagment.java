@@ -95,8 +95,9 @@ public class JDBCManagment implements Cov_Manager {
 			stmt6.close();
 
 			Statement stmt7 = c.createStatement();
-			String sql7 = "CREATE TABLE medication " + "(id       		INTEGER  	PRIMARY KEY AUTOINCREMENT,"
-					+ " name  			TEXT	 	NOT NULL)";
+			String sql7 = "CREATE TABLE medication " 
+					+ "(id       		INTEGER  	PRIMARY KEY AUTOINCREMENT,"
+					+ " name  			TEXT	 	UNIQUE NOT NULL)";
 			stmt7.executeUpdate(sql7);
 			stmt7.close();
 
@@ -278,48 +279,45 @@ public class JDBCManagment implements Cov_Manager {
 		}
 	}
 
-	// TODO PULIR
 	@Override
 	public void modifyDoctor(int iden, String atrib, String value) {
 		try {
 			String sql;
 			Date fecha = null;
 			if (atrib.equalsIgnoreCase("birth_date")) {
-				 fecha = Date.valueOf(value);
-				 sql = "UPDATE doctors SET "+atrib+" = ? WHERE id = "+iden;
+				fecha = Date.valueOf(value);
+				sql = "UPDATE doctors SET " + atrib + " = ? WHERE id = " + iden;
 			} else {
-				 sql = "UPDATE doctors SET "+atrib+" = ? WHERE id = "+iden;
-			} 
+				sql = "UPDATE doctors SET " + atrib + " = ? WHERE id = " + iden;
+			}
 			PreparedStatement prep = c.prepareStatement(sql);
 			if (atrib.equalsIgnoreCase("birth_date")) {
 				prep.setDate(1, fecha);
 			} else {
-				 prep.setString(1, value);
-			} 
+				prep.setString(1, value);
+			}
 			prep.executeUpdate();
 			prep.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
+
 	}
+
 	@Override
 	public void modifyLab(int iden, String atrib, String value) {
 		try {
 			String sql;
-				 sql = "UPDATE lab SET "+atrib+" = ? WHERE id = "+iden; 
+			sql = "UPDATE lab SET " + atrib + " = ? WHERE id = " + iden;
 			PreparedStatement prep = c.prepareStatement(sql);
-				 prep.setString(1, value);
+			prep.setString(1, value);
 			prep.executeUpdate();
 			prep.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-	}
 
+	}
 
 	public List<Patient> searchPatientByName(String name) {
 		List<Patient> patients = new ArrayList<Patient>();
@@ -566,28 +564,28 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 	}
+
 	@Override
 //TODO NO FUNCIONA
 	public int getNumberofPatients() {
-		int number=0;
+		int number = 0;
 		try {
 			String sql = "SELECT COUNT(id) FROM patients";
 			PreparedStatement prep = c.prepareStatement(sql);
-				ResultSet rs = prep.executeQuery();
-				while (rs.next()) {
-					number++;
-				}
-				rs.close();
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				number++;
+			}
+			rs.close();
 
 			prep.close();
 
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 
 		}
 		return number;
-		
+
 	}
 
 	@Override
@@ -711,5 +709,47 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 		return patients;
+	}
+
+	@Override
+	public List<Medication> searchMedicationByName(String name) {
+		List<Medication> medicaciones = new ArrayList<Medication>();
+		try {
+			String sql = "SELECT * FROM medication WHERE name LIKE ?";
+			PreparedStatement prep= c.prepareStatement(sql);
+			prep.setString(1, "%" + name + "%");
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				int med_id = rs.getInt("id");
+				String med_name = rs.getString("name");
+				Medication medi = new Medication (med_id, med_name);
+				medicaciones.add(medi);
+			}
+			rs.close();
+			prep.close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return medicaciones;
+	}
+
+	@Override
+	public Medication getMedication(String name) {
+		try {
+			String sql = "SELECT * FROM medication WHERE name LIKE ?";
+			PreparedStatement prep= c.prepareStatement(sql);
+			prep.setString(1, "%" + name + "%");
+			ResultSet rs = prep.executeQuery();
+			int id_med = rs.getInt("id");
+			String nombre = rs.getString("name");
+			Medication nueva = new Medication(id_med, nombre);
+			rs.close();
+			prep.close();
+			return nueva; 
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+		
 	}
 }

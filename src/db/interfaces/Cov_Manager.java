@@ -21,9 +21,9 @@ public interface Cov_Manager {
 	public Patient getPatient(int id);
 	// Search patient by name
 	// If name is empty or null, returns all people
-		public List <Patient> searchPatientByName(String name);
+	public List <Patient> searchPatientByName(String name);
 //en pruebas
-		public List <Patient> searchPatientGeneric(String feature, String type);
+	public List <Patient> searchPatientGeneric(String feature, String type);
 		
 	// Add a new doctor
 	public void addDoctor(Doctor d);
@@ -38,13 +38,15 @@ public interface Cov_Manager {
 	
 	// Add a new lab
 	public void addLab(Lab l);
+	
 	// Gets the lab 
 	public Lab getLab(int id);
+	
 	// Show all labs
-		public List<Lab> showLabs();
+	public List<Lab> showLabs();
 		
-		//get total number of patients
-		public int getNumberofPatients();
+	//get total number of patients
+	public int getNumberofPatients();
 	
 	// Add a new shipment
 	public void addShipment(Shipment s, Lab l, Administration a);
@@ -75,5 +77,11 @@ public interface Cov_Manager {
 	
 	//Modifies a laboratory information
 	public void modifyLab(int iden, String atrib, String value);
+	
+	//Gets a list with all the medications added to the DDBB
+	public List<Medication> searchMedicationByName(String name);
+	
+	//Gets the medication based on the name
+	public Medication getMedication(String name);
 	
 }

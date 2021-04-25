@@ -37,8 +37,9 @@ public class Menu {
 			System.out.println("5. Add a medication		");
 			System.out.println("6. Modify doctor        ");
 			System.out.println("7. Get doctor           ");
-			System.out.println("8. Modify lab      ");
-			System.out.println("9. Get lab           ");
+			System.out.println("8. Modify lab           ");
+			System.out.println("9. Get lab              ");
+			System.out.println("10. Get medication      ");
 			System.out.println("0. Exit					");
 			
 			int choice = Integer.parseInt(reader.readLine());
@@ -70,6 +71,9 @@ public class Menu {
 			case 9:
 				getLab();
 				break;
+			case 10:
+				searchMed();
+				break;
 			case 0:
 				//TODO ESTO PARA LA GUI?
 				inter.disconnect();
@@ -79,6 +83,19 @@ public class Menu {
 			}
 		}
 		while(true);
+	}
+
+	private static void searchMed() {
+		try {
+		System.out.println("Tell me the name of the medication: ");
+		String nombre = reader.readLine();
+		List<Medication> result = inter.searchMedicationByName(nombre);
+		System.out.println("Those are the medications: \n" + result.toString());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 	private static void getDoc() {
@@ -110,14 +127,18 @@ public class Menu {
 	private static void addMedication() throws Exception{ 
 		List<Medication> med = new ArrayList<Medication>();
 		String n_med = "";
-		while(!n_med.isEmpty()) {
-			System.out.println("Please intoduce the");
+		while(true) {
+			System.out.println("Please intoduce the name, 0 for exit");
 			n_med = reader.readLine();
-			Medication m = new Medication(n_med);
-			med.add(m);
+			if (n_med.equalsIgnoreCase("0")) {
+				break;
+			}
+			else {
+			Medication m = new Medication(n_med);		
 			inter.addMedication(m);
-		}
-		
+			med.add(inter.getMedication(n_med));		
+			}
+		}		
 		System.out.println(med);
 	}
 
@@ -150,12 +171,24 @@ public class Menu {
 		System.out.print("Do you want to add any medication? (True or False): ");
 		Boolean p_med = Boolean.parseBoolean(reader.readLine());
 		if(p_med.TRUE) {
+			System.out.println();
 			addMedication();
 		}
 		
 		inter.addPatient(new Patient (p_hosL, p_name, Date.valueOf(p_bday), p_ss, p_height, p_weight, p_sex, p_infected, p_alive, p_hos, p_vaccinated, p_blood));
+		System.out.println("Select patient: ");
+		inter.searchPatientByName(p_name);
+		Integer id_pac = Integer.parseInt(reader.readLine());
+		System.out.println("Now the medications: ");
+		inter.searchMedicationByName("");
+		System.out.print("Does the medication exist? (True, False or NN): ");
+		Boolean check = Boolean.parseBoolean(reader.readLine());
+		if(check.TRUE) {
+			System.out.println("Select the medication (write the name): ");
+			String med_name = reader.readLine();
+			inter.assignMed(inter.getPatient(id_pac), inter.getMedication(med_name));
+		}
 	}
-	
 
 	private static void searchPatients() throws Exception {
 		System.out.println("Please, input the person info:");
