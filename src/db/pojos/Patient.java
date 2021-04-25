@@ -103,8 +103,8 @@ public class Patient implements Serializable{
 	}
 	
 	// NO TOCAR ESTE CONSTRUCTOR QUE ES IMPORTANTE!!!!
-	//TODO A�ADIR LAS LISTAS DE PATOLOG�AS Y MEDICACI�N
-	//TODO A�ADIR LOCALDATE Date INTRODUCED PARA QUE LUEGO LOS PODAMOS FILTRAR 
+	//TODO ANADIR LAS LISTAS DE PATOLOGIAS Y MEDICACION
+	//TODO ANADIR LOCALDATE Date INTRODUCED PARA QUE LUEGO LOS PODAMOS FILTRAR 
 	
 	public Patient(String hos_location, String name, Date birthday, String social_security, float height, float weight,
  			Sex sex, boolean infected, boolean alive, String hospital, boolean vaccinated, String bloodType) {

@@ -102,8 +102,9 @@ public class AddPatientController {
         LocalDate dateIntroduced= LocalDate.now();
     	
     	//TODO ARREGLAR EL CONSTRUCTOR DE PACIENTES PARA METER LAS LISTAS Y EL  LOCALDATE INTRODUCED
-    	//Patient p_new= new Patient(Place_Text,Name_Text,date,SSNum_Text,height,weight,sex,infected,alive,Hospital_Text,vaccinated,Blood_Text,medication_list,other_pathologies_list);
-    	//Main.getInter().addPatient(p_new);
+        
+    	Patient p_new= new Patient(Place_Text,Name_Text,date,SSNum_Text,height,weight,sex,infected,alive,Hospital_Text,vaccinated,Blood_Text/*,medication_list,other_pathologies_list*/);
+    	Main.getInter().addPatient(p_new);
     }
 
     @FXML

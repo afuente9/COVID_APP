@@ -48,6 +48,8 @@ String newadress= newadresslab.getText();
 oldlabadress.setText(newadress);
 lmodif.setAddress(newadress);
 newadresslab.setText("");
+Main.getInter().modifyLab(lmodif.getId(), "adress", newadress);
+
 
     }
 
@@ -57,6 +59,7 @@ newadresslab.setText("");
     	oldlabcif.setText(newcif);
     	lmodif.setCif(newcif);
     	newciflab.setText("");
+Main.getInter().modifyLab(lmodif.getId(), "cif", newcif);
     }
 
     @FXML
@@ -65,6 +68,8 @@ newadresslab.setText("");
     	oldlabname.setText(newname);
     	lmodif.setName(newname);
     	newnamelab.setText("");
+    	Main.getInter().modifyLab(lmodif.getId(), "name", newname);
+
     }
 
 	

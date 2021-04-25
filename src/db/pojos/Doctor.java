@@ -145,6 +145,9 @@ public class Doctor implements Serializable{
 	public String getName() {
 		return name;
 	}
+	public int getId() {
+		return id;
+	}
 
 	
 	public void setName(String name) {

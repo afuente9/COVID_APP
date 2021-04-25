@@ -3,6 +3,7 @@ package db.GUI;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import db.pojos.Patient;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
@@ -31,7 +33,33 @@ public class SearchPatientLABController  implements Initializable  {
     private DatePicker tolab;
 
     @FXML
-    private TableView<?> patientstablelab;
+    private TableView<Patient> patientstablelab;
+    @FXML
+    private TableColumn colName;
+
+    @FXML
+    private TableColumn colAge;
+
+    @FXML
+    private TableColumn colSex;
+
+    @FXML
+    private TableColumn colHeight;
+
+    @FXML
+    private TableColumn colWeight;
+
+    @FXML
+    private TableColumn colSSnum;
+
+    @FXML
+    private TableColumn colHos;
+
+    @FXML
+    private TableColumn colInfected;
+
+    @FXML
+    private TableColumn colDateIntroduced;
 
     @FXML
     void BackFromModifylab(ActionEvent event) {

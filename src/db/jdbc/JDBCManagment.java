@@ -319,21 +319,7 @@ public class JDBCManagment implements Cov_Manager {
 		
 		
 	}
-//TODO search patient by each feature. Se puede hacer algo as�? Si no se puede, hay que hacer un metodo para cada feature
-	/*
-	 * public List<Patient> searchPatientByFeature(String feature, String type) {
-	 * List<Patient> patients = new ArrayList<Patient>(); try { String sql =
-	 * "SELECT * FROM  patients WHERE ? LIKE ?"; PreparedStatement prep =
-	 * c.prepareStatement(sql); prep.setString(1, "%" + feature + "%");
-	 * prep.setString(2, "%" + type + "%");
-	 * 
-	 * public List<Patient> searchPatientByFeature(String feature, String type) {
-	 * List<Patient> patients = new ArrayList<Patient>(); try { String sql =
-	 * "SELECT * FROM  patients WHERE " + feature + " LIKE ?"; PreparedStatement
-	 * prep = c.prepareStatement(sql); prep.setString(1, "%" + type + "%");
-	 * 
-	 * 
-	 */
+
 
 	public List<Patient> searchPatientByName(String name) {
 		List<Patient> patients = new ArrayList<Patient>();
@@ -579,6 +565,29 @@ public class JDBCManagment implements Cov_Manager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	@Override
+//TODO NO FUNCIONA
+	public int getNumberofPatients() {
+		int number=0;
+		try {
+			String sql = "SELECT COUNT(id) FROM patients";
+			PreparedStatement prep = c.prepareStatement(sql);
+				ResultSet rs = prep.executeQuery();
+				while (rs.next()) {
+					number++;
+				}
+				rs.close();
+
+			prep.close();
+
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return number;
+		
 	}
 
 	@Override

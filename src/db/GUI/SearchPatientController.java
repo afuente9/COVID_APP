@@ -14,8 +14,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class SearchPatientController implements Initializable {
@@ -28,7 +30,52 @@ public class SearchPatientController implements Initializable {
     @FXML
     private TextField typeTextfield;
     @FXML
-    private TableView<?> tablePatients;
+    private TableView<Patient> tablePatients;
+    @FXML
+    private TableColumn colName;
+
+    @FXML
+    private TableColumn colBirth;
+
+    @FXML
+    private TableColumn colSex;
+
+    @FXML
+    private TableColumn colHeight;
+
+    @FXML
+    private TableColumn colWeight;
+
+    @FXML
+    private TableColumn colSSnum;
+
+    @FXML
+    private TableColumn colHos;
+
+    @FXML
+    private TableColumn colInfected;
+
+    @FXML
+    private TableColumn colDateIntroduced;
+ 
+
+    @FXML
+    private TableColumn colAlive;
+
+    @FXML
+    private TableColumn colBloodType;
+
+    @FXML
+    private TableColumn colVaccinated;
+
+    @FXML
+    private TableColumn colMedica;
+
+    @FXML
+    private TableColumn colPatho;
+    
+    private ObservableList<Patient> patientsTableList;
+
     @FXML
     private DatePicker dateFrom;
 
@@ -42,12 +89,13 @@ public class SearchPatientController implements Initializable {
 
     @FXML
     void ModifySearch(ActionEvent event) {
+    	this.patientsTableList.clear();
     	String feature = SearchOptions.getValue();
 		String type = typeTextfield.getText();
 		List<Patient> result = Main.getInter().searchPatientGeneric(feature,type);
 		System.out.println("Those are the patients: \n" + result.toString());
-        //SearchOptions.getValue();
-    	// TODO Select de la base de datos todos los pacientes que lo cumplan
+		this.patientsTableList.addAll(result);
+    	this.tablePatients.setItems(patientsTableList);    
     	
     	
     }
@@ -66,10 +114,30 @@ public class SearchPatientController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     	loadData();
     	SearchOptions.setValue("Select an option");
-    	numberofpatients.setText("There are "+/*lista.gettotalnumberofpatients+*/"patients");
+    	int numberpatients= Main.getInter().getNumberofPatients();
+    	numberofpatients.setText("There are "+numberpatients+" patients");
+    	patientsTableList = FXCollections.observableArrayList();
+        this.colName.setCellValueFactory(new PropertyValueFactory("name"));
+        this.colBirth.setCellValueFactory(new PropertyValueFactory("birthday"));
+        this.colSex.setCellValueFactory(new PropertyValueFactory("sex"));
+        this.colHeight.setCellValueFactory(new PropertyValueFactory("height"));
+        this.colWeight.setCellValueFactory(new PropertyValueFactory("weight"));
+        this.colSSnum.setCellValueFactory(new PropertyValueFactory("social_security"));
+        this.colHos.setCellValueFactory(new PropertyValueFactory("hospital"));
+        this.colInfected.setCellValueFactory(new PropertyValueFactory("infected"));
+        this.colAlive.setCellValueFactory(new PropertyValueFactory("alive"));
+        this.colBloodType.setCellValueFactory(new PropertyValueFactory("bloodType"));
+        this.colVaccinated.setCellValueFactory(new PropertyValueFactory("vaccinated"));
+        //this.colMedica.setCellValueFactory(new PropertyValueFactory("medication"));
+      //  this.colPatho.setCellValueFactory(new PropertyValueFactory("other_pathologies"));
+      //  this.colDateIntroduced.setCellValueFactory(new PropertyValueFactory("dateIntroduced"));
+        
+        
+
     	List <Patient> allpatients= Main.getInter().searchPatientByName("");
-    	//TODO IMPRIMIR LISTA EN LA TABLA
-    	//tablePatients.set
+    	this.patientsTableList.addAll(allpatients);
+    	this.tablePatients.setItems(patientsTableList);
+    	
     	
     			
     	

@@ -37,11 +37,11 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -81,30 +81,34 @@
             <TextField fx:id="typeTextfield" layoutX="338.0" layoutY="133.0" />
             <DatePicker fx:id="dateFrom" layoutX="223.0" layoutY="78.0" />
             <DatePicker fx:id="dateTo" layoutX="441.0" layoutY="78.0" />
+            <Button layoutX="631.0" layoutY="78.0" mnemonicParsing="false" onAction="#Filterclick" text="Filter" />
             <Button layoutX="509.0" layoutY="128.0" mnemonicParsing="false" onAction="#ModifySearch" prefHeight="35.0" prefWidth="54.0" text="Search" />
-            <ScrollPane layoutX="35.0" layoutY="178.0" prefHeight="323.0" prefWidth="729.0">
-              <content>
+            <Pane layoutX="33.0" layoutY="178.0" prefHeight="323.0" prefWidth="730.0">
+               <children>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="318.0" prefWidth="730.0">
                      <children>
                         <TableView fx:id="tablePatients" prefHeight="310.0" prefWidth="719.0">
                           <columns>
-                            <TableColumn prefWidth="100.0" text="Name" />
-                            <TableColumn prefWidth="41.60003662109375" text="Age" />
-                              <TableColumn prefWidth="31.20001220703125" text="Sex" />
-                              <TableColumn prefWidth="55.20001220703125" text="Height" />
-                              <TableColumn prefWidth="63.20001220703125" text="Weight" />
-                              <TableColumn prefWidth="98.4000244140625" text="SS num" />
-                              <TableColumn prefWidth="104.0" text="Hospital" />
-                              <TableColumn prefWidth="69.5999755859375" text="Infected" />
-                              <TableColumn prefWidth="80.00006103515625" text="Introduced" />
-                              <TableColumn prefWidth="99.9998779296875" />
+                            <TableColumn fx:id="colName" prefWidth="43.20001220703125" text="Name" />
+                            <TableColumn fx:id="colBirth" prefWidth="45.60003662109375" text="Birth date" />
+                              <TableColumn fx:id="colSex" minWidth="0.0" prefWidth="51.199951171875" text="Sex" />
+                              <TableColumn fx:id="colHeight" prefWidth="47.99993896484375" text="Height" />
+                              <TableColumn fx:id="colWeight" prefWidth="31.199951171875" text="Weight" />
+                              <TableColumn fx:id="colSSnum" minWidth="5.60003662109375" prefWidth="28.79998779296875" text="SS num" />
+                              <TableColumn fx:id="colHos" prefWidth="39.199951171875" text="Hospital" />
+                              <TableColumn fx:id="colInfected" minWidth="2.39996337890625" prefWidth="80.79998779296875" text="Infected" />
+                              <TableColumn fx:id="colDateIntroduced" minWidth="0.800048828125" prefWidth="52.00006103515625" text="Introduced" />
+                              <TableColumn fx:id="colAlive" prefWidth="53.60003662109375" text="Alive" />
+                              <TableColumn fx:id="colBloodType" minWidth="9.60003662109375" prefWidth="63.20001220703125" text="Blood " />
+                              <TableColumn fx:id="colVaccinated" prefWidth="51.199951171875" text="Vaccinated" />
+                              <TableColumn fx:id="colMedica" prefWidth="95.199951171875" text="Medication" />
+                              <TableColumn fx:id="colPatho" prefWidth="53.60009765625" text="Pathologies" />
                           </columns>
                         </TableView>
                      </children>
                   </AnchorPane>
-              </content>
-            </ScrollPane>
-            <Button layoutX="631.0" layoutY="78.0" mnemonicParsing="false" onAction="#Filterclick" text="Filter" />
+               </children>
+            </Pane>
       </children>
     </AnchorPane>
   </children>

@@ -71,6 +71,7 @@ public class Menu {
 				getLab();
 				break;
 			case 0:
+				//TODO ESTO PARA LA GUI?
 				inter.disconnect();
 				System.exit(0);
 			default:
@@ -209,7 +210,8 @@ public class Menu {
 		try {
 			System.out.print("Doctor id: ");
 			int iden = Integer.parseInt(reader.readLine());
-			System.out.println("Which atribute want you to change? (name, collegiate_number, sex, birth_date, speciality or hospital)");
+			System.out.println("Which atribute want you to change? (name, collegiate_num1"
+					+ "ber, sex, birth_date, speciality or hospital)");
 			String atrib = reader.readLine();
 			System.out.println("Introduce the new value: ");
 			if (atrib.equalsIgnoreCase("sex")) {

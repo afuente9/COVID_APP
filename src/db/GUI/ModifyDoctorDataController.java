@@ -63,7 +63,7 @@ String newDate= ModifyDateTextField.getText();
 dmodif.setBirthday(Date.valueOf(newDate));
 OldBDate.setText(newDate);
 ModifyDateTextField.setText("");
-//TODO  SQL METODO MODIFICAR DEL PACIENTE
+Main.getInter().modifyDoctor(this.dmodif.getId(), "birth_date", newDate);
     }
 
     @FXML
@@ -72,7 +72,7 @@ String new_colnum= ModifyColNumTextField.getText();
 dmodif.setCollegiate_number(new_colnum);
 OldColNum.setText(new_colnum);
 ModifyColNumTextField.setText("");
-//TODO  SQL METODO MODIFICAR DEL PACIENTE
+Main.getInter().modifyDoctor(this.dmodif.getId(), "collegiate_number", new_colnum);
 
     }
 
@@ -82,7 +82,7 @@ ModifyColNumTextField.setText("");
     	dmodif.setCollegiate_number(new_hospital);
     	OldHospi.setText(new_hospital);
     	ModifyHospitalTextField.setText("");
-    	//TODO  SQL METODO MODIFICAR DEL PACIENTE
+    	Main.getInter().modifyDoctor(this.dmodif.getId(), "hospital", new_hospital);
 
     }
 
@@ -96,7 +96,7 @@ ModifyColNumTextField.setText("");
     	OldName.setText(new_name);
     	// TODO DoctorMenuController.DoctorName.setText(new_name); refresh o algo para la pantalla principal
     	ModifyNameTextField.setText("");
-    	//TODO  SQL METODO MODIFICAR DEL PACIENTE
+    	Main.getInter().modifyDoctor(this.dmodif.getId(), "name", new_name);
 
     	
     }
@@ -109,7 +109,7 @@ ModifyColNumTextField.setText("");
     	dmodif.setSex(Sex.valueOf(newSex));
     	OldSex.setText(newSex);
     	ModifySexTextField.setText("");
-    	//TODO  SQL METODO MODIFICAR DEL PACIENTE
+    	Main.getInter().modifyDoctor(this.dmodif.getId(), "sex", newSex);
 
     }
 
@@ -119,7 +119,7 @@ ModifyColNumTextField.setText("");
     	dmodif.setSpeciality(new_spetiality);
     	OldSpetiality.setText(new_spetiality);
     	ModifySpetialityTextField.setText("");
-    	//TODO  SQL METODO MODIFICAR DEL PACIENTE
+    	Main.getInter().modifyDoctor(this.dmodif.getId(), "speciality", new_spetiality);
 
     }
 

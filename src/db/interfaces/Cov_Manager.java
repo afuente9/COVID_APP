@@ -41,7 +41,10 @@ public interface Cov_Manager {
 	// Gets the lab 
 	public Lab getLab(int id);
 	// Show all labs
-	public List<Lab> showLabs();
+		public List<Lab> showLabs();
+		
+		//get total number of patients
+		public int getNumberofPatients();
 	
 	// Add a new shipment
 	public void addShipment(Shipment s, Lab l, Administration a);
