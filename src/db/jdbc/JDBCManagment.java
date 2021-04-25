@@ -43,7 +43,8 @@ public class JDBCManagment implements Cov_Manager {
 	public void creatTables() {
 		try {
 			Statement stmt1 = c.createStatement();
-			String sql1 = "CREATE TABLE doctors " + "(id       			INTEGER  	 	PRIMARY KEY AUTOINCREMENT,"
+			String sql1 = "CREATE TABLE doctors " 
+					+ "(id       			INTEGER  	 	PRIMARY KEY AUTOINCREMENT,"
 					+ " name     			TEXT    	 	NOT NULL,"
 					+ " speciality 			TEXT  		 	NOT NULL,"
 					+ " birth_date			DATE		 	NOT NULL,"
@@ -53,7 +54,8 @@ public class JDBCManagment implements Cov_Manager {
 			stmt1.close();
 
 			Statement stmt2 = c.createStatement();
-			String sql2 = "CREATE TABLE patients " + "(id       			INTEGER  	 PRIMARY KEY AUTOINCREMENT,"
+			String sql2 = "CREATE TABLE patients " 
+					+ "(id       			INTEGER  	 PRIMARY KEY AUTOINCREMENT,"
 					+ " name     			TEXT    	 NOT NULL," + " hos_location 		TEXT  		 NOT NULL,"
 					+ " birthday			DATE  		 NOT NULL," + " social_security   	TEXT  	 	 NOT NULL,"
 					+ " height 				float   	 NOT NULL," + " weight 				float   	 NOT NULL,"
@@ -66,7 +68,8 @@ public class JDBCManagment implements Cov_Manager {
 			stmt2.close();
 
 			Statement stmt3 = c.createStatement();
-			String sql3 = "CREATE TABLE lab " + "(id       		INTEGER  	 	PRIMARY KEY AUTOINCREMENT,"
+			String sql3 = "CREATE TABLE lab " 
+					+ "(id       		INTEGER  	 	PRIMARY KEY AUTOINCREMENT,"
 					+ " name     		TEXT    	 	NOT NULL," + " adress	 		TEXT	 	 	NOT NULL,"
 					+ " cif			    TEXT  	 	 	NOT NULL," + " vacciness  		INTEGER	 	 	NOT NULL,"
 					+ " image 			BLOB   			NULL)";
@@ -103,25 +106,25 @@ public class JDBCManagment implements Cov_Manager {
 
 			Statement stmt8 = c.createStatement();
 			String sql8 = "CREATE TABLE pat_doc " + "(id_doc       	INTEGER  	REFERENCES doctors(id),"
-					+ " id_pat 			INTEGER	 	REFERENCES pathient(id)," + " PRIMARY KEY (id_doc, id_pat))";
+					+ " id_pat 			INTEGER	 	REFERENCES patients(id)," + " PRIMARY KEY (id_doc, id_pat))";
 			stmt8.executeUpdate(sql8);
 			stmt8.close();
 
 			Statement stmt9 = c.createStatement();
-			String sql9 = "CREATE TABLE pat_patho " + "(id_pat       	INTEGER  	REFERENCES pathient(id),"
+			String sql9 = "CREATE TABLE pat_patho " + "(id_pat       	INTEGER  	REFERENCES patients(id),"
 					+ " id_patho 		INTEGER	 	REFERENCES other_pathologies(id),"
 					+ " PRIMARY KEY (id_pat, id_patho))";
 			stmt9.executeUpdate(sql9);
 			stmt9.close();
 
 			Statement stmt10 = c.createStatement();
-			String sql10 = "CREATE TABLE pat_medi " + "(id_pat       	INTEGER  	REFERENCES pathient(id),"
+			String sql10 = "CREATE TABLE pat_medi " + "(id_pat       	INTEGER  	REFERENCES patients(id),"
 					+ " id_medi 		INTEGER	 	REFERENCES medication(id)," + " PRIMARY KEY (id_pat, id_medi))";
 			stmt10.executeUpdate(sql10);
 			stmt10.close();
 
 			Statement stmt11 = c.createStatement();
-			String sql11 = "CREATE TABLE pat_lab " + "(id_pat       	INTEGER  	REFERENCES pathient(id),"
+			String sql11 = "CREATE TABLE pat_lab " + "(id_pat       	INTEGER  	REFERENCES patients(id),"
 					+ " id_lab 			INTEGER	 	REFERENCES lab(id)," + " PRIMARY KEY (id_pat, id_lab))";
 			stmt11.executeUpdate(sql11);
 			stmt11.close();
@@ -370,7 +373,7 @@ public class JDBCManagment implements Cov_Manager {
 				String hos_loc = rs.getString("hos_location");
 				Date bdate = rs.getDate("birthday");
 				String socsec = rs.getString("social_security");
-				float high = rs.getFloat("heigh");
+				float high = rs.getFloat("height");
 				float weig = rs.getFloat("weight");
 				String sexo = rs.getString("sex");
 				Sex sexoo;
@@ -735,21 +738,20 @@ public class JDBCManagment implements Cov_Manager {
 
 	@Override
 	public Medication getMedication(String name) {
+		Medication nueva=null;
 		try {
 			String sql = "SELECT * FROM medication WHERE name LIKE ?";
 			PreparedStatement prep= c.prepareStatement(sql);
 			prep.setString(1, "%" + name + "%");
 			ResultSet rs = prep.executeQuery();
-			int id_med = rs.getInt("id");
+			Integer id_med = rs.getInt("id");
 			String nombre = rs.getString("name");
-			Medication nueva = new Medication(id_med, nombre);
+			nueva = new Medication(id_med, nombre);
 			rs.close();
 			prep.close();
-			return nueva; 
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
-		
+		return nueva;		
 	}
 }

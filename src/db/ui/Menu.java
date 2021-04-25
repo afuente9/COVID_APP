@@ -168,25 +168,29 @@ public class Menu {
 		String p_blood = reader.readLine();
 		System.out.print("Is vaccinated (True or False): ");
 		Boolean p_vaccinated = Boolean.parseBoolean(reader.readLine());
+		inter.addPatient(new Patient (p_hosL, p_name, Date.valueOf(p_bday), p_ss, p_height, p_weight, p_sex, p_infected, p_alive, p_hos, p_vaccinated, p_blood));
 		System.out.print("Do you want to add any medication? (True or False): ");
 		Boolean p_med = Boolean.parseBoolean(reader.readLine());
 		if(p_med.TRUE) {
-			System.out.println();
-			addMedication();
-		}
-		
-		inter.addPatient(new Patient (p_hosL, p_name, Date.valueOf(p_bday), p_ss, p_height, p_weight, p_sex, p_infected, p_alive, p_hos, p_vaccinated, p_blood));
-		System.out.println("Select patient: ");
-		inter.searchPatientByName(p_name);
-		Integer id_pac = Integer.parseInt(reader.readLine());
-		System.out.println("Now the medications: ");
-		inter.searchMedicationByName("");
-		System.out.print("Does the medication exist? (True, False or NN): ");
-		Boolean check = Boolean.parseBoolean(reader.readLine());
-		if(check.TRUE) {
-			System.out.println("Select the medication (write the name): ");
-			String med_name = reader.readLine();
-			inter.assignMed(inter.getPatient(id_pac), inter.getMedication(med_name));
+			System.out.println("Select patient: ");
+			System.out.println(inter.searchPatientByName(p_name).toString());
+			Integer id_pac = Integer.parseInt(reader.readLine());
+			System.out.println("Now the medications: ");
+			System.out.println(inter.searchMedicationByName("").toString());
+			System.out.print("Does the medication exist? (True or False): ");
+			Boolean check = Boolean.parseBoolean(reader.readLine());
+			if(check.TRUE) {
+				System.out.println("Select the medication (write the name): ");
+				String med_name = reader.readLine();
+				inter.assignMed(inter.getPatient(id_pac), inter.getMedication(med_name));
+			}
+			else {
+				System.out.println("Write the name of the medication: ");
+				String n_med = reader.readLine();
+				Medication m = new Medication(n_med);		
+				inter.addMedication(m);
+				inter.assignMed(inter.getPatient(id_pac), inter.getMedication(n_med));
+			}
 		}
 	}
 
