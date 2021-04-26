@@ -1,16 +1,21 @@
 package db.GUI;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
 
 import db.pojos.Patient;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -19,6 +24,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class SearchPatientController implements Initializable {
@@ -49,6 +56,7 @@ public class SearchPatientController implements Initializable {
 
     @FXML
     private TableColumn colSSnum;
+    Patient pselected;
 
     @FXML
     private TableColumn colHos;
@@ -111,8 +119,41 @@ public class SearchPatientController implements Initializable {
     
     @FXML
     void ModifyPatient(ActionEvent event) {
-    	//TODO metodo modificar paciente
-
+    	
+    	String name= "ModifyPatient.fxml";
+		ModifyPatientController controller = null;
+		try {
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+    	Parent root;
+    	
+    		root = loader.load();
+    		
+    	  controller = loader.getController();
+    	  controller.setpmodif(pselected);
+    	  controller.setOldName(pselected.getName());
+     	 controller.setOldSex(pselected.getSex().toString()); 
+     	 controller.setOldBirthDate(pselected.getBirthday().toString());
+    	 controller.setOldSSNUM(pselected.getSocial_security().toString());
+    	 controller.setOldHeight(""+pselected.getHeight());
+    	 controller.setOldWei(""+pselected.getWeight());
+    	 System.out.println("ogjeruigjerigjerigjerio"+pselected.getBloodType());
+    	 controller.setOldBlood(    	 pselected.getBloodType());
+    	 controller.setOldHospital(pselected.getHospital());
+    	 controller.setOldPlace(pselected.getHos_location());
+    	 controller.setOldVaccinated(""+pselected.getVaccinated());
+    	 
+    	
+    	 
+    	Scene scene = new Scene(root);
+    	Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.showAndWait();
+        
+    	} catch (IOException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}			
     }
     
     @Override
@@ -134,7 +175,7 @@ public class SearchPatientController implements Initializable {
         this.colBloodType.setCellValueFactory(new PropertyValueFactory("bloodType"));
         this.colVaccinated.setCellValueFactory(new PropertyValueFactory("Vaccinated"));
         this.colMedica.setCellValueFactory(new PropertyValueFactory("medication"));
-      //  this.colPatho.setCellValueFactory(new PropertyValueFactory("other_pathologies"));
+        this.colPatho.setCellValueFactory(new PropertyValueFactory("other_pathologies"));
         this.colDateIntroduced.setCellValueFactory(new PropertyValueFactory("DateIntroduced"));
         
         
@@ -166,5 +207,11 @@ public class SearchPatientController implements Initializable {
     	
 
     }
+    @FXML
+    void selectRow(MouseEvent event) {
+         pselected = this.tablePatients.getSelectionModel().getSelectedItem();
+
+    }
+    
 
 }

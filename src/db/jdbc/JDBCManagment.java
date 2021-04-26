@@ -306,6 +306,44 @@ public class JDBCManagment implements Cov_Manager {
 		}
 
 	}
+	
+	@Override
+	public void modifyPatient(int iden, String atrib, String value) {
+		try {
+			String sql;
+			Date fecha = null;
+			if (atrib.equalsIgnoreCase("birthday")) {
+				
+				fecha = Date.valueOf(value);
+				sql = "UPDATE patients SET " + atrib + " = ? WHERE id = " + iden;
+			} else {
+				sql = "UPDATE patients SET " + atrib + " = ? WHERE id = " + iden;
+			}
+			PreparedStatement prep = c.prepareStatement(sql);
+			if (atrib.equalsIgnoreCase("birthday")) {
+				prep.setDate(1, fecha);
+			} 
+			else if(atrib=="height"||atrib=="weight"){
+				prep.setFloat(1,Float.parseFloat(value));
+			
+			}
+			else if(atrib=="infected"||atrib=="alive"||atrib=="vaccinated"){
+				prep.setBoolean(1,Boolean.parseBoolean(value));
+				
+
+			}
+			
+			else {
+			
+				prep.setString(1, value);
+			}
+			prep.executeUpdate();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	@Override
 	public void modifyLab(int iden, String atrib, String value) {
@@ -841,5 +879,31 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 		return null;		
+	}
+	@Override
+	public List<Medication> getMedicationfromPatient(Integer id) {
+		List<Medication> medicaciones = new ArrayList<Medication>();
+
+		try {
+			String sql = "SELECT name FROM medication AS m JOIN pat_medi AS pm ON pm.id_medi = m.id JOIN patients AS p ON p.id=pm.id_pat WHERE p.id= ?";
+				
+			PreparedStatement prep= c.prepareStatement(sql);
+			prep.setInt(1, id);
+			ResultSet rs = prep.executeQuery();
+			while(rs.next()) {
+				Integer id_med = rs.getInt("id");
+				String nombre = rs.getString("name");
+				Medication medi = new Medication (id_med, nombre);
+				medicaciones.add(medi);
+				return medicaciones;		
+
+				}
+			
+			rs.close();
+			prep.close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return medicaciones;		
 	}
 }

@@ -147,6 +147,7 @@ public class AddPatientController {
     	medication_list.add(m_new);
         Main.getInter().addMedication(m_new);
         Main.getInter().assignMed(Main.getInter().getLastPatient().getId(), Main.getInter().getLastMedication());
+        Main.getInter().getLastPatient().setMedication(medication_list);
     	MedicationPatientTextField.setText("");
     		
     		Iterator iter = medication_list.iterator();
@@ -204,7 +205,7 @@ public class AddPatientController {
     		
     		 Main.getInter().addOtherPathologies(op_new);
     	     Main.getInter().assignPatho(Main.getInter().getLastPatient().getId(), Main.getInter().getLastPath());
-    	    	
+    	     Main.getInter().getLastPatient().setOther_pathologies(other_pathologies_list);
     		
     		OtherPathologiesPatientTextField.setText("");
     		Iterator iter = other_pathologies_list.iterator();

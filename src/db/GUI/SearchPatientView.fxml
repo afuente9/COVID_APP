@@ -87,7 +87,7 @@
                <children>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="318.0" prefWidth="730.0">
                      <children>
-                        <TableView fx:id="tablePatients" prefHeight="310.0" prefWidth="719.0">
+                        <TableView fx:id="tablePatients" onMouseClicked="#selectRow" prefHeight="310.0" prefWidth="719.0">
                           <columns>
                             <TableColumn fx:id="colName" prefWidth="43.20001220703125" text="Name" />
                             <TableColumn fx:id="colBirth" prefWidth="45.60003662109375" text="Birth date" />

@@ -86,5 +86,7 @@ public interface Cov_Manager {
 	Patient getLastPatient();
 	Medication getLastMedication();
 	Other_Pathologies getLastPath();
+	void modifyPatient(int iden, String atrib, String value);
+	public List<Medication> getMedicationfromPatient(Integer id);
 	
 }
