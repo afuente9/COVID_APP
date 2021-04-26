@@ -94,6 +94,8 @@ public class ModifyPatientController implements Initializable {
 	@FXML
 	private Label oldHospital;
 
+	
+
 	@FXML
 	private Label oldBlood;
 
@@ -122,8 +124,8 @@ public class ModifyPatientController implements Initializable {
 
 	@FXML
 	private Label oldVaccinated;
-	private List<Medication> medication_list = new ArrayList();
-	private List<Other_Pathologies> other_pathologies_list = new ArrayList();
+	private List<Medication> medication_list ;
+	private List<Other_Pathologies> other_pathologies_list ;
 
 	@FXML
 	void AcceptHosp(ActionEvent event) {
@@ -145,7 +147,7 @@ public class ModifyPatientController implements Initializable {
 		String newPlace = PlacePatientTextField.getText();
 		oldPlace.setText(newPlace);
 		pmodif.setHos_location(newPlace);
-		HospitalPatientTextField.setText("");
+		PlacePatientTextField.setText("");
 		Main.getInter().modifyPatient(this.pmodif.getId(), "hos_location", newPlace);
 
 	}
@@ -183,9 +185,9 @@ public class ModifyPatientController implements Initializable {
 			Main.getInter().assignMed(Main.getInter().getLastPatient().getId(), Main.getInter().getLastMedication());
 			Main.getInter().getLastPatient().setMedication(medication_list);
 			MedicationPatientTextField.setText("");
+			String  medications = "";
 
 			Iterator iter = medication_list.iterator();
-			String medications = "";
 			while (iter.hasNext()) {
 				medications += iter.next() + "\n";
 			}
@@ -202,8 +204,7 @@ public class ModifyPatientController implements Initializable {
 	@FXML
 	void OnAddPathology(ActionEvent event) {
 		String otherPathologiesName = OtherPathologiesPatientTextField.getText();
-		// other_pathologies_list= Main.getInter().get metodo de obtener todas las
-		// patologias del paciente.
+		
 		int otherpatId = other_pathologies_list.size();
 		Other_Pathologies op_new = new Other_Pathologies(otherpatId, otherPathologiesName);
 		if (!other_pathologies_list.contains(op_new)) {
@@ -229,7 +230,9 @@ public class ModifyPatientController implements Initializable {
 
 	@FXML
 	void OnCancelPatient(ActionEvent event) {
-
+		
+		Stage stage = (Stage) this.BirthDatePatientTextField.getScene().getWindow();
+    	stage.close();
 	}
 
 	@FXML
@@ -455,8 +458,8 @@ public class ModifyPatientController implements Initializable {
 		DeleteMedNum = deleteMedNum;
 	}
 
-	public void setAllMedLabel(Label allMedLabel) {
-		AllMedLabel = allMedLabel;
+	public void setAllMedLabel(String allMedLabel) {
+		AllMedLabel.setText(allMedLabel); 
 	}
 
 	public void setSeeAllMedication1(TitledPane seeAllMedication1) {
@@ -533,7 +536,7 @@ public class ModifyPatientController implements Initializable {
 		String height = HeihtPatientTextField.getText();
 		oldHeight.setText(height);
 		pmodif.setHeight(Float.parseFloat(height));
-		oldHeight.setText("");
+		HeihtPatientTextField.setText("");
 		Main.getInter().modifyPatient(this.pmodif.getId(), "height", height);
 
 	}
@@ -543,7 +546,7 @@ public class ModifyPatientController implements Initializable {
 		String name = NamePatientTextField.getText();
 		oldName.setText(name);
 		pmodif.setName(name);
-		oldName.setText("");
+		NamePatientTextField.setText("");
 		Main.getInter().modifyPatient(this.pmodif.getId(), "name", name);
 
 	}
@@ -553,7 +556,7 @@ public class ModifyPatientController implements Initializable {
 		String ssnum = SSNumPatientTextField.getText();
 		oldSSNUM.setText(ssnum);
 		pmodif.setSocial_security(ssnum);
-		oldSSNUM.setText("");
+		SSNumPatientTextField.setText("");
 		Main.getInter().modifyPatient(this.pmodif.getId(), "social_security", ssnum);
 
 	}
@@ -563,7 +566,7 @@ public class ModifyPatientController implements Initializable {
 		String sex = SexPatientTextField.getText();
 		oldSex.setText(sex);
 		pmodif.setSex(Sex.valueOf(sex));
-		oldSex.setText("");
+		SexPatientTextField.setText("");
 		Main.getInter().modifyPatient(this.pmodif.getId(), "sex", sex);
 
 	}
@@ -573,10 +576,11 @@ public class ModifyPatientController implements Initializable {
 		String vaccinated = VaccinatedTEXTFIELD.getText();
 		oldVaccinated.setText(vaccinated);
 		pmodif.setVaccinated(Boolean.parseBoolean(vaccinated));
-		oldVaccinated.setText("");
+		VaccinatedTEXTFIELD.setText("");
 		Main.getInter().modifyPatient(this.pmodif.getId(), "vaccinated", vaccinated);
 
 	}
+	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

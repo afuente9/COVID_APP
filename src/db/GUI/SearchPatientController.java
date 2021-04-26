@@ -3,10 +3,11 @@ package db.GUI;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
-
+import db.pojos.Medication;
 import db.pojos.Patient;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -136,13 +137,21 @@ public class SearchPatientController implements Initializable {
     	 controller.setOldSSNUM(pselected.getSocial_security().toString());
     	 controller.setOldHeight(""+pselected.getHeight());
     	 controller.setOldWei(""+pselected.getWeight());
-    	 System.out.println("ogjeruigjerigjerigjerio"+pselected.getBloodType());
+    	 System.out.println(pselected.getBloodType());
     	 controller.setOldBlood(    	 pselected.getBloodType());
     	 controller.setOldHospital(pselected.getHospital());
     	 controller.setOldPlace(pselected.getHos_location());
     	 controller.setOldVaccinated(""+pselected.getVaccinated());
-    	 
-    	
+    	// controller.setOther_pathologies_list(Main.getInter().get);
+    	 controller.setMedication_list(Main.getInter().getMedicationfromPatient(pselected.getId()));
+    	 List <Medication> medication_list= Main.getInter().getMedicationfromPatient(pselected.getId());
+    	Iterator iter = medication_list.iterator();
+		String  medications = "";
+		while (iter.hasNext()) {
+			System.out.println(medications);
+			medications += iter.next() + "\n";
+		}
+		controller.setAllMedLabel(medications);
     	 
     	Scene scene = new Scene(root);
     	Stage stage = new Stage();

@@ -881,20 +881,24 @@ public class JDBCManagment implements Cov_Manager {
 		return null;		
 	}
 	@Override
-	public List<Medication> getMedicationfromPatient(Integer id) {
+	public List<Medication> getMedicationfromPatient(int id) {
 		List<Medication> medicaciones = new ArrayList<Medication>();
 
 		try {
-			String sql = "SELECT name FROM medication AS m JOIN pat_medi AS pm ON pm.id_medi = m.id JOIN patients AS p ON p.id=pm.id_pat WHERE p.id= ?";
+			String sql = "SELECT m.id, m.name FROM medication AS m JOIN pat_medi AS pm ON pm.id_medi = m.id JOIN patients AS p ON p.id=pm.id_pat WHERE p.id = ?";
 				
 			PreparedStatement prep= c.prepareStatement(sql);
+
 			prep.setInt(1, id);
+
 			ResultSet rs = prep.executeQuery();
+
 			while(rs.next()) {
-				Integer id_med = rs.getInt("id");
+				Integer nid = rs.getInt("id");
 				String nombre = rs.getString("name");
-				Medication medi = new Medication (id_med, nombre);
+				Medication medi = new Medication (nid, nombre);
 				medicaciones.add(medi);
+				System.out.println("med"+medi);
 				return medicaciones;		
 
 				}
