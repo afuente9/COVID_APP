@@ -178,8 +178,8 @@ public class ModifyPatientController implements Initializable {
 		String medicationName = MedicationPatientTextField.getText();
 
 		int medicationId = medication_list.size();
-		Medication m_new = new Medication(medicationId, medicationName);
-		if (!medication_list.contains(m_new)) {
+		Medication m_new = new Medication(medicationName);
+		//TODO CONTROLAR SI LA MEDICACION YA ESTA METIDA EN EL PACIENTE
 			medication_list.add(m_new);
 			Main.getInter().addMedication(m_new);
 			Main.getInter().assignMed(Main.getInter().getLastPatient().getId(), Main.getInter().getLastMedication());
@@ -193,11 +193,7 @@ public class ModifyPatientController implements Initializable {
 			}
 			AllMedLabel.setText(medications);
 
-		}
-
-		else {
-			// TODO mensaje error ya se ha añadido esa medication
-		}
+		
 
 	}
 

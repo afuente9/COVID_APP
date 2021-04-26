@@ -272,7 +272,7 @@ public class JDBCManagment implements Cov_Manager {
 
 	public void addMedication(Medication m) {
 		try {
-			String sql = "INSERT INTO Medication (name) VALUES (?)";
+			String sql = "INSERT INTO medication (name) VALUES (?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, m.getName());
 			prep.executeUpdate();
