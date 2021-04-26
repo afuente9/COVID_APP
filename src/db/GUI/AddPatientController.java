@@ -72,7 +72,8 @@ public class AddPatientController {
     private TextField DeleteMedNum;
     @FXML
     private TextField DeletePathologynum;
-
+    @FXML
+    private TextField VaccinatedTEXTFIELD;
     @FXML
     private Label pathologylabel;
     Patient p_new;
@@ -87,6 +88,7 @@ public class AddPatientController {
    
     @FXML
     void onConfirmWithoutMedPat(ActionEvent event) {
+
     
     	String Name_Text= NamePatientTextField.getText();
     	String Sex_Text= SexPatientTextField.getText();
@@ -97,6 +99,8 @@ public class AddPatientController {
     	String Blood_Text= BloodPatientTextField.getText();
     	String Hospital_Text= HospitalPatientTextField.getText();
     	String Place_Text= PlacePatientTextField.getText();
+    	String VaccinatedText=VaccinatedTEXTFIELD.getText();
+    	
     	
     	db.pojos.Sex sex= Sex.valueOf(Sex_Text);
     	Date date = Date.valueOf(BirthDate_Text);
@@ -106,23 +110,31 @@ public class AddPatientController {
         boolean infected=true;
         boolean alive=true;
         int score=0;
-        boolean vaccinated=false;
-        LocalDate dateIntroduced= LocalDate.now();
+        boolean vaccinated= Boolean.parseBoolean(VaccinatedText);
+        Date dateIntroduced= Date.valueOf(LocalDate.now());
     	
-    	//TODO ARREGLAR EL CONSTRUCTOR DE PACIENTES PARA METER LAS LISTAS Y EL  LOCALDATE INTRODUCED
         
-        p_new= new Patient(Place_Text,Name_Text,date,SSNum_Text,height,weight,sex,infected,alive,Hospital_Text,vaccinated,Blood_Text/*,medication_list,other_pathologies_list*/);
+        p_new= new Patient(Place_Text,Name_Text,date,SSNum_Text,height,weight,sex,infected,alive,Hospital_Text,vaccinated,Blood_Text,dateIntroduced);
     	Main.getInter().addPatient(p_new);
     
+    	
+    	
+    	 NamePatientTextField.setDisable(true);
+    	 SexPatientTextField.setDisable(true);
+    	BirthDatePatientTextField.setDisable(true);
+    	 SSNumPatientTextField.setDisable(true);
+    	 HeihtPatientTextField.setDisable(true);
+    	 WeightPatientTextField.setDisable(true);
+    	 BloodPatientTextField.setDisable(true);
+       HospitalPatientTextField.setDisable(true);
+    	 PlacePatientTextField.setDisable(true);
+    	VaccinatedTEXTFIELD.setDisable(true);
     	OtherPathologiesPatientTextField.setDisable(false);
     	MedicationPatientTextField.setDisable(false);
     	addPat.setDisable(false);
     	addMed.setDisable(false);
     	SeeAllMedication1.setDisable(false);
     	SeeAllMedication.setDisable(false);
-    	
-    	System.out.println("el ide ifernfierufnerui"+p_new.getId());
-    	
     	
     
     }
@@ -155,6 +167,7 @@ public class AddPatientController {
     }
     @FXML
     void DeletePathbyNum(ActionEvent event) {
+    	//TODO HACER METODO PARA BORRAR RELACION PACIENTE PATOLOGIA
     	other_pathologies_list.remove(Integer.parseInt(DeletePathologynum.getText()));
     	DeletePathologynum.setText("");
     	Iterator iter = other_pathologies_list.iterator();
@@ -167,6 +180,9 @@ public class AddPatientController {
 
     @FXML
     void Deletemedbynum(ActionEvent event) {
+    	//TODO HACER METODO PARA BORRAR RELACION PACIENTE MEDIC
+    	
+
     	medication_list.remove(Integer.parseInt(DeleteMedNum.getText()));
     	DeleteMedNum.setText("");
     	Iterator iter = medication_list.iterator();
@@ -185,6 +201,11 @@ public class AddPatientController {
     	Other_Pathologies op_new= new Other_Pathologies(otherpatId,otherPathologiesName);
     	if(!other_pathologies_list.contains(op_new)){
     		other_pathologies_list.add(op_new);
+    		
+    		 Main.getInter().addOtherPathologies(op_new);
+    	     Main.getInter().assignPatho(Main.getInter().getLastPatient().getId(), Main.getInter().getLastPath());
+    	    	
+    		
     		OtherPathologiesPatientTextField.setText("");
     		Iterator iter = other_pathologies_list.iterator();
     		String paths="";

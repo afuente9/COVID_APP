@@ -21,9 +21,9 @@ public class Patient implements Serializable{
 	private boolean alive;
 	private String hospital;
 	private int score;
-	private boolean vaccinated;
+	private boolean Vaccinated;
 	private String bloodType;	
-	private LocalDate dateIntroduced;
+	private Date dateIntroduced;
 	private List<Medication> medication;
 	private List<Other_Pathologies> other_pathologies;
 	private List<Doctor> doctors;
@@ -40,7 +40,7 @@ public class Patient implements Serializable{
 	
 
 	public Patient(Integer id,String hos_location, String name, Date birthday, String social_security, float height, float weight,
-			Sex sex, boolean infected, boolean alive, String hospital, boolean vaccinated, String bloodType,List<Medication> medication,List<Other_Pathologies> other_pathologies) {
+			Sex sex, boolean infected, boolean alive, String hospital, boolean Vaccinated, String bloodType,List<Medication> medication,List<Other_Pathologies> other_pathologies) {
 		super();
 		this.id=id;
 		this.hos_location = hos_location;
@@ -53,7 +53,7 @@ public class Patient implements Serializable{
 		this.infected = infected;
 		this.alive = alive;
 		this.hospital = hospital;
-		this.vaccinated = vaccinated;
+		this.Vaccinated = Vaccinated;
 		this.bloodType = bloodType;
 		this.medication=medication;
 		this.other_pathologies=other_pathologies;
@@ -64,8 +64,8 @@ public class Patient implements Serializable{
 
 
 	public Patient(Integer id, String hos_location, String name, Date birthday, String social_security, float height,
-			float weight, Sex sex, boolean infected, boolean alive, String hospital, boolean vaccinated,
-			String bloodType) {
+			float weight, Sex sex, boolean infected, boolean alive, String hospital, boolean Vaccinated,
+			String bloodType,Date dateIntroduced) {
 		super();
 		this.id = id;
 		this.hos_location = hos_location;
@@ -78,13 +78,15 @@ public class Patient implements Serializable{
 		this.infected = infected;
 		this.alive = alive;
 		this.hospital = hospital;
-		this.vaccinated = vaccinated;
+		this.Vaccinated = Vaccinated;
 		this.bloodType = bloodType;
+ 		this.dateIntroduced=dateIntroduced;
+
 	}
 
 
 	public Patient(Integer id, String hos_location, String name, Date birthday, String social_security, float height,
-			float weight, Sex sex, boolean infected, boolean alive, String hospital, int score, boolean is_vaccinated, String bloodType) {
+			float weight, Sex sex, boolean infected, boolean alive, String hospital, int score, boolean is_vaccinated, String bloodType,Date dateIntroduced) {
 		super();
 		this.id = id;
 		this.hos_location = hos_location;
@@ -98,8 +100,10 @@ public class Patient implements Serializable{
 		this.alive = alive;
 		this.hospital = hospital;
 		this.score = score;
-		this.vaccinated = is_vaccinated;
+		this.Vaccinated = is_vaccinated;
 		this.bloodType = bloodType;
+ 		this.dateIntroduced=dateIntroduced;
+
 	}
 	
 	// NO TOCAR ESTE CONSTRUCTOR QUE ES IMPORTANTE!!!!
@@ -107,7 +111,7 @@ public class Patient implements Serializable{
 	//TODO ANADIR LOCALDATE Date INTRODUCED PARA QUE LUEGO LOS PODAMOS FILTRAR 
 	
 	public Patient(String hos_location, String name, Date birthday, String social_security, float height, float weight,
- 			Sex sex, boolean infected, boolean alive, String hospital, boolean vaccinated, String bloodType) {
+ 			Sex sex, boolean infected, boolean alive, String hospital, boolean Vaccinated, String bloodType,Date dateIntroduced) {
  		super();
  		this.hos_location = hos_location;
  		this.name = name;
@@ -119,8 +123,9 @@ public class Patient implements Serializable{
  		this.infected = infected;
  		this.alive = alive;
  		this.hospital = hospital;
- 		this.vaccinated = vaccinated;
+ 		this.Vaccinated = Vaccinated;
  		this.bloodType = bloodType;
+ 		this.dateIntroduced=dateIntroduced;
  	}
 
 	public Patient(Integer id, String patientName) {
@@ -146,7 +151,7 @@ public class Patient implements Serializable{
 		result = prime * result + score;
 		result = prime * result + ((sex == null) ? 0 : sex.hashCode());
 		result = prime * result + ((social_security == null) ? 0 : social_security.hashCode());
-		result = prime * result + (vaccinated ? 1231 : 1237);
+		result = prime * result + (Vaccinated ? 1231 : 1237);
 		result = prime * result + Float.floatToIntBits(weight);
 		return result;
 	}
@@ -206,7 +211,7 @@ public class Patient implements Serializable{
 				return false;
 		} else if (!social_security.equals(other.social_security))
 			return false;
-		if (vaccinated != other.vaccinated)
+		if (Vaccinated != other.Vaccinated)
 			return false;
 		if (Float.floatToIntBits(weight) != Float.floatToIntBits(other.weight))
 			return false;
@@ -269,12 +274,12 @@ public class Patient implements Serializable{
 	}
 
 	
-	public float getheight() {
+	public float getHeight() {
 		return height;
 	}
 
 	
-	public void setheight(float height) {
+	public void setHeight(float height) {
 		this.height = height;
 	}
 
@@ -349,13 +354,76 @@ public class Patient implements Serializable{
 	}
 
 	
-	public boolean Is_vaccinated() {
-		return vaccinated;
+	public boolean getVaccinated() {
+		return Vaccinated;
 	}
 
 	
-	public void setIs_vaccinated(boolean is_vaccinated) {
-		this.vaccinated = is_vaccinated;
+	public Date getDateIntroduced() {
+		return dateIntroduced;
+	}
+
+
+
+
+	public List<Medication> getMedication() {
+		return medication;
+	}
+
+
+
+
+	public List<Other_Pathologies> getOther_pathologies() {
+		return other_pathologies;
+	}
+
+
+
+
+	public List<Doctor> getDoctors() {
+		return doctors;
+	}
+
+
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
+
+
+	public void setDateIntroduced(Date dateIntroduced) {
+		this.dateIntroduced = dateIntroduced;
+	}
+
+
+
+
+	public void setMedication(List<Medication> medication) {
+		this.medication = medication;
+	}
+
+
+
+
+	public void setOther_pathologies(List<Other_Pathologies> other_pathologies) {
+		this.other_pathologies = other_pathologies;
+	}
+
+
+
+
+	public void setDoctors(List<Doctor> doctors) {
+		this.doctors = doctors;
+	}
+
+
+
+
+	public void setVaccinated(boolean vaccinated) {
+		this.Vaccinated = vaccinated;
 	}
 
 	public int getTheAge(Date birthday2) {

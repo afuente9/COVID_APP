@@ -63,7 +63,8 @@ public class JDBCManagment implements Cov_Manager {
 					+ " alive 				boolean  	 NOT NULL," + " hospital  			TEXT	 	 NOT NULL,"
 					+ " score 				INTEGER		 NOT NULL,"
 					+ " id_adm				INTEGER		 REFERENCES administration(id),"
-					+ " vaccinated			boolean		 NOT NULL," + " bloodType			TEXT		 NOT NULL)";
+					+ " vaccinated			boolean		 NOT NULL," + " bloodType			TEXT		 NOT NULL,"
+					+ "dateIntroduced       DATE  		 NOT NULL)";
 			stmt2.executeUpdate(sql2);
 			stmt2.close();
 
@@ -152,13 +153,13 @@ public class JDBCManagment implements Cov_Manager {
 			} else {
 				sexo = "F";
 			}
-			String sql = "INSERT INTO patients (name, birthday, social_security, height, weight, sex, infected, alive, hospital, hos_location, score, bloodType, vaccinated)"
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO patients (name, birthday, social_security, height, weight, sex, infected, alive, hospital, hos_location, score, bloodType, vaccinated, dateIntroduced)"
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, p.getName());
 			prep.setDate(2, p.getBirthday());
 			prep.setString(3, p.getSocial_security());
-			prep.setFloat(4, p.getheight());
+			prep.setFloat(4, p.getHeight());
 			prep.setFloat(5, p.getWeight());
 			prep.setString(6, sexo);
 			prep.setBoolean(7, p.isInfected());
@@ -168,7 +169,8 @@ public class JDBCManagment implements Cov_Manager {
 			prep.setInt(11, 0); // TODO hay que insertar formula del score para poder introducir bien los
 								// pacientes en la tabla
 			prep.setString(12, p.getBloodType());
-			prep.setBoolean(13, p.Is_vaccinated());
+			prep.setBoolean(13, p.getVaccinated());
+			prep.setDate(14, p.getDateIntroduced());
 			prep.executeUpdate();
 			prep.close();
 		} catch (Exception e) {
@@ -346,9 +348,11 @@ public class JDBCManagment implements Cov_Manager {
 				String loc_hosp = rs.getString("hos_location");
 				String blood = rs.getString("bloodType");
 				boolean vaccin = rs.getBoolean("vaccinated");
+				Date dateIntroduced= rs.getDate("dateIntroduced"); 
+
 
 				Patient patient = new Patient(id, loc_hosp, patientname, birthday, social_security, height, weight,
-						sexo, infec, alive, hosp, vaccin, blood);
+						sexo, infec, alive, hosp, vaccin, blood,dateIntroduced);
 				patients.add(patient);
 			}
 			rs.close();
@@ -385,8 +389,10 @@ public class JDBCManagment implements Cov_Manager {
 				String hos = rs.getString("hospital");
 				boolean vacc = rs.getBoolean("vaccinated");
 				String sangre = rs.getString("bloodType");
+				Date dateIntroduced= rs.getDate("dateIntroduced"); 
+
 				return new Patient(id, hos_loc, patientName, bdate, socsec, high, weig, sexoo, infec, vivo, hos, vacc,
-						sangre);
+						sangre,dateIntroduced);
 			}
 			prep.close();
 			rs.close();
@@ -422,10 +428,11 @@ public class JDBCManagment implements Cov_Manager {
 				String hos = rs.getString("hospital");
 				boolean vacc = rs.getBoolean("vaccinated");
 				String sangre = rs.getString("bloodType");
+				Date dateIntroduced= rs.getDate("dateIntroduced"); 
 				System.out.println(new  Patient(id, hos_loc, patientName, bdate, socsec, high, weig, sexoo, infec, vivo, hos, vacc,
-						sangre));
+						sangre,dateIntroduced));
 				return new Patient(id, hos_loc, patientName, bdate, socsec, high, weig, sexoo, infec, vivo, hos, vacc,
-						sangre);
+						sangre,dateIntroduced);
 			}
 			prep.close();
 			rs.close();
@@ -499,7 +506,25 @@ public class JDBCManagment implements Cov_Manager {
 		}
 		return doctors;
 	}
-
+	@Override
+	public Other_Pathologies getLastPath() {
+		
+		try {
+			 String sql = "SELECT * FROM other_pathologies WHERE id = (SELECT MAX(id) FROM other_pathologies)";
+			PreparedStatement prep= c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			if(rs.next()) {
+				Integer id_path = rs.getInt("id");
+				String name = rs.getString("name");
+				return new Other_Pathologies(id_path, name);
+			}
+			rs.close();
+			prep.close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;			
+	}
 	@Override
 	public void assignPatho(int id, Other_Pathologies op) {
 		try {
@@ -743,9 +768,10 @@ public class JDBCManagment implements Cov_Manager {
 				String loc_hosp = rs.getString("hos_location");
 				String blood = rs.getString("bloodType");
 				boolean vaccin = rs.getBoolean("vaccinated");
+				Date dateIntroduced= rs.getDate("dateIntroduced"); 
 
 				Patient patient = new Patient(id, loc_hosp, patientname, birthday, social_security, height, weight,
-						sexo, infec, alive, hosp, vaccin, blood);
+						sexo, infec, alive, hosp, vaccin, blood,dateIntroduced);
 				patients.add(patient);
 			}
 			rs.close();

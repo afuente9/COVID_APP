@@ -127,8 +127,8 @@ public class SearchPatientController implements Initializable {
         this.colInfected.setCellValueFactory(new PropertyValueFactory("infected"));
         this.colAlive.setCellValueFactory(new PropertyValueFactory("alive"));
         this.colBloodType.setCellValueFactory(new PropertyValueFactory("bloodType"));
-        this.colVaccinated.setCellValueFactory(new PropertyValueFactory("vaccinated"));
-        //this.colMedica.setCellValueFactory(new PropertyValueFactory("medication"));
+        this.colVaccinated.setCellValueFactory(new PropertyValueFactory("Vaccinated"));
+        this.colMedica.setCellValueFactory(new PropertyValueFactory("medication"));
       //  this.colPatho.setCellValueFactory(new PropertyValueFactory("other_pathologies"));
       //  this.colDateIntroduced.setCellValueFactory(new PropertyValueFactory("dateIntroduced"));
         
