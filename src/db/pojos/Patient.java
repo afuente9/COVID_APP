@@ -23,7 +23,7 @@ public class Patient implements Serializable{
 	private int score;
 	private boolean Vaccinated;
 	private String bloodType;	
-	private Date dateIntroduced;
+	private Date DateIntroduced;
 	private List<Medication> medication;
 	private List<Other_Pathologies> other_pathologies;
 	private List<Doctor> doctors;
@@ -80,7 +80,7 @@ public class Patient implements Serializable{
 		this.hospital = hospital;
 		this.Vaccinated = Vaccinated;
 		this.bloodType = bloodType;
- 		this.dateIntroduced=dateIntroduced;
+ 		this.DateIntroduced=dateIntroduced;
 
 	}
 
@@ -102,7 +102,7 @@ public class Patient implements Serializable{
 		this.score = score;
 		this.Vaccinated = is_vaccinated;
 		this.bloodType = bloodType;
- 		this.dateIntroduced=dateIntroduced;
+ 		this.DateIntroduced=dateIntroduced;
 
 	}
 	
@@ -125,7 +125,7 @@ public class Patient implements Serializable{
  		this.hospital = hospital;
  		this.Vaccinated = Vaccinated;
  		this.bloodType = bloodType;
- 		this.dateIntroduced=dateIntroduced;
+ 		this.DateIntroduced=dateIntroduced;
  	}
 
 	public Patient(Integer id, String patientName) {
@@ -360,7 +360,7 @@ public class Patient implements Serializable{
 
 	
 	public Date getDateIntroduced() {
-		return dateIntroduced;
+		return DateIntroduced;
 	}
 
 
@@ -395,7 +395,7 @@ public class Patient implements Serializable{
 
 
 	public void setDateIntroduced(Date dateIntroduced) {
-		this.dateIntroduced = dateIntroduced;
+		this.DateIntroduced = DateIntroduced;
 	}
 
 

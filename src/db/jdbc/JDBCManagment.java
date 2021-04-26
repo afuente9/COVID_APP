@@ -636,11 +636,10 @@ public class JDBCManagment implements Cov_Manager {
 	}
 
 	@Override
-//TODO NO FUNCIONA
 	public int getNumberofPatients() {
 		int number = 0;
 		try {
-			String sql = "SELECT COUNT(id) FROM patients";
+			String sql = "SELECT id FROM patients";
 			PreparedStatement prep = c.prepareStatement(sql);
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
@@ -712,28 +711,29 @@ public class JDBCManagment implements Cov_Manager {
 	@Override
 	public List<Patient> searchPatientGeneric(String feature, String type) {
 		List<Patient> patients = new ArrayList<Patient>();
-
+//TODO PARA LA DATE INTRODUCED
 		try {
-			String sql;
-			if (feature == "Age") {
-				// TODO NO FUNCIONA
-				feature = "birthday";
-				sql = "SELECT * FROM  patients WHERE " + feature + " = '?' ";
-			} else {
-				sql = "SELECT * FROM  patients WHERE " + feature + " LIKE ?";
-			}
 			if (feature == "SS num") {
 				feature = "social_security";
 			}
+			if (feature == "Blood type") {
+				feature = "bloodType";
+			}
+			String sql;
+			if (feature == "Birth date") {
+				feature = "birthday";
+				sql = "SELECT * FROM  patients WHERE " + feature + " = '?' ";
+
+			} else {
+				sql = "SELECT * FROM  patients WHERE " + feature + " LIKE ?";
+			}
+			
 
 			PreparedStatement prep = c.prepareStatement(sql);
 
 			if (feature == "birthday") {
-				// TODO testear sacar fecha de nacimiento
 
-				Date today = Date.valueOf(LocalDate.now());
-				LocalDate temp = today.toLocalDate().minusYears(Integer.parseInt(type));
-				Date d = Date.valueOf(temp);
+				Date d = Date.valueOf(type);
 				prep.setDate(1, d);
 			}
 
@@ -776,7 +776,7 @@ public class JDBCManagment implements Cov_Manager {
 			}
 			rs.close();
 			prep.close();
-		} catch (Exception e) {
+			} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return patients;

@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -63,6 +64,9 @@ public class SearchPatientController implements Initializable {
     private TableColumn colAlive;
 
     @FXML
+    private Button SearchButton;
+
+    @FXML
     private TableColumn colBloodType;
 
     @FXML
@@ -95,7 +99,8 @@ public class SearchPatientController implements Initializable {
 		List<Patient> result = Main.getInter().searchPatientGeneric(feature,type);
 		System.out.println("Those are the patients: \n" + result.toString());
 		this.patientsTableList.addAll(result);
-    	this.tablePatients.setItems(patientsTableList);    
+    	this.tablePatients.setItems(patientsTableList);  
+    	typeTextfield.setText("");
     	
     	
     }
@@ -130,7 +135,7 @@ public class SearchPatientController implements Initializable {
         this.colVaccinated.setCellValueFactory(new PropertyValueFactory("Vaccinated"));
         this.colMedica.setCellValueFactory(new PropertyValueFactory("medication"));
       //  this.colPatho.setCellValueFactory(new PropertyValueFactory("other_pathologies"));
-      //  this.colDateIntroduced.setCellValueFactory(new PropertyValueFactory("dateIntroduced"));
+        this.colDateIntroduced.setCellValueFactory(new PropertyValueFactory("DateIntroduced"));
         
         
 
@@ -146,7 +151,7 @@ public class SearchPatientController implements Initializable {
     private void loadData() {
     	list.removeAll(list);
     	String a="Name";
-    	String b="Age";
+    	String b="Birth date";
     	String c="Sex";
     	String cc="Height";
     	String d="Weight";
@@ -154,7 +159,9 @@ public class SearchPatientController implements Initializable {
     	String f="Hospital";
     	String g="Infected";
     	String h="Date introduced";
-    	list.addAll(a,b,c,cc,d,e,f,g,h);
+    	String i="Blood type";
+
+    	list.addAll(a,b,c,cc,d,e,f,g,h,i);
     	SearchOptions.getItems().addAll(list);
     	
 

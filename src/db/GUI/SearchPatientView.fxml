@@ -82,7 +82,7 @@
             <DatePicker fx:id="dateFrom" layoutX="223.0" layoutY="78.0" />
             <DatePicker fx:id="dateTo" layoutX="441.0" layoutY="78.0" />
             <Button layoutX="631.0" layoutY="78.0" mnemonicParsing="false" onAction="#Filterclick" text="Filter" />
-            <Button layoutX="509.0" layoutY="128.0" mnemonicParsing="false" onAction="#ModifySearch" prefHeight="35.0" prefWidth="54.0" text="Search" />
+            <Button fx:id="SearchButton" layoutX="509.0" layoutY="128.0" mnemonicParsing="false" onAction="#ModifySearch" prefHeight="35.0" prefWidth="54.0" text="Search" />
             <Pane layoutX="33.0" layoutY="178.0" prefHeight="323.0" prefWidth="730.0">
                <children>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="318.0" prefWidth="730.0">
