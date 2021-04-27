@@ -2,6 +2,7 @@ package db.GUI;
 import java.io.IOException;
 import java.sql.Date;
 
+import db.pojos.Administration;
 import db.pojos.Doctor;
 import db.pojos.Lab;
 import db.pojos.Sex;
@@ -39,7 +40,7 @@ public class MainMenuController {
     @FXML
     void OnEnterUser(ActionEvent event) {
     	System.out.println(UserTextField.getText());
-		if(UserTextField.getText().equals("")&&PasswordTextField.getText().equals("")) {
+		if(UserTextField.getText().equals("doctor")&&PasswordTextField.getText().equals("doctor")) {
 			byte[] image=null;
 			Doctor d = new Doctor(0,"cardio","Lucas Pérez",Date.valueOf("2000-10-10"),"34234",Sex.valueOf("Male"),"La Paz",image);
 			String name= "DoctorMenuView.fxml";
@@ -69,7 +70,8 @@ public class MainMenuController {
 			GovernmentMenuController controller = null;
 			openWindow(name,controller);
 		}
-		if(UserTextField.getText().equals("lab")&&PasswordTextField.getText().equals("lab")) {
+		if(UserTextField.getText().equals("")&&PasswordTextField.getText().equals("")) {
+			
 			String name= "LabMenuView.fxml";
 			LabMenuController controller = null;
 			byte[] image= null;
@@ -81,8 +83,8 @@ public class MainMenuController {
 	    		root = loader.load();
 	    	
 	    	  controller = loader.getController();
-	    	 controller.setL(l_new);
-	    	 controller.setLabName(l_new.getName());
+	    	 controller.setL(Main.getInter().getLab(1));
+	    	 controller.setLabName(Main.getInter().getLab(1).getName());
 	    	  
 	    	Scene scene = new Scene(root);
 	    	Stage stage = new Stage();

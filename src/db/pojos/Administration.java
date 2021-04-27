@@ -7,6 +7,12 @@ public class Administration implements Serializable{
 	private Integer id;
 	private int vaccines;
 	byte[] image;
+	
+	public Administration(Integer id,int vaccines) {
+		this.id=id;
+		this.vaccines=vaccines;
+		
+	}
 
 	
 	public Administration() {

@@ -28,7 +28,6 @@ public void setL(Lab l) {
 }
 	@FXML
     private Label LabName;
-
     public void setLabName(String labName) {
 		LabName.setText(labName);
 	}
@@ -114,9 +113,11 @@ controller.setLabnamenewvaccines("Recent batches of vaccines by " +l.getName());
 
     @FXML
     void searchpatientbutton(ActionEvent event) {
-    	String name= "SearchPatientLABView.fxml";
-    	SearchPatientLABController controller = null;
+    	String name= "SearchPatientbyLabView.fxml";
+    	SearchPatientbyLabController controller = null;
+    	
     	openWindow(name,controller);
+    	
     	
     }
 
@@ -132,6 +133,7 @@ controller.setLabnamenewvaccines("Recent batches of vaccines by " +l.getName());
     	
     	  controller = loader.getController();
     	  controller.setLsendvaccines(l);
+    	  System.out.println(l);
     	  controller.setLabname("Recent shipments from " +l.getName());
     	Scene scene = new Scene(root);
     	Stage stage = new Stage();
@@ -160,6 +162,7 @@ controller.setLabnamenewvaccines("Recent batches of vaccines by " +l.getName());
     		root = loader.load();
     	
     	  controller = loader.getController();
+    	  
     	Scene scene = new Scene(root);
     	Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);

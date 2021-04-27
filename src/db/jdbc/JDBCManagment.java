@@ -360,6 +360,34 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 
+	}@Override
+	public void ModifyVaccinesFromLab(int amount, int id) {
+		try {
+			String sql;
+			sql = "UPDATE lab SET vacciness = (vacciness + ?) WHERE id = ?" ;
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, amount);
+			prep.setInt(2, id);
+			prep.executeUpdate();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	@Override
+	public void ModifyVaccinesAdmin(int amount) {
+		try {
+			String sql;
+			sql = "UPDATE administration SET total_vacciness = (total_vacciness + ?)" ;
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, amount);
+			prep.executeUpdate();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public List<Patient> searchPatientByName(String name) {
@@ -602,6 +630,48 @@ public class JDBCManagment implements Cov_Manager {
 		}
 
 	}
+	@Override
+	public Administration getAdministration() {
+		try {
+			String sql = "SELECT * FROM administration WHERE id = 1";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			if (rs.next()) {
+				int vacc = rs.getInt("total_vacciness");
+				Integer id= 1;
+				return new Administration(id, vacc);
+			}
+			prep.close();
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}	
+	@Override
+	public List<Shipment> getAllShipment() {
+		List<Shipment> allShips= new ArrayList();
+		try {
+			String sql = "SELECT * FROM shipment ";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				int vacc = rs.getInt("vacciness");
+				Date d1= rs.getDate("date");
+				System.out.println("miputamsdfeuifnergyuherui"+d1);
+				allShips.add(new Shipment(vacc, d1)) ;
+			}
+
+			prep.close();
+			rs.close();
+			return allShips;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return allShips;
+	}
+
 
 	@Override
 	public Lab getLab(int id) {

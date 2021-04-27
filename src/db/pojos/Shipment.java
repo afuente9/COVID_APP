@@ -6,7 +6,7 @@ import java.sql.Date;
 public class Shipment implements Serializable{
 	
 	private Integer id;
-	private int vaccines;
+	private int Vaccines;
 	private Date date_ship;
 	
 	public Shipment() {
@@ -16,7 +16,12 @@ public class Shipment implements Serializable{
 	public Shipment(Integer id, int vaccines, Date date_ship) {
 		super();
 		this.id = id;
-		this.vaccines = vaccines;
+		this.Vaccines = vaccines;
+		this.date_ship = date_ship;
+	}
+	public Shipment( int vaccines, Date date_ship) {
+		super();
+		this.Vaccines = vaccines;
 		this.date_ship = date_ship;
 	}
 
@@ -26,7 +31,7 @@ public class Shipment implements Serializable{
 		int result = 1;
 		result = prime * result + ((date_ship == null) ? 0 : date_ship.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + vaccines;
+		result = prime * result + Vaccines;
 		return result;
 	}
 
@@ -49,22 +54,22 @@ public class Shipment implements Serializable{
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (vaccines != other.vaccines)
+		if (Vaccines != other.Vaccines)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Shipment [id=" + id + ", vaccines=" + vaccines + ", date_ship=" + date_ship + "]";
+		return "Shipment [id=" + id + ", vaccines=" + Vaccines + ", date_ship=" + date_ship + "]";
 	}
 
 	public int getVaccines() {
-		return vaccines;
+		return Vaccines;
 	}
 
 	public void setVaccines(int vaccines) {
-		this.vaccines = vaccines;
+		this.Vaccines = vaccines;
 	}
 
 	public Date getDate_ship() {
