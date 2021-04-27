@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import db.pojos.Medication;
+import db.pojos.Other_Pathologies;
 import db.pojos.Patient;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -94,6 +95,9 @@ public class SearchPatientController implements Initializable {
 
     @FXML
     private DatePicker dateTo;
+    
+    
+    
     @FXML
     void BackFromModify(ActionEvent event) {
     	Stage stage = (Stage) this.SearchOptions.getScene().getWindow();
@@ -105,18 +109,40 @@ public class SearchPatientController implements Initializable {
     	this.patientsTableList.clear();
     	String feature = SearchOptions.getValue();
 		String type = typeTextfield.getText();
-		List<Patient> result = Main.getInter().searchPatientGeneric(feature,type);
-		System.out.println("Those are the patients: \n" + result.toString());
-		this.patientsTableList.addAll(result);
-    	this.tablePatients.setItems(patientsTableList);  
-    	typeTextfield.setText("");
+		if (feature == "Birth date") {
+			List<Patient> result = Main.getInter().getPatientbyBD(type);
+			System.out.println("Those are the patients: \n" + result.toString());
+			this.patientsTableList.addAll(result);
+	    	this.tablePatients.setItems(patientsTableList);  
+	    	typeTextfield.setText("");
+		}else if (feature == "Date introduced"){
+			List<Patient> result = Main.getInter().getPatientbyDateIntro(type);
+			System.out.println("Those are the patients: \n" + result.toString());
+			this.patientsTableList.addAll(result);
+	    	this.tablePatients.setItems(patientsTableList);  
+	    	typeTextfield.setText("");
+		}
+		else {
+			List<Patient> result = Main.getInter().searchPatientGeneric(feature,type);
+			System.out.println("Those are the patients: \n" + result.toString());
+			this.patientsTableList.addAll(result);
+	    	this.tablePatients.setItems(patientsTableList);  
+	    	typeTextfield.setText("");
+		}
+		
     	
     	
     }
     @FXML
     void Filterclick(ActionEvent event) {
-//TODO Select patients where dateintroduced>datefrom y < date to e imprimir
-    }
+    	this.patientsTableList.clear();
+    	String dateFromText =dateFrom.getValue().toString(); 
+		String dateToText = dateTo.getValue().toString();
+		List<Patient> result = Main.getInter().filterPatient(dateFromText, dateToText);
+		System.out.println("Those are the patients: \n" + result.toString());
+		this.patientsTableList.addAll(result);
+    	this.tablePatients.setItems(patientsTableList);  
+    	typeTextfield.setText("");    }
     
     @FXML
     void ModifyPatient(ActionEvent event) {
@@ -142,7 +168,16 @@ public class SearchPatientController implements Initializable {
     	 controller.setOldHospital(pselected.getHospital());
     	 controller.setOldPlace(pselected.getHos_location());
     	 controller.setOldVaccinated(""+pselected.getVaccinated());
-    	// controller.setOther_pathologies_list(Main.getInter().get);
+    	 controller.setOther_pathologies_list(Main.getInter().getPathofromPatient(pselected.getId()));
+    	 List <Other_Pathologies> patholo_list= Main.getInter().getPathofromPatient(pselected.getId());
+     	Iterator iter1 = patholo_list.iterator();
+		String  paths = "";
+		while (iter1.hasNext()) {
+			paths += iter1.next() + "\n";
+		}
+		controller.setPathologylabel(paths);
+
+    	 
     	 controller.setMedication_list(Main.getInter().getMedicationfromPatient(pselected.getId()));
     	 List <Medication> medication_list= Main.getInter().getMedicationfromPatient(pselected.getId());
     	Iterator iter = medication_list.iterator();

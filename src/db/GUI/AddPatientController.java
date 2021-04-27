@@ -166,8 +166,12 @@ public class AddPatientController {
     
     @FXML
     void DeletePathbyNum(ActionEvent event) {
-    	//TODO HACER METODO PARA BORRAR RELACION PACIENTE PATOLOGIA
-    	other_pathologies_list.remove(Integer.parseInt(DeletePathologynum.getText()));
+
+        Main.getInter().deleteAssignmentPathology(Main.getInter().getLastPatient().getId(),Integer.parseInt(DeletePathologynum.getText()) );
+
+    	
+    	other_pathologies_list.remove(Main.getInter().getPathologyId(Integer.parseInt(DeletePathologynum.getText())));
+    	
     	DeletePathologynum.setText("");
     	Iterator iter = other_pathologies_list.iterator();
 		String paths="";
@@ -179,10 +183,10 @@ public class AddPatientController {
 
     @FXML
     void Deletemedbynum(ActionEvent event) {
-    	//TODO HACER METODO PARA BORRAR RELACION PACIENTE MEDIC
     	
+        Main.getInter().deleteAssignmentMedication(Main.getInter().getLastPatient().getId(),Integer.parseInt(DeleteMedNum.getText()) );
 
-    	medication_list.remove(Integer.parseInt(DeleteMedNum.getText()));
+    	medication_list.remove(Main.getInter().getMedicationId(Integer.parseInt(DeleteMedNum.getText())));
     	DeleteMedNum.setText("");
     	Iterator iter = medication_list.iterator();
 		String medications="";

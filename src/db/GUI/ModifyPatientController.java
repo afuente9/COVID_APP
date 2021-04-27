@@ -94,7 +94,12 @@ public class ModifyPatientController implements Initializable {
 	@FXML
 	private Label oldHospital;
 
-	
+
+    @FXML
+    private TextField InfectedTEXTFIELD1;
+
+    @FXML
+    private Label oldInfected;
 
 	@FXML
 	private Label oldBlood;
@@ -161,23 +166,47 @@ public class ModifyPatientController implements Initializable {
 		WeightPatientTextField.setText("");
 		Main.getInter().modifyPatient(this.pmodif.getId(), "weight", newWeig);
 
+	
 	}
+
+	
 
 	@FXML
 	void DeletePathbyNum(ActionEvent event) {
+		
+		 Main.getInter().deleteAssignmentPathology(Main.getInter().getLastPatient().getId(),Integer.parseInt(DeletePathologynum.getText()) );
 
+	    	
+	    	other_pathologies_list.remove(Main.getInter().getPathologyId(Integer.parseInt(DeletePathologynum.getText())));
+	    	
+	    	DeletePathologynum.setText("");
+	    	Iterator iter = other_pathologies_list.iterator();
+			String paths="";
+			while (iter.hasNext()) {
+			 paths+=iter.next()+"\n";
+			 }
+			pathologylabel.setText(paths);   
 	}
 
 	@FXML
 	void Deletemedbynum(ActionEvent event) {
+		
+        Main.getInter().deleteAssignmentMedication(Main.getInter().getLastPatient().getId(),Integer.parseInt(DeleteMedNum.getText()) );
 
+    	medication_list.remove(Main.getInter().getMedicationId(Integer.parseInt(DeleteMedNum.getText())));
+    	DeleteMedNum.setText("");
+    	Iterator iter = medication_list.iterator();
+		String medications="";
+		while (iter.hasNext()) {
+		 medications+=iter.next()+"\n";
+		 }
+		AllMedLabel.setText(medications);   
 	}
 
 	@FXML
 	void OnAddMedication(ActionEvent event) {
 		String medicationName = MedicationPatientTextField.getText();
 
-		int medicationId = medication_list.size();
 		Medication m_new = new Medication(medicationName);
 		//TODO CONTROLAR SI LA MEDICACION YA ESTA METIDA EN EL PACIENTE
 			Main.getInter().addMedication(m_new);
@@ -203,11 +232,12 @@ public class ModifyPatientController implements Initializable {
 			Main.getInter().addOtherPathologies(op_new);
 			Main.getInter().assignPatho(Main.getInter().getLastPatient().getId(), Main.getInter().getLastPath());
 			Main.getInter().getLastPatient().setOther_pathologies(other_pathologies_list);
+			OtherPathologiesPatientTextField.setText("");
+			String paths = "";
+
 			other_pathologies_list.add(Main.getInter().getLastPath());
 
-			OtherPathologiesPatientTextField.setText("");
 			Iterator iter = other_pathologies_list.iterator();
-			String paths = "";
 			while (iter.hasNext()) {
 				paths += iter.next() + "\n";
 			}
@@ -458,8 +488,8 @@ public class ModifyPatientController implements Initializable {
 		DeletePathologynum = deletePathologynum;
 	}
 
-	public void setPathologylabel(Label pathologylabel) {
-		this.pathologylabel = pathologylabel;
+	public void setPathologylabel(String pathologylabel) {
+		this.pathologylabel.setText(pathologylabel);
 	}
 
 	public void setVaccinatedTEXTFIELD(TextField vaccinatedTEXTFIELD) {
@@ -568,6 +598,14 @@ public class ModifyPatientController implements Initializable {
 		Main.getInter().modifyPatient(this.pmodif.getId(), "vaccinated", vaccinated);
 
 	}
+	  @FXML
+	    void acceptInfected(ActionEvent event) {
+			String infected = InfectedTEXTFIELD1.getText();
+			oldInfected.setText(infected);
+			pmodif.setInfected(Boolean.parseBoolean(infected));
+			InfectedTEXTFIELD1.setText("");
+			Main.getInter().modifyPatient(this.pmodif.getId(), "infected", infected);
+	    }
 	
 
 	@Override

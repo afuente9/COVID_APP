@@ -88,7 +88,13 @@ public interface Cov_Manager {
 	Other_Pathologies getLastPath();
 	void modifyPatient(int iden, String atrib, String value);
 	public List<Medication> getMedicationfromPatient(int id);
-	void deleteAssignment(int idPatient, int idmed);
-	void deleteAssignmentMedication(int idPatient, int idmedication);
-	
+	void deleteAssignmentPathology(int idPatient, int idpatho);
+	void deleteAssignmentMedication(Integer idPatient, int idmedication);
+	List<Patient> filterPatient(String dateFrom, String dateTo);
+	Medication getMedicationId(Integer id);
+	Other_Pathologies getPathologyId(Integer id);
+	List<Other_Pathologies> getPathofromPatient(int id);
+	List<Patient> getPatientbyBD(String BDdate);
+	List<Patient> getPatientbyDateIntro(String dateintro);
+
 }
