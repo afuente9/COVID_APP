@@ -180,35 +180,30 @@ public class ModifyPatientController implements Initializable {
 		int medicationId = medication_list.size();
 		Medication m_new = new Medication(medicationName);
 		//TODO CONTROLAR SI LA MEDICACION YA ESTA METIDA EN EL PACIENTE
-			medication_list.add(m_new);
 			Main.getInter().addMedication(m_new);
 			Main.getInter().assignMed(Main.getInter().getLastPatient().getId(), Main.getInter().getLastMedication());
 			Main.getInter().getLastPatient().setMedication(medication_list);
 			MedicationPatientTextField.setText("");
 			String  medications = "";
+			medication_list.add(Main.getInter().getLastMedication());
 
 			Iterator iter = medication_list.iterator();
 			while (iter.hasNext()) {
 				medications += iter.next() + "\n";
 			}
 			AllMedLabel.setText(medications);
-
-		
-
 	}
 
 	@FXML
 	void OnAddPathology(ActionEvent event) {
 		String otherPathologiesName = OtherPathologiesPatientTextField.getText();
 		
-		int otherpatId = other_pathologies_list.size();
-		Other_Pathologies op_new = new Other_Pathologies(otherpatId, otherPathologiesName);
-		if (!other_pathologies_list.contains(op_new)) {
-			other_pathologies_list.add(op_new);
+		Other_Pathologies op_new = new Other_Pathologies(otherPathologiesName);
 
 			Main.getInter().addOtherPathologies(op_new);
 			Main.getInter().assignPatho(Main.getInter().getLastPatient().getId(), Main.getInter().getLastPath());
 			Main.getInter().getLastPatient().setOther_pathologies(other_pathologies_list);
+			other_pathologies_list.add(Main.getInter().getLastPath());
 
 			OtherPathologiesPatientTextField.setText("");
 			Iterator iter = other_pathologies_list.iterator();
@@ -218,11 +213,8 @@ public class ModifyPatientController implements Initializable {
 			}
 			pathologylabel.setText(paths);
 
-		} else {
-			// TODO mensaje error ya se ha añadido esa patologia
-
-		}
-	}
+		} 
+	
 
 	@FXML
 	void OnCancelPatient(ActionEvent event) {

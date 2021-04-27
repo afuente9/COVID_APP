@@ -885,7 +885,7 @@ public class JDBCManagment implements Cov_Manager {
 		List<Medication> medicaciones = new ArrayList<Medication>();
 
 		try {
-			String sql = "SELECT m.id, m.name FROM medication AS m JOIN pat_medi AS pm ON pm.id_medi = m.id JOIN patients AS p ON p.id=pm.id_pat WHERE p.id = ?";
+			String sql = "SELECT m.id, m.name FROM medication AS m JOIN pat_medi AS pm ON pm.id_medi = m.id JOIN patients AS p ON p.id=pm.id_pat WHERE p.id = ? ";
 				
 			PreparedStatement prep= c.prepareStatement(sql);
 
@@ -894,11 +894,13 @@ public class JDBCManagment implements Cov_Manager {
 			ResultSet rs = prep.executeQuery();
 
 			while(rs.next()) {
+				
 				Integer nid = rs.getInt("id");
 				String nombre = rs.getString("name");
 				Medication medi = new Medication (nid, nombre);
-				medicaciones.add(medi);
 				System.out.println("med"+medi);
+
+				medicaciones.add(medi);
 				return medicaciones;		
 
 				}
@@ -910,4 +912,26 @@ public class JDBCManagment implements Cov_Manager {
 		}
 		return medicaciones;		
 	}
+	@Override
+	public void deleteAssignmentMedication(int idPatient, int idmedication) {
+		try {
+		String sql = "DELETE FROM pat_medi WHERE (id_pat = ? AND id_medi = ?)";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1, idPatient);
+		prep.setInt(2, idmedication);
+		prep.executeUpdate();
+		prep.close();
+
+		
+			
+		} catch (Exception e) {
 }
+	}
+
+	@Override
+	public void deleteAssignment(int idPatient, int idmed) {
+		// TODO Auto-generated method stub
+		
+	}
+	}
+

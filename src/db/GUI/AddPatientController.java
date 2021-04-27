@@ -140,16 +140,16 @@ public class AddPatientController {
     }
     @FXML
     void OnAddMedication(ActionEvent event) {
+    	//	TODO CONTROLAR SI YA ESTA METIDA
     	String medicationName= MedicationPatientTextField.getText();
-    	int medicationId=medication_list.size();
-    	Medication m_new= new Medication(medicationId,medicationName);
-    	if(!medication_list.contains(m_new)) {
-    	medication_list.add(m_new);
+    	Medication m_new= new Medication(medicationName);
+    	
+    	
         Main.getInter().addMedication(m_new);
         Main.getInter().assignMed(Main.getInter().getLastPatient().getId(), Main.getInter().getLastMedication());
         Main.getInter().getLastPatient().setMedication(medication_list);
     	MedicationPatientTextField.setText("");
-    		
+    	medication_list.add(Main.getInter().getLastMedication());
     		Iterator iter = medication_list.iterator();
     		String medications="";
     		while (iter.hasNext()) {
@@ -160,12 +160,10 @@ public class AddPatientController {
     	}
     	
     	
-    	else {
-    		// TODO mensaje error ya se ha añadido esa medication
-    	}
+    
     	
 
-    }
+    
     @FXML
     void DeletePathbyNum(ActionEvent event) {
     	//TODO HACER METODO PARA BORRAR RELACION PACIENTE PATOLOGIA
@@ -198,34 +196,23 @@ public class AddPatientController {
     @FXML
     void OnAddPathology(ActionEvent event) {
     	String otherPathologiesName= OtherPathologiesPatientTextField.getText();
-    	int otherpatId= other_pathologies_list.size();
-    	Other_Pathologies op_new= new Other_Pathologies(otherpatId,otherPathologiesName);
-    	if(!other_pathologies_list.contains(op_new)){
-    		other_pathologies_list.add(op_new);
+    	Other_Pathologies op_new= new Other_Pathologies(otherPathologiesName);
     		
     		 Main.getInter().addOtherPathologies(op_new);
     	     Main.getInter().assignPatho(Main.getInter().getLastPatient().getId(), Main.getInter().getLastPath());
     	     Main.getInter().getLastPatient().setOther_pathologies(other_pathologies_list);
-    		
+     		
+    	     other_pathologies_list.add(Main.getInter().getLastPath());
     		OtherPathologiesPatientTextField.setText("");
     		Iterator iter = other_pathologies_list.iterator();
     		String paths="";
+
     		while (iter.hasNext()) {
     		 paths+=iter.next()+"\n";
     		 }
     		pathologylabel.setText(paths);   
     		
     	}
-    	else {
-    		//TODO mensaje error ya se ha añadido esa patologia
-
-    	}
-    	
-    	
-    	
-
-    }
-
     @FXML
     void SeeAllMed(ActionEvent event) {
     	String name= "SeeAllMedView.fxml";
