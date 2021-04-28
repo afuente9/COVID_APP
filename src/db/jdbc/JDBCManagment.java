@@ -45,8 +45,7 @@ public class JDBCManagment implements Cov_Manager {
 	public void creatTables() {
 		try {
 			Statement stmt1 = c.createStatement();
-			String sql1 = "CREATE TABLE doctors " 
-					+ "(id       			INTEGER  	 	PRIMARY KEY AUTOINCREMENT,"
+			String sql1 = "CREATE TABLE doctors " + "(id       			INTEGER  	 	PRIMARY KEY AUTOINCREMENT,"
 					+ " name     			TEXT    	 	NOT NULL,"
 					+ " speciality 			TEXT  		 	NOT NULL,"
 					+ " birth_date			DATE		 	NOT NULL,"
@@ -56,8 +55,7 @@ public class JDBCManagment implements Cov_Manager {
 			stmt1.close();
 
 			Statement stmt2 = c.createStatement();
-			String sql2 = "CREATE TABLE patients " 
-					+ "(id       			INTEGER  	 PRIMARY KEY AUTOINCREMENT,"
+			String sql2 = "CREATE TABLE patients " + "(id       			INTEGER  	 PRIMARY KEY AUTOINCREMENT,"
 					+ " name     			TEXT    	 NOT NULL," + " hos_location 		TEXT  		 NOT NULL,"
 					+ " birthday			DATE  		 NOT NULL," + " social_security   	TEXT  	 	 NOT NULL,"
 					+ " height 				float   	 NOT NULL," + " weight 				float   	 NOT NULL,"
@@ -71,18 +69,17 @@ public class JDBCManagment implements Cov_Manager {
 			stmt2.close();
 
 			Statement stmt3 = c.createStatement();
-			String sql3 = "CREATE TABLE lab " 
-					+ "(id       		INTEGER  	 	PRIMARY KEY AUTOINCREMENT,"
+			String sql3 = "CREATE TABLE lab " + "(id       		INTEGER  	 	PRIMARY KEY AUTOINCREMENT,"
 					+ " name     		TEXT    	 	NOT NULL," + " adress	 		TEXT	 	 	NOT NULL,"
 					+ " cif			    TEXT  	 	 	NOT NULL," + " vacciness  		INTEGER	 	 	NOT NULL,"
 					+ " image 			BLOB   			NULL)";
 			stmt3.executeUpdate(sql3);
 			stmt3.close();
-
+//We also have to add the name of the lab because tableView only print pojos
 			Statement stmt4 = c.createStatement();
 			String sql4 = "CREATE TABLE shipment " + "(id       		INTEGER  	PRIMARY KEY AUTOINCREMENT,"
 					+ " vacciness  		INTEGER	 	NOT NULL," + " date			DATE		NOT NULL,"
-					+ " id_lab			INTEGER		REFERENCES lab(id),"
+					+ " id_lab			INTEGER		REFERENCES lab(id)," + " labName			TEXT		 NOT NULL,"
 					+ " id_adm			INTEGER		REFERENCES administration(id))";
 			stmt4.executeUpdate(sql4);
 			stmt4.close();
@@ -101,8 +98,7 @@ public class JDBCManagment implements Cov_Manager {
 			stmt6.close();
 
 			Statement stmt7 = c.createStatement();
-			String sql7 = "CREATE TABLE medication " 
-					+ "(id       		INTEGER  	PRIMARY KEY AUTOINCREMENT,"
+			String sql7 = "CREATE TABLE medication " + "(id       		INTEGER  	PRIMARY KEY AUTOINCREMENT,"
 					+ " name  			TEXT	 	UNIQUE NOT NULL)";
 			stmt7.executeUpdate(sql7);
 			stmt7.close();
@@ -182,8 +178,8 @@ public class JDBCManagment implements Cov_Manager {
 
 	/*
 	 * TODO checklist - Cambiar foto (no prioritario) - AddPatients (faltan los
-	 * medicamentos y otras enfermedades) - SelectPatients seg�n fechaIntroduccion -
-	 * SelectPatients seg�n sus atributos - ModifyPatient todos sus atributos -
+	 * medicamentos y otras enfermedades) - SelectPatients seg�n fechaIntroduccion
+	 * - SelectPatients seg�n sus atributos - ModifyPatient todos sus atributos -
 	 * ModifyDoc todos sus atributos - ModifyLab datosLab, nVacc - Select nVacc from
 	 * Gov - Select patients by score for Gov - Modify nVacc from Gov - Select
 	 * Shipment by name
@@ -233,12 +229,13 @@ public class JDBCManagment implements Cov_Manager {
 
 	public void addShipment(Shipment s, Lab l, Administration a) {
 		try {
-			String sql = "INSERT INTO Shipment (vacciness, date, id_lab, id_adm) VALUES (?,?,?,?)";
+			String sql = "INSERT INTO Shipment (vacciness, date, id_lab, labName, id_adm) VALUES (?,?,?,?,?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, s.getVaccines());
 			prep.setDate(2, s.getDate_ship());
 			prep.setInt(3, l.getId());
-			prep.setInt(4, a.getId());
+			prep.setString(4, l.getName());
+			prep.setInt(5, a.getId());
 			prep.executeUpdate();
 			prep.close();
 		} catch (Exception e) {
@@ -308,14 +305,14 @@ public class JDBCManagment implements Cov_Manager {
 		}
 
 	}
-	
+
 	@Override
 	public void modifyPatient(int iden, String atrib, String value) {
 		try {
 			String sql;
 			Date fecha = null;
 			if (atrib.equalsIgnoreCase("birthday")) {
-				
+
 				fecha = Date.valueOf(value);
 				sql = "UPDATE patients SET " + atrib + " = ? WHERE id = " + iden;
 			} else {
@@ -324,19 +321,16 @@ public class JDBCManagment implements Cov_Manager {
 			PreparedStatement prep = c.prepareStatement(sql);
 			if (atrib.equalsIgnoreCase("birthday")) {
 				prep.setDate(1, fecha);
-			} 
-			else if(atrib=="height"||atrib=="weight"){
-				prep.setFloat(1,Float.parseFloat(value));
-			
-			}
-			else if(atrib=="infected"||atrib=="alive"||atrib=="vaccinated"){
-				prep.setBoolean(1,Boolean.parseBoolean(value));
-				
+			} else if (atrib == "height" || atrib == "weight") {
+				prep.setFloat(1, Float.parseFloat(value));
+
+			} else if (atrib == "infected" || atrib == "alive" || atrib == "vaccinated") {
+				prep.setBoolean(1, Boolean.parseBoolean(value));
 
 			}
-			
+
 			else {
-			
+
 				prep.setString(1, value);
 			}
 			prep.executeUpdate();
@@ -360,11 +354,13 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 
-	}@Override
+	}
+
+	@Override
 	public void ModifyVaccinesFromLab(int amount, int id) {
 		try {
 			String sql;
-			sql = "UPDATE lab SET vacciness = (vacciness + ?) WHERE id = ?" ;
+			sql = "UPDATE lab SET vacciness = (vacciness + ?) WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, amount);
 			prep.setInt(2, id);
@@ -375,11 +371,12 @@ public class JDBCManagment implements Cov_Manager {
 		}
 
 	}
+
 	@Override
 	public void ModifyVaccinesAdmin(int amount) {
 		try {
 			String sql;
-			sql = "UPDATE administration SET total_vacciness = (total_vacciness + ?)" ;
+			sql = "UPDATE administration SET total_vacciness = (total_vacciness + ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, amount);
 			prep.executeUpdate();
@@ -416,13 +413,12 @@ public class JDBCManagment implements Cov_Manager {
 				String loc_hosp = rs.getString("hos_location");
 				String blood = rs.getString("bloodType");
 				boolean vaccin = rs.getBoolean("vaccinated");
-				Date dateIntroduced= rs.getDate("dateIntroduced"); 
-				List <Medication> medicationPatient= Main.getInter().getMedicationfromPatient(id);
-				List <Other_Pathologies> Other_Pathologies= Main.getInter().getPathofromPatient(id);
-				
+				Date dateIntroduced = rs.getDate("dateIntroduced");
+				List<Medication> medicationPatient = Main.getInter().getMedicationfromPatient(id);
+				List<Other_Pathologies> Other_Pathologies = Main.getInter().getPathofromPatient(id);
 
 				Patient patient = new Patient(id, loc_hosp, patientname, birthday, social_security, height, weight,
-						sexo, infec, alive, hosp, vaccin, blood,dateIntroduced,medicationPatient,Other_Pathologies);
+						sexo, infec, alive, hosp, vaccin, blood, dateIntroduced, medicationPatient, Other_Pathologies);
 				patients.add(patient);
 			}
 			rs.close();
@@ -459,12 +455,12 @@ public class JDBCManagment implements Cov_Manager {
 				String hos = rs.getString("hospital");
 				boolean vacc = rs.getBoolean("vaccinated");
 				String sangre = rs.getString("bloodType");
-				Date dateIntroduced= rs.getDate("dateIntroduced"); 
-				List <Medication> medicationPatient= Main.getInter().getMedicationfromPatient(id);
-				List <Other_Pathologies> Other_Pathologies= Main.getInter().getPathofromPatient(id);
-				
+				Date dateIntroduced = rs.getDate("dateIntroduced");
+				List<Medication> medicationPatient = Main.getInter().getMedicationfromPatient(id);
+				List<Other_Pathologies> Other_Pathologies = Main.getInter().getPathofromPatient(id);
+
 				return new Patient(id, hos_loc, patientName, bdate, socsec, high, weig, sexoo, infec, vivo, hos, vacc,
-						sangre,dateIntroduced,medicationPatient,Other_Pathologies);
+						sangre, dateIntroduced, medicationPatient, Other_Pathologies);
 			}
 			prep.close();
 			rs.close();
@@ -473,6 +469,7 @@ public class JDBCManagment implements Cov_Manager {
 		}
 		return null;
 	}
+
 	@Override
 	public Patient getLastPatient() {
 		try {
@@ -500,10 +497,10 @@ public class JDBCManagment implements Cov_Manager {
 				String hos = rs.getString("hospital");
 				boolean vacc = rs.getBoolean("vaccinated");
 				String sangre = rs.getString("bloodType");
-				Date dateIntroduced= rs.getDate("dateIntroduced"); 
-				
+				Date dateIntroduced = rs.getDate("dateIntroduced");
+
 				return new Patient(id, hos_loc, patientName, bdate, socsec, high, weig, sexoo, infec, vivo, hos, vacc,
-						sangre,dateIntroduced);
+						sangre, dateIntroduced);
 			}
 			prep.close();
 			rs.close();
@@ -512,6 +509,7 @@ public class JDBCManagment implements Cov_Manager {
 		}
 		return null;
 	}
+
 	@Override
 	public List<Patient> getPatientsOfDoctor(int doc_id) {
 		List<Patient> patients = new ArrayList<Patient>();
@@ -577,25 +575,27 @@ public class JDBCManagment implements Cov_Manager {
 		}
 		return doctors;
 	}
+
 	@Override
 	public Other_Pathologies getLastPath() {
-		
+
 		try {
-			 String sql = "SELECT * FROM other_pathologies WHERE id = (SELECT MAX(id) FROM other_pathologies)";
-			PreparedStatement prep= c.prepareStatement(sql);
+			String sql = "SELECT * FROM other_pathologies WHERE id = (SELECT MAX(id) FROM other_pathologies)";
+			PreparedStatement prep = c.prepareStatement(sql);
 			ResultSet rs = prep.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				Integer id_path = rs.getInt("id");
 				String name = rs.getString("name");
 				return new Other_Pathologies(id_path, name);
 			}
 			rs.close();
 			prep.close();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;			
+		return null;
 	}
+
 	@Override
 	public void assignPatho(int id, Other_Pathologies op) {
 		try {
@@ -614,7 +614,6 @@ public class JDBCManagment implements Cov_Manager {
 	public void assignMed(int id, Medication m) {
 		try {
 
-
 			String sql = "INSERT INTO pat_medi (id_pat, id_medi) VALUES (?, ?)";
 
 			PreparedStatement prep = c.prepareStatement(sql);
@@ -630,6 +629,7 @@ public class JDBCManagment implements Cov_Manager {
 		}
 
 	}
+
 	@Override
 	public Administration getAdministration() {
 		try {
@@ -638,7 +638,7 @@ public class JDBCManagment implements Cov_Manager {
 			ResultSet rs = prep.executeQuery();
 			if (rs.next()) {
 				int vacc = rs.getInt("total_vacciness");
-				Integer id= 1;
+				Integer id = 1;
 				return new Administration(id, vacc);
 			}
 			prep.close();
@@ -647,19 +647,20 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 		return null;
-	}	
+	}
+
 	@Override
 	public List<Shipment> getAllShipment() {
-		List<Shipment> allShips= new ArrayList();
+		List<Shipment> allShips = new ArrayList();
 		try {
 			String sql = "SELECT * FROM shipment ";
 			PreparedStatement prep = c.prepareStatement(sql);
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int vacc = rs.getInt("vacciness");
-				Date d1= rs.getDate("date");
-				System.out.println("miputamsdfeuifnergyuherui"+d1);
-				allShips.add(new Shipment(vacc, d1)) ;
+				Date d1 = rs.getDate("date");
+				String labName = rs.getString("labName");
+				allShips.add(new Shipment(vacc, d1, labName));
 			}
 
 			prep.close();
@@ -672,6 +673,66 @@ public class JDBCManagment implements Cov_Manager {
 		return allShips;
 	}
 
+	@Override
+	public List<Shipment> getAllShipmentforAdminView() {
+		List<Shipment> allShips = new ArrayList();
+		try {
+			String sql = "SELECT * FROM shipment ";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				int vacc = rs.getInt("vacciness");
+				Date d1 = rs.getDate("date");
+				String labName = rs.getString("labName");
+				allShips.add(new Shipment(vacc, d1, labName));
+			}
+
+			prep.close();
+			rs.close();
+			return allShips;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return allShips;
+	}
+
+	@Override
+	public int getNumberVaccinesAdmin() {
+		try {
+			String sql = "SELECT total_vacciness FROM administration WHERE id=1 ";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+
+			int num = rs.getInt("total_vacciness");
+			prep.close();
+			rs.close();
+			return num;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	@Override
+	public int getNumberVaccinesLab(int id) {
+		try {
+			String sql = "SELECT vacciness FROM lab WHERE id=? ";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, id);
+			ResultSet rs = prep.executeQuery();
+
+			int num = rs.getInt("vacciness");
+			prep.close();
+			rs.close();
+			return num;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 
 	@Override
 	public Lab getLab(int id) {
@@ -840,7 +901,6 @@ public class JDBCManagment implements Cov_Manager {
 			} else {
 				sql = "SELECT * FROM  patients WHERE " + feature + " LIKE ?";
 			}
-			
 
 			PreparedStatement prep = c.prepareStatement(sql);
 
@@ -881,40 +941,122 @@ public class JDBCManagment implements Cov_Manager {
 				String loc_hosp = rs.getString("hos_location");
 				String blood = rs.getString("bloodType");
 				boolean vaccin = rs.getBoolean("vaccinated");
-				Date dateIntroduced= rs.getDate("dateIntroduced"); 
-				List <Medication> medicationPatient= Main.getInter().getMedicationfromPatient(id);
-				List <Other_Pathologies> Other_Pathologies= Main.getInter().getPathofromPatient(id);
-				
+				Date dateIntroduced = rs.getDate("dateIntroduced");
+				List<Medication> medicationPatient = Main.getInter().getMedicationfromPatient(id);
+				List<Other_Pathologies> Other_Pathologies = Main.getInter().getPathofromPatient(id);
 
 				Patient patient = new Patient(id, loc_hosp, patientname, birthday, social_security, height, weight,
-						sexo, infec, alive, hosp, vaccin, blood,dateIntroduced,medicationPatient,Other_Pathologies);
+						sexo, infec, alive, hosp, vaccin, blood, dateIntroduced, medicationPatient, Other_Pathologies);
 				patients.add(patient);
 			}
 			rs.close();
 			prep.close();
-			} catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return patients;
 	}
-	
+
+	@Override
+	public List<Patient> getSimulatedPatients(int availableVaccines) {
+		List<Patient> patients = new ArrayList<Patient>();
+
+		try {
+			
+//Hay una sql que me permita coger los N pacientes con los scores mas altos?
+			String sql = "SELECT * FROM  patients";
+
+			PreparedStatement prep = c.prepareStatement(sql);
+
+			//prep.setInt(1, availableVaccines);
+
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String patientname = rs.getString("name");
+				Date birthday = rs.getDate("birthday");
+				String social_security = rs.getString("social_security");
+				float height = rs.getFloat("height");
+				float weight = rs.getFloat("weight");
+				Sex sexo;
+				if (rs.getString("sex").equalsIgnoreCase("m")) {
+					sexo = Sex.Male;
+				} else {
+					sexo = Sex.Female;
+				}
+				boolean infec = rs.getBoolean("infected");
+				boolean alive = rs.getBoolean("alive");
+				String hosp = rs.getString("hospital");
+				String loc_hosp = rs.getString("hos_location");
+				String blood = rs.getString("bloodType");
+				boolean vaccin = rs.getBoolean("vaccinated");
+				Date dateIntroduced = rs.getDate("dateIntroduced");
+				List<Medication> medicationPatient = Main.getInter().getMedicationfromPatient(id);
+				List<Other_Pathologies> Other_Pathologies = Main.getInter().getPathofromPatient(id);
+				int score = rs.getInt("score");
+
+				Patient patient = new Patient(id, loc_hosp, patientname, birthday, social_security, height, weight,
+						sexo, infec, alive, hosp, vaccin, blood, dateIntroduced, medicationPatient, Other_Pathologies,
+						score);
+				patients.add(patient);
+			}
+			rs.close();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+//TODO COMPROBAR SI FUNCIONA BIEN CUANDO TENGAMOS PUNTUACIONES
+		return getFinalList(patients,availableVaccines);
+	}
+
+	private List<Patient> getFinalList(List<Patient> allpatients, int numberVaccines) {
+		List<Patient> sortList = new ArrayList();
+		List<Integer> scores = new ArrayList(allpatients.size());
+
+		for (int i = 0; i < allpatients.size(); i++) {
+
+			scores.add(allpatients.get(i).getScore());
+		}
+
+		Collections.sort(scores);
+		int times = 0;
+		int goodtimes=0;
+		int previousSize = allpatients.size();
+
+		do {
+			System.out.println("dfeiofneo" + times);
+
+			if (scores.get(goodtimes) == allpatients.get(times).getScore()) {
+				sortList.add(allpatients.get(times));
+				allpatients.remove(times);
+				goodtimes++;
+			}
+			times++;
+			if (times == previousSize-1) {
+				times = 0;
+			}
+		} while (sortList.size() != previousSize);
+		
+		for (int i = 0; i < allpatients.size(); i++) {
+         if(i>numberVaccines) {
+        	 sortList.remove(i);
+		}
+		}
+		return sortList;
+	}
+
 	@Override
 	public List<Patient> filterPatient(String dateFrom, String dateTo) {
 		List<Patient> patients = new ArrayList<Patient>();
 		try {
-			
-			String sql = "SELECT * FROM  patients WHERE dateIntroduced <= ? AND dateIntroduced >= ?";
 
+			String sql = "SELECT * FROM  patients WHERE dateIntroduced <= ? AND dateIntroduced >= ?";
 
 			PreparedStatement prep = c.prepareStatement(sql);
 
+			prep.setDate(1, Date.valueOf(dateTo));
 
-				prep.setDate(1, Date.valueOf(dateTo));
-
-				prep.setDate(2, Date.valueOf(dateFrom));
-			
-
-		
+			prep.setDate(2, Date.valueOf(dateFrom));
 
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
@@ -936,38 +1078,33 @@ public class JDBCManagment implements Cov_Manager {
 				String loc_hosp = rs.getString("hos_location");
 				String blood = rs.getString("bloodType");
 				boolean vaccin = rs.getBoolean("vaccinated");
-				Date dateIntroduced= rs.getDate("dateIntroduced"); 
+				Date dateIntroduced = rs.getDate("dateIntroduced");
 
-				List <Medication> medicationPatient= Main.getInter().getMedicationfromPatient(id);
-				List <Other_Pathologies> Other_Pathologies= Main.getInter().getPathofromPatient(id);
-				
+				List<Medication> medicationPatient = Main.getInter().getMedicationfromPatient(id);
+				List<Other_Pathologies> Other_Pathologies = Main.getInter().getPathofromPatient(id);
 
 				Patient patient = new Patient(id, loc_hosp, patientname, birthday, social_security, height, weight,
-						sexo, infec, alive, hosp, vaccin, blood,dateIntroduced,medicationPatient,Other_Pathologies);
+						sexo, infec, alive, hosp, vaccin, blood, dateIntroduced, medicationPatient, Other_Pathologies);
 				patients.add(patient);
 			}
 			rs.close();
 			prep.close();
-			} catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return patients;
 	}
+
 	@Override
 	public List<Patient> getPatientbyBD(String BDdate) {
 		List<Patient> patients = new ArrayList<Patient>();
 		try {
-			
-			String sql = "SELECT * FROM  patients WHERE birthday = ? ";
 
+			String sql = "SELECT * FROM  patients WHERE birthday = ? ";
 
 			PreparedStatement prep = c.prepareStatement(sql);
 
-
-				prep.setDate(1, Date.valueOf(BDdate));
-			
-
-		
+			prep.setDate(1, Date.valueOf(BDdate));
 
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
@@ -989,38 +1126,33 @@ public class JDBCManagment implements Cov_Manager {
 				String loc_hosp = rs.getString("hos_location");
 				String blood = rs.getString("bloodType");
 				boolean vaccin = rs.getBoolean("vaccinated");
-				Date dateIntroduced= rs.getDate("dateIntroduced"); 
+				Date dateIntroduced = rs.getDate("dateIntroduced");
 
-				List <Medication> medicationPatient= Main.getInter().getMedicationfromPatient(id);
-				List <Other_Pathologies> Other_Pathologies= Main.getInter().getPathofromPatient(id);
-				
+				List<Medication> medicationPatient = Main.getInter().getMedicationfromPatient(id);
+				List<Other_Pathologies> Other_Pathologies = Main.getInter().getPathofromPatient(id);
 
 				Patient patient = new Patient(id, loc_hosp, patientname, birthday, social_security, height, weight,
-						sexo, infec, alive, hosp, vaccin, blood,dateIntroduced,medicationPatient,Other_Pathologies);
+						sexo, infec, alive, hosp, vaccin, blood, dateIntroduced, medicationPatient, Other_Pathologies);
 				patients.add(patient);
 			}
 			rs.close();
 			prep.close();
-			} catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return patients;
-	}	
+	}
+
 	@Override
 	public List<Patient> getPatientbyDateIntro(String dateintro) {
 		List<Patient> patients = new ArrayList<Patient>();
 		try {
-			
-			String sql = "SELECT * FROM  patients WHERE dateIntroduced = ? ";
 
+			String sql = "SELECT * FROM  patients WHERE dateIntroduced = ? ";
 
 			PreparedStatement prep = c.prepareStatement(sql);
 
-
-				prep.setDate(1, Date.valueOf(dateintro));
-			
-
-		
+			prep.setDate(1, Date.valueOf(dateintro));
 
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
@@ -1042,19 +1174,18 @@ public class JDBCManagment implements Cov_Manager {
 				String loc_hosp = rs.getString("hos_location");
 				String blood = rs.getString("bloodType");
 				boolean vaccin = rs.getBoolean("vaccinated");
-				Date dateIntroduced= rs.getDate("dateIntroduced"); 
+				Date dateIntroduced = rs.getDate("dateIntroduced");
 
-				List <Medication> medicationPatient= Main.getInter().getMedicationfromPatient(id);
-				List <Other_Pathologies> Other_Pathologies= Main.getInter().getPathofromPatient(id);
-				
+				List<Medication> medicationPatient = Main.getInter().getMedicationfromPatient(id);
+				List<Other_Pathologies> Other_Pathologies = Main.getInter().getPathofromPatient(id);
 
 				Patient patient = new Patient(id, loc_hosp, patientname, birthday, social_security, height, weight,
-						sexo, infec, alive, hosp, vaccin, blood,dateIntroduced,medicationPatient,Other_Pathologies);
+						sexo, infec, alive, hosp, vaccin, blood, dateIntroduced, medicationPatient, Other_Pathologies);
 				patients.add(patient);
 			}
 			rs.close();
 			prep.close();
-			} catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return patients;
@@ -1065,177 +1196,181 @@ public class JDBCManagment implements Cov_Manager {
 		List<Medication> medicaciones = new ArrayList<Medication>();
 		try {
 			String sql = "SELECT * FROM medication WHERE name LIKE ?";
-			PreparedStatement prep= c.prepareStatement(sql);
+			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, "%" + name + "%");
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int med_id = rs.getInt("id");
 				String med_name = rs.getString("name");
-				Medication medi = new Medication (med_id, med_name);
+				Medication medi = new Medication(med_id, med_name);
 				medicaciones.add(medi);
 			}
 			rs.close();
 			prep.close();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return medicaciones;
 	}
+
 	@Override
-	
+
 	public Medication getLastMedication() {
 		try {
 			String sql = "SELECT * FROM medication WHERE id = (SELECT MAX(id) FROM medication)";
-			PreparedStatement prep= c.prepareStatement(sql);
+			PreparedStatement prep = c.prepareStatement(sql);
 			ResultSet rs = prep.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				Integer id_med = rs.getInt("id");
 				String nombre = rs.getString("name");
 				return new Medication(id_med, nombre);
 			}
 			rs.close();
 			prep.close();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;		
+		return null;
 	}
 
 	@Override
 	public Medication getMedication(String name) {
 		try {
 			String sql = "SELECT * FROM medication WHERE name LIKE ?";
-			PreparedStatement prep= c.prepareStatement(sql);
+			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, "%" + name + "%");
 			ResultSet rs = prep.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				Integer id_med = rs.getInt("id");
 				String nombre = rs.getString("name");
 				return new Medication(id_med, nombre);
 			}
 			rs.close();
 			prep.close();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;		
-	}	
+		return null;
+	}
+
 	@Override
 	public Medication getMedicationId(Integer id) {
 		try {
 			String sql = "SELECT * FROM medication WHERE id LIKE ?";
-			PreparedStatement prep= c.prepareStatement(sql);
+			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, id);
 			ResultSet rs = prep.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				Integer id_med = rs.getInt("id");
 				String nombre = rs.getString("name");
 				return new Medication(id_med, nombre);
 			}
 			rs.close();
 			prep.close();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;		
-	}	
+		return null;
+	}
+
 	@Override
 	public Other_Pathologies getPathologyId(Integer id) {
 		try {
 			String sql = "SELECT * FROM other_pathologies WHERE id LIKE ?";
-			PreparedStatement prep= c.prepareStatement(sql);
+			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, id);
 			ResultSet rs = prep.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				Integer idpatho = rs.getInt("id");
 				String nombre = rs.getString("name");
 				return new Other_Pathologies(idpatho, nombre);
 			}
 			rs.close();
 			prep.close();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;		
+		return null;
 	}
+
 	@Override
 	public List<Medication> getMedicationfromPatient(int id) {
 		List<Medication> medicaciones = new ArrayList<Medication>();
 
 		try {
 			String sql = "SELECT m.id, m.name FROM medication AS m JOIN pat_medi AS pm ON pm.id_medi = m.id JOIN patients AS p ON p.id=pm.id_pat WHERE p.id = ? ";
-				
-			PreparedStatement prep= c.prepareStatement(sql);
+
+			PreparedStatement prep = c.prepareStatement(sql);
 
 			prep.setInt(1, id);
 
 			ResultSet rs = prep.executeQuery();
 
-			while(rs.next()) {
-				
+			while (rs.next()) {
+
 				Integer nid = rs.getInt("id");
 				String nombre = rs.getString("name");
-				Medication medi = new Medication (nid, nombre);
-				System.out.println("med"+medi);
+				Medication medi = new Medication(nid, nombre);
+				System.out.println("med" + medi);
 
 				medicaciones.add(medi);
-				return medicaciones;		
+				return medicaciones;
 
-				}
-			
+			}
+
 			rs.close();
 			prep.close();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return medicaciones;		
-	}	
+		return medicaciones;
+	}
+
 	@Override
 	public List<Other_Pathologies> getPathofromPatient(int id) {
 		List<Other_Pathologies> paths = new ArrayList<Other_Pathologies>();
 
 		try {
 			String sql = "SELECT p.id, p.name FROM other_pathologies AS p JOIN pat_patho AS pp ON pp.id_patho = p.id JOIN patients AS pat ON pat.id=pp.id_pat WHERE pat.id = ? ";
-				
-			PreparedStatement prep= c.prepareStatement(sql);
+
+			PreparedStatement prep = c.prepareStatement(sql);
 
 			prep.setInt(1, id);
 
 			ResultSet rs = prep.executeQuery();
 
-			while(rs.next()) {
-				
+			while (rs.next()) {
+
 				Integer nid = rs.getInt("id");
 				String nombre = rs.getString("name");
-				Other_Pathologies pathology = new Other_Pathologies (nid, nombre);
-				System.out.println("lla pat es "+ pathology);
+				Other_Pathologies pathology = new Other_Pathologies(nid, nombre);
+				System.out.println("lla pat es " + pathology);
 
 				paths.add(pathology);
-				return paths;		
+				return paths;
 
-				}
-			
+			}
+
 			rs.close();
 			prep.close();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return paths;		
+		return paths;
 	}
+
 	@Override
 	public void deleteAssignmentMedication(Integer idPatient, int idmedication) {
 		try {
-		String sql = "DELETE FROM pat_medi WHERE (id_pat = ? AND id_medi = ?)";
-		PreparedStatement prep = c.prepareStatement(sql);
-		prep.setInt(1, idPatient);
-		prep.setInt(2, idmedication);
-		prep.executeUpdate();
-		prep.close();
+			String sql = "DELETE FROM pat_medi WHERE (id_pat = ? AND id_medi = ?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, idPatient);
+			prep.setInt(2, idmedication);
+			prep.executeUpdate();
+			prep.close();
 
-		
-			
 		} catch (Exception e) {
-}
+		}
 	}
 
 	@Override
@@ -1248,10 +1383,7 @@ public class JDBCManagment implements Cov_Manager {
 			prep.executeUpdate();
 			prep.close();
 
-			
-				
-			} catch (Exception e) {
-	}	
+		} catch (Exception e) {
+		}
 	}
-	}
-
+}

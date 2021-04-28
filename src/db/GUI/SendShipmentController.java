@@ -74,7 +74,7 @@ public class SendShipmentController implements Initializable {
     void sendvaccinesbutton(ActionEvent event) {
     	this.ShipmentList.clear();
 
-    	Shipment snew= new Shipment(Integer.parseInt(textamountvaccinessend.getText()),Date.valueOf(LocalDate.now()));
+    	Shipment snew= new Shipment(Integer.parseInt(textamountvaccinessend.getText()),Date.valueOf(LocalDate.now()),lsendvaccines.getName());
 
     	Main.getInter().addShipment(snew, Main.getInter().getLab(lsendvaccines.getId()), Main.getInter().getAdministration());
         Main.getInter().ModifyVaccinesFromLab(Integer.parseInt("-"+textamountvaccinessend.getText()), lsendvaccines.getId());

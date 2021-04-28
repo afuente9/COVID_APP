@@ -100,5 +100,9 @@ public interface Cov_Manager {
 	void ModifyVaccinesFromLab(int amount, int id);
 	void ModifyVaccinesAdmin(int amount);
 	List<Shipment> getAllShipment();
+	int getNumberVaccinesAdmin();
+	List<Shipment> getAllShipmentforAdminView();
+	int getNumberVaccinesLab(int id);
+	List<Patient> getSimulatedPatients(int availableVaccines);
 
 }

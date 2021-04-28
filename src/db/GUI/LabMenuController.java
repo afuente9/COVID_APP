@@ -52,16 +52,20 @@ public void setL(Lab l) {
     @FXML
     void addvaccinesbutton(ActionEvent event) {
     	String name= "NewVaccinesView.fxml";
+    	
     	NewVaccinesController controller = null;
+
      	try {
     		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
-    	Parent root;
-    	
-    		root = loader.load();
-    	
+
+           	Parent root = loader.load();
+
     	  controller = loader.getController();
-controller.setLnewvaccines(l);    
-controller.setLabnamenewvaccines("Recent batches of vaccines by " +l.getName());
+
+           controller.setLnewvaccines(l); 
+   		controller.setTotalNumberVaccines1("You have "+ Main.getInter().getNumberVaccinesLab(l.getId())+ " vaccines");
+
+
     	Scene scene = new Scene(root);
     	Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);

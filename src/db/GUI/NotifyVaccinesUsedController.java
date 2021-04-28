@@ -13,7 +13,8 @@ public class NotifyVaccinesUsedController {
     @FXML
     void AcceptVaccinesUsed(ActionEvent event) {
 int amount= Integer.parseInt(textamountofvaccines.getText());
-//TODO government.setVaccines()=government.getVaccines()-amount;
+Main.getInter().ModifyVaccinesAdmin(Integer.parseInt("-"+amount));
+textamountofvaccines.setText("");
     }
 
     @FXML

@@ -7,22 +7,41 @@ public class Shipment implements Serializable{
 	
 	private Integer id;
 	private int Vaccines;
+	private String LabName;
 	private Date date_ship;
 	
 	public Shipment() {
 		super();
 	}
 	
-	public Shipment(Integer id, int vaccines, Date date_ship) {
+	public Shipment(Integer id, int vaccines, Date date_ship,String LabName ) {
 		super();
 		this.id = id;
 		this.Vaccines = vaccines;
 		this.date_ship = date_ship;
+		this.LabName=LabName;
 	}
-	public Shipment( int vaccines, Date date_ship) {
+	public Shipment( int vaccines, Date date_ship, String LabName) {
 		super();
 		this.Vaccines = vaccines;
 		this.date_ship = date_ship;
+		this.LabName=LabName;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public String getLabName() {
+		return LabName;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setLabName(String labName) {
+		LabName = labName;
 	}
 
 	@Override

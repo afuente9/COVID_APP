@@ -65,6 +65,28 @@ public class Patient implements Serializable{
 
 	public Patient(Integer id, String hos_location, String name, Date birthday, String social_security, float height,
 			float weight, Sex sex, boolean infected, boolean alive, String hospital, boolean Vaccinated,
+			String bloodType,Date dateIntroduced,List<Medication> medication,List<Other_Pathologies> other_pathologies,int score) {
+		super();
+		this.id = id;
+		this.hos_location = hos_location;
+		this.name = name;
+		this.birthday = birthday;
+		this.social_security = social_security;
+		this.height = height;
+		this.weight = weight;
+		this.sex = sex;
+		this.infected = infected;
+		this.alive = alive;
+		this.hospital = hospital;
+		this.Vaccinated = Vaccinated;
+		this.bloodType = bloodType;
+ 		this.DateIntroduced=dateIntroduced;
+		this.medication=medication;
+		this.other_pathologies=other_pathologies;
+		this.score=score;
+
+	}public Patient(Integer id, String hos_location, String name, Date birthday, String social_security, float height,
+			float weight, Sex sex, boolean infected, boolean alive, String hospital, boolean Vaccinated,
 			String bloodType,Date dateIntroduced,List<Medication> medication,List<Other_Pathologies> other_pathologies) {
 		super();
 		this.id = id;
@@ -83,6 +105,7 @@ public class Patient implements Serializable{
  		this.DateIntroduced=dateIntroduced;
 		this.medication=medication;
 		this.other_pathologies=other_pathologies;
+
 	}
 	public Patient(Integer id, String hos_location, String name, Date birthday, String social_security, float height,
 			float weight, Sex sex, boolean infected, boolean alive, String hospital, boolean Vaccinated,
