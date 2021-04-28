@@ -1418,4 +1418,34 @@ public class JDBCManagment implements Cov_Manager {
 		}
 		
 	}
+
+	@Override
+	public void getPicFromDoc(int id) {
+		try {
+			String sql;
+			sql = "SELECT image FROM doctors WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, id);
+			prep.executeQuery();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void getPicFromLab(int id) {
+		try {
+			String sql;
+			sql = "SELECT image FROM doctors WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, id);
+			prep.executeQuery();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 }
