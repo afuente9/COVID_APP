@@ -1386,4 +1386,36 @@ public class JDBCManagment implements Cov_Manager {
 		} catch (Exception e) {
 		}
 	}
+
+	@Override
+	public void changeDocPic(Doctor d, byte[] pic) {
+		try {
+			String sql;
+			sql = "UPDATE doctors SET image = ? WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setBytes(1, pic);
+			prep.setInt(2, d.getId() );
+			prep.executeUpdate();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void changeLabPic(Lab l, byte[] pic) {
+		try {
+			String sql;
+			sql = "UPDATE doctors SET image = ? WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setBytes(1, pic);
+			prep.setInt(2, l.getId() );
+			prep.executeUpdate();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 }

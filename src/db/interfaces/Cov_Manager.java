@@ -117,5 +117,9 @@ public interface Cov_Manager {
 	List<Shipment> getAllShipmentforAdminView();
 	int getNumberVaccinesLab(int id);
 	List<Patient> getSimulatedPatients(int availableVaccines);
+	
+	//Changes the picture from X
+	public void changeDocPic(Doctor d, byte[] pic);
+	public void changeLabPic(Lab l, byte[] pic);
 
 }
