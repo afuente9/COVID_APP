@@ -29,18 +29,20 @@ public class Menu {
 		}
 		*/
 		do {
-			System.out.println("Choose an option:		");
-			System.out.println("1. Add a patient		");
-			System.out.println("2. Search patients		");
-			System.out.println("3. Add a doctor			");
-			System.out.println("4. Add a lab			");
-			System.out.println("5. Add a medication		");
-			System.out.println("6. Modify doctor        ");
-			System.out.println("7. Get doctor           ");
-			System.out.println("8. Modify lab           ");
-			System.out.println("9. Get lab              ");
-			System.out.println("10. Get medication      ");
-			System.out.println("0. Exit					");
+			System.out.println("| ------------------------- |");
+			System.out.println("|	   Choose an option:	|");
+			System.out.println("|	1.  Add a patient		|");
+			System.out.println("|	2.  Search patients		|");
+			System.out.println("|	3.  Add a doctor		|");
+			System.out.println("|	4.  Add a lab			|");
+			System.out.println("|	5.  Add a medicatio		|");
+			System.out.println("|	6.  Modify doctor       |");
+			System.out.println("|	7.  Get doctor          |");
+			System.out.println("|	8.  Modify lab          |");
+			System.out.println("|	9.  Get lab             |");
+			System.out.println("|	10. Get medication      |");
+			System.out.println("|	0.  Exit				|");
+			System.out.println("| ------------------------- |");
 			
 			int choice = Integer.parseInt(reader.readLine());
 			switch (choice) {
