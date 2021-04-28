@@ -54,8 +54,18 @@ public class MainMenuController {
 	    	  controller = loader.getController();
 	    	  controller.setD(d);
 	    	  controller.setDoctorName(d.getName());
+	    	  //controller.setDoctorPic(Main.getInter().getPicFromDoc(1));
+	    	  /*  BufferedImage bImage = ImageIO.read(new File("sample.jpg"));
+      ByteArrayOutputStream bos = new ByteArrayOutputStream();
+      ImageIO.write(bImage, "jpg", bos );
+      byte [] data = bos.toByteArray();
+      ByteArrayInputStream bis = new ByteArrayInputStream(data);
+      BufferedImage bImage2 = ImageIO.read(bis);
+      ImageIO.write(bImage2, "jpg", new File("output.jpg") );
+      System.out.println("image created");*/
 	    	Scene scene = new Scene(root);
 	    	Stage stage = new Stage();
+	    	
 	        stage.initModality(Modality.APPLICATION_MODAL);
 	        stage.setScene(scene);
 	        stage.showAndWait();

@@ -1,7 +1,12 @@
 
 	package db.GUI;
 
-	import java.io.IOException;
+	import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import db.pojos.Doctor;
 import javafx.event.ActionEvent;
@@ -11,16 +16,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 	import javafx.scene.control.Label;
-	import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-	public class DoctorMenuController {
+	public class DoctorMenuController  {
         Doctor d;
 	    public Doctor getD() {
 			return d;
 		}
 
+	  
 
 
 		public void setD(Doctor d) {
@@ -48,7 +56,7 @@ import javafx.stage.Stage;
 	    private Button ModifyData;
 
 	    @FXML
-	    private ImageView Doctor_Picture;
+	    private ImageView DoctorPic;
 
 	    @FXML
 	    void OnAddPatient(ActionEvent event) {
@@ -121,6 +129,94 @@ import javafx.stage.Stage;
 	    	}
 
 	    }
+	    @FXML
+	    void onChangePicDoc(ActionEvent event) {
+	    	try {
+	    		
+	    
+	    	final FileChooser fileChooser= new FileChooser();
+	    	File file = fileChooser.showOpenDialog((Stage) this.DoctorName.getScene().getWindow());
+	    	
+	    	if(file.isFile() && file.getName().contains(".jpg")) {
+	    		String thumbURL = file.toURI().toURL().toString();
+	    		Image imgLoad= new Image(thumbURL,500,300,true,true,true);
+	    		System.out.println("fnriuferiusiaoiasdfj");
+	    		this.DoctorPic.setImage(imgLoad);
+	    		 BufferedImage bImage = ImageIO.read(file);
+	    	      ByteArrayOutputStream bos = new ByteArrayOutputStream();
+	    	      ImageIO.write(bImage, "jpg", bos );
+	    	      byte [] data = bos.toByteArray();
+	    		Main.getInter().changeDocPic(d, data);
+	    		
+	    	}
+	    		
+	    	}catch (Exception e) {e.printStackTrace();
+	    	}
+	    }
+
+
+
+
+		public Button getAdd_Patient() {
+			return Add_Patient;
+		}
+
+
+
+
+		public Button getSearchModify_Patient() {
+			return SearchModify_Patient;
+		}
+
+
+
+
+		public Button getModifyData() {
+			return ModifyData;
+		}
+
+
+
+
+		public ImageView getDoctorPic() {
+			return DoctorPic;
+		}
+
+
+
+
+		public void setDoctorName(Label doctorName) {
+			DoctorName = doctorName;
+		}
+
+
+
+
+		public void setAdd_Patient(Button add_Patient) {
+			Add_Patient = add_Patient;
+		}
+
+
+
+
+		public void setSearchModify_Patient(Button searchModify_Patient) {
+			SearchModify_Patient = searchModify_Patient;
+		}
+
+
+
+
+		public void setModifyData(Button modifyData) {
+			ModifyData = modifyData;
+		}
+
+
+
+
+		public void setDoctorPic(ImageView doctorPic) {
+			DoctorPic = doctorPic;
+		}
+	    
 
 	}
 
