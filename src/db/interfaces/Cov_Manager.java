@@ -83,16 +83,29 @@ public interface Cov_Manager {
 	
 	//Gets the medication based on the name
 	public Medication getMedication(String name);
+	
+	//Gets the last X
 	Patient getLastPatient();
 	Medication getLastMedication();
 	Other_Pathologies getLastPath();
+	
+	//Modifies a patient (located usin the ID) atribute (atrib) to the value (value)
 	void modifyPatient(int iden, String atrib, String value);
+	
+	//Gets all the medications associated to a patient that is located ussing its ID
 	public List<Medication> getMedicationfromPatient(int id);
+	
+	//Deletes X from the patient list
 	void deleteAssignmentPathology(int idPatient, int idpatho);
 	void deleteAssignmentMedication(Integer idPatient, int idmedication);
+	
+	//Filters the patients between two dates
 	List<Patient> filterPatient(String dateFrom, String dateTo);
+	
+	//Gets the ID from X
 	Medication getMedicationId(Integer id);
 	Other_Pathologies getPathologyId(Integer id);
+	
 	List<Other_Pathologies> getPathofromPatient(int id);
 	List<Patient> getPatientbyBD(String BDdate);
 	List<Patient> getPatientbyDateIntro(String dateintro);
