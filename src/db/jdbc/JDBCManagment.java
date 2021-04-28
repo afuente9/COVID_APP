@@ -1407,7 +1407,7 @@ public class JDBCManagment implements Cov_Manager {
 	public void changeLabPic(Lab l, byte[] pic) {
 		try {
 			String sql;
-			sql = "UPDATE doctors SET image = ? WHERE id = ?";
+			sql = "UPDATE lab SET image = ? WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setBytes(1, pic);
 			prep.setInt(2, l.getId() );
@@ -1438,7 +1438,7 @@ public class JDBCManagment implements Cov_Manager {
 	public void getPicFromLab(int id) {
 		try {
 			String sql;
-			sql = "SELECT image FROM doctors WHERE id = ?";
+			sql = "SELECT image FROM lab WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, id);
 			prep.executeQuery();
