@@ -10,26 +10,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import db.pojos.*;
-import db.pojos.users.Role;
-import db.pojos.users.User;
+//import db.pojos.users.Role;
+//import db.pojos.users.User;
 import db.interfaces.Cov_Manager;
-import db.interfaces.UserManager;
+//import db.interfaces.UserManager;
 import db.jdbc.JDBCManagment;
-import db.jpa.JPAUserManagment;
+//import db.jpa.JPAUserManagment;
 
 public class Menu {
 	//public Day today=ultimo dia a�adido a la lista de dias;
 
 	
 	private static Cov_Manager inter = new JDBCManagment();
-	private static UserManager userman = new JPAUserManagment();
+	//private static UserManager userman = new JPAUserManagment();
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	
 	public static void main(String[] args) throws Exception {
 		inter.connect();
-		userman.connect();
+		//userman.connect();
 		/*if (today.getDate() != LocalDate.now()) {
 			newDay();
 		
@@ -44,15 +44,15 @@ public class Menu {
 			int choice = Integer.parseInt(reader.readLine());
 			switch (choice) {
 			case 1:
-				register();
+				//register();
 				break;
 			case 2:
-				login();
+				//login();
 				break;
 			case 0:
 				//TODO ESTO PARA LA GUI?
 				inter.disconnect();
-				userman.disconnect();
+				//userman.disconnect();
 				System.exit(0);
 			default:
 				break;
@@ -61,7 +61,7 @@ public class Menu {
 		while(true);
 	}
 
-	private static void register() throws Exception{ 
+	/*private static void register() throws Exception{ 
 		//TODO como queremos que eligan el role que tienen, ¿es lo primero que eligen o lo ultimo?
 		System.out.println("Please, introduce your email address:");
 		String email = reader.readLine();
@@ -76,9 +76,9 @@ public class Menu {
 		byte[] hash = md.digest();
 		User u = new User(email, hash, role);
 		userman.newUser(u);
-	}
+	}*/
 	
-	private static void login() throws Exception{
+	/*private static void login() throws Exception{
 		System.out.println("Please, introduce your email address:");
 		String email = reader.readLine();
 		System.out.println("Now, please, introduce your password:");
@@ -94,7 +94,7 @@ public class Menu {
 		}else if(u.getRole().getName().equalsIgnoreCase("laboratory")) {
 			labMenu();
 		}
-	}
+	}*/
 	
 	private static void administrationMenu() throws Exception{
 		do {

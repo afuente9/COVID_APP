@@ -1,5 +1,5 @@
 package db.jpa;
-
+/*
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -82,3 +82,4 @@ public class JPAUserManagment implements UserManager{
 	}
 
 }
+*/

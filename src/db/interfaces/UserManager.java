@@ -1,5 +1,5 @@
 package db.interfaces;
-
+/*
 import java.util.List;
 
 import db.pojos.users.Role;
@@ -15,4 +15,4 @@ public interface UserManager {
 	public List<Role> getRoles();
 	public User checkPassword(String email, String password);
 	
-}
+}*/
