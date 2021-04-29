@@ -1,6 +1,8 @@
 package db.ui;
 
 import java.io.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -8,41 +10,127 @@ import java.util.ArrayList;
 import java.util.List;
 
 import db.pojos.*;
-
+import db.pojos.users.Role;
+import db.pojos.users.User;
 import db.interfaces.Cov_Manager;
+import db.interfaces.UserManager;
 import db.jdbc.JDBCManagment;
+import db.jpa.JPAUserManagment;
 
 public class Menu {
 	//public Day today=ultimo dia a�adido a la lista de dias;
 
 	
 	private static Cov_Manager inter = new JDBCManagment();
+	private static UserManager userman = new JPAUserManagment();
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	
 	public static void main(String[] args) throws Exception {
 		inter.connect();
+		userman.connect();
 		/*if (today.getDate() != LocalDate.now()) {
 			newDay();
 		
 		}
 		*/
 		do {
-			System.out.println("| ------------------------- |");
+			System.out.println("|	   Choose an option:	|");
+			System.out.println("|	1.  Register			|");
+			System.out.println("|	2.  Login				|");
+			System.out.println("|	0.  Exit				|");
+			
+			int choice = Integer.parseInt(reader.readLine());
+			switch (choice) {
+			case 1:
+				register();
+				break;
+			case 2:
+				login();
+				break;
+			case 0:
+				//TODO ESTO PARA LA GUI?
+				inter.disconnect();
+				userman.disconnect();
+				System.exit(0);
+			default:
+				break;
+			}
+		}
+		while(true);
+	}
+
+	private static void register() throws Exception{ 
+		//TODO como queremos que eligan el role que tienen, ¿es lo primero que eligen o lo ultimo?
+		System.out.println("Please, introduce your email address:");
+		String email = reader.readLine();
+		System.out.println("Now, please, introduce your password:");
+		String password = reader.readLine();
+		System.out.println(userman.getRoles());
+		System.out.println("Introduce the chosen role ID:");
+		int id = Integer.parseInt(reader.readLine());
+		Role role = userman.getRole(id);
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		md.update(password.getBytes());
+		byte[] hash = md.digest();
+		User u = new User(email, hash, role);
+		userman.newUser(u);
+	}
+	
+	private static void login() throws Exception{
+		System.out.println("Please, introduce your email address:");
+		String email = reader.readLine();
+		System.out.println("Now, please, introduce your password:");
+		String password = reader.readLine();
+		User u = userman.checkPassword(email, password);
+		if(u == null) {
+			System.out.println("Wrong email or password");
+			return;
+		}else if(u.getRole().getName().equalsIgnoreCase("administration")) {
+			administrationMenu();
+		}else if(u.getRole().getName().equalsIgnoreCase("doctor")) {
+			doctorMenu();
+		}else if(u.getRole().getName().equalsIgnoreCase("laboratory")) {
+			labMenu();
+		}
+	}
+	
+	private static void administrationMenu() throws Exception{
+		do {
+			System.out.println("|	   Choose an option:		|");
+			System.out.println("|	1.  Total nº of vaccines	|");
+			System.out.println("|	2.  Simulation				|");
+			System.out.println("|	3.  Vaccines used			|");
+			System.out.println("|	0.  Exit				|");
+			
+			int choice = Integer.parseInt(reader.readLine());
+			switch (choice) {
+			case 1:
+				//totalNVaccines();
+				break;
+			case 2:
+				//simulation();
+				break;
+			case 3:
+				//vaccinesUsed();
+				break;
+			case 0:
+				return;
+			default:
+				break;
+			}
+		}
+		while(true);
+	}
+	
+	private static void doctorMenu() throws Exception{
+		do {
 			System.out.println("|	   Choose an option:	|");
 			System.out.println("|	1.  Add a patient		|");
 			System.out.println("|	2.  Search patients		|");
-			System.out.println("|	3.  Add a doctor		|");
-			System.out.println("|	4.  Add a lab			|");
-			System.out.println("|	5.  Add a medicatio		|");
-			System.out.println("|	6.  Modify doctor       |");
-			System.out.println("|	7.  Get doctor          |");
-			System.out.println("|	8.  Modify lab          |");
-			System.out.println("|	9.  Get lab             |");
-			System.out.println("|	10. Get medication      |");
+			System.out.println("|	3.  Modify doctor 		|");
 			System.out.println("|	0.  Exit				|");
-			System.out.println("| ------------------------- |");
 			
 			int choice = Integer.parseInt(reader.readLine());
 			switch (choice) {
@@ -53,40 +141,53 @@ public class Menu {
 				searchPatientGeneric();
 				break;
 			case 3:
-				addDoctor();
-				break;
-			case 4:
-				addLab();
-				break;
-			case 5:
-				addMedication();
-				break;
-			case 6:
 				modifyDoctor();
 				break;
-			case 7:
-				getDoc();
-				break;
-			case 8:
-				modifyLab();
-				break;
-			case 9:
-				getLab();
-				break;
-			case 10:
-				searchMed();
-				break;
 			case 0:
-				//TODO ESTO PARA LA GUI?
-				inter.disconnect();
-				System.exit(0);
+				return;
 			default:
 				break;
 			}
 		}
 		while(true);
 	}
-
+	
+	private static void labMenu() throws Exception{
+		do {
+			System.out.println("|	   Choose an option:			|");
+			System.out.println("|	1.  View Stadistics				|");
+			System.out.println("|	2.  Search patients				|");
+			System.out.println("|	3.  Send new Shipment			|");
+			System.out.println("|	4.  Add new batch of vaccines	|");
+			System.out.println("|	5.  Modify lab  				|");
+			System.out.println("|	0.  Exit						|");
+			
+			int choice = Integer.parseInt(reader.readLine());
+			switch (choice) {
+			case 1:
+				//viewStadistics();
+				break;
+			case 2:
+				searchPatientGeneric();
+				break;
+			case 3:
+				//newShipment();
+				break;
+			case 4:
+				//newBatch();
+				break;
+			case 5:
+				modifyLab();
+				break;
+			case 0:
+				return;
+			default:
+				break;
+			}
+		}
+		while(true);
+	}
+	
 	private static void searchMed() {
 		try {
 		System.out.println("Tell me the name of the medication: ");
@@ -205,6 +306,7 @@ public class Menu {
 		List<Patient> result = inter.searchPatientByName(p_name);
 		System.out.println("Those are the patients: \n" + result.toString());
 	}
+	
 	private static void searchPatientGeneric() throws Exception {
 		System.out.println("Please, input the person info:");
 		System.out.print("feature: ");
@@ -214,7 +316,6 @@ public class Menu {
 		List<Patient> result = inter.searchPatientGeneric(feature,type);
 		System.out.println("Those are the patients: \n" + result.toString());
 	}
-	
 	
 	private static void addDoctor() throws Exception{
 		System.out.println("Please, input the DOCTOR info:");
@@ -232,7 +333,6 @@ public class Menu {
 		Sex d_sex = Sex.parse(reader.readLine());
 		inter.addDoctor(new Doctor(d_name, d_speciality, Date.valueOf(d_bday), d_cn, d_hosp, d_sex));
 	}
-	
 	
 	private static void addLab() throws Exception{
 		System.out.println("Please, input the LAB info:");
@@ -269,7 +369,8 @@ public class Menu {
 			e.printStackTrace();
 		}
 	}
-		private static void modifyLab() {
+	
+	private static void modifyLab() {
 			try {
 				System.out.print("Laboratory id: ");
 				int iden = Integer.parseInt(reader.readLine());
