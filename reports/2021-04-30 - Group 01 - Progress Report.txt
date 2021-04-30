@@ -1,0 +1,14 @@
+This week we expected to be able to do...
+Finish the resty of the adds, selects and modifys for the Gui
+
+This week we did...
+The multiple UPDATE, DELETE and N-N tables, the JPA and implemented the methods in the GUI menu and the console menu
+
+Optional: Reasons why
+---------------------
+
+Next weeks we will do...
+Implement the XML
+
+Optional: Reasons why
+---------------------
