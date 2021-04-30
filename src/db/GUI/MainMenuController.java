@@ -29,7 +29,65 @@ public class MainMenuController implements Initializable {
     @FXML
     private Label labelDate;
     
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+	/*	
+		Day d1= new Day(323,0,Date.valueOf("2021-04-20"));
+		
+	
+		Day d2= new Day(432,0,Date.valueOf("2021-04-21"));
+	
+		Day d3= new Day(543,0,Date.valueOf("2021-04-22"));
+		
+		Day d4= new Day(555,0,Date.valueOf("2021-04-23"));
+		
+		Day d5= new Day(665,0,Date.valueOf("2021-04-24"));
+		
+		Day d6= new Day(443,0,Date.valueOf("2021-04-25"));
+		
+		Day d7= new Day(564,0,Date.valueOf("2021-04-26"));
+		
+		Day d8= new Day(876,0,Date.valueOf("2021-04-27"));
+		
+		Day d9= new Day(432,0,Date.valueOf("2021-04-28"));
+		
+		Day d0= new Day(132,0,Date.valueOf("2021-04-29"));
+		Main.getInter().addDay(d1);
+		Main.getInter().addDay(d2);
+		Main.getInter().addDay(d3);
+		Main.getInter().addDay(d4);
+		Main.getInter().addDay(d5);
+		Main.getInter().addDay(d6);
+		Main.getInter().addDay(d7);
+		Main.getInter().addDay(d8);
+		Main.getInter().addDay(d9);
+		Main.getInter().addDay(d0);
+*/
 
+
+		  		
+		
+		this.labelDate.setText(""+Date.valueOf(LocalDate.now()));
+		System.out.println("el day es "+Main.getInter().getLastDay().getDate());
+		if ( Main.getInter().getLastDay().getDate().compareTo(Date.valueOf(LocalDate.now()))!=0 ){
+			
+			
+			long daysWithoutChanges = ChronoUnit.DAYS.between(Main.getInter().getLastDay().getDate().toLocalDate(), LocalDate.now());
+			if (daysWithoutChanges>1) {
+				
+			
+			for (long i=1; i<=daysWithoutChanges;i++) {
+
+				Day d= new Day(Main.getInter().getLastDay().getDeaths(),Main.getInter().getLastDay().getAverage(),Date.valueOf(Main.getInter().getLastDay().getDate().toLocalDate().plusDays(i)));
+				Main.getInter().addDay(Main.getInter().getLastDay());
+				
+			}
+			}
+			
+			
+		newDay();		
+}
+}
     @FXML
     void OnSignUpClick(ActionEvent event) {
 		
@@ -141,23 +199,9 @@ public class MainMenuController implements Initializable {
     	}
 
     }
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		this.labelDate.setText(""+Date.valueOf(LocalDate.now()));
-		
-		if ( Main.getInter().getLastDay().getDate()!= Date.valueOf(LocalDate.now())){
-			
-			
-			long daysWithoutChanges = ChronoUnit.DAYS.between(Main.getInter().getLastDay().getDate().toLocalDate(), LocalDate.now());
-			for (int i=0; i<daysWithoutChanges;i++) {
-				Main.getInter().addDay(Main.getInter().getLastDay());
-			}
-			
-			
-		newDay();		
-}
-}
+
 public void newDay() { 
+
 		
 		//TODO  esto pasara if today != ultimo dia metido
 		
@@ -168,9 +212,12 @@ public void newDay() {
 				
 				  float suma=0;
 				  List <Day> last7=new ArrayList();
+
 				  last7= Main.getInter().getLast7Days();
-				  for (int i=0; i<7;i++){
-				  suma +=last7.get(i).getDeaths();
+
+				  for (int i=1; i<=6;i++){
+					  //TODO 
+				  suma +=(last7.get(i).getDeaths()-last7.get(i-1).getDeaths());
 
 				  }
 				  average= suma/7;

@@ -833,12 +833,14 @@ public class JDBCManagment implements Cov_Manager {
 	@Override
 	public int getNumberofDays() {
 		int number = 0;
+
 		try {
-			String sql = "SELECT id FROM days";
+			String sql = "SELECT  id FROM days";
 			PreparedStatement prep = c.prepareStatement(sql);
 			ResultSet rs = prep.executeQuery();
+
 			while (rs.next()) {
-				number++;
+			number++;
 			}
 			rs.close();
 
@@ -848,6 +850,7 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 
 		}
+		System.out.println("el numero es "+number);
 		return number;
 
 	}
@@ -855,8 +858,9 @@ public class JDBCManagment implements Cov_Manager {
 	public int getNumberofDeads() {
 		int number = 0;
 		try {
-			String sql = "SELECT id FROM patients WHERE alive = false";
+			String sql = "SELECT id FROM patients WHERE alive = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setBoolean(1, false);
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				number++;
@@ -878,7 +882,7 @@ public class JDBCManagment implements Cov_Manager {
 	public List<Day> getLast7Days() {
 		List<Day> savedDays = new ArrayList<Day>();
 		try {
-			String sql = "SELECT * FROM days ORDER BY daytime ASC";
+			String sql = "SELECT * FROM days ORDER BY daytime DESC";
 			PreparedStatement prep = c.prepareStatement(sql);
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
@@ -888,11 +892,16 @@ public class JDBCManagment implements Cov_Manager {
 				Date dia = rs.getDate("daytime");
 				savedDays.add(new Day(dayID, falle, media, dia));
 			}
-			
-			for(int i =0;i<Main.getInter().getNumberofDays()-7;i++ ) {
+
+			for(int i =7;i<savedDays.size();i++ ) {
+
 				savedDays.remove(i);
 				
 			}
+			
+			
+
+
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1263,7 +1272,7 @@ public class JDBCManagment implements Cov_Manager {
 			ResultSet rs = prep.executeQuery();
 			if (rs.next()) {
 				Integer id = rs.getInt("id");
-				int deaths = rs.getInt("name");
+				int deaths = rs.getInt("deaths");
 				float average = rs.getFloat("average");
 				Date daytime= rs.getDate("daytime");
 				return new Day(id, deaths,average,daytime);
