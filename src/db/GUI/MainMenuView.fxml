@@ -76,6 +76,11 @@
                </font>
             </Label>
             <Button layoutX="524.0" layoutY="30.0" mnemonicParsing="false" onAction="#onClose" text="Close" />
+            <Label fx:id="labelDate" layoutX="40.0" layoutY="12.0" text="COVIDIST" textOverrun="CLIP">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
       </children>
     </AnchorPane>
   </children>

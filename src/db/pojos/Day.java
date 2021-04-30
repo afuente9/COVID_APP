@@ -17,6 +17,13 @@ public class Day {
 		this.average = average;
 		this.date = date;
 	}
+	public Day( int deaths, float average, Date date) {
+		super();
+		this.id = id;
+		this.deaths = deaths;
+		this.average = average;
+		this.date = date;
+	}
 
 	public List<Day> getSavedDates() {
 		return savedDates;

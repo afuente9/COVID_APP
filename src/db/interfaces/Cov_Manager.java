@@ -125,5 +125,9 @@ public interface Cov_Manager {
 	//Gets the actual image from X
 	public void getPicFromDoc(int id);
 	public void getPicFromLab(int id);
+	Day getLastDay();
+	int getNumberofDeads();
+	List<Day> getLast7Days();
+	int getNumberofDays();
 
 }

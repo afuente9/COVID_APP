@@ -829,15 +829,57 @@ public class JDBCManagment implements Cov_Manager {
 		}
 		return number;
 
-	}
-
+	}	
 	@Override
-	public List<Day> getDay(int id) {
+	public int getNumberofDays() {
+		int number = 0;
+		try {
+			String sql = "SELECT id FROM days";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				number++;
+			}
+			rs.close();
+
+			prep.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return number;
+
+	}
+	@Override
+	public int getNumberofDeads() {
+		int number = 0;
+		try {
+			String sql = "SELECT id FROM patients WHERE alive = false";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				number++;
+			}
+			rs.close();
+
+			prep.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return number;
+
+	}
+	
+	
+	@Override
+	public List<Day> getLast7Days() {
 		List<Day> savedDays = new ArrayList<Day>();
 		try {
-			String sql = "SELECT * FROM days WHERE id_pat = ?";
+			String sql = "SELECT * FROM days ORDER BY daytime ASC";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setInt(1, id);
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int dayID = rs.getInt("id");
@@ -846,6 +888,12 @@ public class JDBCManagment implements Cov_Manager {
 				Date dia = rs.getDate("daytime");
 				savedDays.add(new Day(dayID, falle, media, dia));
 			}
+			
+			for(int i =0;i<Main.getInter().getNumberofDays()-7;i++ ) {
+				savedDays.remove(i);
+				
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -964,7 +1012,7 @@ public class JDBCManagment implements Cov_Manager {
 		try {
 			
 //Hay una sql que me permita coger los N pacientes con los scores mas altos?
-			String sql = "SELECT * FROM  patients";
+			String sql = "SELECT * FROM  patients ORDER BY score DESC ";
 
 			PreparedStatement prep = c.prepareStatement(sql);
 
@@ -1010,39 +1058,14 @@ public class JDBCManagment implements Cov_Manager {
 	}
 
 	private List<Patient> getFinalList(List<Patient> allpatients, int numberVaccines) {
-		List<Patient> sortList = new ArrayList();
-		List<Integer> scores = new ArrayList(allpatients.size());
-
-		for (int i = 0; i < allpatients.size(); i++) {
-
-			scores.add(allpatients.get(i).getScore());
-		}
-
-		Collections.sort(scores);
-		int times = 0;
-		int goodtimes=0;
-		int previousSize = allpatients.size();
-
-		do {
-			System.out.println("dfeiofneo" + times);
-
-			if (scores.get(goodtimes) == allpatients.get(times).getScore()) {
-				sortList.add(allpatients.get(times));
-				allpatients.remove(times);
-				goodtimes++;
-			}
-			times++;
-			if (times == previousSize-1) {
-				times = 0;
-			}
-		} while (sortList.size() != previousSize);
 		
-		for (int i = 0; i < allpatients.size(); i++) {
-         if(i>numberVaccines) {
-        	 sortList.remove(i);
+		
+		for (int i= numberVaccines; i<allpatients.size();i++) {
+			
+			allpatients.remove(i);
+			
 		}
-		}
-		return sortList;
+		return allpatients;
 	}
 
 	@Override
@@ -1224,6 +1247,26 @@ public class JDBCManagment implements Cov_Manager {
 				Integer id_med = rs.getInt("id");
 				String nombre = rs.getString("name");
 				return new Medication(id_med, nombre);
+			}
+			rs.close();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}@Override
+
+	public Day getLastDay() {
+		try {
+			String sql = "SELECT * FROM days WHERE id = (SELECT MAX(id) FROM days)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			if (rs.next()) {
+				Integer id = rs.getInt("id");
+				int deaths = rs.getInt("name");
+				float average = rs.getFloat("average");
+				Date daytime= rs.getDate("daytime");
+				return new Day(id, deaths,average,daytime);
 			}
 			rs.close();
 			prep.close();
@@ -1447,5 +1490,11 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public List<Day> getDay(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
