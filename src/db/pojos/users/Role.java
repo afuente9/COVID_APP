@@ -1,19 +1,19 @@
 package db.pojos.users;
-/*
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;*/
+import javax.persistence.*;
 
-/*
+
 @Entity
-@Table(name = "roles")*/
-/*public class Role implements Serializable{
+@Table(name = "roles")
+public class Role implements Serializable{
 
 	/**
 	 * 
 	 */ 
-	/*private static final long serialVersionUID = 6755642485952853818L;
+	private static final long serialVersionUID = 6755642485952853818L;
 	
 	@Id
 	@GeneratedValue(generator = "roles")
@@ -92,4 +92,3 @@ import javax.persistence.*;*/
 	
 	
 }
-*/

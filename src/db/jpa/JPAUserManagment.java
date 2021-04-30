@@ -1,5 +1,5 @@
 package db.jpa;
-/*
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -60,7 +60,7 @@ public class JPAUserManagment implements UserManager{
 	@Override
 	public List<Role> getRoles() {
 		Query q = em.createNativeQuery("SELECT * FROM roles", Role.class);
-		return (List<Role>) q.getSingleResult();
+		return (List<Role>) q.getResultList();
 	}
 
 	@Override
@@ -76,10 +76,26 @@ public class JPAUserManagment implements UserManager{
 		}catch(NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}catch(NoResultException nre) {
-			nre.printStackTrace();
+			return null;
+		}
+		return null;
+	}
+
+	@Override
+	public Boolean checkEmail(String email) {
+		try {
+			Query q = em.createNativeQuery("SELECT * FROM users WHERE email = ?", User.class);
+			q.setParameter(1, email);
+			User temp = (User)q.getSingleResult();
+			if(temp.getEmail().equalsIgnoreCase(email)) {
+				return true;
+			}else {
+				return false;
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 		return null;
 	}
 
 }
-*/

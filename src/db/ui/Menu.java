@@ -10,49 +10,49 @@ import java.util.ArrayList;
 import java.util.List;
 
 import db.pojos.*;
-//import db.pojos.users.Role;
-//import db.pojos.users.User;
+import db.pojos.users.Role;
+import db.pojos.users.User;
 import db.interfaces.Cov_Manager;
-//import db.interfaces.UserManager;
+import db.interfaces.UserManager;
 import db.jdbc.JDBCManagment;
-//import db.jpa.JPAUserManagment;
+import db.jpa.JPAUserManagment;
 
 public class Menu {
 	//public Day today=ultimo dia a�adido a la lista de dias;
 
 	
 	private static Cov_Manager inter = new JDBCManagment();
-	//private static UserManager userman = new JPAUserManagment();
+	private static UserManager userman = new JPAUserManagment();
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	
 	public static void main(String[] args) throws Exception {
 		inter.connect();
-		//userman.connect();
+		userman.connect();
 		/*if (today.getDate() != LocalDate.now()) {
 			newDay();
 		
 		}
 		*/
 		do {
-			System.out.println("|	   Choose an option:	|");
+			System.out.println("|	   Choose an option:		|");
 			System.out.println("|	1.  Register			|");
-			System.out.println("|	2.  Login				|");
-			System.out.println("|	0.  Exit				|");
+			System.out.println("|	2.  Login			|");
+			System.out.println("|	0.  Exit			|");
 			
 			int choice = Integer.parseInt(reader.readLine());
 			switch (choice) {
 			case 1:
-				//register();
+				register();
 				break;
 			case 2:
-				//login();
+				login();
 				break;
 			case 0:
 				//TODO ESTO PARA LA GUI?
 				inter.disconnect();
-				//userman.disconnect();
+				userman.disconnect();
 				System.exit(0);
 			default:
 				break;
@@ -61,24 +61,30 @@ public class Menu {
 		while(true);
 	}
 
-	/*private static void register() throws Exception{ 
+	private static void register() throws Exception{ 
 		//TODO como queremos que eligan el role que tienen, ¿es lo primero que eligen o lo ultimo?
 		System.out.println("Please, introduce your email address:");
 		String email = reader.readLine();
-		System.out.println("Now, please, introduce your password:");
-		String password = reader.readLine();
-		System.out.println(userman.getRoles());
-		System.out.println("Introduce the chosen role ID:");
-		int id = Integer.parseInt(reader.readLine());
-		Role role = userman.getRole(id);
-		MessageDigest md = MessageDigest.getInstance("MD5");
-		md.update(password.getBytes());
-		byte[] hash = md.digest();
-		User u = new User(email, hash, role);
-		userman.newUser(u);
-	}*/
+		if (userman.checkEmail(email)) {
+			System.out.println("Email already used, try to log in");
+		}
+		else {
+			System.out.println("Now, please, introduce your password:");
+			String password = reader.readLine();
+			System.out.println(userman.getRoles());
+			System.out.println("Introduce the chosen role ID:");
+			int id = Integer.parseInt(reader.readLine());
+			Role role = userman.getRole(id);
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(password.getBytes());
+			byte[] hash = md.digest();
+			User u = new User(email, hash, role);
+			userman.newUser(u);
+		}
+		
+	}
 	
-	/*private static void login() throws Exception{
+	private static void login() throws Exception{
 		System.out.println("Please, introduce your email address:");
 		String email = reader.readLine();
 		System.out.println("Now, please, introduce your password:");
@@ -94,15 +100,15 @@ public class Menu {
 		}else if(u.getRole().getName().equalsIgnoreCase("laboratory")) {
 			labMenu();
 		}
-	}*/
+	}
 	
 	private static void administrationMenu() throws Exception{
 		do {
 			System.out.println("|	   Choose an option:		|");
 			System.out.println("|	1.  Total nº of vaccines	|");
-			System.out.println("|	2.  Simulation				|");
-			System.out.println("|	3.  Vaccines used			|");
-			System.out.println("|	0.  Exit				|");
+			System.out.println("|	2.  Simulation			|");
+			System.out.println("|	3.  Vaccines used		|");
+			System.out.println("|	0.  Go back			|");
 			
 			int choice = Integer.parseInt(reader.readLine());
 			switch (choice) {
@@ -126,11 +132,11 @@ public class Menu {
 	
 	private static void doctorMenu() throws Exception{
 		do {
-			System.out.println("|	   Choose an option:	|");
+			System.out.println("|	   Choose an option:		|");
 			System.out.println("|	1.  Add a patient		|");
 			System.out.println("|	2.  Search patients		|");
 			System.out.println("|	3.  Modify doctor 		|");
-			System.out.println("|	0.  Exit				|");
+			System.out.println("|	0.  Go back			|");
 			
 			int choice = Integer.parseInt(reader.readLine());
 			switch (choice) {
@@ -155,12 +161,12 @@ public class Menu {
 	private static void labMenu() throws Exception{
 		do {
 			System.out.println("|	   Choose an option:			|");
-			System.out.println("|	1.  View Stadistics				|");
-			System.out.println("|	2.  Search patients				|");
+			System.out.println("|	1.  View Stadistics			|");
+			System.out.println("|	2.  Search patients			|");
 			System.out.println("|	3.  Send new Shipment			|");
-			System.out.println("|	4.  Add new batch of vaccines	|");
+			System.out.println("|	4.  Add new batch of vaccines		|");
 			System.out.println("|	5.  Modify lab  				|");
-			System.out.println("|	0.  Exit						|");
+			System.out.println("|	0.  Go back					|");
 			
 			int choice = Integer.parseInt(reader.readLine());
 			switch (choice) {

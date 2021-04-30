@@ -1,9 +1,9 @@
 package db.pojos.users;
-/*
+
 import java.io.Serializable;
 import java.util.Arrays;
-import javax.persistence.*; */
-/*
+import javax.persistence.*; 
+
 @Entity
 @Table(name = "users")
 public class User implements Serializable{
@@ -11,7 +11,7 @@ public class User implements Serializable{
 	/**
 	 * 
 	 */
-	/*private static final long serialVersionUID = -3902983480527656994L;
+	private static final long serialVersionUID = -3902983480527656994L;
 
 	@Id
 	@GeneratedValue(generator = "users")
@@ -25,12 +25,16 @@ public class User implements Serializable{
 	@JoinColumn(name = "role_id")
 	private Role role;
 	
+	public User() {
+		super();
+	}
+
 	public User(String email, byte[] password, Role role) {
 		super();
 		this.email = email;
 		this.password = password;
 		this.role = role;
-	}
+	} 
 
 	public Integer getId() {
 		return id;
@@ -96,4 +100,4 @@ public class User implements Serializable{
 	}
 	
 	
-}*/
+}
