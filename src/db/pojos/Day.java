@@ -6,25 +6,41 @@ import java.util.*;
 public class Day {
 	private Integer id;
 	private int deaths;
+	private int infectedPatients;
 	private float average;
 	private Date date;
 	private List<Day> savedDates = new ArrayList();
 
-	public Day(Integer id, int deaths, float average, Date date) {
+	public Day(Integer id, int deaths,int infectedPatients , float average, Date date) {
 		super();
 		this.id = id;
 		this.deaths = deaths;
+		this.infectedPatients=infectedPatients;
 		this.average = average;
 		this.date = date;
 	}
-	public Day( int deaths, float average, Date date) {
+	public Day( int deaths, int infectedPatients,float average, Date date) {
 		super();
 		this.id = id;
 		this.deaths = deaths;
+		this.infectedPatients=infectedPatients;
+
 		this.average = average;
 		this.date = date;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+	public int getInfectedPatients() {
+		return infectedPatients;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public void setInfectedPatients(int infectedPatients) {
+		this.infectedPatients = infectedPatients;
+	}
 	public List<Day> getSavedDates() {
 		return savedDates;
 	}

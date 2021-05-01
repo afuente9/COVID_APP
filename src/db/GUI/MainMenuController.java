@@ -31,28 +31,31 @@ public class MainMenuController implements Initializable {
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-	/*	
-		Day d1= new Day(323,0,Date.valueOf("2021-04-20"));
+		/*
+		Day d1= new Day(323,232,0,Date.valueOf("2021-04-20"));
 		
 	
-		Day d2= new Day(432,0,Date.valueOf("2021-04-21"));
+		Day d2= new Day(432,231,0,Date.valueOf("2021-04-21"));
 	
-		Day d3= new Day(543,0,Date.valueOf("2021-04-22"));
+		Day d3= new Day(543,432,0,Date.valueOf("2021-04-22"));
 		
-		Day d4= new Day(555,0,Date.valueOf("2021-04-23"));
+		Day d4= new Day(555,243,0,Date.valueOf("2021-04-23"));
 		
-		Day d5= new Day(665,0,Date.valueOf("2021-04-24"));
+		Day d5= new Day(665,232,0,Date.valueOf("2021-04-24"));
 		
-		Day d6= new Day(443,0,Date.valueOf("2021-04-25"));
+		Day d6= new Day(443,123,0,Date.valueOf("2021-04-25"));
 		
-		Day d7= new Day(564,0,Date.valueOf("2021-04-26"));
+		Day d7= new Day(564,232,0,Date.valueOf("2021-04-26"));
 		
-		Day d8= new Day(876,0,Date.valueOf("2021-04-27"));
+		Day d8= new Day(876,456,0,Date.valueOf("2021-04-27"));
 		
-		Day d9= new Day(432,0,Date.valueOf("2021-04-28"));
+		Day d9= new Day(432,435,0,Date.valueOf("2021-04-28"));
 		
-		Day d0= new Day(132,0,Date.valueOf("2021-04-29"));
+		Day d0= new Day(132,133,0,Date.valueOf("2021-04-29"));
+		System.out.println("denieu");
+		
 		Main.getInter().addDay(d1);
+
 		Main.getInter().addDay(d2);
 		Main.getInter().addDay(d3);
 		Main.getInter().addDay(d4);
@@ -62,10 +65,10 @@ public class MainMenuController implements Initializable {
 		Main.getInter().addDay(d8);
 		Main.getInter().addDay(d9);
 		Main.getInter().addDay(d0);
-*/
 
 
-		  		
+
+		  	*/	
 		
 		this.labelDate.setText(""+Date.valueOf(LocalDate.now()));
 		System.out.println("el day es "+Main.getInter().getLastDay().getDate());
@@ -78,7 +81,7 @@ public class MainMenuController implements Initializable {
 			
 			for (long i=1; i<=daysWithoutChanges;i++) {
 
-				Day d= new Day(Main.getInter().getLastDay().getDeaths(),Main.getInter().getLastDay().getAverage(),Date.valueOf(Main.getInter().getLastDay().getDate().toLocalDate().plusDays(i)));
+				Day d= new Day(Main.getInter().getLastDay().getDeaths(),Main.getInter().getLastDay().getInfectedPatients(),Main.getInter().getLastDay().getAverage(),Date.valueOf(Main.getInter().getLastDay().getDate().toLocalDate().plusDays(i)));
 				Main.getInter().addDay(Main.getInter().getLastDay());
 				
 			}
@@ -154,6 +157,7 @@ public class MainMenuController implements Initializable {
 			LabMenuController controller = null;
 			byte[] image= null;
 			Lab l_new= new Lab(0,0,"28223, Pozuelo","Pfizer","23433453F",image);
+		//	Main.getInter().addLab(l_new);
 			try {
 	    		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
 	    	Parent root;
@@ -225,7 +229,7 @@ public void newDay() {
 				 
 				
 						//crear un nuevo dia
-				  Day newToday = new Day(Main.getInter().getNumberofDeads(), average,Date.valueOf(LocalDate.now()));
+				  Day newToday = new Day(Main.getInter().getNumberofDeads(),Main.getInter().getNumberofInfecteds(), average,Date.valueOf(LocalDate.now()));
 
 						Main.getInter().addDay(newToday);
 						

@@ -35,6 +35,7 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -55,24 +56,30 @@
             </Label>
             <Button layoutX="83.0" layoutY="98.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="175.0" text="View important info" />
             <ChoiceBox fx:id="typeofpatient" layoutX="258.0" layoutY="40.0" prefWidth="150.0" />
-            <CheckBox layoutX="96.0" layoutY="149.1" mnemonicParsing="false" text="By age" />
-            <CheckBox layoutX="96.0" layoutY="185.0" mnemonicParsing="false" text="By weight" />
-            <CheckBox layoutX="96.0" layoutY="418.0" mnemonicParsing="false" text="By other pathologies" />
-            <CheckBox layoutX="96.0" layoutY="378.0" mnemonicParsing="false" text="By medication" />
-            <CheckBox layoutX="96.0" layoutY="336.0" mnemonicParsing="false" text="By patient location" />
-            <CheckBox layoutX="96.0" layoutY="222.0" mnemonicParsing="false" text="By height" />
-            <CheckBox layoutX="96.0" layoutY="258.0" mnemonicParsing="false" text="By sex" />
-            <CheckBox layoutX="96.0" layoutY="298.0" mnemonicParsing="false" text="By hospital" />
-            <Button fx:id="pdfbutton" layoutX="96.0" layoutY="475.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="175.0" text="*************" />
-            <LineChart layoutX="373.0" layoutY="101.0" prefHeight="314.0" prefWidth="391.0">
+            <CheckBox fx:id="checkAge" layoutX="96.0" layoutY="149.1" mnemonicParsing="false" onAction="#CheckAge" text="By age" />
+            <CheckBox fx:id="checkWeight" layoutX="96.0" layoutY="185.0" mnemonicParsing="false" onAction="#checkWei" text="By weight" />
+            <CheckBox fx:id="ckeckOtherPathologies" layoutX="96.0" layoutY="418.0" mnemonicParsing="false" onAction="#onckeckOtherPathologies" text="By other pathologies" />
+            <CheckBox fx:id="checkMedication" layoutX="96.0" layoutY="378.0" mnemonicParsing="false" onAction="#onCheckMedication" text="By medication" />
+            <CheckBox fx:id="checkPatientLocation" layoutX="96.0" layoutY="336.0" mnemonicParsing="false" onAction="#onCheckLocation" text="By patient location" />
+            <CheckBox fx:id="checkHeight" layoutX="96.0" layoutY="222.0" mnemonicParsing="false" onAction="#checkHei" text="By height" />
+            <CheckBox fx:id="checkSex" layoutX="96.0" layoutY="258.0" mnemonicParsing="false" onAction="#oncheckSex" text="By sex" />
+            <CheckBox fx:id="checkHospital" layoutX="96.0" layoutY="298.0" mnemonicParsing="false" onAction="#onCheckHos" text="By hospital" />
+            <Button fx:id="pdfbutton" layoutX="96.0" layoutY="475.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="175.0" text="Generate a pdf" />
+            <CheckBox fx:id="ckeckBloodType" layoutX="96.0" layoutY="448.0" mnemonicParsing="false" onAction="#onckeckBloodType" text="By blood type" />
+            <PieChart fx:id="pieChart" layoutX="414.0" layoutY="93.0" prefHeight="298.0" prefWidth="340.0" />
+            <LineChart fx:id="lineChart" layoutX="426.0" layoutY="98.0" prefHeight="298.0" prefWidth="340.0">
               <xAxis>
-                <CategoryAxis side="BOTTOM" />
+                <CategoryAxis fx:id="daysAxis" side="BOTTOM" />
               </xAxis>
               <yAxis>
-                <NumberAxis side="LEFT" />
+                  <NumberAxis fx:id="numAxis" side="LEFT" />
               </yAxis>
             </LineChart>
-            <CheckBox layoutX="106.0" layoutY="448.0" mnemonicParsing="false" text="By blood type" />
+            <Label fx:id="plotTittle" layoutX="503.0" layoutY="79.0" text="Title">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
       </children>
     </AnchorPane>
   </children>

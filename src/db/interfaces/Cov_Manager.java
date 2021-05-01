@@ -129,5 +129,8 @@ public interface Cov_Manager {
 	int getNumberofDeads();
 	List<Day> getLast7Days();
 	int getNumberofDays();
+	List<Integer> getNumberofDeadsofEachDay();
+	int getNumberofInfecteds();
+	List<Integer> getNumberofInfectedsofEachDay();
 
 }

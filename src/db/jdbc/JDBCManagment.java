@@ -130,7 +130,7 @@ public class JDBCManagment implements Cov_Manager {
 
 			Statement stmt12 = c.createStatement();
 			String sql12 = "CREATE TABLE days " + "(id       	    INTEGER  	PRIMARY KEY AUTOINCREMENT,"
-					+ " deaths 			INTEGER	 	NOT NULL," + " average			FLOAT		NOT NULL,"
+					+ " deaths 			INTEGER	 	NOT NULL," + " infectedPatients 			INTEGER	 	NOT NULL," + " average			FLOAT		NOT NULL,"
 					+ " daytime			DATE 		NOT NULL)";
 			stmt11.executeUpdate(sql12);
 			stmt11.close();
@@ -797,11 +797,12 @@ public class JDBCManagment implements Cov_Manager {
 	@Override
 	public void addDay(Day f) {
 		try {
-			String sql = "INSERT INTO days (deaths, average, daytime) VALUES (?,?,?)";
+			String sql = "INSERT INTO days (deaths,infectedPatients, average, daytime) VALUES (?,?,?,?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, f.getDeaths());
-			prep.setFloat(2, f.getAverage());
-			prep.setDate(3, f.getDate());
+			prep.setInt(2, f.getInfectedPatients());
+			prep.setFloat(3, f.getAverage());
+			prep.setDate(4, f.getDate());
 			prep.executeUpdate();
 			prep.close();
 		} catch (Exception e) {
@@ -874,6 +875,72 @@ public class JDBCManagment implements Cov_Manager {
 
 		}
 		return number;
+
+	}
+	@Override
+	public int getNumberofInfecteds() {
+		int number = 0;
+		try {
+			String sql = "SELECT id FROM patients WHERE alive = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setBoolean(1, true);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				number++;
+			}
+			rs.close();
+
+			prep.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return number;
+
+	}
+	@Override
+	public List<Integer> getNumberofDeadsofEachDay() {
+		List<Integer> listDeaths = new ArrayList <>();
+		try {
+			String sql = "SELECT deaths FROM days ";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+           int deaths = rs.getInt("deaths");
+           listDeaths.add(deaths);
+			}
+			rs.close();
+
+			prep.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return listDeaths;
+
+	}
+	@Override
+	public List<Integer> getNumberofInfectedsofEachDay() {
+		List<Integer> infectedList = new ArrayList <>();
+		try {
+			String sql = "SELECT infectedPatients FROM days ";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+           int infectedPatients = rs.getInt("infectedPatients");
+           infectedList.add(infectedPatients);
+			}
+			rs.close();
+
+			prep.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return infectedList;
 
 	}
 	
