@@ -63,7 +63,7 @@ public class StatisticsController implements Initializable {
 
 	@FXML
 	private Button pdfbutton;
-
+ObservableList <PieChart.Data> pieChartData;
 	@FXML
 	private PieChart pieChart;
 
@@ -130,6 +130,7 @@ public class StatisticsController implements Initializable {
 
     @FXML
     void CheckAge(ActionEvent event) {
+    	
         if(this.checkWeight.isSelected()) {
         	
     		
@@ -259,6 +260,10 @@ public class StatisticsController implements Initializable {
 
     @FXML
     void oncheckSex(ActionEvent event) {
+    	lineChart.setVisible(false);
+    	
+    	pieChartData =  FXCollections.observableArrayList(new PieChart.Data("Male", Main.getInter().searchPatientGenericCOUNT("sex", "Male")),new PieChart.Data("sex", Main.getInter().searchPatientGenericCOUNT("sex","Female")));
+    	
     	 if(this.checkWeight.isSelected()) {
      		
      	}if(this.checkHeight.isSelected()) {
@@ -276,6 +281,8 @@ public class StatisticsController implements Initializable {
      	}if(this.ckeckBloodType.isSelected()) {
      		
      	}
+     	pieChart.setData(pieChartData);
+     	
     }
 
     @FXML

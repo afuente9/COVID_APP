@@ -1079,6 +1079,56 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 		return patients;
+	}	
+	@Override
+	public int searchPatientGenericCOUNT(String feature, String type) {
+int count=0;
+//TODO PARA LA DATE INTRODUCED
+		try {
+			if (feature == "SS num") {
+				feature = "social_security";
+			}
+			if (feature == "Blood type") {
+				feature = "bloodType";
+			}
+			String sql;
+			if (feature == "Birth date") {
+				feature = "birthday";
+				sql = "SELECT * FROM  patients WHERE " + feature + " = '?' ";
+
+			} else {
+				sql = "SELECT * FROM  patients WHERE " + feature + " LIKE ?";
+			}
+
+			PreparedStatement prep = c.prepareStatement(sql);
+
+			if (feature == "birthday") {
+
+				Date d = Date.valueOf(type);
+				prep.setDate(1, d);
+			}
+
+			if (feature == "Infected") {
+				boolean newbool = Boolean.parseBoolean(type);
+				prep.setBoolean(1, newbool);
+
+			}
+
+			else {
+				prep.setString(1, "%" + type + "%");
+
+			}
+
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				count++;
+			}
+			rs.close();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
 	}
 
 	@Override

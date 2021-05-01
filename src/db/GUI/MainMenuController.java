@@ -12,6 +12,9 @@ import db.pojos.Administration;
 import db.pojos.Day;
 import db.pojos.Doctor;
 import db.pojos.Lab;
+import db.pojos.Medication;
+import db.pojos.Other_Pathologies;
+import db.pojos.Patient;
 import db.pojos.Sex;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
@@ -68,8 +71,48 @@ public class MainMenuController implements Initializable {
 
 
 
-		  	*/	
+		  	
+      p_new= new Patient(Place_Text,Name_Text,date,SSNum_Text,height,weight,sex,infected,alive,Hospital_Text,vaccinated,Blood_Text,dateIntroduced);
+    	Main.getInter().addPatient(p_new);
+
 		
+		String[] names = new String[]{"Daniel","Antonio","Loreto","Esteban","María","Javier","Lorena","Miriam","Carla","Jose Luís","Eva","Emilia","Josefa","Ofelia","Olga","Lidia","Cesar","Felipe","Lucas","Aitor","Samuel","Felix","Julio","Tomás","Gonzalo","Emilio","Hugo","Marcos","Jaime","Juan","Pablo","Mario","Carolina","Nerea","Sofía","Susana","Sonia","Alicia"," Inés","Rosa","Andrea","Alba","Elena","Sara","Ana María","Laura","Paula","Jose","Diego","Raúl","Leo","Pedro","Alfonso","Miguel"};
+	
+		String[] surnames = new String[]{"García","Rodríguez","Carmona","Gonzalez","Fernández","López","Martínez","Sánchez","Otero","Pérez","Franco","Martín","Largo Caballero","Jiménez","Messi","Ruíz","Hernández","Díaz","Ayuso","Moreno","Muñoz","Alonso","Gutiérrez","Torres","Ramos","Casillas","Gil","Cabello","Anchuela","Sanchís","Cantarero","Serrano","Blasco","Expósito","Ramírez","Suárez","Morales","Castillo"," Ortega","Castro","Cortés","Núñez","Iglesias","Yáñez","Lozano","Cano","Prieto","Cruz","Aguirre","Calvo","León","Campos","Carrasco","Lucena"};
+		
+		String[] locations = new String[]{"UCI","UCI","UCI","Hospital floor","Hospital floor","Hospital floor","Hospital floor","Hospital floor","Home","Home","Home","Home","Home","Home","Home","Home","Home","Home"};
+		//fecha
+		//ssnum
+		//hei
+		//wei
+		String[] sex = new String[]{"Male","Female"};
+		String[] hospital = new String[]{"12 Octubre","Puerta de Hierro","Clínic de Barcelona","Vall d'hebron","Teknon","Joan XXIII","Sant Joan de Reus","Infanta Sofía","General de Requena","Pardo de Aravaca","Quirón Toledo","Universitari Sagrat Cor","La Vega","San Jordi de Sant Andreu","La fe","Mediterráneo","El Pilar","San Juan de Dios Tenerife","2 de maig","De la Reina","Sierrallana","La inmaculada","La pedrera","Fundación de Alcorcón","Parque","Hospital de Sevilla"};
+
+        //infected
+		String[] vaccinated = new String[]{"true","false","false","false","false","false"};
+		String[] bloodType = new String[]{"A+","A-","B+","B-","AB+","AB-","0+","0-"};
+		String[] Medication = new String[]{"O2","Ketamine","Lidocaine","Morphine","Iboprufen","Acetylsalicylic acid","Paracetamol","Kodeine","Fentanyl","Methadone","Dexamethasone","Diacepan","Haloperidol","Lactulose","Metoclopramide","Peniciline","Loratadine","Hydrocortisone","Epinephrine","Calcium gluconate","Penicillamine","Amoxicillin","Loracepam"};
+		String[] Pats = new String[]{"lung cancer","colon cancer","testicular cancer","liver cancer","arthritis","Asthma","Chronic fatigue sindrom","COPD","Diabetes","Crabs","Celiac disease","Hepatitis","Human papillomavirus","Gonorrhea","Fybromialgia","Lupus","Listediosis","ELA","Meningitis","Polio","Rubella","Tetanus","Tuberculosis","Siphilis","Yellow fiber","Zika"};
+
+		for (int i =0; i<200; i++){
+		    int Math.Random();
+			
+			Patient p_new= new Patient(Place_Text,Name_Text,date,SSNum_Text,height,weight,sex,infected,alive,Hospital_Text,vaccinated,Blood_Text,dateIntroduced);
+
+			
+		}
+		*/	
+		
+		
+		
+		
+		
+		
+		
+
+
+
+
 		this.labelDate.setText(""+Date.valueOf(LocalDate.now()));
 		System.out.println("el day es "+Main.getInter().getLastDay().getDate());
 		if ( Main.getInter().getLastDay().getDate().compareTo(Date.valueOf(LocalDate.now()))!=0 ){
