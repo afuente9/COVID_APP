@@ -672,6 +672,30 @@ public class JDBCManagment implements Cov_Manager {
 		}
 		return allShips;
 	}
+	
+	@Override
+	public List<String> getdifferentHospitals() {
+		List<String> Hospitals = new ArrayList();
+		try {
+			String sql = "SELECT * FROM patients ";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+               String hospital = rs.getString("hospital");
+             if (!Hospitals.contains(hospital)) {
+            	 Hospitals.add(hospital);
+             }
+			}
+
+			prep.close();
+			rs.close();
+			return Hospitals;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Hospitals;
+	}
 
 	@Override
 	public List<Shipment> getAllShipmentforAdminView() {
@@ -1123,6 +1147,56 @@ int count=0;
 			while (rs.next()) {
 				count++;
 			}
+			rs.close();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}	
+	
+	
+	@Override
+	public int getNumberPatientsbyRangeofFeature(String feature, float max, float min) {
+int count=0;
+		try {
+			String sql = "SELECT * FROM  patients WHERE( "+feature+" < "+max+" AND "+feature+" > "+min+" )" ;
+
+			
+
+			PreparedStatement prep = c.prepareStatement(sql);
+
+			
+
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				count++;
+			}
+			System.out.println("MAX "+max+" Min "+min+" count "+count);
+
+			rs.close();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	@Override
+	public int getNumberPatientsbyanyString(String feature, String type) {
+int count=0;
+		try {
+			String sql = "SELECT * FROM  patients WHERE("+feature+" = '" + type + "')" ;
+
+			
+
+			PreparedStatement prep = c.prepareStatement(sql);
+
+
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				count++;
+			}
+
 			rs.close();
 			prep.close();
 		} catch (Exception e) {

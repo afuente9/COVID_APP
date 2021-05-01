@@ -133,5 +133,8 @@ public interface Cov_Manager {
 	int getNumberofInfecteds();
 	List<Integer> getNumberofInfectedsofEachDay();
 	int searchPatientGenericCOUNT(String feature, String type);
+	int getNumberPatientsbyRangeofFeature(String feature, float max, float min);
+	int getNumberPatientsbyanyString(String feature, String type);
+	List<String> getdifferentHospitals();
 
 }
