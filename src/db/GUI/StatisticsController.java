@@ -1,6 +1,11 @@
 package db.GUI;
 
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Year;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -130,6 +135,57 @@ ObservableList <PieChart.Data> pieChartData;
 
     @FXML
     void CheckAge(ActionEvent event) {
+    	lineChart.setVisible(false);
+
+    	List<Date> dates = Main.getInter().getDates();
+    	List<Integer> ages = new ArrayList<>();
+		 LocalDate today = LocalDate.now();   
+		 for(int i =0;i<dates.size();i++) {
+			 System.out.println(i);
+
+			 LocalDate fHoy= LocalDate.now();
+		     LocalDate cumple= dates.get(i).toLocalDate();
+		     long age= ChronoUnit.YEARS.between(cumple, fHoy); 
+			 
+	    		
+	    		ages.add((int)age);
+	    	}
+		 int timer1=0;
+		 int timer2=0;
+		 int timer3=0;
+		 int timer4=0;
+		 int timer5=0;
+
+		 for(int i =0;i<ages.size();i++) {
+			 
+			 if (ages.get(i)>0 && ages.get(i)<20) {
+				 timer1++;
+			 } 
+			 if (ages.get(i)>20  && ages.get(i)<40) {
+				 timer2++;
+			 } 
+			 if (ages.get(i)>40 && ages.get(i)<60) {
+				 timer3++;
+			 }
+			 if (ages.get(i)>60 && ages.get(i)<80) {
+				 timer4++;
+			 } 
+			 if (ages.get(i)>80) {
+				 timer5++;
+			 }
+			 
+	    		
+	    	}
+    
+		 pieChartData = FXCollections.observableArrayList( FXCollections.observableArrayList(new PieChart.Data("<20 ", timer1),
+	    			new PieChart.Data("20 - 40", timer2),
+	    			new PieChart.Data("40- 60", timer3),
+	    			new PieChart.Data("60 - 80", timer4),
+	    			new PieChart.Data("> 80", timer5)));
+
+    	
+    	
+
     	
         if(this.checkWeight.isSelected()) {
         	
@@ -149,6 +205,8 @@ ObservableList <PieChart.Data> pieChartData;
     	}if(this.ckeckBloodType.isSelected()) {
     		
     	}
+     	pieChart.setData(pieChartData);
+
 
     }
 

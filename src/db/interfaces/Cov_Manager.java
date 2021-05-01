@@ -1,5 +1,6 @@
 package db.interfaces;
 
+import java.sql.Date;
 import java.util.*;
 
 import db.pojos.*;
@@ -136,5 +137,6 @@ public interface Cov_Manager {
 	int getNumberPatientsbyRangeofFeature(String feature, float max, float min);
 	int getNumberPatientsbyanyString(String feature, String type);
 	List<String> getdifferentHospitals();
+	List<Date> getDates();
 
 }

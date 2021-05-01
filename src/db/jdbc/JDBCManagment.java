@@ -695,6 +695,27 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 		return Hospitals;
+	}	
+	@Override
+	public List<Date> getDates() {
+		List<Date> dates = new ArrayList();
+		try {
+			String sql = "SELECT * FROM patients ";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+               Date date = rs.getDate("birthday");
+               dates.add(date);
+			}
+
+			prep.close();
+			rs.close();
+			return dates;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dates;
 	}
 
 	@Override

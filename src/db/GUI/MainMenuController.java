@@ -93,7 +93,16 @@ public class MainMenuController implements Initializable {
 		String[] bloodType = new String[]{"A+","A-","B+","B-","AB+","AB-","0+","0-"};
 		String[] Medication = new String[]{"O2","Ketamine","Lidocaine","Morphine","Iboprufen","Acetylsalicylic acid","Paracetamol","Kodeine","Fentanyl","Methadone","Dexamethasone","Diacepan","Haloperidol","Lactulose","Metoclopramide","Peniciline","Loratadine","Hydrocortisone","Epinephrine","Calcium gluconate","Penicillamine","Amoxicillin","Loracepam"};
 		String[] Pats = new String[]{"lung cancer","colon cancer","testicular cancer","liver cancer","arthritis","Asthma","Chronic fatigue sindrom","COPD","Diabetes","Crabs","Celiac disease","Hepatitis","Human papillomavirus","Gonorrhea","Fybromialgia","Lupus","Listediosis","ELA","Meningitis","Polio","Rubella","Tetanus","Tuberculosis","Siphilis","Yellow fiber","Zika"};
-int contadoranmo=2006;
+		/*for (int i =0; i<Medication.length;i++) {
+			Main.getInter().addMedication(new Medication(Medication[i]));
+		}
+		for (int i =0; i<Pats.length;i++) {
+			Main.getInter().addOtherPathologies(new Other_Pathologies(Pats[i]));
+		}
+		*/
+		
+		
+		int contadoranmo=2006;
 		for (int i =0; i<100; i++){
 		   /* double ssrandom =  Math.random()*900000+100000;
 		    int ssranint = (int) ssrandom;
