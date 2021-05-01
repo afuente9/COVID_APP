@@ -74,7 +74,7 @@ public class MainMenuController implements Initializable {
 		  	
       p_new= new Patient(Place_Text,Name_Text,date,SSNum_Text,height,weight,sex,infected,alive,Hospital_Text,vaccinated,Blood_Text,dateIntroduced);
     	Main.getInter().addPatient(p_new);
-
+	*/	
 		
 		String[] names = new String[]{"Daniel","Antonio","Loreto","Esteban","María","Javier","Lorena","Miriam","Carla","Jose Luís","Eva","Emilia","Josefa","Ofelia","Olga","Lidia","Cesar","Felipe","Lucas","Aitor","Samuel","Felix","Julio","Tomás","Gonzalo","Emilio","Hugo","Marcos","Jaime","Juan","Pablo","Mario","Carolina","Nerea","Sofía","Susana","Sonia","Alicia"," Inés","Rosa","Andrea","Alba","Elena","Sara","Ana María","Laura","Paula","Jose","Diego","Raúl","Leo","Pedro","Alfonso","Miguel"};
 	
@@ -93,15 +93,44 @@ public class MainMenuController implements Initializable {
 		String[] bloodType = new String[]{"A+","A-","B+","B-","AB+","AB-","0+","0-"};
 		String[] Medication = new String[]{"O2","Ketamine","Lidocaine","Morphine","Iboprufen","Acetylsalicylic acid","Paracetamol","Kodeine","Fentanyl","Methadone","Dexamethasone","Diacepan","Haloperidol","Lactulose","Metoclopramide","Peniciline","Loratadine","Hydrocortisone","Epinephrine","Calcium gluconate","Penicillamine","Amoxicillin","Loracepam"};
 		String[] Pats = new String[]{"lung cancer","colon cancer","testicular cancer","liver cancer","arthritis","Asthma","Chronic fatigue sindrom","COPD","Diabetes","Crabs","Celiac disease","Hepatitis","Human papillomavirus","Gonorrhea","Fybromialgia","Lupus","Listediosis","ELA","Meningitis","Polio","Rubella","Tetanus","Tuberculosis","Siphilis","Yellow fiber","Zika"};
-
-		for (int i =0; i<200; i++){
-		    int Math.Random();
+int contadoranmo=2006;
+		for (int i =0; i<100; i++){
+		   /* double ssrandom =  Math.random()*900000+100000;
+		    int ssranint = (int) ssrandom;
+		    double prefix =  Math.random()*90+10;
+		    int prefixint = (int)prefix;
+		    String prefixstring = "("+prefixint+")"+ssranint;
+		    
+		    System.out.println(prefixstring);
+		    
+Main.getInter().modifyPatient(i, "social_security", prefixstring);
 			
-			Patient p_new= new Patient(Place_Text,Name_Text,date,SSNum_Text,height,weight,sex,infected,alive,Hospital_Text,vaccinated,Blood_Text,dateIntroduced);
+			double diarandom = Math.random()*29+1;
+			int diarandomint = (int) diarandom;
+			String diadef="";
+			if (diarandomint<10) {
+				diadef="0"+diarandomint;
+				
+			}else {
+				diadef=""+diarandomint;
+			}
+			double mesran = Math.random()*11+1;
+			int mesrandomint = (int) mesran;
+			String mesdef="";
 
-			
+			if (mesrandomint<10) {
+				mesdef="0"+mesrandomint;
+				
+			}else {
+				mesdef=""+mesrandomint;
+			}
+			String date =contadoranmo+"-"+mesdef+"-"+diadef;
+			System.out.println(date);
+			Main.getInter().modifyPatient(i, "birthday", date.valueOf(date));
+
+			contadoranmo--;*/
 		}
-		*/	
+	
 		
 		
 		
