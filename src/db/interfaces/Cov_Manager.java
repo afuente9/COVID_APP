@@ -138,5 +138,9 @@ public interface Cov_Manager {
 	int getNumberPatientsbyanyString(String feature, String type);
 	List<String> getdifferentHospitals();
 	List<Date> getDates();
+	List<String> getdifferentMeds();
+	int getdifferentMedsCOUNT(String name);
+	List<String> getdifferentPaths();
+	int getdifferentPathsCOUNT(String name);
 
 }

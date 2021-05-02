@@ -343,6 +343,19 @@ System.out.println("goald");
 
     @FXML
     void onCheckMedication(ActionEvent event) {
+       	lineChart.setVisible(false);
+       	
+    	List<String> Medics = Main.getInter().getdifferentMeds();
+    	List<PieChart.Data> piedatas =new ArrayList<>();
+
+       	for (int i =0; i<Medics.size();i++) {
+    		System.out.println(Medics.get(i));
+    		piedatas.add(new PieChart.Data(""+Medics.get(i), Main.getInter().getdifferentMedsCOUNT( Medics.get(i))));
+
+    	}
+       	pieChartData =  FXCollections.observableArrayList();
+    	pieChartData.addAll(piedatas);
+
     	 if(this.checkWeight.isSelected()) {
      		
      	}if(this.checkHeight.isSelected()) {
@@ -360,6 +373,8 @@ System.out.println("goald");
      	}if(this.ckeckBloodType.isSelected()) {
      		
      	}
+     	pieChart.setData(pieChartData);
+
     }
 
     @FXML
@@ -426,6 +441,18 @@ System.out.println("goald");
 
     @FXML
     void onckeckOtherPathologies(ActionEvent event) {
+lineChart.setVisible(false);
+       	
+    	List<String> paths = Main.getInter().getdifferentPaths();
+    	List<PieChart.Data> piedatas =new ArrayList<>();
+
+       	for (int i =0; i<paths.size();i++) {
+    		System.out.println(paths.get(i));
+    		piedatas.add(new PieChart.Data(""+paths.get(i), Main.getInter().getdifferentPathsCOUNT( paths.get(i))));
+
+    	}
+       	pieChartData =  FXCollections.observableArrayList();
+    	pieChartData.addAll(piedatas);
     	 if(this.checkWeight.isSelected()) {
      		
      	}if(this.checkHeight.isSelected()) {
@@ -443,6 +470,8 @@ System.out.println("goald");
      	}if(this.ckeckBloodType.isSelected()) {
      		
      	}
+     	pieChart.setData(pieChartData);
+
     }
 
 	private void loadData() {

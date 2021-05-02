@@ -66,7 +66,7 @@
             <CheckBox fx:id="checkHospital" layoutX="96.0" layoutY="298.0" mnemonicParsing="false" onAction="#onCheckHos" text="By hospital" />
             <Button fx:id="pdfbutton" layoutX="96.0" layoutY="475.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="175.0" text="Generate a pdf" />
             <CheckBox fx:id="ckeckBloodType" layoutX="96.0" layoutY="448.0" mnemonicParsing="false" onAction="#onckeckBloodType" text="By blood type" />
-            <PieChart fx:id="pieChart" layoutX="285.0" layoutY="26.0" prefHeight="426.0" prefWidth="507.0" />
+            <PieChart fx:id="pieChart" layoutX="285.0" layoutY="26.0" legendVisible="false" prefHeight="426.0" prefWidth="507.0" />
             <LineChart fx:id="lineChart" layoutX="426.0" layoutY="98.0" prefHeight="298.0" prefWidth="340.0">
               <xAxis>
                 <CategoryAxis fx:id="daysAxis" side="BOTTOM" />

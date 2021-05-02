@@ -695,6 +695,93 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 		return Hospitals;
+	}
+	@Override
+	public List<String> getdifferentMeds() {
+		List<String> Medications = new ArrayList();
+		try {
+			String sql = "SELECT med.name FROM medication AS med JOIN pat_medi AS pm ON pm.id_medi=med.id JOIN patients AS p ON p.id=pm.id_pat WHERE (p.id>0)  ";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+               String name = rs.getString("name");
+             if (!Medications.contains(name)) {
+            	 Medications.add(name);
+             }
+			}
+
+			prep.close();
+			rs.close();
+			return Medications;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Medications;
+	}
+	@Override
+	public int getdifferentMedsCOUNT(String name) {
+int times=0;
+try {
+			String sql = "SELECT p.id FROM patients AS p JOIN pat_medi AS pm ON pm.id_pat=p.id JOIN medication AS m ON m.id=pm.id_medi WHERE (m.name = '"+name+"' )";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+             times++;
+			}
+
+			prep.close();
+			rs.close();
+			return times;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return times;
+	}
+	@Override
+	public List<String> getdifferentPaths() {
+		List<String> Pathologies = new ArrayList();
+		try {
+			String sql = "SELECT path.name FROM other_pathologies AS path JOIN pat_patho AS pp ON pp.id_patho=path.id JOIN patients AS p ON p.id=pp.id_pat WHERE (p.id>0)  ";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+               String name = rs.getString("name");
+             if (!Pathologies.contains(name)) {
+            	 Pathologies.add(name);
+             }
+			}
+
+			prep.close();
+			rs.close();
+			return Pathologies;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Pathologies;
+	}
+	
+	@Override
+	public int getdifferentPathsCOUNT(String name) {
+int times=0;
+try {
+			String sql = "SELECT p.id FROM patients AS p JOIN pat_patho AS pp ON pp.id_pat=p.id JOIN other_pathologies AS path ON path.id=pp.id_patho WHERE (path.name = '"+name+"' )";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+             times++;
+			}
+
+			prep.close();
+			rs.close();
+			return times;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return times;
 	}	
 	@Override
 	public List<Date> getDates() {
