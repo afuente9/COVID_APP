@@ -474,9 +474,9 @@ public class JDBCManagment implements Cov_Manager {
 				Date dateIntroduced = rs.getDate("dateIntroduced");
 				List<Medication> medicationPatient = Main.getInter().getMedicationfromPatient(id);
 				List<Other_Pathologies> Other_Pathologies = Main.getInter().getPathofromPatient(id);
-
-				return new Patient(id, hos_loc, patientName, bdate, socsec, high, weig, sexoo, infec, vivo, hos, vacc,
+				Patient p= new Patient(id, hos_loc, patientName, bdate, socsec, high, weig, sexoo, infec, vivo, hos, vacc,
 						sangre, dateIntroduced, medicationPatient, Other_Pathologies);
+return p;
 			}
 			prep.close();
 			rs.close();
@@ -706,11 +706,11 @@ public class JDBCManagment implements Cov_Manager {
 
 			prep.close();
 			rs.close();
-			return Hospitals;
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 		return Hospitals;
 	}
 	@Override
@@ -1340,15 +1340,13 @@ prep.setBoolean(1, alive);
 
 		try {
 			
-//Hay una sql que me permita coger los N pacientes con los scores mas altos?
-			String sql = "SELECT * FROM  patients ORDER BY score DESC ";
+			String sql = "SELECT * FROM  patients WHERE alive = ? ORDER BY score DESC ";
 
 			PreparedStatement prep = c.prepareStatement(sql);
-
-			//prep.setInt(1, availableVaccines);
-
+prep.setBoolean(1, true);
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
+
 				int id = rs.getInt("id");
 				String patientname = rs.getString("name");
 				Date birthday = rs.getDate("birthday");
@@ -1375,7 +1373,9 @@ prep.setBoolean(1, alive);
 				Patient patient = new Patient(id, loc_hosp, patientname, birthday, social_security, height, weight,
 						sexo, infec, alive, hosp, vaccin, blood, dateIntroduced, medicationPatient, Other_Pathologies,
 						score);
+
 				patients.add(patient);
+
 			}
 			rs.close();
 			prep.close();
@@ -1383,18 +1383,20 @@ prep.setBoolean(1, alive);
 			e.printStackTrace();
 		}
 //TODO COMPROBAR SI FUNCIONA BIEN CUANDO TENGAMOS PUNTUACIONES
+
 		return getFinalList(patients,availableVaccines);
 	}
 
 	private List<Patient> getFinalList(List<Patient> allpatients, int numberVaccines) {
 		
-		
-		for (int i= numberVaccines; i<allpatients.size();i++) {
+	List <Patient> finalList= new ArrayList<>();
+		int originalsize=allpatients.size();
+		for (int i= 0; i<numberVaccines;i++) {
+			finalList.add(allpatients.get(i));
 			
-			allpatients.remove(i);
 			
 		}
-		return allpatients;
+		return finalList;
 	}
 
 	@Override
@@ -1743,7 +1745,6 @@ prep.setBoolean(1, alive);
 				Integer nid = rs.getInt("id");
 				String nombre = rs.getString("name");
 				Other_Pathologies pathology = new Other_Pathologies(nid, nombre);
-				System.out.println(contador+"/"+id+"- "+pathology);
                 contador++;
 				paths.add(pathology);
 

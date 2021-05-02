@@ -1,4 +1,4 @@
-package db.statistics;
+package db.GUI;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import db.GUI.Main;
 import db.pojos.Day;
 import db.pojos.Doctor;
 import db.pojos.Patient;
@@ -79,7 +78,7 @@ public void calculateValues() {
 }
 */
 
-public void calculateScore(Patient p,float DeadImportance) {
+public float calculateScore(Patient p,float DeadImportance) {
 	//cojo los numeros de todos
 	
 	List<Float> contributions = new ArrayList<>();
@@ -209,7 +208,7 @@ public void calculateScore(Patient p,float DeadImportance) {
 	}
 	
 	Main.getInter().modifyScore(p.getId(), totalContributions);
-	
+	return totalContributions;
 
 	
 }
