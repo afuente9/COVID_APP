@@ -111,20 +111,17 @@ public class SearchPatientController implements Initializable {
 		String type = typeTextfield.getText();
 		if (feature == "Birth date") {
 			List<Patient> result = Main.getInter().getPatientbyBD(type);
-			System.out.println("Those are the patients: \n" + result.toString());
 			this.patientsTableList.addAll(result);
 	    	this.tablePatients.setItems(patientsTableList);  
 	    	typeTextfield.setText("");
 		}else if (feature == "Date introduced"){
 			List<Patient> result = Main.getInter().getPatientbyDateIntro(type);
-			System.out.println("Those are the patients: \n" + result.toString());
 			this.patientsTableList.addAll(result);
 	    	this.tablePatients.setItems(patientsTableList);  
 	    	typeTextfield.setText("");
 		}
 		else {
 			List<Patient> result = Main.getInter().searchPatientGeneric(feature,type);
-			System.out.println("Those are the patients: \n" + result.toString());
 			this.patientsTableList.addAll(result);
 	    	this.tablePatients.setItems(patientsTableList);  
 	    	typeTextfield.setText("");
@@ -139,7 +136,6 @@ public class SearchPatientController implements Initializable {
     	String dateFromText =dateFrom.getValue().toString(); 
 		String dateToText = dateTo.getValue().toString();
 		List<Patient> result = Main.getInter().filterPatient(dateFromText, dateToText);
-		System.out.println("Those are the patients: \n" + result.toString());
 		this.patientsTableList.addAll(result);
     	this.tablePatients.setItems(patientsTableList);  
     	typeTextfield.setText("");    }
@@ -163,7 +159,6 @@ public class SearchPatientController implements Initializable {
     	 controller.setOldSSNUM(pselected.getSocial_security().toString());
     	 controller.setOldHeight(""+pselected.getHeight());
     	 controller.setOldWei(""+pselected.getWeight());
-    	 System.out.println(pselected.getBloodType());
     	 controller.setOldBlood(    	 pselected.getBloodType());
     	 controller.setOldHospital(pselected.getHospital());
     	 controller.setOldPlace(pselected.getHos_location());
@@ -171,7 +166,8 @@ public class SearchPatientController implements Initializable {
     	 controller.setOther_pathologies_list(Main.getInter().getPathofromPatient(pselected.getId()));
     	 List <Other_Pathologies> patholo_list= Main.getInter().getPathofromPatient(pselected.getId());
      	Iterator iter1 = patholo_list.iterator();
-		String  paths = "";
+
+    	 String  paths = "";
 		while (iter1.hasNext()) {
 			paths += iter1.next() + "\n";
 		}
@@ -183,7 +179,6 @@ public class SearchPatientController implements Initializable {
     	Iterator iter = medication_list.iterator();
 		String  medications = "";
 		while (iter.hasNext()) {
-			System.out.println(medications);
 			medications += iter.next() + "\n";
 		}
 		controller.setAllMedLabel(medications);

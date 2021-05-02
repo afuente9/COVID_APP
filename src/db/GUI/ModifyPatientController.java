@@ -174,7 +174,7 @@ public class ModifyPatientController implements Initializable {
 	@FXML
 	void DeletePathbyNum(ActionEvent event) {
 		
-		 Main.getInter().deleteAssignmentPathology(Main.getInter().getLastPatient().getId(),Integer.parseInt(DeletePathologynum.getText()) );
+		 Main.getInter().deleteAssignmentPathology(this.pmodif.getId(),Integer.parseInt(DeletePathologynum.getText()) );
 
 	    	
 	    	other_pathologies_list.remove(Main.getInter().getPathologyId(Integer.parseInt(DeletePathologynum.getText())));
@@ -191,7 +191,7 @@ public class ModifyPatientController implements Initializable {
 	@FXML
 	void Deletemedbynum(ActionEvent event) {
 		
-        Main.getInter().deleteAssignmentMedication(Main.getInter().getLastPatient().getId(),Integer.parseInt(DeleteMedNum.getText()) );
+        Main.getInter().deleteAssignmentMedication(this.pmodif.getId(),Integer.parseInt(DeleteMedNum.getText()) );
 
     	medication_list.remove(Main.getInter().getMedicationId(Integer.parseInt(DeleteMedNum.getText())));
     	DeleteMedNum.setText("");
@@ -210,7 +210,7 @@ public class ModifyPatientController implements Initializable {
 		Medication m_new = new Medication(medicationName);
 		//TODO CONTROLAR SI LA MEDICACION YA ESTA METIDA EN EL PACIENTE
 			Main.getInter().addMedication(m_new);
-			Main.getInter().assignMed(Main.getInter().getLastPatient().getId(), Main.getInter().getLastMedication());
+			Main.getInter().assignMed(this.pmodif.getId(), Main.getInter().getLastMedication());
 			Main.getInter().getLastPatient().setMedication(medication_list);
 			MedicationPatientTextField.setText("");
 			String  medications = "";
@@ -230,7 +230,7 @@ public class ModifyPatientController implements Initializable {
 		Other_Pathologies op_new = new Other_Pathologies(otherPathologiesName);
 
 			Main.getInter().addOtherPathologies(op_new);
-			Main.getInter().assignPatho(Main.getInter().getLastPatient().getId(), Main.getInter().getLastPath());
+			Main.getInter().assignPatho(this.pmodif.getId(), Main.getInter().getLastPath());
 			Main.getInter().getLastPatient().setOther_pathologies(other_pathologies_list);
 			OtherPathologiesPatientTextField.setText("");
 			String paths = "";

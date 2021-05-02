@@ -115,8 +115,6 @@ public void calculateScore(Patient p,float DeadImportance) {
 	List<Float> PerOPATDead = getOPatDead();
 
 	
-	//Float MaxPerAgeAlive = getMaxNum (agePercentagesAlive);
-	//Float MinPerAgeAlive = getMinNum (agePercentagesAlive);
 	float AGEPercentagePatientAlive =getPercentageAgePatient(p.getTheAge(p.getBirthday()),agePercentagesAlive);
 	float patientScoreBasicAgeAlive= patientScore(getMaxNum (agePercentagesAlive),getMinNum (agePercentagesAlive),AGEPercentagePatientAlive,agePercentagesAlive.size());
 	float contributionAgeAlive = patientScoreBasicAgeAlive*(1-DeadImportance);
@@ -171,14 +169,44 @@ public void calculateScore(Patient p,float DeadImportance) {
 	float contributionBloodDead = patientScoreBasicBloodDead*(DeadImportance);
 	contributions.add(contributionBloodDead);
 	
-	float hospitalPercentage= HospitalPercentage(p.getHospital(),perHospitalAlive);
+	float hospitalPercentage= HospitalPercentage(p.getHospital(),perHospitalAlive,true);
    	float patientScoreBasicHospitalAlive= patientScore(getMaxNum (perHospitalAlive),getMinNum (perHospitalAlive),bloodPercentageAlive,perHospitalAlive.size());
 	float contributionHospitalAlive = patientScoreBasicHospitalAlive*(1-DeadImportance);
 	contributions.add(contributionHospitalAlive);
-	float HospitalPercentageDead= HospitalPercentage(p.getHospital(),perHospitalDead);
+	float HospitalPercentageDead= HospitalPercentage(p.getHospital(),perHospitalDead, false);
    	float patientScoreBasicHospitalDead= patientScore(getMaxNum (perHospitalDead),getMinNum (perHospitalDead),bloodPercentageDead,perHospitalDead.size());
 	float contributionHospitalDead = patientScoreBasicHospitalDead*(DeadImportance);
 	contributions.add(contributionHospitalDead);
+	
+	List<String> Medication_Patient = Main.getInter().getMedicationfromPatientNAME(p.getId());
+
+	for(int i=0;i<Medication_Patient.size();i++) {
+		String medication = Medication_Patient.get(i);
+	float medicationPercentageAlive= MedicationPercentage(medication,perMedAlive,true);
+ 	float patientScoreBasicmedicationAlive= patientScore(getMaxNum (perMedAlive),getMinNum (perMedAlive),medicationPercentageAlive,perMedAlive.size());
+	float contributionMedlAlive = patientScoreBasicmedicationAlive*(1-DeadImportance);
+	contributions.add(contributionMedlAlive);
+	float medicationPercentageDead= MedicationPercentage(medication,perMedDead,false);
+ 	float patientScoreBasicmedicationDead= patientScore(getMaxNum (perMedDead),getMinNum (perMedDead),medicationPercentageDead,perMedDead.size());
+	float contributionMedlDead = patientScoreBasicmedicationDead*(DeadImportance);
+	contributions.add(contributionMedlDead);
+	}
+	
+	List<String> Patho_Patient = Main.getInter().getMedicationfromPatientNAME(p.getId());
+
+	for(int i=0;i<Patho_Patient.size();i++) {
+		String pathology = Patho_Patient.get(i);
+	float pathologyPercentageAlive= PathologyPercentage(pathology,PerOPATAlive,true);
+ 	float patientScoreBasicpathologyAlive= patientScore(getMaxNum (PerOPATAlive),getMinNum (PerOPATAlive),pathologyPercentageAlive,PerOPATAlive.size());
+	float contributionMedlAlive = patientScoreBasicpathologyAlive*(1-DeadImportance);
+	contributions.add(contributionMedlAlive);
+	float pathologyPercentageDead= PathologyPercentage(pathology,PerOPATDead,false);
+ 	float patientScoreBasicPathologyDead= patientScore(getMaxNum (PerOPATDead),getMinNum (PerOPATDead),pathologyPercentageDead,PerOPATDead.size());
+	float contributionMedlDead = patientScoreBasicPathologyDead*(DeadImportance);
+	contributions.add(contributionMedlDead);
+	}
+	
+	
 	
 	
 
@@ -196,9 +224,44 @@ public void calculateScore(Patient p,float DeadImportance) {
 	
 	
 }
-public   Float   HospitalPercentage (String hospital, List <Float> percentages) {
+public   Float  PathologyPercentage (String pathologyName, List <Float> percentages,boolean alive) {
 	 float percentage=0;
-		List<String> difHospitalsname = Main.getInter().getdifferentHospitals(true);
+		List<String> difPathologiesname = Main.getInter().getdifferentPaths(alive);
+
+for (int i=0;i<percentages.size();i++) {
+	if(difPathologiesname.get(i).equals(pathologyName)) {
+		percentage = percentages.get(i);
+	}
+	
+}
+
+	 
+	 return percentage;
+	
+}
+
+public   Float  MedicationPercentage (String medicationName, List <Float> percentages,boolean alive) {
+	 float percentage=0;
+		List<String> difMedicationsname = Main.getInter().getdifferentMeds(alive);
+
+for (int i=0;i<percentages.size();i++) {
+	if(difMedicationsname.get(i).equals(medicationName)) {
+		percentage = percentages.get(i);
+	}
+	
+}
+
+	 
+	 return percentage;
+	
+}
+
+
+
+
+public   Float   HospitalPercentage (String hospital, List <Float> percentages,boolean alive) {
+	 float percentage=0;
+		List<String> difHospitalsname = Main.getInter().getdifferentHospitals(alive);
 
 for (int i=0;i<percentages.size();i++) {
 	if(difHospitalsname.get(i).equals(hospital)) {

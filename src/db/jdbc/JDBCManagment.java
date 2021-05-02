@@ -989,7 +989,6 @@ try {
 			e.printStackTrace();
 
 		}
-		System.out.println("el numero es "+number);
 		return number;
 
 	}
@@ -1287,7 +1286,6 @@ int count=0;
 			while (rs.next()) {
 				count++;
 			}
-			System.out.println("MAX "+max+" Min "+min+" count "+count);
 
 			rs.close();
 			prep.close();
@@ -1669,10 +1667,36 @@ prep.setBoolean(1, alive);
 				Integer nid = rs.getInt("id");
 				String nombre = rs.getString("name");
 				Medication medi = new Medication(nid, nombre);
-				System.out.println("med" + medi);
 
 				medicaciones.add(medi);
-				return medicaciones;
+
+			}
+
+			rs.close();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return medicaciones;
+	}
+	@Override
+	public List<String> getMedicationfromPatientNAME(int id) {
+		List<String> medicaciones = new ArrayList<String>();
+
+		try {
+			String sql = "SELECT  m.name FROM medication AS m JOIN pat_medi AS pm ON pm.id_medi = m.id JOIN patients AS p ON p.id=pm.id_pat WHERE p.id = ? ";
+
+			PreparedStatement prep = c.prepareStatement(sql);
+
+			prep.setInt(1, id);
+
+			ResultSet rs = prep.executeQuery();
+
+			while (rs.next()) {
+
+				String nombre = rs.getString("name");
+
+				medicaciones.add(nombre);
 
 			}
 
@@ -1689,28 +1713,57 @@ prep.setBoolean(1, alive);
 		List<Other_Pathologies> paths = new ArrayList<Other_Pathologies>();
 
 		try {
-			String sql = "SELECT p.id, p.name FROM other_pathologies AS p JOIN pat_patho AS pp ON pp.id_patho = p.id JOIN patients AS pat ON pat.id=pp.id_pat WHERE pat.id = ? ";
+			String sql = "SELECT path.id, path.name FROM other_pathologies AS path JOIN pat_patho AS pp ON pp.id_patho=path.id JOIN patients AS p ON p.id=pp.id_pat WHERE p.id = ?   ";
+
 
 			PreparedStatement prep = c.prepareStatement(sql);
 
 			prep.setInt(1, id);
 
 			ResultSet rs = prep.executeQuery();
-
-			while (rs.next()) {
-
+		
+            int contador=0;
+            while (rs.next()) {
 				Integer nid = rs.getInt("id");
 				String nombre = rs.getString("name");
 				Other_Pathologies pathology = new Other_Pathologies(nid, nombre);
-				System.out.println("lla pat es " + pathology);
-
+				System.out.println(contador+"/"+id+"- "+pathology);
+                contador++;
 				paths.add(pathology);
-				return paths;
 
 			}
 
 			rs.close();
 			prep.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return paths;
+	}
+	@Override
+	public List<String> getPathofromPatientNAME(int id) {
+		List<String> paths = new ArrayList<String>();
+
+		try {
+			String sql = "SELECT  path.name FROM other_pathologies AS path JOIN pat_patho AS pp ON pp.id_patho=path.id JOIN patients AS p ON p.id=pp.id_pat WHERE p.id = ?   ";
+
+
+			PreparedStatement prep = c.prepareStatement(sql);
+
+			prep.setInt(1, id);
+
+			ResultSet rs = prep.executeQuery();
+		
+            while (rs.next()) {
+				String name = rs.getString("name");
+				paths.add(name);
+
+			}
+
+			rs.close();
+			prep.close();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

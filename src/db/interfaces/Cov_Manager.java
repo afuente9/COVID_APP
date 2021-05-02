@@ -142,5 +142,7 @@ public interface Cov_Manager {
 	List<String> getdifferentPaths(boolean alive);
 	int getdifferentMedsCOUNT(String name, boolean alive);
 	int getdifferentPathsCOUNT(String name, boolean alive);
+	List<String> getMedicationfromPatientNAME(int id);
+	List<String> getPathofromPatientNAME(int id);
 
 }
