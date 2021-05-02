@@ -11,6 +11,7 @@ import db.GUI.Main;
 import db.pojos.Day;
 import db.pojos.Doctor;
 import db.pojos.Patient;
+import db.pojos.Sex;
 import javafx.collections.FXCollections;
 import javafx.scene.chart.PieChart;
 
@@ -78,8 +79,11 @@ public void calculateValues() {
 }
 */
 
-public void calculateScore(Patient p,Day d) {
+public void calculateScore(Patient p,float DeadImportance) {
 	//cojo los numeros de todos
+	
+	List<Float> contributions = new ArrayList<>();
+
 	List<Float> agePercentagesAlive = getAgesALIVE();
 	List<Float> agePercentagesDead = getAgesDEAD();
 	
@@ -88,13 +92,14 @@ public void calculateScore(Patient p,Day d) {
 	
 	List<Float> WeightPerAlive = getWeightALIVE();
 	List<Float> WeightPerDead = getWeightDEAD();
-	
 	List<Float> perHospitalAlive = getHosALIVE();
 	List<Float> perHospitalDead = getHosDEAD();	
 
 	List<Float> perLocationAlive = getLocALIVE();
 	List<Float> perLocationDead = getLocDEAD();
-	
+		
+		
+		//ME LO HE DEJADO
 	List<Float> perMedAlive = getMedALIVE();
 	List<Float> perMedDead = getMedDead();
 
@@ -104,18 +109,86 @@ public void calculateScore(Patient p,Day d) {
 	List<Float> PerBloodAlive = getBloodALIVE();
 	List<Float> PerBloodDead = getBloodDead();
 	
+		//ME LO HE DEJADO
 	
 	List<Float> PerOPATAlive = getOPatALIVE();
 	List<Float> PerOPATDead = getOPatDead();
 
 	
+	//Float MaxPerAgeAlive = getMaxNum (agePercentagesAlive);
+	//Float MinPerAgeAlive = getMinNum (agePercentagesAlive);
+	float AGEPercentagePatientAlive =getPercentageAgePatient(p.getTheAge(p.getBirthday()),agePercentagesAlive);
+	float patientScoreBasicAgeAlive= patientScore(getMaxNum (agePercentagesAlive),getMinNum (agePercentagesAlive),AGEPercentagePatientAlive,agePercentagesAlive.size());
+	float contributionAgeAlive = patientScoreBasicAgeAlive*(1-DeadImportance);
+	contributions.add(contributionAgeAlive);
+	float AGEPercentagePatientDead =getPercentageAgePatient(p.getTheAge(p.getBirthday()),agePercentagesDead);
+	float patientScoreBasicAgeDead= patientScore(getMaxNum (agePercentagesDead),getMinNum (agePercentagesDead),AGEPercentagePatientDead,agePercentagesDead.size());
+	float contributionAgeDead = patientScoreBasicAgeAlive*(DeadImportance);
+	contributions.add(contributionAgeDead);
+
+	float HeightPercentageAlive = HeightPercentage(p.getHeight(),HeighPerAlive);
+	float patientScoreBasicHeightAlive= patientScore(getMaxNum (HeighPerAlive),getMinNum (HeighPerAlive),HeightPercentageAlive,HeighPerAlive.size());
+	float contributionHeightAlive = patientScoreBasicHeightAlive*(1-DeadImportance);
+	contributions.add(contributionHeightAlive);
+	float HeightPercentageDead = HeightPercentage(p.getHeight(),HeighPerDead);
+	float patientScoreBasicHeightDead= patientScore(getMaxNum (HeighPerDead),getMinNum (HeighPerDead),HeightPercentageDead,HeighPerDead.size());
+	float contributionHeightDead = patientScoreBasicHeightDead*(1-DeadImportance);
+	contributions.add(contributionHeightDead);
+	
+	float WeightPercentageAlive = WeightPercentage(p.getWeight(),WeightPerAlive);
+	float patientScoreBasicWeightAlive= patientScore(getMaxNum (WeightPerAlive),getMinNum (WeightPerAlive),WeightPercentageAlive,WeightPerAlive.size());
+	float contributionWeightAlive = patientScoreBasicWeightAlive*(1-DeadImportance);
+	contributions.add(contributionWeightAlive);
+	float WeightPercentageDead = WeightPercentage(p.getWeight(),WeightPerDead);
+	float patientScoreBasicWeightDead= patientScore(getMaxNum (WeightPerDead),getMinNum (WeightPerDead),WeightPercentageDead,WeightPerDead.size());
+	float contributionWeightDead = patientScoreBasicWeightDead*(DeadImportance);
+	contributions.add(contributionWeightDead);
+	
+	float locationPercentageAlive= LocationPercentage(p.getHos_location(),perLocationAlive);
+	float patientScoreBasicLocationAlive= patientScore(getMaxNum (perLocationAlive),getMinNum (perLocationAlive),locationPercentageAlive,perLocationAlive.size());
+	float contributionLocationAlive = patientScoreBasicLocationAlive*(1-DeadImportance);
+	contributions.add(contributionLocationAlive);
+	float locationPercentageDead= LocationPercentage(p.getHos_location(),perLocationDead);
+	float patientScoreBasicLocationDead= patientScore(getMaxNum (perLocationDead),getMinNum (perLocationDead),locationPercentageDead,perLocationDead.size());
+	float contributionLocationDead = patientScoreBasicLocationDead*(DeadImportance);
+	contributions.add(contributionLocationDead);
+
+	float sexPercentageAlive= SexPercentage(p.getSex(),PerSexAlive);
+	float patientScoreBasicSexAlive= patientScore(getMaxNum (PerSexAlive),getMinNum (PerSexAlive),sexPercentageAlive,PerSexAlive.size());
+	float contributionSexAlive = patientScoreBasicSexAlive*(1-DeadImportance);
+	contributions.add(contributionSexAlive);
+	float sexPercentageDead= SexPercentage(p.getSex(),PerSexDead);
+	float patientScoreBasicSexDead= patientScore(getMaxNum (PerSexDead),getMinNum (PerSexDead),sexPercentageDead,PerSexDead.size());
+	float contributionSexDead = patientScoreBasicSexDead*(DeadImportance);
+	contributions.add(contributionSexDead);
+	
+	float bloodPercentageAlive= BloodPercentage(p.getBloodType(),PerBloodAlive);
+	float patientScoreBasicBloodAlive= patientScore(getMaxNum (PerBloodAlive),getMinNum (PerBloodAlive),bloodPercentageAlive,PerBloodAlive.size());
+	float contributionBloodAlive = patientScoreBasicBloodAlive*(1-DeadImportance);
+	contributions.add(contributionBloodAlive);
+	float bloodPercentageDead= BloodPercentage(p.getBloodType(),PerBloodDead);
+	float patientScoreBasicBloodDead= patientScore(getMaxNum (PerBloodDead),getMinNum (PerBloodDead),bloodPercentageDead,PerBloodDead.size());
+	float contributionBloodDead = patientScoreBasicBloodDead*(DeadImportance);
+	contributions.add(contributionBloodDead);
+	
+	float hospitalPercentage= HospitalPercentage(p.getHospital(),perHospitalAlive);
+   	float patientScoreBasicHospitalAlive= patientScore(getMaxNum (perHospitalAlive),getMinNum (perHospitalAlive),bloodPercentageAlive,perHospitalAlive.size());
+	float contributionHospitalAlive = patientScoreBasicHospitalAlive*(1-DeadImportance);
+	contributions.add(contributionHospitalAlive);
+	float HospitalPercentageDead= HospitalPercentage(p.getHospital(),perHospitalDead);
+   	float patientScoreBasicHospitalDead= patientScore(getMaxNum (perHospitalDead),getMinNum (perHospitalDead),bloodPercentageDead,perHospitalDead.size());
+	float contributionHospitalDead = patientScoreBasicHospitalDead*(DeadImportance);
+	contributions.add(contributionHospitalDead);
+	
+	
+
+
+
+
 
 	
 	
-
-	
-	
-	
+	 
 	
 	
 	
@@ -123,6 +196,180 @@ public void calculateScore(Patient p,Day d) {
 	
 	
 }
+public   Float   HospitalPercentage (String hospital, List <Float> percentages) {
+	 float percentage=0;
+		List<String> difHospitalsname = Main.getInter().getdifferentHospitals(true);
+
+for (int i=0;i<percentages.size();i++) {
+	if(difHospitalsname.get(i).equals(hospital)) {
+		percentage = percentages.get(i);
+	}
+	
+}
+
+	 
+	 return percentage;
+}
+public   Float   BloodPercentage (String blood, List <Float> percentages) {
+	 float percentage=0;
+	 if (blood.equals("A+")) {
+		 percentage = percentages.get(0);
+	 } 
+	 else  if (blood.equals("A-")) {
+		 percentage = percentages.get(1);
+
+		 
+	 } 
+	 else if (blood.equals("B+")) {
+		 percentage = percentages.get(2);
+
+	 } if (blood.equals("B-")) {
+		 percentage = percentages.get(3);
+	 } 
+	 else  if (blood.equals("0+")) {
+		 percentage = percentages.get(4);
+
+		 
+	 } 
+	 else if (blood.equals("0-")) {
+		 percentage = percentages.get(5);
+
+	 } else  if (blood.equals("AB-")) {
+		 percentage = percentages.get(6);
+
+		 
+	 } 
+	 else if (blood.equals("AB+")) {
+		 percentage = percentages.get(7);
+
+	 }
+	 
+	 return percentage;
+}
+public   Float   SexPercentage (Sex sex, List <Float> percentages) {
+	 float percentage=0;
+	 if (sex.equals("M")) {
+		 percentage = percentages.get(0);
+	 } 
+	 else  if (sex.equals("F")) {
+		 percentage = percentages.get(1);
+
+		 
+	 } 
+	 
+	 return percentage;
+}
+
+public   Float   LocationPercentage (String location, List <Float> percentages) {
+	 float percentage=0;
+	 if (location.equals("Home")) {
+		 percentage = percentages.get(0);
+	 } 
+	 else  if (location.equals("Floor hospital")) {
+		 percentage = percentages.get(1);
+
+		 
+	 } 
+	 else if (location.equals("ICU")) {
+		 percentage = percentages.get(2);
+
+	 }
+	 
+	 return percentage;
+}
+
+public   Float   WeightPercentage (float weight, List <Float> percentages) {
+	 float percentage=0;
+	 if (weight>0 && weight<20) {
+		 percentage = percentages.get(0);
+	 } 
+	 else  if (weight>20  && weight<50) {
+		 percentage = percentages.get(1);
+
+		 
+	 } 
+	 else if (weight>50 &&weight<70) {
+		 percentage = percentages.get(2);
+
+	 }
+	 else if (weight>70 && weight<90) {
+		 percentage = percentages.get(3);
+
+	 } 
+	 else  if (weight>90 && weight<110) {
+		 percentage = percentages.get(4);
+
+	 } 
+	 else  if (weight>110) {
+		 percentage = percentages.get(5);
+
+	 }
+	 return percentage;
+}
+
+public   Float   HeightPercentage (float height, List <Float> percentages) {
+	 float percentage=0;
+	 if (height>0 && height<1.0) {
+		 percentage = percentages.get(0);
+	 } 
+	 else  if (height>1.0  && height<1.50) {
+		 percentage = percentages.get(1);
+
+		 
+	 } 
+	 else if (height>1.50 &&height<1.750) {
+		 percentage = percentages.get(2);
+
+	 }
+	 else if (height>1.75 && height<2.0) {
+		 percentage = percentages.get(3);
+
+	 } 
+	 else  if (height>2.0) {
+		 percentage = percentages.get(4);
+
+	 }
+	 return percentage;
+}
+
+
+
+public float patientScore(float MaxPercentage, float MinPercentage, float PatientPercentage,int NumberOptionsFeature) {
+	float difference = MaxPercentage-MinPercentage;
+	float base = difference*PatientPercentage;
+	float exponent = 1+(NumberOptionsFeature/10);
+	float score = (float) Math.pow(base, exponent);
+	
+	
+	return score;
+}
+public   Float   getPercentageAgePatient (int age, List <Float> percentages) {
+	 float percentage=0;
+	 if (age>0 && age<20) {
+		 percentage = percentages.get(0);
+	 } 
+	 else  if (age>20  && age<40) {
+		 percentage = percentages.get(1);
+
+		 
+	 } 
+	 else if (age>40 &&age<60) {
+		 percentage = percentages.get(2);
+
+	 }
+	 else if (age>60 && age<80) {
+		 percentage = percentages.get(3);
+
+	 } 
+	 else  if (age>80) {
+		 percentage = percentages.get(4);
+
+	 }
+	 return percentage;
+}
+
+
+
 public  List<Float>   getOPatALIVE () {
 	List<String> paths = Main.getInter().getdifferentPaths(true);
 
@@ -384,16 +631,16 @@ public  List<Float>   getAgesALIVE () {
 		 if (ages.get(i)>0 && ages.get(i)<20) {
 			 timer1++;
 		 } 
-		 if (ages.get(i)>20  && ages.get(i)<40) {
+		 else if (ages.get(i)>20  && ages.get(i)<40) {
 			 timer2++;
 		 } 
-		 if (ages.get(i)>40 && ages.get(i)<60) {
+		 else if (ages.get(i)>40 && ages.get(i)<60) {
 			 timer3++;
 		 }
-		 if (ages.get(i)>60 && ages.get(i)<80) {
+		 else if (ages.get(i)>60 && ages.get(i)<80) {
 			 timer4++;
 		 } 
-		 if (ages.get(i)>80) {
+		 else  if (ages.get(i)>80) {
 			 timer5++;
 		 }
 		 
@@ -431,16 +678,16 @@ public  List<Float>   getAgesDEAD () {
 		 if (ages.get(i)>0 && ages.get(i)<20) {
 			 timer1++;
 		 } 
-		 if (ages.get(i)>20  && ages.get(i)<40) {
+		 else if (ages.get(i)>20  && ages.get(i)<40) {
 			 timer2++;
 		 } 
-		 if (ages.get(i)>40 && ages.get(i)<60) {
+		 else  if (ages.get(i)>40 && ages.get(i)<60) {
 			 timer3++;
 		 }
-		 if (ages.get(i)>60 && ages.get(i)<80) {
+		 else  if (ages.get(i)>60 && ages.get(i)<80) {
 			 timer4++;
 		 } 
-		 if (ages.get(i)>80) {
+		 else if (ages.get(i)>80) {
 			 timer5++;
 		 }
 		 
