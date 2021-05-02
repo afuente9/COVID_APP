@@ -99,7 +99,6 @@ public void calculateScore(Patient p,float DeadImportance) {
 	List<Float> perLocationDead = getLocDEAD();
 		
 		
-		//ME LO HE DEJADO
 	List<Float> perMedAlive = getMedALIVE();
 	List<Float> perMedDead = getMedDead();
 
@@ -109,7 +108,6 @@ public void calculateScore(Patient p,float DeadImportance) {
 	List<Float> PerBloodAlive = getBloodALIVE();
 	List<Float> PerBloodDead = getBloodDead();
 	
-		//ME LO HE DEJADO
 	
 	List<Float> PerOPATAlive = getOPatALIVE();
 	List<Float> PerOPATDead = getOPatDead();
@@ -205,23 +203,14 @@ public void calculateScore(Patient p,float DeadImportance) {
 	float contributionMedlDead = patientScoreBasicPathologyDead*(DeadImportance);
 	contributions.add(contributionMedlDead);
 	}
+	float totalContributions=0;
+	for(int i = 0;i<contributions.size();i++) {
+		totalContributions+=contributions.get(i);
+	}
 	
-	
-	
+	Main.getInter().modifyScore(p.getId(), totalContributions);
 	
 
-
-
-
-
-	
-	
-	 
-	
-	
-	
-	
-	
 	
 }
 public   Float  PathologyPercentage (String pathologyName, List <Float> percentages,boolean alive) {
@@ -799,18 +788,8 @@ public float getMinNum(List<Float> list) {
 	
 	return max;
 }
-public int getFinalScore(double [] contributions) {
-	double score=0;
-	for(int i=0; i<=contributions.length; i++) {
-		score+=contributions[i];
-	}
-	return (int) score;
-}
-public float calculateDiferencesList(List<Float> list) {
-	float difference=0;
-	difference= getMaxNum(list)-getMinNum(list);
-	return difference;
-}
+
+
 
 
 }

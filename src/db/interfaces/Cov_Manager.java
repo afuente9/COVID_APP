@@ -144,5 +144,6 @@ public interface Cov_Manager {
 	int getdifferentPathsCOUNT(String name, boolean alive);
 	List<String> getMedicationfromPatientNAME(int id);
 	List<String> getPathofromPatientNAME(int id);
+	void modifyScore(int id, float value);
 
 }

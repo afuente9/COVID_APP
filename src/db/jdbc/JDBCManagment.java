@@ -340,6 +340,22 @@ public class JDBCManagment implements Cov_Manager {
 		}
 
 	}
+	@Override
+	public void modifyScore(int id, float value) {
+		try {
+
+				String sql = "UPDATE patients SET score = ? WHERE id = " + id;
+			
+			PreparedStatement prep = c.prepareStatement(sql);
+             prep.setFloat(1, value);
+			
+			prep.executeUpdate();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	@Override
 	public void modifyLab(int iden, String atrib, String value) {

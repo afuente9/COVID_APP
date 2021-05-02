@@ -74,7 +74,7 @@ public class MainMenuController implements Initializable {
 		  	
       p_new= new Patient(Place_Text,Name_Text,date,SSNum_Text,height,weight,sex,infected,alive,Hospital_Text,vaccinated,Blood_Text,dateIntroduced);
     	Main.getInter().addPatient(p_new);
-	*/	
+	*/	/*
 		
 		String[] names = new String[]{"Daniel","Antonio","Loreto","Esteban","María","Javier","Lorena","Miriam","Carla","Jose Luís","Eva","Emilia","Josefa","Ofelia","Olga","Lidia","Cesar","Felipe","Lucas","Aitor","Samuel","Felix","Julio","Tomás","Gonzalo","Emilio","Hugo","Marcos","Jaime","Juan","Pablo","Mario","Carolina","Nerea","Sofía","Susana","Sonia","Alicia"," Inés","Rosa","Andrea","Alba","Elena","Sara","Ana María","Laura","Paula","Jose","Diego","Raúl","Leo","Pedro","Alfonso","Miguel"};
 	
