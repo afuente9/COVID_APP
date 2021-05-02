@@ -56,16 +56,16 @@
             </Label>
             <Button layoutX="83.0" layoutY="98.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="175.0" text="View important info" />
             <ChoiceBox fx:id="typeofpatient" layoutX="258.0" layoutY="40.0" prefWidth="150.0" />
-            <CheckBox fx:id="checkAge" layoutX="96.0" layoutY="149.1" mnemonicParsing="false" onAction="#CheckAge" text="By age" />
-            <CheckBox fx:id="checkWeight" layoutX="96.0" layoutY="185.0" mnemonicParsing="false" onAction="#checkWei" text="By weight" />
-            <CheckBox fx:id="ckeckOtherPathologies" layoutX="96.0" layoutY="418.0" mnemonicParsing="false" onAction="#onckeckOtherPathologies" text="By other pathologies" />
-            <CheckBox fx:id="checkMedication" layoutX="96.0" layoutY="378.0" mnemonicParsing="false" onAction="#onCheckMedication" text="By medication" />
-            <CheckBox fx:id="checkPatientLocation" layoutX="96.0" layoutY="336.0" mnemonicParsing="false" onAction="#onCheckLocation" text="By patient location" />
-            <CheckBox fx:id="checkHeight" layoutX="96.0" layoutY="222.0" mnemonicParsing="false" onAction="#checkHei" text="By height" />
-            <CheckBox fx:id="checkSex" layoutX="96.0" layoutY="258.0" mnemonicParsing="false" onAction="#oncheckSex" text="By sex" />
-            <CheckBox fx:id="checkHospital" layoutX="96.0" layoutY="298.0" mnemonicParsing="false" onAction="#onCheckHos" text="By hospital" />
+            <CheckBox fx:id="checkAge" disable="true" layoutX="96.0" layoutY="149.1" mnemonicParsing="false" onAction="#CheckAge" text="By age" />
+            <CheckBox fx:id="checkWeight" disable="true" layoutX="96.0" layoutY="185.0" mnemonicParsing="false" onAction="#checkWei" text="By weight" />
+            <CheckBox fx:id="ckeckOtherPathologies" disable="true" layoutX="96.0" layoutY="418.0" mnemonicParsing="false" onAction="#onckeckOtherPathologies" text="By other pathologies" />
+            <CheckBox fx:id="checkMedication" disable="true" layoutX="96.0" layoutY="378.0" mnemonicParsing="false" onAction="#onCheckMedication" text="By medication" />
+            <CheckBox fx:id="checkPatientLocation" disable="true" layoutX="96.0" layoutY="336.0" mnemonicParsing="false" onAction="#onCheckLocation" text="By patient location" />
+            <CheckBox fx:id="checkHeight" disable="true" layoutX="96.0" layoutY="222.0" mnemonicParsing="false" onAction="#checkHei" text="By height" />
+            <CheckBox fx:id="checkSex" disable="true" layoutX="96.0" layoutY="258.0" mnemonicParsing="false" onAction="#oncheckSex" text="By sex" />
+            <CheckBox fx:id="checkHospital" disable="true" layoutX="96.0" layoutY="298.0" mnemonicParsing="false" onAction="#onCheckHos" text="By hospital" />
             <Button fx:id="pdfbutton" layoutX="96.0" layoutY="475.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="175.0" text="Generate a pdf" />
-            <CheckBox fx:id="ckeckBloodType" layoutX="96.0" layoutY="448.0" mnemonicParsing="false" onAction="#onckeckBloodType" text="By blood type" />
+            <CheckBox fx:id="ckeckBloodType" disable="true" layoutX="96.0" layoutY="448.0" mnemonicParsing="false" onAction="#onckeckBloodType" text="By blood type" />
             <PieChart fx:id="pieChart" layoutX="285.0" layoutY="26.0" legendVisible="false" prefHeight="426.0" prefWidth="507.0" />
             <LineChart fx:id="lineChart" layoutX="426.0" layoutY="98.0" prefHeight="298.0" prefWidth="340.0">
               <xAxis>

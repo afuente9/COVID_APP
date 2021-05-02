@@ -133,14 +133,14 @@ public interface Cov_Manager {
 	List<Integer> getNumberofDeadsofEachDay();
 	int getNumberofInfecteds();
 	List<Integer> getNumberofInfectedsofEachDay();
-	int searchPatientGenericCOUNT(String feature, String type);
-	int getNumberPatientsbyRangeofFeature(String feature, float max, float min);
-	int getNumberPatientsbyanyString(String feature, String type);
-	List<String> getdifferentHospitals();
-	List<Date> getDates();
-	List<String> getdifferentMeds();
 	int getdifferentMedsCOUNT(String name);
-	List<String> getdifferentPaths();
 	int getdifferentPathsCOUNT(String name);
+	int searchPatientGenericCOUNT(String feature, String type, boolean alive);
+	List<Date> getDates(boolean alive);
+	int getNumberPatientsbyRangeofFeature(String feature, float max, float min, boolean alive);
+	List<String> getdifferentHospitals(boolean alive);
+	int getNumberPatientsbyanyString(String feature, String type, boolean alive);
+	List<String> getdifferentMeds(boolean alive);
+	List<String> getdifferentPaths(boolean alive);
 
 }

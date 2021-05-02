@@ -674,11 +674,12 @@ public class JDBCManagment implements Cov_Manager {
 	}
 	
 	@Override
-	public List<String> getdifferentHospitals() {
+	public List<String> getdifferentHospitals(boolean alive) {
 		List<String> Hospitals = new ArrayList();
 		try {
-			String sql = "SELECT * FROM patients ";
+			String sql = "SELECT * FROM patients WHERE alive = ? ";
 			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setBoolean(1, alive);
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
                String hospital = rs.getString("hospital");
@@ -697,11 +698,12 @@ public class JDBCManagment implements Cov_Manager {
 		return Hospitals;
 	}
 	@Override
-	public List<String> getdifferentMeds() {
+	public List<String> getdifferentMeds(boolean alive) {
 		List<String> Medications = new ArrayList();
 		try {
-			String sql = "SELECT med.name FROM medication AS med JOIN pat_medi AS pm ON pm.id_medi=med.id JOIN patients AS p ON p.id=pm.id_pat WHERE (p.id>0)  ";
+			String sql = "SELECT med.name FROM medication AS med JOIN pat_medi AS pm ON pm.id_medi=med.id JOIN patients AS p ON p.id=pm.id_pat WHERE (p.id>0 AND alive = ?)  ";
 			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setBoolean(1, alive);
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
                String name = rs.getString("name");
@@ -740,11 +742,12 @@ try {
 		return times;
 	}
 	@Override
-	public List<String> getdifferentPaths() {
+	public List<String> getdifferentPaths(boolean alive) {
 		List<String> Pathologies = new ArrayList();
 		try {
-			String sql = "SELECT path.name FROM other_pathologies AS path JOIN pat_patho AS pp ON pp.id_patho=path.id JOIN patients AS p ON p.id=pp.id_pat WHERE (p.id>0)  ";
+			String sql = "SELECT path.name FROM other_pathologies AS path JOIN pat_patho AS pp ON pp.id_patho=path.id JOIN patients AS p ON p.id=pp.id_pat WHERE (p.id>0 AND alive = ?)  ";
 			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setBoolean(1, alive);
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
                String name = rs.getString("name");
@@ -784,11 +787,12 @@ try {
 		return times;
 	}	
 	@Override
-	public List<Date> getDates() {
+	public List<Date> getDates(boolean alive) {
 		List<Date> dates = new ArrayList();
 		try {
-			String sql = "SELECT * FROM patients ";
+			String sql = "SELECT * FROM patients WHERE alive = ? ";
 			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setBoolean(1, alive);
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
                Date date = rs.getDate("birthday");
@@ -1213,7 +1217,7 @@ try {
 		return patients;
 	}	
 	@Override
-	public int searchPatientGenericCOUNT(String feature, String type) {
+	public int searchPatientGenericCOUNT(String feature, String type, boolean alive) {
 int count=0;
 //TODO PARA LA DATE INTRODUCED
 		try {
@@ -1229,7 +1233,7 @@ int count=0;
 				sql = "SELECT * FROM  patients WHERE " + feature + " = '?' ";
 
 			} else {
-				sql = "SELECT * FROM  patients WHERE " + feature + " LIKE ?";
+				sql = "SELECT * FROM  patients WHERE( " + feature + " LIKE ? AND alive = ?)";
 			}
 
 			PreparedStatement prep = c.prepareStatement(sql);
@@ -1248,6 +1252,7 @@ int count=0;
 
 			else {
 				prep.setString(1, "%" + type + "%");
+				prep.setBoolean(2,alive);
 
 			}
 
@@ -1265,16 +1270,16 @@ int count=0;
 	
 	
 	@Override
-	public int getNumberPatientsbyRangeofFeature(String feature, float max, float min) {
+	public int getNumberPatientsbyRangeofFeature(String feature, float max, float min, boolean alive) {
 int count=0;
 		try {
-			String sql = "SELECT * FROM  patients WHERE( "+feature+" < "+max+" AND "+feature+" > "+min+" )" ;
+			String sql = "SELECT * FROM  patients WHERE( "+feature+" < "+max+" AND "+feature+" > "+min+" AND alive = ? )" ;
 
 			
 
 			PreparedStatement prep = c.prepareStatement(sql);
 
-			
+			prep.setBoolean(1, alive);
 
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
@@ -1290,15 +1295,15 @@ int count=0;
 		return count;
 	}
 	@Override
-	public int getNumberPatientsbyanyString(String feature, String type) {
+	public int getNumberPatientsbyanyString(String feature, String type, boolean alive) {
 int count=0;
 		try {
-			String sql = "SELECT * FROM  patients WHERE("+feature+" = '" + type + "')" ;
+			String sql = "SELECT * FROM  patients WHERE("+feature+" = '" + type + "' AND alive = ?)" ;
 
 			
 
 			PreparedStatement prep = c.prepareStatement(sql);
-
+prep.setBoolean(1, alive);
 
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
