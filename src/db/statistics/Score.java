@@ -1,12 +1,18 @@
 package db.statistics;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import db.GUI.Main;
 import db.pojos.Day;
 import db.pojos.Doctor;
 import db.pojos.Patient;
+import javafx.collections.FXCollections;
+import javafx.scene.chart.PieChart;
 
 public class Score {
 	public boolean firstTime=true;
@@ -72,81 +78,393 @@ public void calculateValues() {
 }
 */
 
-public void calculateScore(Patient p,Day d,List<Float> percentageAgeInfectedList) {
-	/*
-	 * PARA LOS CASOS DONDE HAY INTERVALOS COMO AGE, WEIGHT Y HEIGHT USAREMOS LISTAS DE LA MISMA MANERA QUE YA ESTÁ IMPLEMENTADO EN AGE
-	 * PARA LOS DEMÁS CASOS, USAREMOS DICCIONARIOS DONDE LE PASAREMOS EL TIPO QUE TIENE EL PACIENTE COMO KEY, Y NOS DEVOLVERA EL PORCENTAJE
-	 * POR EJEMPLO EN SEXO, HOSPITAL, MEDICACION ETC. ASI SOLUCIONAMOS EL TEMA DE NO SABER CUANTOS TIPOS DIFERENTES TENEMOS
-	 * EN LOS QUE USAMOS DICCIONARIOS, TENDREMOS QUE COGER TODOS LOS PORCENTAJES PARA MIRAR CUAL ES EL MAXIMO Y EL MINIMO. 
-	 * A MALAS, PASAMOS TODOS A UNA LISTA Y LUEGO USAMOS LOS METODOS MIN Y MAX YA CREADOS.
+public void calculateScore(Patient p,Day d) {
+	//cojo los numeros de todos
+	List<Float> agePercentagesAlive = getAgesALIVE();
+	List<Float> agePercentagesDead = getAgesDEAD();
 	
-	*/
-	//TODO AL FINAL DEL TODo CUANDO SE VERIFIQUE QUE TODo FUNCIONA!! simplificar variables 
+	List<Float> HeighPerAlive = getHeightALIVE();
+	List<Float> HeighPerDead = getHeightDEAD();
 	
-	double DeadScore=0;
-	double InfectedScore=0;
-	float percentageAgeDifference=0;
-	if(firstTime==true) {
-		//calcular el infected score y el dead score solo lo tiene que hacer una vez al dia y usarel mismo valor para todos los pacientes
-		double exponente = -0.039*d.getAverage()+5;
-		double denominadorDeathScore=1+Math.pow(2.71828,exponente);
-		 DeadScore=((35/denominadorDeathScore)+65)/100;
-		 InfectedScore=1-DeadScore;
-		
-		 percentageAgeDifference= calculateDiferencesList(percentageAgeInfectedList);
-		// diferencialista2= calculateDiferencesList(lista2);...
-		//diferenciadiccionario1=calculateDiferencesDictionary(diccionario1)... asi con todos
-		firstTime=false;
+	List<Float> WeightPerAlive = getWeightALIVE();
+	List<Float> WeightPerDead = getWeightDEAD();
+	
+	List<Float> perHospitalAlive = getHosALIVE();
+	List<Float> perHospitalDead = getHosDEAD();	
+
+	List<Float> perLocationAlive = getLocALIVE();
+	List<Float> perLocationDead = getLocDEAD();
+	
+	List<Float> perMedAlive = getMedALIVE();
+	List<Float> perMedDead = getMedDead();
+
+	List<Float> PerSexAlive = getSexALIVE();
+	List<Float> PerSexDead = getSexDead();
+	
+	List<Float> PerBloodAlive = getBloodALIVE();
+	List<Float> PerBloodDead = getBloodDead();
+	
+	
+	List<Float> PerOPATAlive = getOPatALIVE();
+	List<Float> PerOPATDead = getOPatDead();
+
+	
+
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
+public  List<Float>   getOPatALIVE () {
+	List<String> paths = Main.getInter().getdifferentPaths(true);
+
+	List<Integer> NumsPaths =new ArrayList<>();
+	for (int i =0; i<paths.size();i++) {
+		NumsPaths.add(Main.getInter().getdifferentPathsCOUNT( paths.get(i),true));
 	}
 	
-	double [] contributions= new double[20];
-	int  score=0;
+	return calculatePercentages(NumsPaths);
+	
+	
+	
+}public  List<Float>   getOPatDead () {
+	List<String> paths = Main.getInter().getdifferentPaths(false);
+
+	List<Integer> NumsPaths =new ArrayList<>();
+	for (int i =0; i<paths.size();i++) {
+		NumsPaths.add(Main.getInter().getdifferentPathsCOUNT( paths.get(i),false));
+	}
+	
+	return calculatePercentages(NumsPaths);
+	
+	
+	
+}
+
+public  List<Float>   getBloodALIVE () {
+List<Integer> bloodsNum = new ArrayList<>();
+
+
+
+
+	
+bloodsNum.add( Main.getInter().getNumberPatientsbyanyString("bloodType","A+" ,true));
+bloodsNum.add(  Main.getInter().getNumberPatientsbyanyString("bloodType", "A-",true));
+bloodsNum.add(  Main.getInter().getNumberPatientsbyanyString("bloodType","B+",true));
+bloodsNum.add(  Main.getInter().getNumberPatientsbyanyString("bloodType", "B-",true));
+bloodsNum.add( Main.getInter().getNumberPatientsbyanyString("bloodType", "0+",true));
+bloodsNum.add( Main.getInter().getNumberPatientsbyanyString("bloodType", "0-",true));
+bloodsNum.add( Main.getInter().getNumberPatientsbyanyString("bloodType", "AB-",true));
+bloodsNum.add( Main.getInter().getNumberPatientsbyanyString("bloodType", "AB+",true));
+return calculatePercentages(bloodsNum);
+	
+}public  List<Float>   getBloodDead () {
+	List<Integer> bloodsNum = new ArrayList<>();
+
+
+
+
+	
+	bloodsNum.add( Main.getInter().getNumberPatientsbyanyString("bloodType","A+" ,false));
+	bloodsNum.add(  Main.getInter().getNumberPatientsbyanyString("bloodType", "A-",false));
+	bloodsNum.add(  Main.getInter().getNumberPatientsbyanyString("bloodType","B+",false));
+	bloodsNum.add(  Main.getInter().getNumberPatientsbyanyString("bloodType", "B-",false));
+	bloodsNum.add( Main.getInter().getNumberPatientsbyanyString("bloodType", "0+",false));
+	bloodsNum.add( Main.getInter().getNumberPatientsbyanyString("bloodType", "0-",false));
+	bloodsNum.add( Main.getInter().getNumberPatientsbyanyString("bloodType", "AB-",false));
+	bloodsNum.add( Main.getInter().getNumberPatientsbyanyString("bloodType", "AB+",false));
+	return calculatePercentages(bloodsNum);
+		
+	}
+
 	
 
 
-	int age=p.getTheAge(p.getBirthday());//obtenemos la edad del paci
-    float percentageAge= getAgePercentage(age,percentageAgeInfectedList);//miramos en que intervalo esta y sacamos de la lista  el porcentage de ese intervalo 
-    float agePoints= (percentageAgeDifference*percentageAge);
-	float exponent=1+(percentageAgeInfectedList.size()/10);
-	double basicScore= Math.pow(agePoints,exponent);
-	double finalAgeScoreInfected=basicScore*InfectedScore;
-	
-	
-	//TODO repetir para todas las listas Y DICCIONARIOS
+
+public  List<Float>   getSexALIVE () {
+	List<Integer> NumsSex =new ArrayList<>();
+	NumsSex.add(Main.getInter().searchPatientGenericCOUNT("sex", "M",true));
+	NumsSex.add(Main.getInter().searchPatientGenericCOUNT("sex","F",true));
+	return calculatePercentages(NumsSex);
 
 	
-	score=getFinalScore(contributions);
-    p.setScore(score);	
+
+	
+}
+
+public  List<Float>   getSexDead() {
+	List<Integer> NumsSex =new ArrayList<>();
+	NumsSex.add(Main.getInter().searchPatientGenericCOUNT("sex", "M",false));
+	NumsSex.add(Main.getInter().searchPatientGenericCOUNT("sex","F",false));
+	return calculatePercentages(NumsSex);
+
+	
+}
+
+public  List<Float>   getMedALIVE () {
+	List<String> Medics = Main.getInter().getdifferentMeds(true);
+	List<Integer> NumsMeds =new ArrayList<>();
+	for (int i =0; i<Medics.size();i++) {
+		NumsMeds.add(Main.getInter().getdifferentMedsCOUNT( Medics.get(i),true));
+	}
+	
+	return calculatePercentages(NumsMeds);
+
+}
+public  List<Float>   getMedDead () {
+	List<String> Medics = Main.getInter().getdifferentMeds(false);
+	List<Integer> NumsMeds =new ArrayList<>();
+	for (int i =0; i<Medics.size();i++) {
+		NumsMeds.add(Main.getInter().getdifferentMedsCOUNT( Medics.get(i),false));
+	}
+	
+	return calculatePercentages(NumsMeds);
+
+}
+
+
+
+
+
+
+public  List<Float>   getLocALIVE () {
+List<Integer> locationsNumb = new ArrayList<>();
+
+
+ 
+locationsNumb.add(Main.getInter().getNumberPatientsbyanyString("hos_location","Home" ,true));
+locationsNumb.add( Main.getInter().getNumberPatientsbyanyString("hos_location", "Floor hospital",true));
+locationsNumb.add(Main.getInter().getNumberPatientsbyanyString("hos_location", "ICU",true));
+
+return calculatePercentages(locationsNumb);
+	
+}
+public  List<Float>   getLocDEAD () {
+	List<Integer> locationsNumb = new ArrayList<>();
+
+
+	 
+	locationsNumb.add(Main.getInter().getNumberPatientsbyanyString("hos_location","Home" ,false));
+	locationsNumb.add( Main.getInter().getNumberPatientsbyanyString("hos_location", "Floor hospital",false));
+	locationsNumb.add(Main.getInter().getNumberPatientsbyanyString("hos_location", "ICU",false));
+
+	return calculatePercentages(locationsNumb);
+		
+	}
+
+	
+
+
+public  List<Float>   getHosALIVE () {
+	List<Integer> Hospitals = new ArrayList<>();
+	List<String> difHospitalsname = Main.getInter().getdifferentHospitals(true);
+
+	for (int i =0; i<Hospitals.size();i++) {
+		Hospitals.add(Main.getInter().getNumberPatientsbyanyString("hospital",""+ difHospitalsname.get(i),true));
+	}
+	
+	return calculatePercentages(Hospitals);
+
+}
+public  List<Float>   getHosDEAD() {
+	List<Integer> Hospitals = new ArrayList<>();
+	List<String> difHospitalsname = Main.getInter().getdifferentHospitals(false);
+
+	for (int i =0; i<Hospitals.size();i++) {
+		Hospitals.add(Main.getInter().getNumberPatientsbyanyString("hospital",""+ difHospitalsname.get(i),false));
+	}
+	
+	return calculatePercentages(Hospitals);
+
+}
+
+
+
+public  List<Float>   getWeightALIVE () {
+	List<Integer> Weights = new ArrayList<>();
+	
+	Weights.add( Main.getInter().getNumberPatientsbyRangeofFeature("weight", 20, 0,true));
+	Weights.add( Main.getInter().getNumberPatientsbyRangeofFeature("weight", 50, 20,true));
+	Weights.add( Main.getInter().getNumberPatientsbyRangeofFeature("weight",  70, 50,true));
+	Weights.add( Main.getInter().getNumberPatientsbyRangeofFeature("weight", 90, 70,true));
+	Weights.add( Main.getInter().getNumberPatientsbyRangeofFeature("weight",  110, 90,true));
+	Weights.add( Main.getInter().getNumberPatientsbyRangeofFeature("weight",900, 110,true));
+	
+	return calculatePercentages(Weights);
+
+	
+}
+public  List<Float>   getWeightDEAD () {
+	List<Integer> Weights = new ArrayList<>();
+	
+	Weights.add( Main.getInter().getNumberPatientsbyRangeofFeature("weight", 20, 0,false));
+	Weights.add( Main.getInter().getNumberPatientsbyRangeofFeature("weight", 50, 20,false));
+	Weights.add( Main.getInter().getNumberPatientsbyRangeofFeature("weight",  70, 50,false));
+	Weights.add( Main.getInter().getNumberPatientsbyRangeofFeature("weight", 90, 70,false));
+	Weights.add( Main.getInter().getNumberPatientsbyRangeofFeature("weight",  110, 90,false));
+	Weights.add( Main.getInter().getNumberPatientsbyRangeofFeature("weight",900, 110,false));
+	
+	return calculatePercentages(Weights);
+
+	
+}
+
+
+public  List<Float>   getHeightALIVE () {
+	List<Integer> heights = new ArrayList<>();
+	heights.add(Main.getInter().getNumberPatientsbyRangeofFeature("height", (float)1.0, 0,true));
+	heights.add(Main.getInter().getNumberPatientsbyRangeofFeature("height", (float)1.50, (float)1.0,true));
+    heights.add(Main.getInter().getNumberPatientsbyRangeofFeature("height", (float)1.75, (float)1.50,true));
+    heights.add(Main.getInter().getNumberPatientsbyRangeofFeature("height", (float)2.00, (float)1.75,true));
+	heights.add(Main.getInter().getNumberPatientsbyRangeofFeature("height", (float)5.0, (float)2.0,true));
+	
+	return calculatePercentages(heights);
+}public  List<Float>   getHeightDEAD () {
+	List<Integer> heights = new ArrayList<>();
+	heights.add(Main.getInter().getNumberPatientsbyRangeofFeature("height", (float)1.0, 0,false));
+	heights.add(Main.getInter().getNumberPatientsbyRangeofFeature("height", (float)1.50, (float)1.0,false));
+    heights.add(Main.getInter().getNumberPatientsbyRangeofFeature("height", (float)1.75, (float)1.50,false));
+    heights.add(Main.getInter().getNumberPatientsbyRangeofFeature("height", (float)2.00, (float)1.75,false));
+	heights.add(Main.getInter().getNumberPatientsbyRangeofFeature("height", (float)5.0, (float)2.0,false));
+	
+	return calculatePercentages(heights);
+}
+
+public  List<Float>   calculatePercentages (List<Integer> heights) {
+	 List<Float> listofpercentages = new ArrayList<>();
+	 int add=0;
+
+		for (int i=0;i<heights.size() ; i ++) {
+			 add+=heights.get(i);
+		}
+		
+		 
+		 for (int i=0;i<heights.size();i++) {
+			 float percentage= (heights.get(i)/add);
+			 listofpercentages.add(percentage);
+		 }
+		
+		return listofpercentages;
+	
+}
+
+
+
+public  List<Float>   getAgesALIVE () {
+	
+	List<Date> dates = Main.getInter().getDates(true);
+	List<Integer> ages = new ArrayList<>();
+	 LocalDate today = LocalDate.now();   
+	 for(int i =0;i<dates.size();i++) {
+		 System.out.println(i);
+
+		 LocalDate fHoy= LocalDate.now();
+	     LocalDate cumple= dates.get(i).toLocalDate();
+	     long age= ChronoUnit.YEARS.between(cumple, fHoy); 
+		 
+    		
+    		ages.add((int)age);
+    	}
+	 int timer1=0;
+	 int timer2=0;
+	 int timer3=0;
+	 int timer4=0;
+	 int timer5=0;
+
+	 for(int i =0;i<ages.size();i++) {
+		 
+		 if (ages.get(i)>0 && ages.get(i)<20) {
+			 timer1++;
+		 } 
+		 if (ages.get(i)>20  && ages.get(i)<40) {
+			 timer2++;
+		 } 
+		 if (ages.get(i)>40 && ages.get(i)<60) {
+			 timer3++;
+		 }
+		 if (ages.get(i)>60 && ages.get(i)<80) {
+			 timer4++;
+		 } 
+		 if (ages.get(i)>80) {
+			 timer5++;
+		 }
+		 
+    		
+    	}
+	 List<Integer> agePercentages = new ArrayList<>();
+	
+	 
+	 	return calculatePercentages(agePercentages);
+
+}
+public  List<Float>   getAgesDEAD () {
+	
+	List<Date> dates = Main.getInter().getDates(false);
+	List<Integer> ages = new ArrayList<>();
+	 LocalDate today = LocalDate.now();   
+	 for(int i =0;i<dates.size();i++) {
+		 System.out.println(i);
+
+		 LocalDate fHoy= LocalDate.now();
+	     LocalDate cumple= dates.get(i).toLocalDate();
+	     long age= ChronoUnit.YEARS.between(cumple, fHoy); 
+		 
+    		
+    		ages.add((int)age);
+    	}
+	 int timer1=0;
+	 int timer2=0;
+	 int timer3=0;
+	 int timer4=0;
+	 int timer5=0;
+
+	 for(int i =0;i<ages.size();i++) {
+		 
+		 if (ages.get(i)>0 && ages.get(i)<20) {
+			 timer1++;
+		 } 
+		 if (ages.get(i)>20  && ages.get(i)<40) {
+			 timer2++;
+		 } 
+		 if (ages.get(i)>40 && ages.get(i)<60) {
+			 timer3++;
+		 }
+		 if (ages.get(i)>60 && ages.get(i)<80) {
+			 timer4++;
+		 } 
+		 if (ages.get(i)>80) {
+			 timer5++;
+		 }
+		 
+    		
+    	}
+	 List<Integer> agePercentages = new ArrayList<>();
+	 
+	 agePercentages.add(timer1);
+	 agePercentages.add(timer2);
+	 agePercentages.add(timer3);
+	 agePercentages.add(timer4);
+	 agePercentages.add(timer5);
+	 
+	 //saco porcentaje de cada timer
+	 
+	
+	 
+	 	return calculatePercentages(agePercentages);
 }
 public boolean getFirstTime() {
 	return firstTime;
 }
 public void setFirstTime(boolean firstTime) {
 	this.firstTime = firstTime;
-}
-public float getAgePercentage (int age,List<Float> percentageAgeInfected) {
-	
-	float percentageAge=0;
-	
-if (age<15) {
-	percentageAge=percentageAgeInfected.get(0);
-	
-}else if(age<30&&age>15) {
-	percentageAge=percentageAgeInfected.get(1);
-
-}else if(age<65&&age>30) {
-	percentageAge=percentageAgeInfected.get(2);
-
-}else if(age<90&&age>65) {
-	percentageAge=percentageAgeInfected.get(3);
-
-}else if(age>90) {
-	percentageAge=percentageAgeInfected.get(4);
-
-}
-	
-	
-	return percentageAge;
 }
 
 public float getMinNum(List<Float> list) {

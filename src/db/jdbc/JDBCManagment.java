@@ -722,11 +722,12 @@ public class JDBCManagment implements Cov_Manager {
 		return Medications;
 	}
 	@Override
-	public int getdifferentMedsCOUNT(String name) {
+	public int getdifferentMedsCOUNT(String name, boolean alive) {
 int times=0;
 try {
-			String sql = "SELECT p.id FROM patients AS p JOIN pat_medi AS pm ON pm.id_pat=p.id JOIN medication AS m ON m.id=pm.id_medi WHERE (m.name = '"+name+"' )";
+			String sql = "SELECT p.id FROM patients AS p JOIN pat_medi AS pm ON pm.id_pat=p.id JOIN medication AS m ON m.id=pm.id_medi WHERE (m.name = '"+name+"' AND alive = ? )";
 			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setBoolean(1, alive);
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
              times++;
@@ -767,11 +768,12 @@ try {
 	}
 	
 	@Override
-	public int getdifferentPathsCOUNT(String name) {
+	public int getdifferentPathsCOUNT(String name, boolean alive) {
 int times=0;
 try {
-			String sql = "SELECT p.id FROM patients AS p JOIN pat_patho AS pp ON pp.id_pat=p.id JOIN other_pathologies AS path ON path.id=pp.id_patho WHERE (path.name = '"+name+"' )";
+			String sql = "SELECT p.id FROM patients AS p JOIN pat_patho AS pp ON pp.id_pat=p.id JOIN other_pathologies AS path ON path.id=pp.id_patho WHERE (path.name = '"+name+"' AND alive = ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setBoolean(1, alive);
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
              times++;

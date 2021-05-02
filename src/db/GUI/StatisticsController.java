@@ -377,7 +377,7 @@ lineChart.setVisible(false);
 
        	for (int i =0; i<Medics.size();i++) {
     		System.out.println(Medics.get(i));
-    		piedatas.add(new PieChart.Data(""+Medics.get(i), Main.getInter().getdifferentMedsCOUNT( Medics.get(i))));
+    		piedatas.add(new PieChart.Data(""+Medics.get(i), Main.getInter().getdifferentMedsCOUNT( Medics.get(i),this.alive)));
 
     	}
        	pieChartData =  FXCollections.observableArrayList();
@@ -409,7 +409,8 @@ lineChart.setVisible(false);
     	if(this.checkSex.isSelected()) {
     	lineChart.setVisible(false);
     	
-    	pieChartData =  FXCollections.observableArrayList(new PieChart.Data("Male", Main.getInter().searchPatientGenericCOUNT("sex", "M",this.alive)),new PieChart.Data("Female", Main.getInter().searchPatientGenericCOUNT("sex","F",this.alive)));
+    	pieChartData =  FXCollections.observableArrayList(new PieChart.Data("Male", Main.getInter().searchPatientGenericCOUNT("sex", "M",this.alive)),
+    			new PieChart.Data("Female", Main.getInter().searchPatientGenericCOUNT("sex","F",this.alive)));
     	
     	 if(this.checkWeight.isSelected()) {
      		
@@ -478,7 +479,7 @@ lineChart.setVisible(false);
 
        	for (int i =0; i<paths.size();i++) {
     		System.out.println(paths.get(i));
-    		piedatas.add(new PieChart.Data(""+paths.get(i), Main.getInter().getdifferentPathsCOUNT( paths.get(i))));
+    		piedatas.add(new PieChart.Data(""+paths.get(i), Main.getInter().getdifferentPathsCOUNT( paths.get(i),this.alive)));
 
     	}
        	pieChartData =  FXCollections.observableArrayList();
