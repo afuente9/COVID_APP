@@ -99,7 +99,7 @@ public class MainMenuController implements Initializable {
 		for (int i =0; i<Pats.length;i++) {
 			Main.getInter().addOtherPathologies(new Other_Pathologies(Pats[i]));
 		}
-		*/
+		            */
 		
 		
 		int contadoranmo=2006;
