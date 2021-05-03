@@ -20,6 +20,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.StackedBarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -43,29 +44,29 @@ public class StatisticsController implements Initializable {
 	private Label plotTittle;
 
 	@FXML
-	private CheckBox checkAge;
+	private Button checkAge;
 
 	@FXML
-	private CheckBox checkWeight;
+	private Button checkWeight;
 
 	@FXML
-	private CheckBox ckeckOtherPathologies;
+	private Button ckeckOtherPathologies;
 
 	@FXML
-	private CheckBox checkMedication;
+	private Button checkMedication;
 
 	@FXML
-	private CheckBox checkPatientLocation;
+	private Button checkPatientLocation;
 	boolean alive;
 	
 	@FXML
-	private CheckBox checkHeight;
+	private Button checkHeight;
 
 	@FXML
-	private CheckBox checkSex;
+	private Button checkSex;
 
 	@FXML
-	private CheckBox checkHospital;
+	private Button checkHospital;
 
 	@FXML
 	private Button pdfbutton;
@@ -81,10 +82,11 @@ ObservableList <PieChart.Data> pieChartData;
 	@FXML
 	private CategoryAxis daysAxis;
 	@FXML
-    private CheckBox ckeckBloodType;
+    private Button ckeckBloodType;
 	@FXML
 	private NumberAxis numAxis;
 
+   
 	@FXML
 	void backfromstatistics(ActionEvent event) {
 		Stage stage = (Stage) this.pdfbutton.getScene().getWindow();
@@ -111,6 +113,9 @@ ObservableList <PieChart.Data> pieChartData;
 						plotTittle.setText("Dead people per day");
 						
 						this.alive=false;
+				    	lineChart.setVisible(true);
+
+						pieChart.setVisible(false);
 
 						List<Integer> listDeaths = Main.getInter().getNumberofDeadsofEachDay();
 						for (int i = 0; i < listDeaths.size(); i++) {
@@ -124,6 +129,9 @@ ObservableList <PieChart.Data> pieChartData;
 						//did it like that so it works well
 						plotTittle.setText("Infected people per day");
 						this.alive=true;
+						pieChart.setVisible(false);
+				    	lineChart.setVisible(true);
+
 
 						List<Integer> listInfecteds = Main.getInter().getNumberofInfectedsofEachDay();
 						for (int i = 0; i < listInfecteds.size(); i++) {
@@ -150,8 +158,11 @@ ObservableList <PieChart.Data> pieChartData;
 
     @FXML
     void CheckAge(ActionEvent event) {
-    	if(this.checkAge.isSelected()) {
     	lineChart.setVisible(false);
+		pieChart.setVisible(true);
+
+		plotTittle.setText("by age");
+
 
     	List<Date> dates = Main.getInter().getDates(this.alive);
     	List<Integer> ages = new ArrayList<>();
@@ -202,36 +213,20 @@ ObservableList <PieChart.Data> pieChartData;
     	
     	
 
-    	
-        if(this.checkWeight.isSelected()) {
-        	
-    		
-    	}if(this.checkHeight.isSelected()) {
-    		
-    	}if(this.checkSex.isSelected()) {
-    		
-    	}if(this.checkHospital.isSelected()) {
-    		
-    	}if(this.checkPatientLocation.isSelected()) {
-    		
-    	}if(this.checkMedication.isSelected()) {
-    		
-    	}if(this.ckeckOtherPathologies.isSelected()) {
-    		
-    	}if(this.ckeckBloodType.isSelected()) {
-    		
-    	}
      	pieChart.setData(pieChartData);
 
 
     }
-    }
+    
 
    
     @FXML
     void checkHei(ActionEvent event) {
-    	if(this.checkHeight.isSelected()) {
     	lineChart.setVisible(false);
+		pieChart.setVisible(true);
+
+		plotTittle.setText("by height");
+
 
     	pieChartData =  FXCollections.observableArrayList(new PieChart.Data("<1'00 m", Main.getInter().getNumberPatientsbyRangeofFeature("height", (float)1.0, 0,this.alive)),
     			new PieChart.Data("1'00 - 1'50 m", Main.getInter().getNumberPatientsbyRangeofFeature("height", (float)1.50, (float)1.0,this.alive)),
@@ -239,32 +234,17 @@ ObservableList <PieChart.Data> pieChartData;
     			new PieChart.Data("1'75 - 2'00 m", Main.getInter().getNumberPatientsbyRangeofFeature("height", (float)2.00, (float)1.75,this.alive)),
     			new PieChart.Data(">2'00 m", Main.getInter().getNumberPatientsbyRangeofFeature("height", (float)5.0, (float)2.0,this.alive)));
 
-    	 if(this.checkWeight.isSelected()) {
-     		
-     	}if(this.checkAge.isSelected()) {
-     		
-     	}if(this.checkSex.isSelected()) {
-     		
-     	}if(this.checkHospital.isSelected()) {
-     		
-     	}if(this.checkPatientLocation.isSelected()) {
-     		
-     	}if(this.checkMedication.isSelected()) {
-     		
-     	}if(this.ckeckOtherPathologies.isSelected()) {
-     		
-     	}if(this.ckeckBloodType.isSelected()) {
-     		
-     	}
+    
      	pieChart.setData(pieChartData);
 
     }
-    }
-
+    
     @FXML
     void checkWei(ActionEvent event) {
-    	if(this.checkWeight.isSelected()) {
 lineChart.setVisible(false);
+pieChart.setVisible(true);
+
+plotTittle.setText("by weight");
 
     	pieChartData =  FXCollections.observableArrayList(new PieChart.Data("<20 kg", Main.getInter().getNumberPatientsbyRangeofFeature("weight", 20, 0,this.alive)),
     			new PieChart.Data("20-50 kg", Main.getInter().getNumberPatientsbyRangeofFeature("weight", 50, 20,this.alive)),
@@ -273,32 +253,18 @@ lineChart.setVisible(false);
     			new PieChart.Data("90-110 kg", Main.getInter().getNumberPatientsbyRangeofFeature("weight", 110, 90,this.alive)),
     			new PieChart.Data(">110 kg", Main.getInter().getNumberPatientsbyRangeofFeature("weight", 900, 110,this.alive)));
     	
-    	 if(this.checkAge.isSelected()) {
-     		
-     	}if(this.checkHeight.isSelected()) {
-     		
-     	}if(this.checkSex.isSelected()) {
-     		
-     	}if(this.checkHospital.isSelected()) {
-     		
-     	}if(this.checkPatientLocation.isSelected()) {
-     		
-     	}if(this.checkMedication.isSelected()) {
-     		
-     	}if(this.ckeckOtherPathologies.isSelected()) {
-     		
-     	}if(this.ckeckBloodType.isSelected()) {
-     		
-     	}
+    	
      	pieChart.setData(pieChartData);
 
     }
-    }
+    
 
     @FXML
     void onCheckHos(ActionEvent event) {
-    	if(this.checkHospital.isSelected()) {
     	lineChart.setVisible(false);
+		pieChart.setVisible(true);
+
+		plotTittle.setText("by hospital");
 
     	List<String> Hospitals = Main.getInter().getdifferentHospitals(this.alive);
     	List<PieChart.Data> piedatas =new ArrayList<>();
@@ -313,31 +279,16 @@ lineChart.setVisible(false);
     	
     	
     	
-    	 if(this.checkWeight.isSelected()) {
-     		
-     	}if(this.checkHeight.isSelected()) {
-     		
-     	}if(this.checkSex.isSelected()) {
-     		
-     	}if(this.checkAge.isSelected()) {
-     		
-     	}if(this.checkPatientLocation.isSelected()) {
-     		
-     	}if(this.checkMedication.isSelected()) {
-     		
-     	}if(this.ckeckOtherPathologies.isSelected()) {
-     		
-     	}if(this.ckeckBloodType.isSelected()) {
-     		
-     	}
      	pieChart.setData(pieChartData);
     	}
-    }
+    
 
     @FXML
     void onCheckLocation(ActionEvent event) {
-    	if(this.checkPatientLocation.isSelected()) {
     	lineChart.setVisible(false);
+		pieChart.setVisible(true);
+
+		plotTittle.setText("by location");
 
     	pieChartData =  FXCollections.observableArrayList(new PieChart.Data("Home", Main.getInter().getNumberPatientsbyanyString("hos_location","Home" ,this.alive)),
     			new PieChart.Data("Floor hospital", Main.getInter().getNumberPatientsbyanyString("hos_location", "Floor hospital",this.alive)),
@@ -346,31 +297,18 @@ lineChart.setVisible(false);
     	 
     	
     	
-    	 if(this.checkWeight.isSelected()) {
-     		
-     	}if(this.checkHeight.isSelected()) {
-     		
-     	}if(this.checkSex.isSelected()) {
-     		
-     	}if(this.checkHospital.isSelected()) {
-     		
-     	}if(this.checkAge.isSelected()) {
-     		
-     	}if(this.checkMedication.isSelected()) {
-     		
-     	}if(this.ckeckOtherPathologies.isSelected()) {
-     		
-     	}if(this.ckeckBloodType.isSelected()) {
-     		
-     	}
+    
      	pieChart.setData(pieChartData);
 
-    }}
+    }
 
     @FXML
     void onCheckMedication(ActionEvent event) {
-    	if(this.checkMedication.isSelected()) {
        	lineChart.setVisible(false);
+		pieChart.setVisible(true);
+
+		plotTittle.setText("by medication");
+
        	
     	List<String> Medics = Main.getInter().getdifferentMeds(this.alive);
     	List<PieChart.Data> piedatas =new ArrayList<>();
@@ -383,60 +321,33 @@ lineChart.setVisible(false);
        	pieChartData =  FXCollections.observableArrayList();
     	pieChartData.addAll(piedatas);
 
-    	 if(this.checkWeight.isSelected()) {
-     		
-     	}if(this.checkHeight.isSelected()) {
-     		
-     	}if(this.checkSex.isSelected()) {
-     		
-     	}if(this.checkHospital.isSelected()) {
-     		
-     	}if(this.checkPatientLocation.isSelected()) {
-     		
-     	}if(this.checkAge.isSelected()) {
-     		
-     	}if(this.ckeckOtherPathologies.isSelected()) {
-     		
-     	}if(this.ckeckBloodType.isSelected()) {
-     		
-     	}
+    
      	pieChart.setData(pieChartData);
     	}
-    }
+    
 
     @FXML
     void oncheckSex(ActionEvent event) {
-    	if(this.checkSex.isSelected()) {
     	lineChart.setVisible(false);
-    	
+		pieChart.setVisible(true);
+
+		plotTittle.setText("by sex");
+
     	pieChartData =  FXCollections.observableArrayList(new PieChart.Data("Male", Main.getInter().searchPatientGenericCOUNT("sex", "M",this.alive)),
     			new PieChart.Data("Female", Main.getInter().searchPatientGenericCOUNT("sex","F",this.alive)));
     	
-    	 if(this.checkWeight.isSelected()) {
-     		
-     	}if(this.checkHeight.isSelected()) {
-     		
-     	}if(this.checkAge.isSelected()) {
-     		
-     	}if(this.checkHospital.isSelected()) {
-     		
-     	}if(this.checkPatientLocation.isSelected()) {
-     		
-     	}if(this.checkMedication.isSelected()) {
-     		
-     	}if(this.ckeckOtherPathologies.isSelected()) {
-     		
-     	}if(this.ckeckBloodType.isSelected()) {
-     		
-     	}
+    
      	pieChart.setData(pieChartData);
      	
-    }}
+    }
 
     @FXML
     void onckeckBloodType(ActionEvent event) {
-    	if(this.ckeckBloodType.isSelected()) {
     	lineChart.setVisible(false);
+		pieChart.setVisible(true);
+
+		plotTittle.setText("by blood type");
+
 
     	pieChartData =  FXCollections.observableArrayList(new PieChart.Data("A+", Main.getInter().getNumberPatientsbyanyString("bloodType","A+" ,this.alive)),
     			new PieChart.Data("A-", Main.getInter().getNumberPatientsbyanyString("bloodType", "A-",this.alive)),
@@ -448,31 +359,18 @@ lineChart.setVisible(false);
     			new PieChart.Data("AB+", Main.getInter().getNumberPatientsbyanyString("bloodType", "AB+",this.alive)));
 
     	 
-    	 if(this.checkWeight.isSelected()) {
-     		
-     	}if(this.checkHeight.isSelected()) {
-     		
-     	}if(this.checkSex.isSelected()) {
-     		
-     	}if(this.checkHospital.isSelected()) {
-     		
-     	}if(this.checkPatientLocation.isSelected()) {
-     		
-     	}if(this.checkMedication.isSelected()) {
-     		
-     	}if(this.ckeckOtherPathologies.isSelected()) {
-     		
-     	}if(this.checkAge.isSelected()) {
-     		
-     	}
+  
      	pieChart.setData(pieChartData);
 
-    }}
+    }
 
     @FXML
     void onckeckOtherPathologies(ActionEvent event) {
-    	if(this.ckeckOtherPathologies.isSelected()) {
 lineChart.setVisible(false);
+pieChart.setVisible(true);
+
+plotTittle.setText("by other pathologies");
+
        	
     	List<String> paths = Main.getInter().getdifferentPaths(this.alive);
     	List<PieChart.Data> piedatas =new ArrayList<>();
@@ -484,26 +382,10 @@ lineChart.setVisible(false);
     	}
        	pieChartData =  FXCollections.observableArrayList();
     	pieChartData.addAll(piedatas);
-    	 if(this.checkWeight.isSelected()) {
-     		
-     	}if(this.checkHeight.isSelected()) {
-     		
-     	}if(this.checkSex.isSelected()) {
-     		
-     	}if(this.checkHospital.isSelected()) {
-     		
-     	}if(this.checkPatientLocation.isSelected()) {
-     		
-     	}if(this.checkMedication.isSelected()) {
-     		
-     	}if(this.checkAge.isSelected()) {
-     		
-     	}if(this.ckeckBloodType.isSelected()) {
-     		
-     	}
+    
      	pieChart.setData(pieChartData);
     	}
-    }
+    
 
 	private void loadData() {
 		list.removeAll(list);

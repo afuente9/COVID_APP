@@ -157,17 +157,30 @@ public class MainMenuController implements Initializable {
 
 		this.labelDate.setText("" + Date.valueOf(LocalDate.now()));
 		System.out.println("el day es " + Main.getInter().getLastDay().getDate());
-		if (Main.getInter().getLastDay().getDate().compareTo(Date.valueOf(LocalDate.now())) == 0) {
+		if (Main.getInter().getLastDay().getDate().compareTo(Date.valueOf(LocalDate.now())) != 0) {
 
 			long daysWithoutChanges = ChronoUnit.DAYS.between(Main.getInter().getLastDay().getDate().toLocalDate(),
 					LocalDate.now());
 			if (daysWithoutChanges > 1) {
 
 				for (long i = 1; i <= daysWithoutChanges; i++) {
+					float average = 0;
+
+					float suma = 0;
+					List<Day> last7 = new ArrayList();
+
+					last7 = Main.getInter().getLast7Days();
+
+					for (int j = 1; j <= 6; j++) {
+						suma += (last7.get(j).getDeaths() - last7.get(j - 1).getDeaths());
+
+					}
+					average = suma / 7;
+
 
 					Day d = new Day(Main.getInter().getLastDay().getDeaths(),
 							Main.getInter().getLastDay().getInfectedPatients(),
-							Main.getInter().getLastDay().getAverage(),
+							average,
 							Date.valueOf(Main.getInter().getLastDay().getDate().toLocalDate().plusDays(1)));
 					Main.getInter().addDay(Main.getInter().getLastDay());
 
