@@ -161,14 +161,6 @@ public class JDBCManagment implements Cov_Manager {
 			stmt11.executeUpdate(sql12);
 			stmt11.close();
 			
-			Statement stmt13 = c.createStatement();
-			String sql13 = "CREATE TABLE pat_doc " 
-					+ "(id_pat       	INTEGER  	REFERENCES patients(id),"
-					+ " id_doc	 		INTEGER	 	REFERENCES doctors(id)," 
-					+ " PRIMARY KEY (id_pat, id_doc))";
-			stmt13.executeUpdate(sql13);
-			stmt13.close();
-
 		} catch (Exception e) {
 			if (!e.getMessage().contains("already exist")) {
 				e.printStackTrace();
