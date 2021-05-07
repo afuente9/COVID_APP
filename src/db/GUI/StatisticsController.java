@@ -402,7 +402,7 @@ public class StatisticsController implements Initializable {
 	}
 
 	@FXML
-	void ongeneratePdf(ActionEvent event) {/*
+	void ongeneratePdf(ActionEvent event) {
 		Document document = new Document();
 		try {
 			String path = System.getProperty("user.home");
@@ -459,7 +459,7 @@ public class StatisticsController implements Initializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 
-		}*/
+		}
 	}
 
 }
