@@ -1,0 +1,14 @@
+This week we expected to be able to do...
+Implement the XML
+
+This week we did...
+The UML and implementing the score for calculate the risk of die in case of get infected
+
+Optional: Reasons why
+---------------------
+
+Next weeks we will do...
+the XML, the presentation, and, if we have time, the User's Manual
+
+Optional: Reasons why
+---------------------
