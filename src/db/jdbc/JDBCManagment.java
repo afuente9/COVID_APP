@@ -4,6 +4,7 @@ import java.sql.*;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import db.GUI.Main;
 import db.interfaces.Cov_Manager;
@@ -749,18 +750,19 @@ return p;
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
                String name = rs.getString("name");
-             if (!Medications.contains(name)) {
-            	 Medications.add(name);
-             }
+               Medications.add(name);
+
+              
 			}
 
 			prep.close();
 			rs.close();
-			return Medications;
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		Medications = Medications.stream().distinct().collect(Collectors.toList());
+
 		return Medications;
 	}
 	@Override
@@ -772,6 +774,7 @@ try {
 			prep.setBoolean(1, alive);
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
+				//System.out.println("el nombre del paciente es"+ rs.getInt("id"));
              times++;
 			}
 

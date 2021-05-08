@@ -157,7 +157,7 @@ public class MainMenuController implements Initializable {
 
 		this.labelDate.setText("" + Date.valueOf(LocalDate.now()));
 		System.out.println("el day es " + Main.getInter().getLastDay().getDate());
-		if (Main.getInter().getLastDay().getDate().compareTo(Date.valueOf(LocalDate.now())) != 0) {
+		if (Main.getInter().getLastDay().getDate().compareTo(Date.valueOf(LocalDate.now())) == 0) {
 
 			long daysWithoutChanges = ChronoUnit.DAYS.between(Main.getInter().getLastDay().getDate().toLocalDate(),
 					LocalDate.now());
@@ -337,6 +337,7 @@ public class MainMenuController implements Initializable {
 		// recorrer la lista de pacientes para calcularles el score TODO mirar cual es
 		// mas optima para recorrer, arraylist o linkedlist
 		for (int i = 1; i <= Main.getInter().getNumberofPatients(); i++) {
+			System.out.println( " el paciente que va a saere caer " + i);
 
 			float score = calculateScore(Main.getInter().getPatient(i), deadImportance);
 			Main.getInter().modifyScore(i, (int)score);
@@ -381,13 +382,13 @@ public class MainMenuController implements Initializable {
 				AGEPercentagePatientAlive, agePercentagesAlive.size());
 		float contributionAgeAlive = patientScoreBasicAgeAlive * (1 - DeadImportance);
 		contributions.add(contributionAgeAlive);
-		System.out.println(p.getId() + " contribucion edad vivo" + contributionAgeAlive);
+	//	System.out.println(p.getId() + " contribucion edad vivo" + contributionAgeAlive);
 		float AGEPercentagePatientDead = getPercentageAgePatient(p.getTheAge(p.getBirthday()), agePercentagesDead);
 		float patientScoreBasicAgeDead = patientScore(getMaxNum(agePercentagesDead), getMinNum(agePercentagesDead),
 				AGEPercentagePatientDead, agePercentagesDead.size());
 		float contributionAgeDead = patientScoreBasicAgeAlive * (DeadImportance);
 		contributions.add(contributionAgeDead);
-		System.out.println(p.getId() + " contribucion edad muerto" + contributionAgeDead);
+		//System.out.println(p.getId() + " contribucion edad muerto" + contributionAgeDead);
 /*
 		float HeightPercentageAlive = HeightPercentage(p.getHeight(), HeighPerAlive);
 		float patientScoreBasicHeightAlive = patientScore(getMaxNum(HeighPerAlive), getMinNum(HeighPerAlive),
@@ -408,42 +409,42 @@ public class MainMenuController implements Initializable {
 				WeightPercentageAlive, WeightPerAlive.size());
 		float contributionWeightAlive = patientScoreBasicWeightAlive * (1 - DeadImportance);
 		contributions.add(contributionWeightAlive);
-		System.out.println(p.getId() + " contribucion peso vivo" + contributionWeightAlive);
+		//System.out.println(p.getId() + " contribucion peso vivo" + contributionWeightAlive);
 
 		float WeightPercentageDead = WeightPercentage(p.getWeight(), WeightPerDead);
 		float patientScoreBasicWeightDead = patientScore(getMaxNum(WeightPerDead), getMinNum(WeightPerDead),
 				WeightPercentageDead, WeightPerDead.size());
 		float contributionWeightDead = patientScoreBasicWeightDead * (DeadImportance);
 		contributions.add(contributionWeightDead);
-		System.out.println(p.getId() + " contribucion peso muerto" + contributionWeightDead);
+		//System.out.println(p.getId() + " contribucion peso muerto" + contributionWeightDead);
 
 		float locationPercentageAlive = LocationPercentage(p.getHos_location(), perLocationAlive);
 		float patientScoreBasicLocationAlive = patientScore(getMaxNum(perLocationAlive), getMinNum(perLocationAlive),
 				locationPercentageAlive, perLocationAlive.size());
 		float contributionLocationAlive = patientScoreBasicLocationAlive * (1 - DeadImportance);
 		contributions.add(contributionLocationAlive);
-		System.out.println(p.getId() + " contribucion location vivo" + contributionLocationAlive);
+		//System.out.println(p.getId() + " contribucion location vivo" + contributionLocationAlive);
 
 		float locationPercentageDead = LocationPercentage(p.getHos_location(), perLocationDead);
 		float patientScoreBasicLocationDead = patientScore(getMaxNum(perLocationDead), getMinNum(perLocationDead),
 				locationPercentageDead, perLocationDead.size());
 		float contributionLocationDead = patientScoreBasicLocationDead * (DeadImportance);
 		contributions.add(contributionLocationDead);
-		System.out.println(p.getId() + " contribucion location muerto" + contributionLocationDead);
+		//System.out.println(p.getId() + " contribucion location muerto" + contributionLocationDead);
 
 		float sexPercentageAlive = SexPercentage(p.getSex(), PerSexAlive);
 		float patientScoreBasicSexAlive = patientScore(getMaxNum(PerSexAlive), getMinNum(PerSexAlive),
 				sexPercentageAlive, PerSexAlive.size());
 		float contributionSexAlive = patientScoreBasicSexAlive * (1 - DeadImportance);
 		contributions.add(contributionSexAlive);
-		System.out.println(p.getId() + " contribucion sexo vivo" + contributionSexAlive);
+		//System.out.println(p.getId() + " contribucion sexo vivo" + contributionSexAlive);
 
 		float sexPercentageDead = SexPercentage(p.getSex(), PerSexDead);
 		float patientScoreBasicSexDead = patientScore(getMaxNum(PerSexDead), getMinNum(PerSexDead), sexPercentageDead,
 				PerSexDead.size());
 		float contributionSexDead = patientScoreBasicSexDead * (DeadImportance);
 		contributions.add(contributionSexDead);
-		System.out.println(p.getId() + " contribucion sexo muerto" + contributionSexDead);
+		//System.out.println(p.getId() + " contribucion sexo muerto" + contributionSexDead);
 
 		float bloodPercentageAlive = BloodPercentage(p.getBloodType(), PerBloodAlive);
 		float patientScoreBasicBloodAlive = patientScore(getMaxNum(PerBloodAlive), getMinNum(PerBloodAlive),
@@ -452,28 +453,28 @@ public class MainMenuController implements Initializable {
 
 		float contributionBloodAlive = patientScoreBasicBloodAlive * (1 - DeadImportance);
 		contributions.add(contributionBloodAlive);
-		System.out.println(p.getId() + " contribucion sangre  vivo" + contributionBloodAlive);
+		//System.out.println(p.getId() + " contribucion sangre  vivo" + contributionBloodAlive);
 
 		float bloodPercentageDead = BloodPercentage(p.getBloodType(), PerBloodDead);
 		float patientScoreBasicBloodDead = patientScore(getMaxNum(PerBloodDead), getMinNum(PerBloodDead),
 				bloodPercentageDead, PerBloodDead.size());
 		float contributionBloodDead = patientScoreBasicBloodDead * (DeadImportance);
 		contributions.add(contributionBloodDead);
-		System.out.println(p.getId() + " contribucion sangre muerto" + contributionBloodDead);
+		//System.out.println(p.getId() + " contribucion sangre muerto" + contributionBloodDead);
 
 		float hospitalPercentage = HospitalPercentage(p.getHospital(), perHospitalAlive, true);
 		float patientScoreBasicHospitalAlive = patientScore(getMaxNum(perHospitalAlive), getMinNum(perHospitalAlive),
 				bloodPercentageAlive, perHospitalAlive.size());
 		float contributionHospitalAlive = patientScoreBasicHospitalAlive * (1 - DeadImportance);
 		contributions.add(contributionHospitalAlive);
-		System.out.println(p.getId() + " contribucion hos vivo" + contributionHospitalAlive);
+		//System.out.println(p.getId() + " contribucion hos vivo" + contributionHospitalAlive);
 
 		float HospitalPercentageDead = HospitalPercentage(p.getHospital(), perHospitalDead, false);
 		float patientScoreBasicHospitalDead = patientScore(getMaxNum(perHospitalDead), getMinNum(perHospitalDead),
 				bloodPercentageDead, perHospitalDead.size());
 		float contributionHospitalDead = patientScoreBasicHospitalDead * (DeadImportance);
 		contributions.add(contributionHospitalDead);
-		System.out.println(p.getId() + " contribucionhopital muerto" + contributionHospitalDead);
+		//System.out.println(p.getId() + " contribucionhopital muerto" + contributionHospitalDead);
 
 		List<String> Medication_Patient = Main.getInter().getMedicationfromPatientNAME(p.getId());
 
@@ -482,6 +483,8 @@ public class MainMenuController implements Initializable {
 			float medicationPercentageAlive = MedicationPercentage(medication, perMedAlive, true);
 			float patientScoreBasicmedicationAlive = patientScore(getMaxNum(perMedAlive), getMinNum(perMedAlive),
 					medicationPercentageAlive, perMedAlive.size());
+			System.out.println(p.getId() + " contribucion eeeeeeeees" + patientScoreBasicmedicationAlive);
+
 			float contributionMedlAlive = patientScoreBasicmedicationAlive * (1 - DeadImportance);
 			contributions.add(contributionMedlAlive);
 			System.out.println(p.getId() + " contribucion medication vivo" + contributionMedlAlive);
@@ -491,7 +494,7 @@ public class MainMenuController implements Initializable {
 					medicationPercentageDead, perMedDead.size());
 			float contributionMedlDead = patientScoreBasicmedicationDead * (DeadImportance);
 			contributions.add(contributionMedlDead);
-			System.out.println(p.getId() + " contribucion medication muerto" + contributionMedlDead);
+			//System.out.println(p.getId() + " contribucion medication muerto" + contributionMedlDead);
 
 		}
 
@@ -504,14 +507,14 @@ public class MainMenuController implements Initializable {
 					pathologyPercentageAlive, PerOPATAlive.size());
 			float contributionPatAlive = patientScoreBasicpathologyAlive * (1 - DeadImportance);
 			contributions.add(contributionPatAlive);
-			System.out.println(p.getId() + " contribucion pat vivo" + contributionPatAlive);
+			//System.out.println(p.getId() + " contribucion pat vivo" + contributionPatAlive);
 
 			float pathologyPercentageDead = PathologyPercentage(pathology, PerOPATDead, false);
 			float patientScoreBasicPathologyDead = patientScore(getMaxNum(PerOPATDead), getMinNum(PerOPATDead),
 					pathologyPercentageDead, PerOPATDead.size());
 			float contributionPatDead = patientScoreBasicPathologyDead * (DeadImportance);
 			contributions.add(contributionPatDead);
-			System.out.println(p.getId() + " contribucion pat muerto" + contributionPatDead);
+			//System.out.println(p.getId() + " contribucion pat muerto" + contributionPatDead);
 
 		}
 		float totalContributions = 0;
@@ -675,11 +678,17 @@ public class MainMenuController implements Initializable {
 
 	public float patientScore(float MaxPercentage, float MinPercentage, float PatientPercentage,
 			int NumberOptionsFeature) {
+		System.out.println( " maximo porcentage " + MaxPercentage);
+		System.out.println( " min porcentage " + MinPercentage);
+		System.out.println( " patient porcentage " + PatientPercentage);
+		System.out.println( " numero de opciones " + NumberOptionsFeature);
+
 		float difference = MaxPercentage - MinPercentage;
 		float base = difference * PatientPercentage;
 		float exponent = 1 + ((float) NumberOptionsFeature / (float) 10);
 		// int exponent = NumberOptionsFeature;
 		float score = (float) Math.pow(base, exponent);
+		System.out.println( " escoreeeeeeeee " + score);
 
 		return score;
 	}
