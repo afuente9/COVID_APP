@@ -178,6 +178,7 @@ public class MainMenuController implements Initializable {
 					average = suma / 7;
 
 					
+					
 
 					Day d = new Day(Main.getInter().getLastDay().getDeaths(),
 							Main.getInter().getLastDay().getInfectedPatients(),
