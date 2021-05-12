@@ -323,6 +323,7 @@ public class MainMenuController implements Initializable {
 			suma += (last7.get(i).getDeaths() - last7.get(i - 1).getDeaths());
 
 		}
+		
 		average = suma / 7;
 
 		// crear un nuevo dia
@@ -483,11 +484,11 @@ public class MainMenuController implements Initializable {
 			float medicationPercentageAlive = MedicationPercentage(medication, perMedAlive, true);
 			float patientScoreBasicmedicationAlive = patientScore(getMaxNum(perMedAlive), getMinNum(perMedAlive),
 					medicationPercentageAlive, perMedAlive.size());
-			System.out.println(p.getId() + " contribucion eeeeeeeees" + patientScoreBasicmedicationAlive);
+			//System.out.println(p.getId() + " contribucion eeeeeeeees" + patientScoreBasicmedicationAlive);
 
 			float contributionMedlAlive = patientScoreBasicmedicationAlive * (1 - DeadImportance);
 			contributions.add(contributionMedlAlive);
-			System.out.println(p.getId() + " contribucion medication vivo" + contributionMedlAlive);
+			//System.out.println(p.getId() + " contribucion medication vivo" + contributionMedlAlive);
 
 			float medicationPercentageDead = MedicationPercentage(medication, perMedDead, false);
 			float patientScoreBasicmedicationDead = patientScore(getMaxNum(perMedDead), getMinNum(perMedDead),
@@ -497,6 +498,7 @@ public class MainMenuController implements Initializable {
 			//System.out.println(p.getId() + " contribucion medication muerto" + contributionMedlDead);
 
 		}
+		System.out.println("el desde el metodo final"+ getMaxNum(perMedAlive));
 
 		List<String> Patho_Patient = Main.getInter().getPathofromPatientNAME(p.getId());
 
@@ -678,18 +680,18 @@ public class MainMenuController implements Initializable {
 
 	public float patientScore(float MaxPercentage, float MinPercentage, float PatientPercentage,
 			int NumberOptionsFeature) {
-		System.out.println( " maximo porcentage " + MaxPercentage);
-		System.out.println( " min porcentage " + MinPercentage);
-		System.out.println( " patient porcentage " + PatientPercentage);
-		System.out.println( " numero de opciones " + NumberOptionsFeature);
+		
+	
 
 		float difference = MaxPercentage - MinPercentage;
-		float base = difference * PatientPercentage;
-		float exponent = 1 + ((float) NumberOptionsFeature / (float) 10);
-		// int exponent = NumberOptionsFeature;
-		float score = (float) Math.pow(base, exponent);
-		System.out.println( " escoreeeeeeeee " + score);
 
+		float base = difference * PatientPercentage;
+
+		float exponent = 1 + ((float) NumberOptionsFeature / (float) 10);
+
+		float score = (float) Math.pow(base, exponent);
+
+		
 		return score;
 	}
 
@@ -795,7 +797,7 @@ public class MainMenuController implements Initializable {
 			NumsMeds.add(Main.getInter().getdifferentMedsCOUNT(Medics.get(i), true));
 		}
 
-		return calculatePercentages(NumsMeds);
+		return calculatePercentagesMedication(NumsMeds);
 
 	}
 
@@ -912,6 +914,7 @@ public class MainMenuController implements Initializable {
 		List<Float> listofpercentages = new ArrayList<>();
 		int add = 0;
 
+
 		for (int i = 0; i < heights.size(); i++) {
 			add += heights.get(i);
 
@@ -924,7 +927,28 @@ public class MainMenuController implements Initializable {
 			listofpercentages.add(percentage);
 
 		}
+	
+		return listofpercentages;
 
+	}public List<Float> calculatePercentagesMedication(List<Integer> heights) {
+		List<Float> listofpercentages = new ArrayList<>();
+		int add = 0;
+
+
+		for (int i = 0; i < heights.size(); i++) {
+			add += heights.get(i);
+
+		}
+
+		for (int i = 0; i < heights.size(); i++) {
+
+			float percentage = 100 * ((float) heights.get(i)) / ((float) add);
+
+			listofpercentages.add(percentage);
+
+		}
+		System.out.println(" en porcent desde calculate percentagfes maximo "+ getMaxNum(listofpercentages));
+		System.out.println(" en porcent desde calculate percentagfes minimo"+ getMinNum(listofpercentages));
 		return listofpercentages;
 
 	}
