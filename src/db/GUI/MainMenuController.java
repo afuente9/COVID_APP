@@ -179,6 +179,7 @@ public class MainMenuController implements Initializable {
 
 					
 					
+					
 
 					Day d = new Day(Main.getInter().getLastDay().getDeaths(),
 							Main.getInter().getLastDay().getInfectedPatients(),
