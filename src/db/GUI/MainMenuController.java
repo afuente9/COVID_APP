@@ -157,7 +157,7 @@ public class MainMenuController implements Initializable {
 
 		this.labelDate.setText("" + Date.valueOf(LocalDate.now()));
 		System.out.println("el day es " + Main.getInter().getLastDay().getDate());
-		if (Main.getInter().getLastDay().getDate().compareTo(Date.valueOf(LocalDate.now())) == 0) {
+		if (Main.getInter().getLastDay().getDate().compareTo(Date.valueOf(LocalDate.now())) != 0) {
 
 			long daysWithoutChanges = ChronoUnit.DAYS.between(Main.getInter().getLastDay().getDate().toLocalDate(),
 					LocalDate.now());
