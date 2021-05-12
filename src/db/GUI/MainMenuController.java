@@ -177,10 +177,11 @@ public class MainMenuController implements Initializable {
 					}
 					average = suma / 7;
 
+					
 
 					Day d = new Day(Main.getInter().getLastDay().getDeaths(),
 							Main.getInter().getLastDay().getInfectedPatients(),
-							average,
+							average, 
 							Date.valueOf(Main.getInter().getLastDay().getDate().toLocalDate().plusDays(1)));
 					Main.getInter().addDay(Main.getInter().getLastDay());
 
