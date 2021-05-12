@@ -105,7 +105,7 @@ public class JDBCManagment implements Cov_Manager {
 			String sql5 = "CREATE TABLE administration "
 					+ "(id       				INTEGER  		PRIMARY KEY AUTOINCREMENT,"
 					+ " total_vacciness  		INTEGER	 		NOT NULL,"
-					+ " image 				    BLOB   NULL)";
+					+ " image 				    BLOB            NULL)";
 			stmt5.executeUpdate(sql5);
 			stmt5.close();
 

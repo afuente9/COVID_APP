@@ -15,5 +15,6 @@ public interface UserManager {
 	public List<Role> getRoles();
 	public User checkPassword(String email, String password);
 	public Boolean checkEmail(String email);
+	//TODO deleteUser, updateUser
 	
 }
