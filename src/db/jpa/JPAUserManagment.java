@@ -92,10 +92,77 @@ public class JPAUserManagment implements UserManager{
 			}else {
 				return false;
 			}
-		}catch(Exception e) {
+		}catch(NoResultException nre) {
+			return false;
+		}
+		catch(Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
+	@Override
+	public void deleteUser(String mail, String password) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(password.getBytes());
+			byte[] hash = md.digest();
+			Query q = em.createNativeQuery("SELECT * FROM users WHERE email = ? AND password = ?", User.class);
+			q.setParameter(1, mail);
+			q.setParameter(2, hash);
+			User u = (User) q.getSingleResult();
+
+			em.getTransaction().begin();
+			em.remove(u);
+			em.getTransaction().commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void updateUserMail(String newMail, String oldMail, String password) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(password.getBytes());
+			byte[] hash = md.digest();
+			Query q = em.createNativeQuery("SELECT * FROM users WHERE email = ? AND password = ?", User.class);
+			q.setParameter(1, oldMail);
+			q.setParameter(2, hash);
+			User u = (User) q.getSingleResult();
+			
+			em.getTransaction().begin();
+			u.setEmail(newMail);
+			em.getTransaction().commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void updateUserPassword(String mail, String newPassword, String oldPassword) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(oldPassword.getBytes());
+			byte[] hash = md.digest();
+			Query q = em.createNativeQuery("SELECT * FROM users WHERE email = ? AND password = ?", User.class);
+			q.setParameter(1, mail);
+			q.setParameter(2, hash);
+			User u = (User) q.getSingleResult();
+			MessageDigest md2 = MessageDigest.getInstance("MD5");
+			md2.update(newPassword.getBytes());
+			byte[] hash2 = md.digest();
+//TODO problemas con el cambio de contraseña
+			
+			em.getTransaction().begin();
+			u.setPassword(hash2);
+			em.getTransaction().commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
 }

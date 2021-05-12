@@ -102,12 +102,55 @@ public class Menu {
 		}
 	}
 	
+	private static void deleteAccount()throws Exception{
+		System.out.println("Please, introduce again your email address:");
+		String email = reader.readLine();
+		System.out.println("Now, please, introduce again your password:");
+		String password = reader.readLine();
+		System.out.println("Are you sure you want to delete your account? (YES / NO)");
+		String sure = reader.readLine();
+		if(sure.equalsIgnoreCase("yes")) {
+			userman.deleteUser(email, password);
+		}
+		
+	}
+	private static void changePassword() throws Exception{
+		System.out.println("Please, introduce again your email address:");
+		String email = reader.readLine();
+		System.out.println("Now, please, introduce again your password:");
+		String oldPassword = reader.readLine();
+		System.out.println("Now, please, introduce your new password:");
+		String newPassword = reader.readLine();
+		System.out.println("Are you sure you want to change your password? (YES / NO)");
+		String sure = reader.readLine();
+		if(sure.equalsIgnoreCase("yes")) {
+			userman.updateUserPassword(email, newPassword, oldPassword);
+		}
+	}
+	
+	private static void changeMail() throws Exception{
+		System.out.println("Please, introduce again your email address:");
+		String oldEmail = reader.readLine();
+		System.out.println("Now, please, introduce your new email address:");
+		String newEmail = reader.readLine();
+		System.out.println("Now, please, introduce again your password:");
+		String password = reader.readLine();
+		System.out.println("Are you sure you want to change your password? (YES / NO)");
+		String sure = reader.readLine();
+		if(sure.equalsIgnoreCase("yes")) {
+			userman.updateUserMail(newEmail, oldEmail, password);
+		}
+	}
+	
 	private static void administrationMenu() throws Exception{
 		do {
 			System.out.println("|	   Choose an option:		|");
 			System.out.println("|	1.  Total nº of vaccines	|");
 			System.out.println("|	2.  Simulation			|");
 			System.out.println("|	3.  Vaccines used		|");
+			System.out.println("|	4.  Delete account		|");
+			System.out.println("|	5.  Change email		|");
+			System.out.println("|	6.  Change password		|");
 			System.out.println("|	0.  Go back			|");
 			
 			int choice = Integer.parseInt(reader.readLine());
@@ -120,6 +163,15 @@ public class Menu {
 				break;
 			case 3:
 				//vaccinesUsed();
+				break;
+			case 4:
+				deleteAccount();
+				break;
+			case 5:
+				changeMail();
+				break;
+			case 6:
+				changePassword();
 				break;
 			case 0:
 				return;
