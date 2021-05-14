@@ -63,23 +63,54 @@ public class Menu {
 
 	private static void register() throws Exception{ 
 		//TODO como queremos que eligan el role que tienen, ¿es lo primero que eligen o lo ultimo?
-		System.out.println("Please, introduce your email address:");
-		String email = reader.readLine();
-		if (userman.checkEmail(email)) {
-			System.out.println("Email already used, try to log in");
-		}
-		else {
-			System.out.println("Now, please, introduce your password:");
-			String password = reader.readLine();
-			System.out.println(userman.getRoles());
-			System.out.println("Introduce the chosen role ID:");
-			int id = Integer.parseInt(reader.readLine());
-			Role role = userman.getRole(id);
-			MessageDigest md = MessageDigest.getInstance("MD5");
-			md.update(password.getBytes());
-			byte[] hash = md.digest();
-			User u = new User(email, hash, role);
-			userman.newUser(u);
+		System.out.println(userman.getRoles());
+		System.out.println("Introduce the chosen role ID:");
+		int id = Integer.parseInt(reader.readLine());
+		Role role = userman.getRole(id);
+		if(role.getName().equalsIgnoreCase("doctor")) {
+			System.out.println("Please, introduce your email address:");
+			String email = reader.readLine();
+			if (userman.checkEmail(email)) {
+				System.out.println("Email already used, try to log in");
+			}
+			else {
+				System.out.println("Now, please, introduce your password:");
+				String password = reader.readLine();
+				MessageDigest md = MessageDigest.getInstance("MD5");
+				md.update(password.getBytes());
+				byte[] hash = md.digest();
+				User u = new User(email, hash, role);
+				userman.newUser(u);
+			}
+		}else if(role.getName().equalsIgnoreCase("laboratory")) {
+			System.out.println("Please, introduce your email address:");
+			String email = reader.readLine();
+			if (userman.checkEmail(email)) {
+				System.out.println("Email already used, try to log in");
+			}
+			else {
+				System.out.println("Now, please, introduce your password:");
+				String password = reader.readLine();
+				MessageDigest md = MessageDigest.getInstance("MD5");
+				md.update(password.getBytes());
+				byte[] hash = md.digest();
+				User u = new User(email, hash, role);
+				userman.newUser(u);
+			}
+		}else {
+			System.out.println("Please, introduce your email address:");
+			String email = reader.readLine();
+			if (userman.checkEmail(email)) {
+				System.out.println("Email already used, try to log in");
+			} else {
+				System.out.println("Now, please, introduce your password:");
+				String password = reader.readLine();
+				MessageDigest md = MessageDigest.getInstance("MD5");
+				md.update(password.getBytes());
+				byte[] hash = md.digest();
+				User u = new User(email, hash, role);
+				userman.newUser(u);
+			}
 		}
 		
 	}
