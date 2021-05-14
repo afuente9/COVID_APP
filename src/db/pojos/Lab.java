@@ -4,14 +4,34 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Lab")
+@XmlType(propOrder = { "id", "name", "address", "vaccines_produce", "cif", "patients"})
 
 public class Lab implements Serializable{
+	@XmlAttribute
 	private int id;
+	@XmlAttribute
 	private int vaccines_produce;
+	@XmlAttribute
 	private String address;
+	@XmlAttribute
 	private String name;
+	@XmlAttribute
 	private String cif;
 	byte[] image;
+	@OneToMany(mappedBy="lab")
+	@XmlElement(name = "Patient")
+    @XmlElementWrapper(name = "Patients")
 	private List<Patient> patients;
 
 	public Lab() {
