@@ -27,6 +27,13 @@ public class Menu {
 	
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	
+	//TODO metodo parseador de los pacientes de un documento externo
+	
+	public void parse(File f) {
+		
+	}
+	
+	
 	public static void main(String[] args) throws Exception {
 		inter.connect();
 		userman.connect();
