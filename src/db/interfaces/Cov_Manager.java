@@ -117,7 +117,6 @@ public interface Cov_Manager {
 	int getNumberVaccinesAdmin();
 	List<Shipment> getAllShipmentforAdminView();
 	int getNumberVaccinesLab(int id);
-	List<Patient> getSimulatedPatients(int availableVaccines);
 	
 	//Changes the picture from X
 	public void changeDocPic(Doctor d, byte[] pic);
@@ -145,5 +144,7 @@ public interface Cov_Manager {
 	List<String> getMedicationfromPatientNAME(int id);
 	List<String> getPathofromPatientNAME(int id);
 	void modifyScore(int id, float value);
+	List<Patient> getSimulatedPatients(int availableVaccines, int id0);
+	int searchadminIDByName(String name);
 
 }

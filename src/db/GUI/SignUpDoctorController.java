@@ -27,6 +27,11 @@ public class SignUpDoctorController implements Initializable {
     private TextField SpetialityTextField;
 
     @FXML
+    private TextField EmaDcotorText;
+
+    @FXML
+    private TextField pasDoctorTxtF;
+    @FXML
     private TextField SexTextField;
     @FXML
     private TextField HospitalTextField;
@@ -37,6 +42,7 @@ public class SignUpDoctorController implements Initializable {
     
     @FXML
     void OnAcceptClick(ActionEvent event) {
+    	
     	String name = NameTextField.getText();
     	String date_text = DateTextField.getText();
     	String colnum = ColNumTextField.getText();
@@ -52,7 +58,6 @@ public class SignUpDoctorController implements Initializable {
     	Doctor d_new= new Doctor(name,spetiality,date,colnum,hospital,sex,image);
     	//añadir doctor a la lista de doctores
     	Main.getInter().addDoctor(d_new);
-    	System.out.println("eriguerngiuegherui");
     	
 
 

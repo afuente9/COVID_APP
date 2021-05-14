@@ -67,7 +67,8 @@
 				<Button fx:id="checkPatientLocation" disable="true" layoutX="92.0" layoutY="284.0" mnemonicParsing="false" onAction="#onCheckLocation" text="By patient location" />
 				<Button fx:id="checkMedication" disable="true" layoutX="89.0" layoutY="328.0" mnemonicParsing="false" onAction="#onCheckMedication" text="By medication" />
 				<Button fx:id="ckeckOtherPathologies" disable="true" layoutX="96.0" layoutY="372.0" mnemonicParsing="false" onAction="#onckeckOtherPathologies" text="By other pathologies" />
-				<Button fx:id="ckeckBloodType" disable="true" layoutX="94.0" layoutY="417.0" mnemonicParsing="false" onAction="#onckeckBloodType" text="By blood type" />
+				<Button fx:id="ckeckBloodType" disable="true" layoutX="102.0" layoutY="440.0" mnemonicParsing="false" onAction="#onckeckBloodType" text="By blood type" />
+            <Button fx:id="bycountry" disable="true" layoutX="101.0" layoutY="404.0" mnemonicParsing="false" onAction="#nBycotry" text="By country" />
 			</children>
 		</AnchorPane>
 	</children>

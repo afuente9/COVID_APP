@@ -361,7 +361,7 @@ public class Menu {
 		Boolean p_vaccinated = Boolean.parseBoolean(reader.readLine());
         Date dateIntroduced= Date.valueOf(LocalDate.now());
 
-		inter.addPatient(new Patient (p_hosL, p_name, Date.valueOf(p_bday), p_ss, p_height, p_weight, p_sex, p_infected, p_alive, p_hos, p_vaccinated, p_blood,dateIntroduced));
+		//inter.addPatient(new Patient (p_hosL, p_name, Date.valueOf(p_bday), p_ss, p_height, p_weight, p_sex, p_infected, p_alive, p_hos, p_vaccinated, p_blood,dateIntroduced));
 		System.out.print("Do you want to add any medication? (True or False): ");
 		Boolean p_med = Boolean.parseBoolean(reader.readLine());
 		if(p_med.TRUE) {

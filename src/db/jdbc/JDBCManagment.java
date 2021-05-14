@@ -179,8 +179,8 @@ public class JDBCManagment implements Cov_Manager {
 			} else {
 				sexo = "F";
 			}
-			String sql = "INSERT INTO patients (name, birthday, social_security, height, weight, sex, infected, alive, hospital, hos_location, score, bloodType, vaccinated, dateIntroduced)"
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+			String sql = "INSERT INTO patients (name, birthday, social_security, height, weight, sex, infected, alive, hospital, hos_location, score,id_adm, bloodType, vaccinated, dateIntroduced)"
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, p.getName());
 			prep.setDate(2, p.getBirthday());
@@ -192,11 +192,12 @@ public class JDBCManagment implements Cov_Manager {
 			prep.setBoolean(8, p.isAlive());
 			prep.setString(9, p.getHospital());
 			prep.setString(10, p.getHos_location());
-			prep.setInt(11, 0); // TODO hay que insertar formula del score para poder introducir bien los
-								// pacientes en la tabla
-			prep.setString(12, p.getBloodType());
-			prep.setBoolean(13, p.getVaccinated());
-			prep.setDate(14, p.getDateIntroduced());
+			prep.setInt(11, 0); 
+			prep.setInt(12, p.getGovId());
+
+			prep.setString(13, p.getBloodType());
+			prep.setBoolean(14, p.getVaccinated());
+			prep.setDate(15, p.getDateIntroduced());
 			prep.executeUpdate();
 			prep.close();
 		} catch (Exception e) {
@@ -694,7 +695,7 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 		return null;
-	}
+	}	
 
 	@Override
 	public List<Shipment> getAllShipment() {
@@ -1377,15 +1378,16 @@ try {
 	}
 
 	@Override
-	public List<Patient> getSimulatedPatients(int availableVaccines) {
+	public List<Patient> getSimulatedPatients(int availableVaccines, int id0) {
 		List<Patient> patients = new ArrayList<Patient>();
 
 		try {
 			
-			String sql = "SELECT * FROM  patients WHERE alive = ? ORDER BY score DESC ";
+			String sql = "SELECT * FROM  patients WHERE alive = ? AND id_adm= ? ORDER BY score DESC ";
 
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setBoolean(1, true);
+			prep.setInt(2, id0);
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 
@@ -1607,6 +1609,26 @@ try {
 			e.printStackTrace();
 		}
 		return medicaciones;
+	}
+	@Override
+	public int searchadminIDByName(String name) {
+int id=0;
+		try {
+			String sql = "SELECT id FROM admin WHERE name LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, "%" + name + "%");
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				 id = rs.getInt("id");
+				
+				
+			}
+			rs.close();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return id;
 	}
 
 	@Override
