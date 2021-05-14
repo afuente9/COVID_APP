@@ -156,7 +156,26 @@ public class MainMenuController implements Initializable {
 		}
 
 		this.labelDate.setText("" + Date.valueOf(LocalDate.now()));
-		System.out.println("el day es " + Main.getInter().getLastDay().getDate());
+		if (Main.getInter().getNumberofDays()<7&&Main.getInter().getNumberofDays()<0) {
+			int daystoadd = 7-Main.getInter().getNumberofDays();
+			for (int i= 0;i <daystoadd; i++) {
+				Day d = new Day(Main.getInter().getLastDay().getDeaths(),
+						Main.getInter().getLastDay().getInfectedPatients(),
+						0, 
+						Date.valueOf(Main.getInter().getLastDay().getDate().toLocalDate().plusDays(1)));
+				Main.getInter().addDay(Main.getInter().getLastDay());
+			}
+			
+		}
+		else if(Main.getInter().getNumberofDays()==0) {
+		
+			for (int i= 0;i <7; i++) {
+				Day newToday = new Day(Main.getInter().getNumberofDeads(), Main.getInter().getNumberofInfecteds(), 0,
+						Date.valueOf(LocalDate.now()));
+
+				Main.getInter().addDay(newToday);
+			}
+		}
 		if (Main.getInter().getLastDay().getDate().compareTo(Date.valueOf(LocalDate.now())) != 0) {
 
 			long daysWithoutChanges = ChronoUnit.DAYS.between(Main.getInter().getLastDay().getDate().toLocalDate(),
@@ -487,7 +506,6 @@ public class MainMenuController implements Initializable {
 			float medicationPercentageAlive = MedicationPercentage(medication, perMedAlive, true);
 			float patientScoreBasicmedicationAlive = patientScore(getMaxNum(perMedAlive), getMinNum(perMedAlive),
 					medicationPercentageAlive, perMedAlive.size());
-			//System.out.println(p.getId() + " contribucion eeeeeeeees" + patientScoreBasicmedicationAlive);
 
 			float contributionMedlAlive = patientScoreBasicmedicationAlive * (1 - DeadImportance);
 			contributions.add(contributionMedlAlive);
