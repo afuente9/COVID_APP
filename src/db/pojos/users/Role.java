@@ -24,6 +24,7 @@ public class Role implements Serializable{
 	@OneToMany(mappedBy="role")
 	private List<User> users;
 	
+	
 	public Role() {
 		super();
 		this.users = new ArrayList<User>();
