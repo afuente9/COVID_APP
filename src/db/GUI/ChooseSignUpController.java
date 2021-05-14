@@ -65,5 +65,13 @@ public class ChooseSignUpController {
 		}
 
 	}
+    @FXML
+    void SIgngovernment(ActionEvent event) {
+    	String name = "SignUpGovView.fxml.fxml";
+		SignUpLaboratoryController controller = null;
+		openWindow(name, controller);
+		Stage stage = (Stage) this.BackButton.getScene().getWindow();
+		stage.close();
+    }
 
 }

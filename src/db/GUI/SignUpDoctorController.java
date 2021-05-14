@@ -1,15 +1,18 @@
 package db.GUI;
 
+import java.net.URL;
 import java.sql.Date;
+import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import db.pojos.*;
 
-public class SignUpDoctorController {
+public class SignUpDoctorController implements Initializable {
 
     @FXML
     private TextField DateTextField;
@@ -27,7 +30,11 @@ public class SignUpDoctorController {
     private TextField SexTextField;
     @FXML
     private TextField HospitalTextField;
-
+    @Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+	}
+    
     @FXML
     void OnAcceptClick(ActionEvent event) {
     	String name = NameTextField.getText();
@@ -58,6 +65,7 @@ public class SignUpDoctorController {
     Stage stage = (Stage) this.NameTextField.getScene().getWindow();
 	stage.close();
     }
-    
+
+	
 
 }

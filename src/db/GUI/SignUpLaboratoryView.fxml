@@ -43,31 +43,43 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="451.0" prefWidth="697.0" VBox.vgrow="ALWAYS">
       <children>
-            <Label layoutX="69.0" layoutY="139.0" text="Cif:">
+            <Label layoutX="62.0" layoutY="257.0" text="Cif:">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="69.0" layoutY="89.0" prefHeight="27.0" prefWidth="64.0" text="Name:">
+            <Label layoutX="62.0" layoutY="207.0" prefHeight="27.0" prefWidth="64.0" text="Name:">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="NameTextField" layoutX="168.0" layoutY="89.0" prefHeight="26.0" prefWidth="175.0" />
+            <TextField fx:id="NameTextField" layoutX="161.0" layoutY="207.0" prefHeight="26.0" prefWidth="175.0" />
             <Button layoutX="475.0" layoutY="444.0" mnemonicParsing="false" onAction="#OnAcceptLabClick" prefHeight="43.0" prefWidth="79.0" text="Accept" />
             <Button layoutX="590.0" layoutY="444.0" mnemonicParsing="false" onAction="#OnCancelLabClick" prefHeight="43.0" prefWidth="79.0" text="Cancel" />
-            <Label layoutX="69.0" layoutY="186.0" text="Adress:">
+            <Label layoutX="62.0" layoutY="304.0" text="Adress:">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="CifTextField" layoutX="168.0" layoutY="139.0" prefHeight="26.0" prefWidth="175.0" />
+            <TextField fx:id="CifTextField" layoutX="161.0" layoutY="257.0" prefHeight="26.0" prefWidth="175.0" />
             <Label layoutX="37.0" layoutY="14.0" prefHeight="43.0" prefWidth="162.0" text="Laboratory">
                <font>
                   <Font size="29.0" />
                </font>
             </Label>
-            <TextField fx:id="AdressTextField" layoutX="168.0" layoutY="186.0" prefHeight="26.0" prefWidth="175.0" />
+            <TextField fx:id="AdressTextField" layoutX="161.0" layoutY="304.0" prefHeight="26.0" prefWidth="175.0" />
+            <Label layoutX="54.0" layoutY="126.0" text="Password:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="54.0" layoutY="76.0" prefHeight="27.0" prefWidth="64.0" text="Email:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="NameTextField2" layoutX="153.0" layoutY="76.0" onAction="#emailLab" prefHeight="26.0" prefWidth="175.0" />
+            <TextField fx:id="CifTextField2" layoutX="153.0" layoutY="126.0" onAction="#PassTextf" prefHeight="26.0" prefWidth="175.0" />
       </children>
     </AnchorPane>
   </children>
