@@ -1,0 +1,14 @@
+This week we expected to be able to do...
+the XML, the presentation, and, if we have time, the User's Manual
+
+This week we did...
+start the XML, fix the formula for the score and create a new method to change the email for the login 
+
+Optional: Reasons why
+---------------------
+
+Next weeks we will do...
+the presentation, finish xml and start html and implememnt it on the gui 
+
+Optional: Reasons why
+---------------------
