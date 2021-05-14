@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.*;
 
 import db.pojos.*;
+import db.pojos.users.User;
 
 public interface Cov_Manager {
 	// Add a new day 
@@ -28,6 +29,7 @@ public interface Cov_Manager {
 		
 	// Add a new doctor
 	public void addDoctor(Doctor d);
+	public void addDoctorUser(Doctor d, User u);
 	// Get a particular doctor
 	public Doctor getDoctor(int id);
 	
@@ -39,6 +41,7 @@ public interface Cov_Manager {
 	
 	// Add a new lab
 	public void addLab(Lab l);
+	public void addLabUser(Lab l, User u);
 	
 	// Gets the lab 
 	public Lab getLab(int id);
@@ -54,6 +57,7 @@ public interface Cov_Manager {
 	
 	// Add a new Government
 	public void addGoverment(Administration a);
+	public void addGovermentUser(Administration a, User u);
 	
 	// Add a new Pathology
 	public void addOtherPathologies(Other_Pathologies op); 
