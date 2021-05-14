@@ -29,7 +29,6 @@ public class Lab implements Serializable{
 	@XmlAttribute
 	private String cif;
 	byte[] image;
-	@OneToMany(mappedBy="lab")
 	@XmlElement(name = "Patient")
     @XmlElementWrapper(name = "Patients")
 	private List<Patient> patients;
@@ -168,5 +167,23 @@ public class Lab implements Serializable{
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
+
+
+	public List<Patient> getPatients() {
+		return patients;
+	}
+
+
+	public void setPatients(List<Patient> patients) {
+		this.patients = patients;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	
+	
 	
 }
