@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import db.GUI.Main;
 import db.interfaces.Cov_Manager;
 import db.pojos.*;
+import db.pojos.users.User;
 
 public class JDBCManagment implements Cov_Manager {
 
@@ -54,7 +55,8 @@ public class JDBCManagment implements Cov_Manager {
 					+ " collegiate_number	TEXT	 	 	NOT NULL,"
 					+ " sex 				TEXT	 	 	NOT NULL,"
 					+ " hospital  			TEXT		 	NOT NULL," 
-					+ " image 				BLOB   			NULL)";
+					+ " image 				BLOB   			NULL,"
+					+ " user_id				INTEGER			REFERENCES users(id))";
 			stmt1.executeUpdate(sql1);
 			stmt1.close();
 
@@ -86,7 +88,8 @@ public class JDBCManagment implements Cov_Manager {
 					+ " adress	 		TEXT	 	 	NOT NULL,"
 					+ " cif			    TEXT  	 	 	NOT NULL," 
 					+ " vacciness  		INTEGER	 	 	NOT NULL,"
-					+ " image 			BLOB   			NULL)";
+					+ " image 			BLOB   			NULL,"
+					+ " user_id			INTEGER			REFERENCES users(id))";
 			stmt3.executeUpdate(sql3);
 			stmt3.close();
 //We also have to add the name of the lab because tableView only print pojos
@@ -106,7 +109,8 @@ public class JDBCManagment implements Cov_Manager {
 					+ "(id       				INTEGER  		PRIMARY KEY AUTOINCREMENT,"
 					+ " total_vacciness  		INTEGER	 		NOT NULL,"
 					+ " name					TEXT			NOT NULL,"
-					+ " image 				    BLOB            NULL)";
+					+ " image 				    BLOB            NULL,"
+					+ " user_id				INTEGER			REFERENCES users(id))";
 			stmt5.executeUpdate(sql5);
 			stmt5.close();
 
@@ -179,8 +183,8 @@ public class JDBCManagment implements Cov_Manager {
 			} else {
 				sexo = "F";
 			}
-			String sql = "INSERT INTO patients (name, birthday, social_security, height, weight, sex, infected, alive, hospital, hos_location, score, bloodType, vaccinated, dateIntroduced)"
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+			String sql = "INSERT INTO patients (name, birthday, social_security, height, weight, sex, infected, alive, hospital, hos_location, score,id_adm, bloodType, vaccinated, dateIntroduced)"
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, p.getName());
 			prep.setDate(2, p.getBirthday());
@@ -192,11 +196,12 @@ public class JDBCManagment implements Cov_Manager {
 			prep.setBoolean(8, p.isAlive());
 			prep.setString(9, p.getHospital());
 			prep.setString(10, p.getHos_location());
-			prep.setInt(11, 0); // TODO hay que insertar formula del score para poder introducir bien los
-								// pacientes en la tabla
-			prep.setString(12, p.getBloodType());
-			prep.setBoolean(13, p.getVaccinated());
-			prep.setDate(14, p.getDateIntroduced());
+			prep.setInt(11, 0); 
+			prep.setInt(12, p.getGovId());
+
+			prep.setString(13, p.getBloodType());
+			prep.setBoolean(14, p.getVaccinated());
+			prep.setDate(15, p.getDateIntroduced());
 			prep.executeUpdate();
 			prep.close();
 		} catch (Exception e) {
@@ -237,6 +242,30 @@ public class JDBCManagment implements Cov_Manager {
 		}
 	}
 
+	public void addDoctorUser(Doctor d, User u) {
+		try {
+			String sexo;
+			if (d.getSex().equals(Sex.Male)) {
+				sexo = "M";
+			} else {
+				sexo = "F";
+			}
+			String sql = "INSERT INTO doctors (name, speciality, birth_date, collegiate_number, sex, hospital, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, d.getName());
+			prep.setString(2, d.getSpeciality());
+			prep.setDate(3, d.getBirthday());
+			prep.setString(4, d.getCollegiate_number());
+			prep.setString(5, sexo);
+			prep.setString(6, d.getHospital());
+			prep.setInt(7, u.getId());
+			prep.executeUpdate();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public void addLab(Lab l) {
 		try {
@@ -247,6 +276,24 @@ public class JDBCManagment implements Cov_Manager {
 			prep.setString(2, l.getAddress());
 			prep.setString(3, l.getCif());
 			prep.setInt(4, l.getVaccines_produce());
+			prep.executeUpdate();
+			prep.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void addLabUser(Lab l, User u) {
+		try {
+
+			String sql = "INSERT INTO lab (name, adress, cif, vacciness, user_id) VALUES (?, ?, ?, ?, ?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, l.getName());
+			prep.setString(2, l.getAddress());
+			prep.setString(3, l.getCif());
+			prep.setInt(4, l.getVaccines_produce());
+			prep.setInt(5, u.getId());
 			prep.executeUpdate();
 			prep.close();
 
@@ -283,6 +330,21 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 	}
+	
+	public void addGovermentUser(Administration a, User u) {
+		try {
+			String sql = "INSERT INTO Administration (total_vacciness, name, user_id) VALUES (?, ?, ?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, a.getVaccines());
+			prep.setString(1, a.getName());
+			prep.setInt(3, u.getId());
+			prep.executeUpdate();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 
 	// TODO UPDATE goverment vaccines used, patient (pic from whatsapp group), all
 	// doctor including image, all lab
@@ -694,7 +756,7 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 		return null;
-	}
+	}	
 
 	@Override
 	public List<Shipment> getAllShipment() {
@@ -1377,15 +1439,16 @@ try {
 	}
 
 	@Override
-	public List<Patient> getSimulatedPatients(int availableVaccines) {
+	public List<Patient> getSimulatedPatients(int availableVaccines, int id0) {
 		List<Patient> patients = new ArrayList<Patient>();
 
 		try {
 			
-			String sql = "SELECT * FROM  patients WHERE alive = ? ORDER BY score DESC ";
+			String sql = "SELECT * FROM  patients WHERE alive = ? AND id_adm= ? ORDER BY score DESC ";
 
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setBoolean(1, true);
+			prep.setInt(2, id0);
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 
@@ -1607,6 +1670,26 @@ try {
 			e.printStackTrace();
 		}
 		return medicaciones;
+	}
+	@Override
+	public int searchadminIDByName(String name) {
+int id=0;
+		try {
+			String sql = "SELECT id FROM admin WHERE name LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, "%" + name + "%");
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				 id = rs.getInt("id");
+				
+				
+			}
+			rs.close();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return id;
 	}
 
 	@Override
@@ -1926,4 +2009,6 @@ try {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 }
