@@ -114,19 +114,6 @@ public class Menu {
 		}
 		
 	}
-	private static void changePassword() throws Exception{
-		System.out.println("Please, introduce again your email address:");
-		String email = reader.readLine();
-		System.out.println("Now, please, introduce again your password:");
-		String oldPassword = reader.readLine();
-		System.out.println("Now, please, introduce your new password:");
-		String newPassword = reader.readLine();
-		System.out.println("Are you sure you want to change your password? (YES / NO)");
-		String sure = reader.readLine();
-		if(sure.equalsIgnoreCase("yes")) {
-			userman.updateUserPassword(email, newPassword, oldPassword);
-		}
-	}
 	
 	private static void changeMail() throws Exception{
 		System.out.println("Please, introduce again your email address:");
@@ -150,7 +137,6 @@ public class Menu {
 			System.out.println("|	3.  Vaccines used		|");
 			System.out.println("|	4.  Delete account		|");
 			System.out.println("|	5.  Change email		|");
-			System.out.println("|	6.  Change password		|");
 			System.out.println("|	0.  Go back			|");
 			
 			int choice = Integer.parseInt(reader.readLine());
@@ -170,9 +156,6 @@ public class Menu {
 			case 5:
 				changeMail();
 				break;
-			case 6:
-				changePassword();
-				break;
 			case 0:
 				return;
 			default:
@@ -188,6 +171,8 @@ public class Menu {
 			System.out.println("|	1.  Add a patient		|");
 			System.out.println("|	2.  Search patients		|");
 			System.out.println("|	3.  Modify doctor 		|");
+			System.out.println("|	4.  Delete account		|");
+			System.out.println("|	5.  Change email		|");
 			System.out.println("|	0.  Go back			|");
 			
 			int choice = Integer.parseInt(reader.readLine());
@@ -201,6 +186,12 @@ public class Menu {
 			case 3:
 				modifyDoctor();
 				break;
+			case 4:
+					deleteAccount();
+					break;
+			case 5:
+					changeMail();
+					break;
 			case 0:
 				return;
 			default:
@@ -217,8 +208,10 @@ public class Menu {
 			System.out.println("|	2.  Search patients			|");
 			System.out.println("|	3.  Send new Shipment			|");
 			System.out.println("|	4.  Add new batch of vaccines		|");
-			System.out.println("|	5.  Modify lab  				|");
-			System.out.println("|	0.  Go back					|");
+			System.out.println("|	5.  Modify lab  			|");
+			System.out.println("|	6.  Delete account			|");
+			System.out.println("|	7.  Change email			|");
+			System.out.println("|	0.  Go back				|");
 			
 			int choice = Integer.parseInt(reader.readLine());
 			switch (choice) {
@@ -236,6 +229,12 @@ public class Menu {
 				break;
 			case 5:
 				modifyLab();
+				break;
+			case 6:
+				deleteAccount();
+				break;
+			case 7:
+				changeMail();
 				break;
 			case 0:
 				return;

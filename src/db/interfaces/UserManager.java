@@ -17,6 +17,5 @@ public interface UserManager {
 	public Boolean checkEmail(String email);
 	public void deleteUser(String mail, String password);
 	public void updateUserMail(String newMail, String oldMail, String password);
-	public void updateUserPassword(String mail, String newPassword, String oldPassword);
 	
 }

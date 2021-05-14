@@ -141,28 +141,4 @@ public class JPAUserManagment implements UserManager{
 		
 	}
 
-	@Override
-	public void updateUserPassword(String mail, String newPassword, String oldPassword) {
-		try {
-			MessageDigest md = MessageDigest.getInstance("MD5");
-			md.update(oldPassword.getBytes());
-			byte[] hash = md.digest();
-			Query q = em.createNativeQuery("SELECT * FROM users WHERE email = ? AND password = ?", User.class);
-			q.setParameter(1, mail);
-			q.setParameter(2, hash);
-			User u = (User) q.getSingleResult();
-			MessageDigest md2 = MessageDigest.getInstance("MD5");
-			md2.update(newPassword.getBytes());
-			byte[] hash2 = md.digest();
-//TODO problemas con el cambio de contraseña
-			
-			em.getTransaction().begin();
-			u.setPassword(hash2);
-			em.getTransaction().commit();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		
-	}
 }

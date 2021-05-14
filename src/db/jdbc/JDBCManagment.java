@@ -105,6 +105,7 @@ public class JDBCManagment implements Cov_Manager {
 			String sql5 = "CREATE TABLE administration "
 					+ "(id       				INTEGER  		PRIMARY KEY AUTOINCREMENT,"
 					+ " total_vacciness  		INTEGER	 		NOT NULL,"
+					+ " name					TEXT			NOT NULL,"
 					+ " image 				    BLOB            NULL)";
 			stmt5.executeUpdate(sql5);
 			stmt5.close();
@@ -272,9 +273,10 @@ public class JDBCManagment implements Cov_Manager {
 
 	public void addGoverment(Administration a) {
 		try {
-			String sql = "INSERT INTO Administration (total_vacciness) VALUES (?)";
+			String sql = "INSERT INTO Administration (total_vacciness, name) VALUES (?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, a.getVaccines());
+			prep.setString(1, a.getName());
 			prep.executeUpdate();
 			prep.close();
 		} catch (Exception e) {
@@ -367,6 +369,7 @@ public class JDBCManagment implements Cov_Manager {
 		}
 
 	}
+	
 	@Override
 	public void modifyScore(int id, float value) {
 		try {
@@ -503,7 +506,7 @@ public class JDBCManagment implements Cov_Manager {
 				List<Other_Pathologies> Other_Pathologies = Main.getInter().getPathofromPatient(id);
 				Patient p= new Patient(id, hos_loc, patientName, bdate, socsec, high, weig, sexoo, infec, vivo, hos, vacc,
 						sangre, dateIntroduced, medicationPatient, Other_Pathologies);
-return p;
+				return p;
 			}
 			prep.close();
 			rs.close();
@@ -673,7 +676,7 @@ return p;
 
 	}
 
-	@Override
+	@Override  //TODO hay que hacer un modify admin??
 	public Administration getAdministration() {
 		try {
 			String sql = "SELECT * FROM administration WHERE id = 1";
@@ -681,8 +684,9 @@ return p;
 			ResultSet rs = prep.executeQuery();
 			if (rs.next()) {
 				int vacc = rs.getInt("total_vacciness");
-				Integer id = 1;
-				return new Administration(id, vacc);
+				Integer id = rs.getInt("id");
+				String name = rs.getString("name");
+				return new Administration(id, vacc, name);
 			}
 			prep.close();
 			rs.close();
@@ -740,6 +744,7 @@ return p;
 
 		return Hospitals;
 	}
+	
 	@Override
 	public List<String> getdifferentMeds(boolean alive) {
 		List<String> Medications = new ArrayList();
@@ -765,10 +770,11 @@ return p;
 
 		return Medications;
 	}
+	
 	@Override
 	public int getdifferentMedsCOUNT(String name, boolean alive) {
-int times=0;
-try {
+		int times=0;
+		try {
 			String sql = "SELECT p.id FROM patients AS p JOIN pat_medi AS pm ON pm.id_pat=p.id JOIN medication AS m ON m.id=pm.id_medi WHERE (m.name = '"+name+"' AND alive = ? )";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setBoolean(1, alive);
@@ -787,6 +793,7 @@ try {
 		}
 		return times;
 	}
+	
 	@Override
 	public List<String> getdifferentPaths(boolean alive) {
 		List<String> Pathologies = new ArrayList();
@@ -833,6 +840,7 @@ try {
 		}
 		return times;
 	}	
+	
 	@Override
 	public List<Date> getDates(boolean alive) {
 		List<Date> dates = new ArrayList();
@@ -1014,6 +1022,7 @@ try {
 		return number;
 
 	}	
+	
 	@Override
 	public int getNumberofDays() {
 		int number = 0;
@@ -1037,6 +1046,7 @@ try {
 		return number;
 
 	}
+	
 	@Override
 	public int getNumberofDeads() {
 		int number = 0;
@@ -1059,6 +1069,7 @@ try {
 		return number;
 
 	}
+	
 	@Override
 	public int getNumberofInfecteds() {
 		int number = 0;
@@ -1081,6 +1092,7 @@ try {
 		return number;
 
 	}
+	
 	@Override
 	public List<Integer> getNumberofDeadsofEachDay() {
 		List<Integer> listDeaths = new ArrayList <>();
@@ -1103,6 +1115,7 @@ try {
 		return listDeaths;
 
 	}
+	
 	@Override
 	public List<Integer> getNumberofInfectedsofEachDay() {
 		List<Integer> infectedList = new ArrayList <>();
@@ -1125,7 +1138,6 @@ try {
 		return infectedList;
 
 	}
-	
 	
 	@Override
 	public List<Day> getLast7Days() {
@@ -1262,9 +1274,10 @@ try {
 		}
 		return patients;
 	}	
+	
 	@Override
 	public int searchPatientGenericCOUNT(String feature, String type, boolean alive) {
-int count=0;
+		int count=0;
 //TODO PARA LA DATE INTRODUCED
 		try {
 			if (feature == "SS num") {
@@ -1313,11 +1326,10 @@ int count=0;
 		}
 		return count;
 	}	
-	
-	
+
 	@Override
 	public int getNumberPatientsbyRangeofFeature(String feature, float max, float min, boolean alive) {
-int count=0;
+		int count=0;
 		try {
 			String sql = "SELECT * FROM  patients WHERE( "+feature+" < "+max+" AND "+feature+" > "+min+" AND alive = ? )" ;
 
@@ -1339,16 +1351,17 @@ int count=0;
 		}
 		return count;
 	}
+	
 	@Override
 	public int getNumberPatientsbyanyString(String feature, String type, boolean alive) {
-int count=0;
+		int count=0;
 		try {
 			String sql = "SELECT * FROM  patients WHERE("+feature+" = '" + type + "' AND alive = ?)" ;
 
 			
 
 			PreparedStatement prep = c.prepareStatement(sql);
-prep.setBoolean(1, alive);
+			prep.setBoolean(1, alive);
 
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
@@ -1372,7 +1385,7 @@ prep.setBoolean(1, alive);
 			String sql = "SELECT * FROM  patients WHERE alive = ? ORDER BY score DESC ";
 
 			PreparedStatement prep = c.prepareStatement(sql);
-prep.setBoolean(1, true);
+			prep.setBoolean(1, true);
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 
@@ -1597,7 +1610,6 @@ prep.setBoolean(1, true);
 	}
 
 	@Override
-
 	public Medication getLastMedication() {
 		try {
 			String sql = "SELECT * FROM medication WHERE id = (SELECT MAX(id) FROM medication)";
@@ -1614,8 +1626,9 @@ prep.setBoolean(1, true);
 			e.printStackTrace();
 		}
 		return null;
-	}@Override
-
+	}
+	
+	@Override
 	public Day getLastDay() {
 		try {
 			String sql = "SELECT * FROM days WHERE id = (SELECT MAX(id) FROM days)";
@@ -1726,6 +1739,7 @@ prep.setBoolean(1, true);
 		}
 		return medicaciones;
 	}
+	
 	@Override
 	public List<String> getMedicationfromPatientNAME(int id) {
 		List<String> medicaciones = new ArrayList<String>();
@@ -1787,6 +1801,7 @@ prep.setBoolean(1, true);
 		}
 		return paths;
 	}
+	
 	@Override
 	public List<String> getPathofromPatientNAME(int id) {
 		List<String> paths = new ArrayList<String>();
