@@ -2,6 +2,7 @@ package db.GUI;
 
 import java.io.IOException;
 
+import db.pojos.Administration;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +15,17 @@ import javafx.stage.Stage;
 public class GovernmentMenuController {
     @FXML
     private Button buttonvaccines;
-    @FXML
+    private Administration admin;
+
+    public Administration getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Administration admin) {
+		this.admin = admin;
+	}
+
+	@FXML
     void NotifyVaccines(ActionEvent event) {
     	String name= "NotifyVaccinesUsedView.fxml";
     	NotifyVaccinesUsedController controller = null;
@@ -31,6 +42,8 @@ public class GovernmentMenuController {
     void TriggerSimulation(ActionEvent event) {
     	String name= "TriggerSimulationView.fxml";
     	TriggerSimulationController controller = null;
+		controller.setAdmin(admin);
+
 		openWindow(name,controller);
     }
 

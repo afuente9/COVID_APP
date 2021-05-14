@@ -64,6 +64,8 @@ public class AddPatientController {
     private TitledPane SeeAllMedication;
 
     @FXML
+    private TextField countrytext;
+    @FXML
     private TitledPane SeeAllMedication1;
     @FXML
     private Label AllMedLabel;
@@ -112,9 +114,9 @@ public class AddPatientController {
         int score=0;
         boolean vaccinated= Boolean.parseBoolean(VaccinatedText);
         Date dateIntroduced= Date.valueOf(LocalDate.now());
-    	
+        int countryId= Main.getInter().searchadminIDByName(countrytext.getText());
         
-        p_new= new Patient(Place_Text,Name_Text,date,SSNum_Text,height,weight,sex,infected,alive,Hospital_Text,vaccinated,Blood_Text,dateIntroduced);
+        p_new= new Patient(Place_Text,Name_Text,date,SSNum_Text,height,weight,sex,infected,alive,Hospital_Text,vaccinated,Blood_Text,dateIntroduced,countryId);
     	Main.getInter().addPatient(p_new);
     
     	
@@ -131,6 +133,7 @@ public class AddPatientController {
     	VaccinatedTEXTFIELD.setDisable(true);
     	OtherPathologiesPatientTextField.setDisable(false);
     	MedicationPatientTextField.setDisable(false);
+    	countrytext.setDisable(false);
     	addPat.setDisable(false);
     	addMed.setDisable(false);
     	SeeAllMedication1.setDisable(false);

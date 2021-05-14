@@ -61,7 +61,9 @@ public class StatisticsController implements Initializable {
 
 	@FXML
 	private Button ckeckOtherPathologies;
-
+    @FXML
+    private Button bycountry;
+    
 	@FXML
 	private Button checkMedication;
 
@@ -101,6 +103,10 @@ public class StatisticsController implements Initializable {
 		Stage stage = (Stage) this.pdfbutton.getScene().getWindow();
 		stage.close();
 	}
+	@FXML
+    void nBycotry(ActionEvent event) {
+
+    }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

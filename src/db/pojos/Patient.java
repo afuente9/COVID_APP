@@ -27,6 +27,7 @@ public class Patient implements Serializable{
 	private List<Medication> medication;
 	private List<Other_Pathologies> other_pathologies;
 	private List<Doctor> doctors;
+	private int govId;
 	
 	
 	public Patient() {
@@ -154,7 +155,7 @@ public class Patient implements Serializable{
 	//TODO ANADIR LOCALDATE Date INTRODUCED PARA QUE LUEGO LOS PODAMOS FILTRAR 
 	
 	public Patient(String hos_location, String name, Date birthday, String social_security, float height, float weight,
- 			Sex sex, boolean infected, boolean alive, String hospital, boolean Vaccinated, String bloodType,Date dateIntroduced) {
+ 			Sex sex, boolean infected, boolean alive, String hospital, boolean Vaccinated, String bloodType,Date dateIntroduced,int govId) {
  		super();
  		this.hos_location = hos_location;
  		this.name = name;
@@ -169,7 +170,22 @@ public class Patient implements Serializable{
  		this.Vaccinated = Vaccinated;
  		this.bloodType = bloodType;
  		this.DateIntroduced=dateIntroduced;
+ 		this.govId=govId;
  	}
+
+	public int getGovId() {
+		return govId;
+	}
+
+
+
+
+	public void setGovId(int govId) {
+		this.govId = govId;
+	}
+
+
+
 
 	public Patient(Integer id, String patientName) {
 		super();
