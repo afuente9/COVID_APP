@@ -262,6 +262,7 @@ if( Main.getInter().adminRegisteredByName(country)==false) {
     @FXML
     void OnAddMedication(ActionEvent event) {
     	String medicationName= MedicationPatientTextField.getText();
+    	if (!medicationName.equals("")) {
     	Medication m_new= new Medication(medicationName);
 
 		List<Medication> medicationsPatient = 	Main.getInter().getMedicationfromPatientwithoutID(Main.getInter().getLastPatient().getId());
@@ -305,7 +306,11 @@ if( Main.getInter().adminRegisteredByName(country)==false) {
     		AllMedLabel.setText(medications);  
         	
     	}
-    }
+    }}
+    	else {
+    	    JOptionPane.showMessageDialog(null, "Empty field");
+
+    	}	
     }
     	
     
@@ -380,6 +385,7 @@ if( Main.getInter().adminRegisteredByName(country)==false) {
     @FXML
     void OnAddPathology(ActionEvent event) {
     	String otherPathologiesName= OtherPathologiesPatientTextField.getText();
+    	if (!otherPathologiesName.equals("")) {
     	Other_Pathologies op_new= new Other_Pathologies(otherPathologiesName);
 		List<Other_Pathologies> pathsPatient = 	Main.getInter().getPatfromPatientwithoutID(Main.getInter().getLastPatient().getId());
 
@@ -421,7 +427,11 @@ if( Main.getInter().adminRegisteredByName(country)==false) {
 		pathologylabel.setText(paths);   
     		
     	}
-    }
+    }}
+    	else {
+    	    JOptionPane.showMessageDialog(null, "Empty field");
+
+    	}
     	
 }
     @FXML

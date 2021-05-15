@@ -2,10 +2,13 @@ package db.GUI;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javax.swing.JOptionPane;
 
 import db.pojos.Medication;
 import db.pojos.Other_Pathologies;
@@ -110,15 +113,37 @@ public class SearchPatientController implements Initializable {
     	String feature = SearchOptions.getValue();
 		String type = typeTextfield.getText();
 		if (feature == "Birth date") {
+			boolean correctdate=true;
+			try {
+	        	Date date = Date.valueOf(type);
+
+	    	}catch(Exception e) {
+	            JOptionPane.showMessageDialog(null, "Wrong date. Please, use the format: yyyy-mm-dd");
+	            correctdate=false;
+
+	    	}
+			if(correctdate==true) {
 			List<Patient> result = Main.getInter().getPatientbyBD(type);
 			this.patientsTableList.addAll(result);
 	    	this.tablePatients.setItems(patientsTableList);  
 	    	typeTextfield.setText("");
+			}
 		}else if (feature == "Date introduced"){
+			boolean correctdate=true;
+			try {
+	        	Date date = Date.valueOf(type);
+
+	    	}catch(Exception e) {
+	            JOptionPane.showMessageDialog(null, "Wrong date. Please, use the format: yyyy-mm-dd");
+	            correctdate=false;
+
+	    	}
+			if(correctdate==true) {
 			List<Patient> result = Main.getInter().getPatientbyDateIntro(type);
 			this.patientsTableList.addAll(result);
 	    	this.tablePatients.setItems(patientsTableList);  
 	    	typeTextfield.setText("");
+			}
 		}
 		else {
 			List<Patient> result = Main.getInter().searchPatientGeneric(feature,type);
@@ -142,7 +167,11 @@ public class SearchPatientController implements Initializable {
     
     @FXML
     void ModifyPatient(ActionEvent event) {
-    	
+    	if (pselected==null) {
+    	    JOptionPane.showMessageDialog(null, "Please, select the patient that you want to modify");
+
+    	}
+    	else {
     	String name= "ModifyPatient.fxml";
 		ModifyPatientController controller = null;
 		try {
@@ -164,6 +193,7 @@ public class SearchPatientController implements Initializable {
     	 controller.setOldPlace(pselected.getHos_location());
     	 controller.setOldVaccinated(""+pselected.getVaccinated());
     	 controller.setOther_pathologies_list(Main.getInter().getPathofromPatient(pselected.getId()));
+    	 controller.setOldInfected(""+pselected.isInfected());
     	 List <Other_Pathologies> patholo_list= Main.getInter().getPathofromPatient(pselected.getId());
      	Iterator iter1 = patholo_list.iterator();
 
@@ -193,6 +223,7 @@ public class SearchPatientController implements Initializable {
     		// TODO Auto-generated catch block
     		e.printStackTrace();
     	}			
+    }
     }
     
     @Override
