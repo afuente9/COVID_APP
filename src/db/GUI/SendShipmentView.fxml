@@ -34,11 +34,11 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -52,27 +52,31 @@
                </font>
             </Label>
             <Button layoutX="614.0" layoutY="23.0" mnemonicParsing="false" onAction="#sendvaccinesbutton" prefHeight="43.0" prefWidth="79.0" text="Send" />
-            <Label fx:id="labname" layoutX="42.0" layoutY="99.0" prefHeight="28.0" prefWidth="400.0" text="Recent shipments from &quot;labname&quot;">
+            <Label fx:id="labname" layoutX="42.0" layoutY="148.0" prefHeight="28.0" prefWidth="400.0" text="Recent shipments from &quot;labname&quot;">
                <font>
                   <Font size="19.0" />
                </font>
             </Label>
-            <ScrollPane layoutX="135.0" layoutY="137.0" prefHeight="314.0" prefWidth="498.0">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="502.0">
-                     <children>
-                        <TableView fx:id="TableShipments" layoutX="-3.0" layoutY="-1.0" prefHeight="302.0" prefWidth="512.0">
-                          <columns>
-                            <TableColumn fx:id="colNumberVaccines" prefWidth="319.20001220703125" text="Number of vaccines" />
-                            <TableColumn fx:id="DateShipment" prefWidth="170.39996337890625" text="Date" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-              </content>
-            </ScrollPane>
             <TextField fx:id="textamountvaccinessend" layoutX="502.0" layoutY="27.0" prefHeight="35.0" prefWidth="66.0" />
             <Button layoutX="680.0" layoutY="429.0" mnemonicParsing="false" onAction="#BackFromSendVaccines" prefHeight="43.0" prefWidth="79.0" text="Back" />
+            <Pane layoutX="130.0" layoutY="192.0" prefHeight="309.0" prefWidth="513.0">
+               <children>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="502.0" />
+                  <TableView fx:id="TableShipments" prefHeight="302.0" prefWidth="512.0">
+                    <columns>
+                      <TableColumn fx:id="colNumberVaccines" prefWidth="155.199951171875" text="Number of vaccines" />
+                      <TableColumn fx:id="DateShipment" prefWidth="150.4000244140625" text="Date" />
+                        <TableColumn fx:id="countrycolumn" prefWidth="202.4000244140625" text="Country" />
+                    </columns>
+                  </TableView>
+               </children>
+            </Pane>
+            <Label layoutX="42.0" layoutY="77.0" prefHeight="28.0" prefWidth="79.0" text="Country: ">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <TextField fx:id="countryTF" layoutX="130.0" layoutY="73.0" prefHeight="35.0" prefWidth="66.0" />
       </children>
     </AnchorPane>
   </children>

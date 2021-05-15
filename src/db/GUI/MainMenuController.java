@@ -275,7 +275,25 @@ public class MainMenuController implements Initializable {
 		if (UserTextField.getText().equals("government") && PasswordTextField.getText().equals("government")) {
 			String name = "GovernmentMenuView.fxml";
 			GovernmentMenuController controller = null;
-			openWindow(name, controller);
+			try {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+				Parent root;
+
+				root = loader.load();
+
+				controller = loader.getController();
+		controller.setAdmin(Main.getInter().getAdministration(1));
+		System.out.println("la admin es "+Main.getInter().getAdministration(1));
+
+				Scene scene = new Scene(root);
+				Stage stage = new Stage();
+				stage.initModality(Modality.APPLICATION_MODAL);
+				stage.setScene(scene);
+				stage.showAndWait();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		if (UserTextField.getText().equals("") && PasswordTextField.getText().equals("")) {
 

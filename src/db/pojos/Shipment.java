@@ -3,29 +3,48 @@ package db.pojos;
 import java.io.Serializable;
 import java.sql.Date;
 
+import db.GUI.Main;
+
 public class Shipment implements Serializable{
 	
 	private Integer id;
 	private int Vaccines;
 	private String LabName;
 	private Date date_ship;
-	
+	private int governmentID;
 	public Shipment() {
 		super();
 	}
 	
-	public Shipment(Integer id, int vaccines, Date date_ship,String LabName ) {
+	public Shipment(Integer id, int vaccines, Date date_ship,String LabName , int governmentID) {
 		super();
 		this.id = id;
 		this.Vaccines = vaccines;
 		this.date_ship = date_ship;
 		this.LabName=LabName;
+		this.governmentID=governmentID;
 	}
-	public Shipment( int vaccines, Date date_ship, String LabName) {
+	public String getGovernmentID() {
+		return Main.getInter().getAdministrationOnlyName(this.governmentID);
+	}
+
+	public void setGovernmentID(int governmentID) {
+		this.governmentID = governmentID;
+	}
+
+	public Shipment( int vaccines, Date date_ship, String LabName,int governmentID) {
 		super();
 		this.Vaccines = vaccines;
 		this.date_ship = date_ship;
 		this.LabName=LabName;
+		this.governmentID=governmentID;
+
+	}public Shipment( int vaccines, Date date_ship, String LabName) {
+		super();
+		this.Vaccines = vaccines;
+		this.date_ship = date_ship;
+		this.LabName=LabName;
+
 	}
 
 	public Integer getId() {

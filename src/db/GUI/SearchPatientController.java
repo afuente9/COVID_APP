@@ -3,6 +3,7 @@ package db.GUI;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -158,8 +159,23 @@ public class SearchPatientController implements Initializable {
     @FXML
     void Filterclick(ActionEvent event) {
     	this.patientsTableList.clear();
-    	String dateFromText =dateFrom.getValue().toString(); 
-		String dateToText = dateTo.getValue().toString();
+    	String dateFromText="";
+    	String dateToText="";
+    	if(dateFrom.getValue()==null) {
+    		 dateFromText = Date.valueOf(LocalDate.now()).toString();
+    	}
+    	else {
+        	 dateFromText =dateFrom.getValue().toString(); 
+
+    	}
+    	if(dateTo.getValue()==null) {
+    		 dateToText = Date.valueOf(LocalDate.now()).toString();
+
+    	}
+    	else {
+    		 dateToText = dateTo.getValue().toString();
+
+    	}
 		List<Patient> result = Main.getInter().filterPatient(dateFromText, dateToText);
 		this.patientsTableList.addAll(result);
     	this.tablePatients.setItems(patientsTableList);  

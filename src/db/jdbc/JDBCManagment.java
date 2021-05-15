@@ -482,13 +482,15 @@ public class JDBCManagment implements Cov_Manager {
 
 	}
 
+	
 	@Override
-	public void ModifyVaccinesAdmin(int amount) {
+	public void ModifyVaccinesAdmin(int amount, int id) {
 		try {
 			String sql;
-			sql = "UPDATE administration SET total_vacciness = (total_vacciness + ?)";
+			sql = "UPDATE administration SET total_vacciness = (total_vacciness + ?) WHERE id= ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, amount);
+			prep.setInt(2, id);
 			prep.executeUpdate();
 			prep.close();
 		} catch (Exception e) {
@@ -739,17 +741,37 @@ public class JDBCManagment implements Cov_Manager {
 		}
 
 	}
-
-	public Administration getAdministration() {
+	
+	@Override
+	public Administration getAdministration(int id0) {
 		try {
-			String sql = "SELECT * FROM administration WHERE id = 1";
+			String sql = "SELECT * FROM administration WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, id0);
 			ResultSet rs = prep.executeQuery();
 			if (rs.next()) {
 				int vacc = rs.getInt("total_vacciness");
 				Integer id = rs.getInt("id");
 				String name = rs.getString("name");
 				return new Administration(id, vacc, name);
+			}
+			prep.close();
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}	@Override
+	public String getAdministrationOnlyName(int id0) {
+		try {
+			String sql = "SELECT name FROM administration WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, id0);
+			ResultSet rs = prep.executeQuery();
+			if (rs.next()) {
+				
+				String name = rs.getString("name");
+				return name;
 			}
 			prep.close();
 			rs.close();
@@ -769,8 +791,9 @@ public class JDBCManagment implements Cov_Manager {
 			while (rs.next()) {
 				int vacc = rs.getInt("vacciness");
 				Date d1 = rs.getDate("date");
+				int idAD= rs.getInt("id_adm");
 				String labName = rs.getString("labName");
-				allShips.add(new Shipment(vacc, d1, labName));
+				allShips.add(new Shipment(vacc, d1, labName,idAD));
 			}
 
 			prep.close();
@@ -806,6 +829,32 @@ public class JDBCManagment implements Cov_Manager {
 		}
 
 		return Hospitals;
+	}	
+	@Override
+	public List<String> getdifferentCountries(boolean alive) {
+		List<String> countries = new ArrayList();
+		countries.add("");
+		try {
+			String sql = "SELECT * FROM patients WHERE alive = ? ";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setBoolean(1, alive);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+               int idcountry= rs.getInt("id_adm");
+               String nameCountry= Main.getInter().getAdministrationOnlyName(idcountry);
+             if (!countries.contains(nameCountry)) {
+            	 countries.add(nameCountry);
+             }
+			}
+
+			prep.close();
+			rs.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return countries;
 	}
 	
 	@Override
@@ -928,11 +977,12 @@ try {
 	}
 
 	@Override
-	public List<Shipment> getAllShipmentforAdminView() {
+	public List<Shipment> getAllShipmentforAdminView(int id) {
 		List<Shipment> allShips = new ArrayList();
 		try {
-			String sql = "SELECT * FROM shipment ";
+			String sql = "SELECT s.vacciness, s.date, s.labName FROM shipment WHERE id_adm=?  ";
 			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, id);
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int vacc = rs.getInt("vacciness");
@@ -952,21 +1002,22 @@ try {
 	}
 
 	@Override
-	public int getNumberVaccinesAdmin() {
+	public int getNumberVaccinesAdmin(int id) {
+		int num=0;
 		try {
-			String sql = "SELECT total_vacciness FROM administration WHERE id=1 ";
+			String sql = "SELECT total_vacciness FROM administration WHERE id=? ";
 			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, id);
 			ResultSet rs = prep.executeQuery();
 
-			int num = rs.getInt("total_vacciness");
+			 num = rs.getInt("total_vacciness");
 			prep.close();
 			rs.close();
-			return num;
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return 0;
+		return num;
 	}
 
 	@Override
@@ -1439,6 +1490,29 @@ try {
 		}
 		return count;
 	}
+	@Override
+	public int getNumberPatientsbyGOVID(int govId, boolean alive) {
+		int count=0;
+		try {
+			String sql = "SELECT * FROM  patients WHERE( id_adm= '" + govId + "' AND alive = ?)" ;
+
+			
+
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setBoolean(1, alive);
+
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				count++;
+			}
+
+			rs.close();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
 
 	@Override
 	public List<Patient> getSimulatedPatients(int availableVaccines, int id0) {
@@ -1498,14 +1572,23 @@ try {
 		
 	List <Patient> finalList= new ArrayList<>();
 		int originalsize=allpatients.size();
-		for (int i= 0; i<numberVaccines;i++) {
+int mini=min(numberVaccines,allpatients.size());
+		for (int i= 0; i<mini;i++) {
+			
 			finalList.add(allpatients.get(i));
 			
 			
 		}
 		return finalList;
 	}
-
+private int min (int n1,int n2) {
+	int min=0;
+	if(n1<=n2) {
+		min=n1;
+	}else min=n2;
+	
+	return min;
+}
 	@Override
 	public List<Patient> filterPatient(String dateFrom, String dateTo) {
 		List<Patient> patients = new ArrayList<Patient>();
@@ -2167,6 +2250,30 @@ try {
 	public List<Day> getDay(int id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Administration getAdministration() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Shipment> getAllShipmentforAdminView() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void ModifyVaccinesAdmin(int amount) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getNumberVaccinesAdmin() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

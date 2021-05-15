@@ -1,5 +1,7 @@
 package db.GUI;
 
+import javax.swing.JOptionPane;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -12,10 +14,30 @@ public class NotifyVaccinesUsedController {
 
     @FXML
     void AcceptVaccinesUsed(ActionEvent event) {
-int amount= Integer.parseInt(textamountofvaccines.getText());
-Main.getInter().ModifyVaccinesAdmin(Integer.parseInt("-"+amount));
-textamountofvaccines.setText("");
-    }
+    if(textamountofvaccines.getText()!="") {	
+    	
+int amount=0;
+boolean correctData=true;
+try {
+amount = Integer.parseInt(textamountofvaccines.getText());
+}
+catch(Exception e) {
+correctData=false;
+}
+
+if(correctData==true&& Main.getInter().getNumberVaccinesAdmin()-amount>0&&amount>0) {
+	Main.getInter().ModifyVaccinesAdmin(Integer.parseInt("-"+amount));
+	textamountofvaccines.setText("");
+}
+else {
+    JOptionPane.showMessageDialog(null, "Wrong number or maybe you do not have that amount of vaccines yet.");
+
+}
+
+    }else {
+	    JOptionPane.showMessageDialog(null, "Empty field");
+
+	} }
 
     @FXML
     void CancelandBack(ActionEvent event) {

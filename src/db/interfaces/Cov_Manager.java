@@ -157,5 +157,12 @@ public interface Cov_Manager {
 	boolean PathologyRegisteredByName(String name);
 	Other_Pathologies getPatByName(String name);
 	List<Other_Pathologies> getPatfromPatientwithoutID(int id);
+	List<Shipment> getAllShipmentforAdminView(int id);
+	Administration getAdministration(int id0);
+	void ModifyVaccinesAdmin(int amount, int id);
+	String getAdministrationOnlyName(int id0);
+	int getNumberVaccinesAdmin(int id);
+	List<String> getdifferentCountries(boolean alive);
+	int getNumberPatientsbyGOVID(int govId, boolean alive);
 
 }

@@ -105,7 +105,22 @@ public class StatisticsController implements Initializable {
 	}
 	@FXML
     void nBycotry(ActionEvent event) {
+		lineChart.setVisible(false);
+		pieChart.setVisible(true);
 
+		plotTittle.setText("by country");
+
+		List<String> countries = Main.getInter().getdifferentCountries(this.alive);
+		List<PieChart.Data> piedatas = new ArrayList<>();
+		for (int i = 1; i < countries.size(); i++) {
+			piedatas.add(new PieChart.Data("" + countries.get(i),
+					Main.getInter().getNumberPatientsbyGOVID(i, this.alive)));
+		}
+
+		pieChartData = FXCollections.observableArrayList();
+		pieChartData.addAll(piedatas);
+
+		pieChart.setData(pieChartData);
     }
 
 	@Override
@@ -165,6 +180,7 @@ public class StatisticsController implements Initializable {
 					this.checkWeight.setDisable(false);
 					this.ckeckOtherPathologies.setDisable(false);
 					this.ckeckBloodType.setDisable(false);
+					this.bycountry.setDisable(false);
 
 				});
 

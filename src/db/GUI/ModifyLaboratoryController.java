@@ -1,5 +1,7 @@
 package db.GUI;
 
+import javax.swing.JOptionPane;
+
 import db.pojos.Lab;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,10 +47,16 @@ public class ModifyLaboratoryController {
     @FXML
     void newadressbutton(ActionEvent event) {
 String newadress= newadresslab.getText();
+if (!newadress.equals("")) {
+
 oldlabadress.setText(newadress);
 lmodif.setAddress(newadress);
 newadresslab.setText("");
 Main.getInter().modifyLab(lmodif.getId(), "adress", newadress);
+}else {
+    JOptionPane.showMessageDialog(null, "Empty field");
+
+}
 
 
     }
@@ -56,20 +64,32 @@ Main.getInter().modifyLab(lmodif.getId(), "adress", newadress);
     @FXML
     void newcifbutton(ActionEvent event) {
     	String newcif= newciflab.getText();
+    	if (!newcif.equals("")) {
+
     	oldlabcif.setText(newcif);
     	lmodif.setCif(newcif);
     	newciflab.setText("");
 Main.getInter().modifyLab(lmodif.getId(), "cif", newcif);
+    }else {
+	    JOptionPane.showMessageDialog(null, "Empty field");
+
+	}
     }
 
     @FXML
     void newnamebutton(ActionEvent event) {
     	String newname= newnamelab.getText();
+
+    	if (!newname.equals("")) {
+
     	oldlabname.setText(newname);
     	lmodif.setName(newname);
     	newnamelab.setText("");
     	Main.getInter().modifyLab(lmodif.getId(), "name", newname);
+    }else {
+	    JOptionPane.showMessageDialog(null, "Empty field");
 
+	}
     }
 
 	

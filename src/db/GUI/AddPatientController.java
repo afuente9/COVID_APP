@@ -207,6 +207,7 @@ HospitalPatientTextField.getText()==""||PlacePatientTextField.getText()==""||Vac
     	}
 if( Main.getInter().adminRegisteredByName(country)==false) {
     JOptionPane.showMessageDialog(null, "Country not registered. Please, contact to the Ministry of Health ");
+    correctData=false;
 
 }
     	

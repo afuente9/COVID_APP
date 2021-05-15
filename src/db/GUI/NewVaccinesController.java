@@ -4,6 +4,8 @@ import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
+
 import db.pojos.Lab;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -88,11 +90,28 @@ Lab lnewvaccines=null;
 
     @FXML
     void addvaccines(ActionEvent event) {
-        int amountNewVaccines= Integer.parseInt(textamountnew.getText());
+    	 int amountNewVaccines=0;
+    	 boolean correctData= true;
+    	try {
+             amountNewVaccines= Integer.parseInt(textamountnew.getText());
+            
+            
+
+    	}
+    	catch(Exception e) {
+    	    JOptionPane.showMessageDialog(null, "Wrong number");
+
+    		
+    	}
+        if(amountNewVaccines>0&&correctData==true) {
         Main.getInter().ModifyVaccinesFromLab(amountNewVaccines,lnewvaccines.getId() );
         textamountnew.setText("");
 		totalNumberVaccines1.setText("You have "+ Main.getInter().getNumberVaccinesLab(lnewvaccines.getId())+ " vaccines");
 
+    } else {
+	    JOptionPane.showMessageDialog(null, "Wrong number");
+
+    }
     }
 
 

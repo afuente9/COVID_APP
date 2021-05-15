@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
+
 import db.pojos.Lab;
 import db.pojos.Patient;
 import db.pojos.Shipment;
@@ -43,6 +45,11 @@ public class SendShipmentController implements Initializable {
 
     @FXML
     private TableColumn DateShipment;
+    @FXML
+    private TextField countryTF;
+
+    @FXML
+    private TableColumn countrycolumn;
 
     @FXML
     private TextField textamountvaccinessend;
@@ -56,7 +63,9 @@ public class SendShipmentController implements Initializable {
 		
 	    	ShipmentList = FXCollections.observableArrayList();
 	        this.colNumberVaccines.setCellValueFactory(new PropertyValueFactory("Vaccines"));
+	        
 	        this.DateShipment.setCellValueFactory(new PropertyValueFactory("date_ship"));
+	        this.countrycolumn.setCellValueFactory(new PropertyValueFactory("governmentID"));
 	    	List <Shipment> allships= Main.getInter().getAllShipment();
 	    	ShipmentList.addAll(allships);
 	    	this.TableShipments.setItems(ShipmentList);
@@ -72,14 +81,40 @@ public class SendShipmentController implements Initializable {
 
     @FXML
     void sendvaccinesbutton(ActionEvent event) {
+    	if(textamountvaccinessend.getText()==""||countryTF.getText()=="") {
+    		
+    	    JOptionPane.showMessageDialog(null, "Empty field");
+
+    	}
+    	else {
+    		boolean correctData=true;
+    		if( Main.getInter().adminRegisteredByName(countryTF.getText())==false) {
+    		    JOptionPane.showMessageDialog(null, "Country not registered. Please, contact to the Ministry of Health ");
+    		    correctData=false;
+
+    		}
+    		try {
+    		if(Main.getInter().getNumberVaccinesLab(lsendvaccines.getId())-Integer.parseInt(textamountvaccinessend.getText())<0) {
+    		    JOptionPane.showMessageDialog(null, "You do not have that amount of vaccines yet ");
+    		    correctData=false;
+
+    		}
+    		}catch(Exception e) {
+    		    JOptionPane.showMessageDialog(null, "Wrong number ");
+    		    correctData=false;
+
+    		}
+    		if (correctData==true) {
+    		if(Integer.parseInt(textamountvaccinessend.getText())>0 ){
     	this.ShipmentList.clear();
 
-    	Shipment snew= new Shipment(Integer.parseInt(textamountvaccinessend.getText()),Date.valueOf(LocalDate.now()),lsendvaccines.getName());
+    	
+    	Shipment snew= new Shipment(Integer.parseInt(textamountvaccinessend.getText()),Date.valueOf(LocalDate.now()),lsendvaccines.getName(),Main.getInter().searchadminIDByName(countryTF.getText()));
 
-    	Main.getInter().addShipment(snew, Main.getInter().getLab(lsendvaccines.getId()), Main.getInter().getAdministration());
+    	Main.getInter().addShipment(snew, Main.getInter().getLab(lsendvaccines.getId()), Main.getInter().getAdministration(Main.getInter().searchadminIDByName(countryTF.getText())));
         Main.getInter().ModifyVaccinesFromLab(Integer.parseInt("-"+textamountvaccinessend.getText()), lsendvaccines.getId());
 
-        Main.getInter().ModifyVaccinesAdmin(Integer.parseInt(textamountvaccinessend.getText()));
+        Main.getInter().ModifyVaccinesAdmin(Integer.parseInt(textamountvaccinessend.getText()),Main.getInter().searchadminIDByName(countryTF.getText()));
         List<Shipment> result = Main.getInter().getAllShipment();
 
 		this.ShipmentList.addAll(result);
@@ -87,8 +122,10 @@ public class SendShipmentController implements Initializable {
     	this.TableShipments.setItems(ShipmentList);  
     	
     	textamountvaccinessend.setText("");
-    	
-    
+    	countryTF.setText("");
+    	}
+    	}
+    	}
 
     }
     public void setLsendvaccines(Lab lsendvaccines) {

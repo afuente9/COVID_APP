@@ -146,13 +146,17 @@ private Administration admin;
         this.bdCol.setCellValueFactory(new PropertyValueFactory("birthday"));
         this.SSnumcol.setCellValueFactory(new PropertyValueFactory("social_security"));
         this.HospitalCol.setCellValueFactory(new PropertyValueFactory("hospital"));
-        this.DateIntroducedCol.setCellValueFactory(new PropertyValueFactory("DateIntroduced"));
-        List <Patient> allpatients= Main.getInter().getSimulatedPatients(Main.getInter().getNumberVaccinesAdmin(), this.admin.getId());
-    	this.patientsTableList.addAll(allpatients);
-    	this.tablesimulation.setItems(patientsTableList);
+		  this.DateIntroducedCol.setCellValueFactory(new PropertyValueFactory("DateIntroduced"));
+
     	
     	
 		
 	}
+	 @FXML
+	    void simulation(ActionEvent event) {
+	        List <Patient> allpatients= Main.getInter().getSimulatedPatients(Main.getInter().getNumberVaccinesAdmin(this.admin.getId()), this.admin.getId());
+	    	this.patientsTableList.addAll(allpatients);
+	    	this.tablesimulation.setItems(patientsTableList);
+	    }
 
 }

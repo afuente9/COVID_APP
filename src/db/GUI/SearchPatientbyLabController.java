@@ -2,10 +2,14 @@ package db.GUI;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javax.swing.JOptionPane;
 
 import db.pojos.Medication;
 import db.pojos.Other_Pathologies;
@@ -110,21 +114,40 @@ public class SearchPatientbyLabController implements Initializable {
     	String feature = SearchOptions.getValue();
 		String type = typeTextfield.getText();
 		if (feature == "Birth date") {
+			boolean correctdate=true;
+			try {
+	        	Date date = Date.valueOf(type);
+
+	    	}catch(Exception e) {
+	            JOptionPane.showMessageDialog(null, "Wrong date. Please, use the format: yyyy-mm-dd");
+	            correctdate=false;
+
+	    	}
+			if(correctdate==true) {
 			List<Patient> result = Main.getInter().getPatientbyBD(type);
-			System.out.println("Those are the patients: \n" + result.toString());
 			this.patientsTableList.addAll(result);
 	    	this.tablePatients.setItems(patientsTableList);  
 	    	typeTextfield.setText("");
+			}
 		}else if (feature == "Date introduced"){
+			boolean correctdate=true;
+			try {
+	        	Date date = Date.valueOf(type);
+
+	    	}catch(Exception e) {
+	            JOptionPane.showMessageDialog(null, "Wrong date. Please, use the format: yyyy-mm-dd");
+	            correctdate=false;
+
+	    	}
+			if(correctdate==true) {
 			List<Patient> result = Main.getInter().getPatientbyDateIntro(type);
-			System.out.println("Those are the patients: \n" + result.toString());
 			this.patientsTableList.addAll(result);
 	    	this.tablePatients.setItems(patientsTableList);  
 	    	typeTextfield.setText("");
+			}
 		}
 		else {
 			List<Patient> result = Main.getInter().searchPatientGeneric(feature,type);
-			System.out.println("Those are the patients: \n" + result.toString());
 			this.patientsTableList.addAll(result);
 	    	this.tablePatients.setItems(patientsTableList);  
 	    	typeTextfield.setText("");
@@ -136,14 +159,26 @@ public class SearchPatientbyLabController implements Initializable {
     @FXML
     void Filterclick(ActionEvent event) {
     	this.patientsTableList.clear();
-    	String dateFromText =dateFrom.getValue().toString(); 
-		String dateToText = dateTo.getValue().toString();
-		List<Patient> result = Main.getInter().filterPatient(dateFromText, dateToText);
-		System.out.println("Those are the patients: \n" + result.toString());
+    	String dateFromText="";
+    	String dateToText="";
+    	if(dateFrom.getValue()==null) {
+    		 dateFromText = Date.valueOf(LocalDate.now()).toString();
+    	}
+    	else {
+        	 dateFromText =dateFrom.getValue().toString(); 
+
+    	}
+    	if(dateTo.getValue()==null) {
+    		 dateToText = Date.valueOf(LocalDate.now()).toString();
+
+    	}
+    	else {
+    		 dateToText = dateTo.getValue().toString();
+
+    	}List<Patient> result = Main.getInter().filterPatient(dateFromText, dateToText);
 		this.patientsTableList.addAll(result);
     	this.tablePatients.setItems(patientsTableList);  
     	typeTextfield.setText("");    }
-    
     
     
     @Override

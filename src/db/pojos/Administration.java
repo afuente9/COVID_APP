@@ -22,6 +22,10 @@ public class Administration implements Serializable{
 	}
 
 
+	public Administration(String name2) {
+this.name= name2;	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

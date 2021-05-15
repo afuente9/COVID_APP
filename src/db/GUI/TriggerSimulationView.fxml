@@ -70,6 +70,7 @@
                   </TableView>
                </children>
             </Pane>
+            <Button layoutX="572.0" layoutY="62.0" mnemonicParsing="false" onAction="#simulation" prefHeight="43.0" prefWidth="79.0" text="Simulation" />
       </children>
     </AnchorPane>
   </children>
