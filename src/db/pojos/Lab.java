@@ -120,6 +120,8 @@ public class Lab implements Serializable{
 			return false;
 		return true;
 	}
+	
+	
 
 	public Integer getId() {
 		return id;

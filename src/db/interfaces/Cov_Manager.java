@@ -48,6 +48,9 @@ public interface Cov_Manager {
 	
 	// Show all labs
 	public List<Lab> showLabs();
+	
+	//Gets a list with all the administration
+	public List<Administration> getAllAdmins();
 		
 	//get total number of patients
 	public int getNumberofPatients();
@@ -164,5 +167,8 @@ public interface Cov_Manager {
 	int getNumberVaccinesAdmin(int id);
 	List<String> getdifferentCountries(boolean alive);
 	int getNumberPatientsbyGOVID(int govId, boolean alive);
-
+	
+	//Allows to check if a Lab or Admministration already exist in the DDBB ignoring the ID
+	public boolean checkAdmin(Administration admin);
+	public boolean checkLab(Lab labo);
 }

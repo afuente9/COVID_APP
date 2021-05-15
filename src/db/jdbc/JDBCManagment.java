@@ -2311,5 +2311,63 @@ try {
 		return 0;
 	}
 
+	@Override
+	public boolean checkAdmin(Administration admin) {
+		List<Administration> admins = getAllAdmins();
+		Administration tmp = null;
+		try {
+			for(int i =0; i<= admins.size(); i++) {
+				tmp=admins.get(i);
+				if(tmp.getName().equalsIgnoreCase(tmp.getName()) && tmp.getVaccines() == admin.getVaccines() ) {
+					return true;
+				}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean checkLab(Lab labo) {
+		List<Lab> labs = showLabs();
+		Lab tmp = null;
+		try {
+			for(int i =0; i<= labs.size(); i++) {
+				tmp=labs.get(i);
+				if(tmp.getAddress().equalsIgnoreCase(labo.getAddress()) && tmp.getCif().equalsIgnoreCase(labo.getCif()) && tmp.getName().equalsIgnoreCase(tmp.getName()) 
+						&& tmp.getVaccines_produce() == labo.getVaccines_produce() && tmp.getPatients().equals(labo.getPatients())) {
+					return true;
+				}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public List<Administration> getAllAdmins() {
+		List<Administration> admins = new ArrayList<Administration>();
+		try {
+			String gov_name = "";
+			String sql = "SELECT * FROM administration WHERE name = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, gov_name);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				int vacciness = rs.getInt("total_vacciness");
+				byte[] pic = rs.getBytes("image");
+				Administration gov = new Administration(id, vacciness, name, pic);
+				admins.add(gov);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return admins;
+	}
+
 	
 }

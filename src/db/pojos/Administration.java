@@ -20,6 +20,17 @@ public class Administration implements Serializable{
 	public Administration() {
 		super();
 	}
+	
+	
+
+
+	public Administration(Integer id, int vaccines, String name, byte[] image) {
+		super();
+		this.id = id;
+		this.vaccines = vaccines;
+		this.name = name;
+		this.image = image;
+	}
 
 
 	public Administration(String name2) {
