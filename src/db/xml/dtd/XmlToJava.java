@@ -73,5 +73,5 @@ public class XmlToJava {
 		em.persist(report);
 		
 		// End transaction
-		tx1.commit();
-	}*/
+		tx1.commit();*/
+	}

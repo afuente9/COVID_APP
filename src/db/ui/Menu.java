@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import db.pojos.*;
@@ -28,11 +29,80 @@ public class Menu {
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	
 	//TODO metodo parseador de los pacientes de un documento externo
-	
-	public void parse(File f) {
-		
+	public static void parse() {
+		BufferedReader lector;
+		try {
+			lector = new BufferedReader(new FileReader("/Users/alvaro/Desktop/Covid_App/COVID_APP/export.csv"));
+			
+			int personas = 100;
+			
+			for(int i = 0; i <= personas; i++) {
+				if(i == 0) {
+					String linea = lector.readLine();
+
+				}else {
+					String linea = lector.readLine();
+					Patient p = patientParse(linea);
+					inter.addPatient(p);
+				}
+				
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
+	private static Patient patientParse(String linea) {
+		String[] datos = linea.split(",");
+		System.out.println(datos.toString());
+		
+		int id = Integer.parseInt(datos[0]);
+		String name = datos[1]; //Bien
+		String hos_location = datos[2];//Bien 
+		
+		String social_security = datos[4];
+		Float height = Float.parseFloat(datos[5]);
+		Float weight = Float.parseFloat(datos[6]);
+		Sex sex = Sex.parse(datos[7]);
+		String ing = datos[8];
+		Boolean infected;
+		if(ing.equalsIgnoreCase("1")) {
+			infected = Boolean.parseBoolean("TRUE");
+		}
+		else {
+			infected = Boolean.parseBoolean("FALSE");
+		}
+		String al = datos[9];
+		Boolean alive;
+		if(al.equalsIgnoreCase("1")) {
+			alive = Boolean.parseBoolean("TRUE");
+		}
+		else {
+			alive = Boolean.parseBoolean("FALSE");
+		}
+		String hos = datos[10];
+		Float score = Float.parseFloat(datos[11]);
+		int id_adm = Integer.parseInt(datos[12]);
+		String vac = datos[13];
+		Boolean vaccinated;
+		if(vac.equalsIgnoreCase("1")) {
+			vaccinated = Boolean.parseBoolean("TRUE");
+		}
+		else {
+			vaccinated = Boolean.parseBoolean("FALSE");
+		}
+		String blood = datos[14];
+		Date dateIntro = Date.valueOf(datos[15]);
+		String b = datos[3];
+		Date birthday = Date.valueOf(LocalDate.parse(b));  
+		
+		Patient p = new Patient(name, hos_location, birthday, social_security, 
+				height, weight, sex, infected, alive, hos, score, id_adm, vaccinated, blood, dateIntro);
+		return p;
+	}
 	
 	public static void main(String[] args) throws Exception {
 		inter.connect();
@@ -46,6 +116,7 @@ public class Menu {
 			System.out.println("|	   Choose an option:		|");
 			System.out.println("|	1.  Register			|");
 			System.out.println("|	2.  Login			|");
+			System.out.println("|	3.  Add patients CSV		|");
 			System.out.println("|	0.  Exit			|");
 			
 			int choice = Integer.parseInt(reader.readLine());
@@ -55,6 +126,9 @@ public class Menu {
 				break;
 			case 2:
 				login();
+				break;
+			case 3:
+				parse();
 				break;
 			case 0:
 				//TODO ESTO PARA LA GUI?

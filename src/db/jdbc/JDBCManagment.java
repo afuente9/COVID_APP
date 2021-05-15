@@ -210,6 +210,41 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 	}
+	
+	// PARA AÑADIR LOS PACIENTES DEL CSV
+	public void addPatientCSV(Patient p) {
+		try {
+			String sexo;
+			if (p.getSex().equals(Sex.Male)) {
+				sexo = "M";
+			} else {
+				sexo = "F";
+			}
+			String sql = "INSERT INTO patients (name, birthday, social_security, height, weight, sex, infected, alive, hospital, hos_location, score,id_adm, bloodType, vaccinated, dateIntroduced)"
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, p.getName());
+			prep.setDate(2, p.getBirthday());
+			prep.setString(3, p.getSocial_security());
+			prep.setFloat(4, p.getHeight());
+			prep.setFloat(5, p.getWeight());
+			prep.setString(6, sexo);
+			prep.setBoolean(7, p.isInfected());
+			prep.setBoolean(8, p.isAlive());
+			prep.setString(9, p.getHospital());
+			prep.setString(10, p.getHos_location());
+			prep.setFloat(11, p.getScore()); 
+			prep.setInt(12, p.getGovId());
+
+			prep.setString(13, p.getBloodType());
+			prep.setBoolean(14, p.getVaccinated());
+			prep.setDate(15, p.getDateIntroduced());
+			prep.executeUpdate();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	/*
 	 * TODO checklist - Cambiar foto (no prioritario) - AddPatients (faltan los

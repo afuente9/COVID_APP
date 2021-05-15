@@ -20,7 +20,7 @@ public class Patient implements Serializable{
 	private boolean infected;
 	private boolean alive;
 	private String hospital;
-	private int score;
+	private Float score;
 	private boolean Vaccinated;
 	private String bloodType;	
 	private Date DateIntroduced;
@@ -66,7 +66,7 @@ public class Patient implements Serializable{
 
 	public Patient(Integer id, String hos_location, String name, Date birthday, String social_security, float height,
 			float weight, Sex sex, boolean infected, boolean alive, String hospital, boolean Vaccinated,
-			String bloodType,Date dateIntroduced,List<Medication> medication,List<Other_Pathologies> other_pathologies,int score) {
+			String bloodType,Date dateIntroduced,List<Medication> medication,List<Other_Pathologies> other_pathologies,float score) {
 		super();
 		this.id = id;
 		this.hos_location = hos_location;
@@ -130,7 +130,7 @@ public class Patient implements Serializable{
 
 
 	public Patient(Integer id, String hos_location, String name, Date birthday, String social_security, float height,
-			float weight, Sex sex, boolean infected, boolean alive, String hospital, int score, boolean is_vaccinated, String bloodType,Date dateIntroduced) {
+			float weight, Sex sex, boolean infected, boolean alive, String hospital, float score, boolean is_vaccinated, String bloodType,Date dateIntroduced) {
 		super();
 		this.id = id;
 		this.hos_location = hos_location;
@@ -194,26 +194,60 @@ public class Patient implements Serializable{
 	}
 
 
+	public Patient(String name2, String hos_location2, Date birthday2, String social_security2, Float height2,
+			Float weight2, Sex sex2, Boolean infected2, Boolean alive2, String hos, Float score2, int id_adm,
+			Boolean vaccinated2, String blood, Date dateIntro) {
+		super();
+		this.name = name2;
+		this.hos_location = hos_location2;
+		this.birthday = birthday2;
+		this.social_security = social_security2;
+		this.height = height2;
+		this.weight = weight2;
+		this.sex = sex2;
+		this.infected = infected2;
+		this.alive = alive2;
+		this.hospital = hos;
+		this.score = score2;
+		this.govId = id_adm; //TODO que es esto??
+		this.Vaccinated = vaccinated2;
+		this.bloodType = blood;
+		this.DateIntroduced = dateIntro;
+	}
+
+
+
+
+	
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((DateIntroduced == null) ? 0 : DateIntroduced.hashCode());
+		result = prime * result + (Vaccinated ? 1231 : 1237);
 		result = prime * result + (alive ? 1231 : 1237);
 		result = prime * result + ((birthday == null) ? 0 : birthday.hashCode());
 		result = prime * result + ((bloodType == null) ? 0 : bloodType.hashCode());
+		result = prime * result + ((doctors == null) ? 0 : doctors.hashCode());
+		result = prime * result + govId;
 		result = prime * result + Float.floatToIntBits(height);
 		result = prime * result + ((hos_location == null) ? 0 : hos_location.hashCode());
 		result = prime * result + ((hospital == null) ? 0 : hospital.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + (infected ? 1231 : 1237);
+		result = prime * result + ((medication == null) ? 0 : medication.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + score;
+		result = prime * result + ((other_pathologies == null) ? 0 : other_pathologies.hashCode());
+		result = prime * result + ((score == null) ? 0 : score.hashCode());
 		result = prime * result + ((sex == null) ? 0 : sex.hashCode());
 		result = prime * result + ((social_security == null) ? 0 : social_security.hashCode());
-		result = prime * result + (Vaccinated ? 1231 : 1237);
 		result = prime * result + Float.floatToIntBits(weight);
 		return result;
 	}
+
+
 
 
 	@Override
@@ -225,6 +259,13 @@ public class Patient implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Patient other = (Patient) obj;
+		if (DateIntroduced == null) {
+			if (other.DateIntroduced != null)
+				return false;
+		} else if (!DateIntroduced.equals(other.DateIntroduced))
+			return false;
+		if (Vaccinated != other.Vaccinated)
+			return false;
 		if (alive != other.alive)
 			return false;
 		if (birthday == null) {
@@ -236,6 +277,13 @@ public class Patient implements Serializable{
 			if (other.bloodType != null)
 				return false;
 		} else if (!bloodType.equals(other.bloodType))
+			return false;
+		if (doctors == null) {
+			if (other.doctors != null)
+				return false;
+		} else if (!doctors.equals(other.doctors))
+			return false;
+		if (govId != other.govId)
 			return false;
 		if (Float.floatToIntBits(height) != Float.floatToIntBits(other.height))
 			return false;
@@ -256,12 +304,25 @@ public class Patient implements Serializable{
 			return false;
 		if (infected != other.infected)
 			return false;
+		if (medication == null) {
+			if (other.medication != null)
+				return false;
+		} else if (!medication.equals(other.medication))
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (score != other.score)
+		if (other_pathologies == null) {
+			if (other.other_pathologies != null)
+				return false;
+		} else if (!other_pathologies.equals(other.other_pathologies))
+			return false;
+		if (score == null) {
+			if (other.score != null)
+				return false;
+		} else if (!score.equals(other.score))
 			return false;
 		if (sex != other.sex)
 			return false;
@@ -270,12 +331,12 @@ public class Patient implements Serializable{
 				return false;
 		} else if (!social_security.equals(other.social_security))
 			return false;
-		if (Vaccinated != other.Vaccinated)
-			return false;
 		if (Float.floatToIntBits(weight) != Float.floatToIntBits(other.weight))
 			return false;
 		return true;
 	}
+
+
 
 
 	@Override
@@ -393,12 +454,12 @@ public class Patient implements Serializable{
 	}
 
 	
-	public int getScore() {
+	public float getScore() {
 		return score;
 	}
 
 	
-	public void setScore(int score) {
+	public void setScore(float score) {
 		this.score = score;
 	}
 
