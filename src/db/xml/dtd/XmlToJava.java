@@ -15,17 +15,25 @@ public class XmlToJava {
 	
 	private static final String PERSISTENCE_PROVIDER = "company-provider";
 	private static EntityManagerFactory factory;
-	public Lab getLabFromXml(String fileName) {
+	public void getLabFromXml(String fileName) {
 		try {
 		JAXBContext jaxbContext_lab = JAXBContext.newInstance(Lab.class);
 		Unmarshaller lab_unmarshaller = jaxbContext_lab.createUnmarshaller();
 		File file = new File("./xmls/"+fileName+".xml");
 		Lab labo = (Lab) lab_unmarshaller.unmarshal(file);		
-		return labo;
+		factory = Persistence.createEntityManagerFactory(PERSISTENCE_PROVIDER);
+		EntityManager em = factory.createEntityManager();
+		em.getTransaction().begin();
+		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
+		em.getTransaction().commit();
+		EntityTransaction tx1 = em.getTransaction();
+		tx1.begin();
+		em.persist(labo);
+		tx1.commit();
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return null;
 	}
 	
 	public void getAdminFromXml(String fileName) {
@@ -49,20 +57,6 @@ public class XmlToJava {
 	}
 	
 	/*TODO mirar esto
-		// Store the report in the database
-		// Create entity manager
-		factory = Persistence.createEntityManagerFactory(PERSISTENCE_PROVIDER);
-		EntityManager em = factory.createEntityManager();
-		em.getTransaction().begin();
-		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
-		em.getTransaction().commit();
-
-		// Create a transaction
-		EntityTransaction tx1 = em.getTransaction();
-
-		// Start transaction
-		tx1.begin();
-
 		// Persist
 		// We assume the authors are not already in the database
 		// In a real world, we should check if they already exist
