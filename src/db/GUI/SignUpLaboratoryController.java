@@ -9,7 +9,11 @@ public class SignUpLaboratoryController {
 
     @FXML
     private TextField NameTextField;
+    @FXML
+    private TextField emailLab;
 
+    @FXML
+    private TextField PassTextf;
     @FXML
     private TextField CifTextField;
 

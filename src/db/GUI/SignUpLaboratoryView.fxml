@@ -78,8 +78,8 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="NameTextField2" layoutX="153.0" layoutY="76.0" onAction="#emailLab" prefHeight="26.0" prefWidth="175.0" />
-            <TextField fx:id="CifTextField2" layoutX="153.0" layoutY="126.0" onAction="#PassTextf" prefHeight="26.0" prefWidth="175.0" />
+            <TextField fx:id="emailLab" layoutX="153.0" layoutY="76.0" prefHeight="26.0" prefWidth="175.0" />
+            <TextField fx:id="PassTextf" layoutX="153.0" layoutY="126.0" prefHeight="26.0" prefWidth="175.0" />
       </children>
     </AnchorPane>
   </children>

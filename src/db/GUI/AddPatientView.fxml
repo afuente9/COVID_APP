@@ -184,7 +184,7 @@
                   </AnchorPane>
                </content>
             </TitledPane>
-            <Button layoutX="335.0" layoutY="409.0" mnemonicParsing="false" onAction="#onConfirmWithoutMedPat" text="Confirm" />
+            <Button fx:id="buttonConfirm" layoutX="335.0" layoutY="409.0" mnemonicParsing="false" onAction="#onConfirmWithoutMedPat" text="Confirm" />
             <Label layoutX="48.0" layoutY="364.0" prefHeight="27.0" prefWidth="94.0" text="Vaccinated">
                <font>
                   <Font size="18.0" />

@@ -150,5 +150,12 @@ public interface Cov_Manager {
 	void modifyScore(int id, float value);
 	List<Patient> getSimulatedPatients(int availableVaccines, int id0);
 	int searchadminIDByName(String name);
+	boolean adminRegisteredByName(String name);
+	boolean MedicationRegisteredByName(String name);
+	int getIdMedicationbyName(String name);
+	List<Medication> getMedicationfromPatientwithoutID(int id);
+	boolean PathologyRegisteredByName(String name);
+	Other_Pathologies getPatByName(String name);
+	List<Other_Pathologies> getPatfromPatientwithoutID(int id);
 
 }

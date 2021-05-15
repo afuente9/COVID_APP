@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import javax.swing.JOptionPane;
+
 import db.GUI.Main;
 import db.interfaces.Cov_Manager;
 import db.pojos.*;
@@ -738,7 +740,6 @@ public class JDBCManagment implements Cov_Manager {
 
 	}
 
-	@Override  //TODO hay que hacer un modify admin??
 	public Administration getAdministration() {
 		try {
 			String sql = "SELECT * FROM administration WHERE id = 1";
@@ -1676,7 +1677,7 @@ try {
 	public int searchadminIDByName(String name) {
 int id=0;
 		try {
-			String sql = "SELECT id FROM admin WHERE name LIKE ?";
+			String sql = "SELECT id FROM administration WHERE name LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, "%" + name + "%");
 			ResultSet rs = prep.executeQuery();
@@ -1691,6 +1692,65 @@ int id=0;
 			e.printStackTrace();
 		}
 		return id;
+	}	
+	@Override
+	public boolean adminRegisteredByName(String name) {
+boolean registered= false;
+try {
+			String sql = "SELECT id FROM administration WHERE name LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, name );
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				registered=true;
+				
+			}
+			rs.close();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		    JOptionPane.showMessageDialog(null, "Country not registered. Please, contact to the Ministry of Health ");
+
+		}
+		return registered;
+	}
+	@Override
+	public boolean MedicationRegisteredByName(String name) {
+boolean registered= false;
+try {
+			String sql = "SELECT id FROM medication WHERE name LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1,  name );
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				registered=true;
+				
+			}
+			rs.close();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return registered;
+	}
+	@Override
+	public boolean PathologyRegisteredByName(String name) {
+boolean registered= false;
+try {
+			String sql = "SELECT id FROM Other_Pathologies WHERE name LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1,  name );
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				registered=true;
+				
+			}
+			rs.close();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return registered;
 	}
 
 	@Override
@@ -1751,6 +1811,46 @@ int id=0;
 			e.printStackTrace();
 		}
 		return null;
+	}
+	@Override
+	public  Other_Pathologies getPatByName(String name) {
+		try {
+			String sql = "SELECT * FROM other_pathologies WHERE name LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1,  name );
+			ResultSet rs = prep.executeQuery();
+			if (rs.next()) {
+				Integer id_med = rs.getInt("id");
+				String nombre = rs.getString("name");
+				return new Other_Pathologies(id_med, nombre);
+			}
+			rs.close();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public int getIdMedicationbyName(String name) {
+		Integer id_med = 0;
+
+		try {
+			String sql = "SELECT * FROM medication WHERE name LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, "%" + name + "%");
+			ResultSet rs = prep.executeQuery();
+			if (rs.next()) {
+				 id_med = rs.getInt("id");
+				
+			}
+			rs.close();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return id_med;
 	}
 
 	@Override
@@ -1822,6 +1922,64 @@ int id=0;
 			e.printStackTrace();
 		}
 		return medicaciones;
+	}
+	@Override
+	public List<Medication> getMedicationfromPatientwithoutID(int id) {
+		List<Medication> medicaciones = new ArrayList<Medication>();
+
+		try {
+			String sql = "SELECT m.name FROM medication AS m JOIN pat_medi AS pm ON pm.id_medi = m.id JOIN patients AS p ON p.id=pm.id_pat WHERE p.id = ? ";
+
+			PreparedStatement prep = c.prepareStatement(sql);
+
+			prep.setInt(1, id);
+
+			ResultSet rs = prep.executeQuery();
+
+			while (rs.next()) {
+
+				String nombre = rs.getString("name");
+				Medication medi = new Medication( nombre);
+
+				medicaciones.add(medi);
+
+			}
+
+			rs.close();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return medicaciones;
+	}	
+	@Override
+	public List<Other_Pathologies> getPatfromPatientwithoutID(int id) {
+		List<Other_Pathologies> OtherPats = new ArrayList<Other_Pathologies>();
+
+		try {
+			String sql = "SELECT  path.name FROM other_pathologies AS path JOIN pat_patho AS pp ON pp.id_patho=path.id JOIN patients AS p ON p.id=pp.id_pat WHERE p.id = ?   ";
+
+			PreparedStatement prep = c.prepareStatement(sql);
+
+			prep.setInt(1, id);
+
+			ResultSet rs = prep.executeQuery();
+
+			while (rs.next()) {
+
+				String nombre = rs.getString("name");
+				Other_Pathologies pat = new Other_Pathologies( nombre);
+
+				OtherPats.add(pat);
+
+			}
+
+			rs.close();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return OtherPats;
 	}
 	
 	@Override

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import db.pojos.Medication;
 import db.pojos.Other_Pathologies;
 import db.pojos.Patient;
@@ -22,6 +24,7 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -32,7 +35,8 @@ public class AddPatientController {
 
     @FXML
     private TextField SexPatientTextField;
-
+    @FXML
+    private Button buttonConfirm;
     @FXML
     private TextField BirthDatePatientTextField;
 
@@ -87,9 +91,35 @@ public class AddPatientController {
     @FXML
     private DialogPane AllMedDialog;
 
-   
+   private List <Integer> ConvertAscii(String StringtoConvert){
+	   	List <Integer> ascciNumsName= new ArrayList<>();
+
+	   try {
+ for (int i =0;i<StringtoConvert.length();i++) {
+	 char chartoconvert= StringtoConvert.charAt(i);
+	 int asciinum=(int)chartoconvert;
+	 ascciNumsName.add(asciinum);
+ }
+ }
+	   catch (Exception e) {
+           JOptionPane.showMessageDialog(null, "Wrong data, put it again.");
+
+	   }
+	   
+	   
+	return ascciNumsName;
+	   
+   }
     @FXML
     void onConfirmWithoutMedPat(ActionEvent event) {
+if(NamePatientTextField.getText()==""||SexPatientTextField.getText()==""||BirthDatePatientTextField.getText()==""||SSNumPatientTextField.getText()==""||
+HeihtPatientTextField.getText()==""||WeightPatientTextField.getText()==""||BloodPatientTextField.getText()==""||
+HospitalPatientTextField.getText()==""||PlacePatientTextField.getText()==""||VaccinatedTEXTFIELD.getText()=="") {
+    JOptionPane.showMessageDialog(null, "There are empty fields.");
+
+	
+}else {
+	
 
     
     	String Name_Text= NamePatientTextField.getText();
@@ -102,11 +132,97 @@ public class AddPatientController {
     	String Hospital_Text= HospitalPatientTextField.getText();
     	String Place_Text= PlacePatientTextField.getText();
     	String VaccinatedText=VaccinatedTEXTFIELD.getText();
+    	String country =countrytext.getText();
+    	boolean correctData= true;
+    	
+    	List <Integer> ascciNumsName= ConvertAscii(Name_Text);
+    	
+    	for (int i =0; i<ascciNumsName.size();i++) {
+    		if (!(ascciNumsName.get(i)>65&&ascciNumsName.get(i)<122)) {
+    			correctData=false;
+
+    		}
+    	
+    	}
+    	if (correctData==false) {
+            JOptionPane.showMessageDialog(null, "Wrong name. ");
+
+    	}
+    	
+    	try {
+        	db.pojos.Sex sex= Sex.valueOf(Sex_Text);
+        	
+
+    	}catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Wrong sex. Please, put: Male or Female");
+            correctData=false;
+
+    	}try {
+        	Date date = Date.valueOf(BirthDate_Text);
+
+    	}catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Wrong date. Please, use the format: yyyy-mm-dd");
+            correctData=false;
+
+    	}try {
+            float height= Float.parseFloat(Height_Text);
+            if(height<0 ||height>3) {
+            	 JOptionPane.showMessageDialog(null, "Wrong height.");
+                 correctData=false;
+            }
+
+    	}catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Wrong height.");
+            correctData=false;
+
+    	}try {
+            float weight= Float.parseFloat(Weight_Text);
+            if(weight<0 ||weight>500) {
+           	 JOptionPane.showMessageDialog(null, "Wrong weight.");
+                correctData=false;
+           }
+
+
+    	}catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Wrong weight.");
+            correctData=false;
+
+    	}
+    	if (!(Blood_Text.equals("AB+")||Blood_Text.equals("AB-")||Blood_Text.equals("A+")||Blood_Text.equals("A-")||
+    			Blood_Text.equals("B+")||Blood_Text.equals("B-")||Blood_Text.equals("0+")||Blood_Text.equals("0-"))) {
+            JOptionPane.showMessageDialog(null, "Wrong blood type.");
+            correctData=false;
+
+    	}if (!(Place_Text.equals("ICU")||Place_Text.equals("Floor")||Place_Text.equals("Home"))) {
+            JOptionPane.showMessageDialog(null, "Wrong place. Please, put: ICU, Floor, Home");
+            correctData=false;
+
+    	}try {
+            boolean vaccinated= Boolean.parseBoolean(VaccinatedText);
+
+    	}catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Wrong vaccinated, please put: True or False.");
+            correctData=false;
+
+    	}
+if( Main.getInter().adminRegisteredByName(country)==false) {
+    JOptionPane.showMessageDialog(null, "Country not registered. Please, contact to the Ministry of Health ");
+
+}
+    	
+
+    	
+    	
+    	
+    	
+    	if (correctData ==true) {
+
+    		
+    	
     	
     	
     	db.pojos.Sex sex= Sex.valueOf(Sex_Text);
     	Date date = Date.valueOf(BirthDate_Text);
-        Integer id = null;
         float height= Float.parseFloat(Height_Text);
         float weight= Float.parseFloat(Weight_Text);
         boolean infected=true;
@@ -131,21 +247,32 @@ public class AddPatientController {
        HospitalPatientTextField.setDisable(true);
     	 PlacePatientTextField.setDisable(true);
     	VaccinatedTEXTFIELD.setDisable(true);
+    	buttonConfirm.setDisable(true);
     	OtherPathologiesPatientTextField.setDisable(false);
     	MedicationPatientTextField.setDisable(false);
-    	countrytext.setDisable(false);
+    	countrytext.setDisable(true);
     	addPat.setDisable(false);
     	addMed.setDisable(false);
     	SeeAllMedication1.setDisable(false);
     	SeeAllMedication.setDisable(false);
-    	
+    	}
     
+    }
     }
     @FXML
     void OnAddMedication(ActionEvent event) {
-    	//	TODO CONTROLAR SI YA ESTA METIDA
     	String medicationName= MedicationPatientTextField.getText();
     	Medication m_new= new Medication(medicationName);
+
+		List<Medication> medicationsPatient = 	Main.getInter().getMedicationfromPatientwithoutID(Main.getInter().getLastPatient().getId());
+    	if(medicationsPatient.contains(m_new)) {
+    		
+    	    JOptionPane.showMessageDialog(null, "Medication already added to this patient");
+    		
+    	}else {
+    		
+    	if(Main.getInter().MedicationRegisteredByName(medicationName)==false) {
+     m_new= new Medication(medicationName);
     	
     	
         Main.getInter().addMedication(m_new);
@@ -153,6 +280,7 @@ public class AddPatientController {
         Main.getInter().getLastPatient().setMedication(medication_list);
     	MedicationPatientTextField.setText("");
     	medication_list.add(Main.getInter().getLastMedication());
+    	medicationsPatient.add(m_new);
     		Iterator iter = medication_list.iterator();
     		String medications="";
     		while (iter.hasNext()) {
@@ -160,8 +288,25 @@ public class AddPatientController {
     		 }
     		AllMedLabel.setText(medications);    
     		
+    }
+    	else {
+        	 m_new= new Medication(medicationName);
+            Main.getInter().assignMed(Main.getInter().getLastPatient().getId(),Main.getInter().getMedication(medicationName));
+            Main.getInter().getLastPatient().setMedication(medication_list);
+        	MedicationPatientTextField.setText("");
+        	medication_list.add(Main.getInter().getMedication(medicationName));
+        	medicationsPatient.add(m_new);
+
+        	Iterator iter = medication_list.iterator();
+    		String medications="";
+    		while (iter.hasNext()) {
+    		 medications+=iter.next()+"\n";
+    		 }
+    		AllMedLabel.setText(medications);  
+        	
     	}
-    	
+    }
+    }
     	
     
     	
@@ -169,6 +314,22 @@ public class AddPatientController {
     
     @FXML
     void DeletePathbyNum(ActionEvent event) {
+    	boolean isnumber=true;
+    	try {
+    		int num= Integer.parseInt(DeletePathologynum.getText());
+    		if(num<0 ) {
+           	 JOptionPane.showMessageDialog(null, "Wrong number.");
+     		isnumber=false;
+           }
+
+    	}catch(Exception e) {
+    		isnumber=false;
+    	    JOptionPane.showMessageDialog(null, "Please put a number to delete a pathology");
+
+    		
+    	}
+    	
+    	if(isnumber==true) {
 
         Main.getInter().deleteAssignmentPathology(Main.getInter().getLastPatient().getId(),Integer.parseInt(DeletePathologynum.getText()) );
 
@@ -183,10 +344,25 @@ public class AddPatientController {
 		 }
 		pathologylabel.setText(paths);   
     }
-
+    }
     @FXML
     void Deletemedbynum(ActionEvent event) {
+    	boolean isnumber=true;
+    	try {
+    		int num = Integer.parseInt(DeleteMedNum.getText());
+    		if(num<0) {
+    			isnumber=false;
+        	    JOptionPane.showMessageDialog(null, "Wrong number");
+
+    		}
+    	}catch(Exception e) {
+    		isnumber=false;
+    	    JOptionPane.showMessageDialog(null, "Please put a number to delete a medication");
+
+    		
+    	}
     	
+    	if(isnumber==true) {
         Main.getInter().deleteAssignmentMedication(Main.getInter().getLastPatient().getId(),Integer.parseInt(DeleteMedNum.getText()) );
 
     	medication_list.remove(Main.getInter().getMedicationId(Integer.parseInt(DeleteMedNum.getText())));
@@ -199,12 +375,23 @@ public class AddPatientController {
 		AllMedLabel.setText(medications);   
 
     }
+    }
 
     @FXML
     void OnAddPathology(ActionEvent event) {
     	String otherPathologiesName= OtherPathologiesPatientTextField.getText();
     	Other_Pathologies op_new= new Other_Pathologies(otherPathologiesName);
-    		
+		List<Other_Pathologies> pathsPatient = 	Main.getInter().getPatfromPatientwithoutID(Main.getInter().getLastPatient().getId());
+
+    	if(pathsPatient.contains(op_new)){
+    	    JOptionPane.showMessageDialog(null, "Pathology already added to this patient");
+
+    	}
+    	
+    	
+    	
+    	else {
+    	if (Main.getInter().PathologyRegisteredByName(otherPathologiesName)==false) {
     		 Main.getInter().addOtherPathologies(op_new);
     	     Main.getInter().assignPatho(Main.getInter().getLastPatient().getId(), Main.getInter().getLastPath());
     	     Main.getInter().getLastPatient().setOther_pathologies(other_pathologies_list);
@@ -220,6 +407,23 @@ public class AddPatientController {
     		pathologylabel.setText(paths);   
     		
     	}
+    	else {
+   	     Main.getInter().assignPatho(Main.getInter().getLastPatient().getId(), Main.getInter().getPatByName(otherPathologiesName));
+	     Main.getInter().getLastPatient().setOther_pathologies(other_pathologies_list);
+	     other_pathologies_list.add( Main.getInter().getPatByName(otherPathologiesName));
+ 		OtherPathologiesPatientTextField.setText("");
+ 		Iterator iter = other_pathologies_list.iterator();
+		String paths="";
+
+		while (iter.hasNext()) {
+		 paths+=iter.next()+"\n";
+		 }
+		pathologylabel.setText(paths);   
+    		
+    	}
+    }
+    	
+}
     @FXML
     void SeeAllMed(ActionEvent event) {
     	String name= "SeeAllMedView.fxml";
