@@ -819,23 +819,22 @@ if (!name.equals("")) {
 		if (!vaccinated.equals("")) {
 		boolean correctData=true;
 
-		try {
-            boolean vaccinatedbool= Boolean.parseBoolean(vaccinated);
-
-    	}catch(Exception e) {
-            JOptionPane.showMessageDialog(null, "Wrong vaccinated, please put: True or False.");
-            correctData=false;
-
+		if (!(vaccinated.equals("True") || vaccinated.equals("False"))) {
+			JOptionPane.showMessageDialog(null, "Wrong vaccinated, please put: True or False.");
+			correctData = false;
     	}
+
+    	
 		if (correctData==true) {
 		oldVaccinated.setText(vaccinated);
 		pmodif.setVaccinated(Boolean.parseBoolean(vaccinated));
 		VaccinatedTEXTFIELD.setText("");
 		Main.getInter().modifyPatient(this.pmodif.getId(), "vaccinated", vaccinated);
-		}}
+		}
 		else {
     	    JOptionPane.showMessageDialog(null, "Empty field");
 
+		}
 		}
 	}
 	  @FXML
