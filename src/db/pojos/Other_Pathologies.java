@@ -4,10 +4,27 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Other_Pathologies")
+@XmlType(propOrder = { "id", "name", "patients"})
+
+
 public class Other_Pathologies implements Serializable{
 	
+	@XmlAttribute
 	private Integer id;
+	@XmlAttribute
 	private String Name;
+	@XmlElement(name = "Patient")
+    @XmlElementWrapper(name = "Patients")
 	private List<Patient> patient;
 	
 	public Other_Pathologies() {

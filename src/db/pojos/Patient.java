@@ -7,26 +7,62 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Patient")
+@XmlType(propOrder = { "id", "name", "hos_location", "birthday", "social_security", "height", "weight", "sex"
+		, "infected", "alive", "hospital", "score", "vaccinated", "bloodType", "DateIntroduced", "medication"
+		, "other_pathologies", "doctors", "govId"})
+
 public class Patient implements Serializable{
 	
+	@XmlAttribute
 	private Integer id;
+	@XmlAttribute
 	private String hos_location;
+	@XmlAttribute
 	private String name;
+	@XmlAttribute
 	private Date birthday;
+	@XmlAttribute
 	private String social_security;
+	@XmlAttribute
 	private float height;
+	@XmlAttribute
 	private float weight;
+	@XmlAttribute
 	private Sex sex;
+	@XmlAttribute
 	private boolean infected;
+	@XmlAttribute
 	private boolean alive;
+	@XmlAttribute
 	private String hospital;
+	@XmlAttribute
 	private Float score;
+	@XmlAttribute
 	private boolean Vaccinated;
+	@XmlAttribute
 	private String bloodType;	
+	@XmlAttribute
 	private Date DateIntroduced;
+	@XmlElement(name = "Medication")
+    @XmlElementWrapper(name = "medication")
 	private List<Medication> medication;
+	@XmlElement(name = "Other_Pathologies")
+    @XmlElementWrapper(name = "other_pathologies")
 	private List<Other_Pathologies> other_pathologies;
+	@XmlElement(name = "Doctor")
+    @XmlElementWrapper(name = "doctors")
 	private List<Doctor> doctors;
+	@XmlAttribute
 	private int govId;
 	
 	

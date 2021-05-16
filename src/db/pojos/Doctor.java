@@ -2,22 +2,40 @@ package db.pojos;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Patient")
+@XmlType(propOrder = { "id", "name", "speciality", "birthday", "collegiate_number", "sex", "hospital", "patients"})
 
 public class Doctor implements Serializable{
 	
+	@XmlAttribute
 	private Integer id;
+	@XmlAttribute
 	private String speciality;
+	@XmlAttribute
 	private String name;
+	@XmlAttribute
 	private Date birthday;
+	@XmlAttribute
 	private String collegiate_number;
+	@XmlAttribute
 	private Sex sex;
+	@XmlAttribute
 	private String hospital;
 	private byte[] image;
+	@XmlElement(name = "Patient")
+    @XmlElementWrapper(name = "Patients")
 	private List<Patient> patients;
 
 	public Doctor() {
