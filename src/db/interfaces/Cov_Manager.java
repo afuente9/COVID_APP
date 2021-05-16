@@ -44,13 +44,18 @@ public interface Cov_Manager {
 	public void addLabUser(Lab l, User u);
 	
 	// Gets the lab 
-	public Lab getLab(int id);
+	public Lab getLab(int id);	
 	
-	// Show all labs
-	public List<Lab> showLabs();
-	
-	//Gets a list with all the administration
+	//Gets a list with all the Object that exist in the DDBB
 	public List<Administration> getAllAdmins();
+	public List<Doctor> getAllDoctors();
+	public List<Medication> getAllMedication();
+	public List<Patient> getAllPatient();
+	public List<Other_Pathologies> getAllPatho();
+	public List<Lab> showLabs();
+
+
+	
 		
 	//get total number of patients
 	public int getNumberofPatients();
@@ -132,6 +137,8 @@ public interface Cov_Manager {
 	//Gets the actual image from X
 	public void getPicFromDoc(int id);
 	public void getPicFromLab(int id);
+	
+	//Used for calculating the score
 	Day getLastDay();
 	int getNumberofDeads();
 	List<Day> getLast7Days();
@@ -168,7 +175,13 @@ public interface Cov_Manager {
 	List<String> getdifferentCountries(boolean alive);
 	int getNumberPatientsbyGOVID(int govId, boolean alive);
 	
-	//Allows to check if a Lab or Admministration already exist in the DDBB ignoring the ID
+	//Allows to check if an object already exist in the DDBB ignoring the ID
 	public boolean checkAdmin(Administration admin);
 	public boolean checkLab(Lab labo);
+	public boolean checkMeds(Medication med);
+	public boolean checkOther_Pat(Other_Pathologies other);
+	public boolean checkPatient(Patient pat);
+	public boolean checkDoctor(Doctor doc);
+	
+
 }

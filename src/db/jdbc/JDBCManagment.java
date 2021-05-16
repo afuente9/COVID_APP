@@ -48,6 +48,7 @@ public class JDBCManagment implements Cov_Manager {
 	// Create tables:
 	public void creatTables() {
 		try {
+			int a;
 			Statement stmt1 = c.createStatement();
 			String sql1 = "CREATE TABLE doctors " 
 					+ "(id       			INTEGER  	 	PRIMARY KEY AUTOINCREMENT,"
@@ -2367,6 +2368,151 @@ try {
 			e.printStackTrace();
 		}
 		return admins;
+	}
+
+	@Override
+	public List<Doctor> getAllDoctors() {
+		List<Doctor> docs = new ArrayList<Doctor>();
+		try {
+			String doc_name = "";
+			String sql = "SELECT * FROM doctors WHERE name = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, doc_name);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String doctorName = rs.getString("name");
+				String espe = rs.getString("speciality");
+				Date nacido = rs.getDate("birth_date");
+				String numCol = rs.getString("collegiate_number");
+				String hos = rs.getString("hospital");
+				byte[] foto = rs.getBytes("image");
+				String sexo = rs.getString("sex");
+				Sex sexoo;
+				if (sexo.equalsIgnoreCase("M")) {
+					sexoo = Sex.Male;
+				} else {
+					sexoo = Sex.Female;
+				}
+				Doctor doc = new Doctor(id, espe, doctorName, nacido, numCol, sexoo, hos, foto);
+				docs.add(doc);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return docs;
+	}
+
+	@Override
+	public List<Medication> getAllMedication() {
+		List<Medication> meds = new ArrayList<Medication>();
+		try {
+			String stri = "";
+			String sql = "SELECT * FROM doctors WHERE name = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, stri);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				Medication med = new Medication(id, name);
+				meds.add(med);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return meds;
+	}
+
+	@Override
+	public List<Patient> getAllPatient() {
+		List<Patient> patients = new ArrayList<Patient>();
+		try {
+			String sql = "SELECT * FROM  patients WHERE name LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, "");
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String patientname = rs.getString("name");
+				Date birthday = rs.getDate("birthday");
+				String social_security = rs.getString("social_security");
+				float height = rs.getFloat("height");
+				float weight = rs.getFloat("weight");
+				Sex sexo;
+				if (rs.getString("sex").equalsIgnoreCase("m")) {
+					sexo = Sex.Male;
+				} else {
+					sexo = Sex.Female;
+				}
+				boolean infec = rs.getBoolean("infected");
+				boolean alive = rs.getBoolean("alive");
+				String hosp = rs.getString("hospital");
+				String loc_hosp = rs.getString("hos_location");
+				String blood = rs.getString("bloodType");
+				boolean vaccin = rs.getBoolean("vaccinated");
+				Date dateIntroduced = rs.getDate("dateIntroduced");
+				List<Medication> medicationPatient = Main.getInter().getMedicationfromPatient(id);
+				List<Other_Pathologies> Other_Pathologies = Main.getInter().getPathofromPatient(id);
+
+				Patient patient = new Patient(id, loc_hosp, patientname, birthday, social_security, height, weight,
+						sexo, infec, alive, hosp, vaccin, blood, dateIntroduced, medicationPatient, Other_Pathologies);
+				patients.add(patient);
+			}
+			rs.close();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return patients;
+
+	}
+
+	@Override
+	public List<Other_Pathologies> getAllPatho() {
+		List<Other_Pathologies> patos = new ArrayList<Other_Pathologies>();
+		try {
+			String stri = "";
+			String sql = "SELECT * FROM doctors WHERE name = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, stri);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				Other_Pathologies pato = new Other_Pathologies(id, name);
+				patos.add(pato);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return patos;
+	}
+
+	@Override
+	public boolean checkMeds(Medication med) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean checkOther_Pat(Other_Pathologies other) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean checkPatient(Patient pat) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean checkDoctor(Doctor doc) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	
