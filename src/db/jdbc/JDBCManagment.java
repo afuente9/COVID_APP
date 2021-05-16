@@ -85,7 +85,7 @@ public class JDBCManagment implements Cov_Manager {
 			stmt2.close();
 
 			Statement stmt3 = c.createStatement();
-			String sql3 = "CREATE TABLE lab " 
+			String sql3 = "CREATE TABLE doc " 
 					+ "(id       		INTEGER  	 	PRIMARY KEY AUTOINCREMENT,"
 					+ " name     		TEXT    	 	NOT NULL," 
 					+ " adress	 		TEXT	 	 	NOT NULL,"
@@ -95,14 +95,14 @@ public class JDBCManagment implements Cov_Manager {
 					+ " user_id			INTEGER			REFERENCES users(id))";
 			stmt3.executeUpdate(sql3);
 			stmt3.close();
-//We also have to add the name of the lab because tableView only print pojos
+//We also have to add the name of the doc because tableView only print pojos
 			Statement stmt4 = c.createStatement();
 			String sql4 = "CREATE TABLE shipment " 
 					+ "(id       		INTEGER  	PRIMARY KEY AUTOINCREMENT,"
 					+ " vacciness  		INTEGER	 	NOT NULL,"
 					+ " date			DATE		NOT NULL,"
-					+ " id_lab			INTEGER		REFERENCES lab(id)," 
-					+ " labName			TEXT		 NOT NULL,"
+					+ " id_doc			INTEGER		REFERENCES doc(id)," 
+					+ " docName			TEXT		 NOT NULL,"
 					+ " id_adm			INTEGER		REFERENCES administration(id))";
 			stmt4.executeUpdate(sql4);
 			stmt4.close();
@@ -153,10 +153,10 @@ public class JDBCManagment implements Cov_Manager {
 			stmt10.close();
 
 			Statement stmt11 = c.createStatement();
-			String sql11 = "CREATE TABLE pat_lab "
+			String sql11 = "CREATE TABLE pat_doc "
 					+ "(id_pat       	INTEGER  	REFERENCES patients(id),"
-					+ " id_lab 			INTEGER	 	REFERENCES lab(id)," 
-					+ " PRIMARY KEY (id_pat, id_lab))";
+					+ " id_doc 			INTEGER	 	REFERENCES doc(id)," 
+					+ " PRIMARY KEY (id_pat, id_doc))";
 			stmt11.executeUpdate(sql11);
 			stmt11.close();
 
@@ -308,7 +308,7 @@ public class JDBCManagment implements Cov_Manager {
 	public void addLab(Lab l) {
 		try {
 
-			String sql = "INSERT INTO lab (name, adress, cif, vacciness) VALUES (?, ?, ?, ?)";
+			String sql = "INSERT INTO doc (name, adress, cif, vacciness) VALUES (?, ?, ?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, l.getName());
 			prep.setString(2, l.getAddress());
@@ -325,7 +325,7 @@ public class JDBCManagment implements Cov_Manager {
 	public void addLabUser(Lab l, User u) {
 		try {
 
-			String sql = "INSERT INTO lab (name, adress, cif, vacciness, user_id) VALUES (?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO doc (name, adress, cif, vacciness, user_id) VALUES (?, ?, ?, ?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, l.getName());
 			prep.setString(2, l.getAddress());
@@ -342,7 +342,7 @@ public class JDBCManagment implements Cov_Manager {
 
 	public void addShipment(Shipment s, Lab l, Administration a) {
 		try {
-			String sql = "INSERT INTO Shipment (vacciness, date, id_lab, labName, id_adm) VALUES (?,?,?,?,?)";
+			String sql = "INSERT INTO Shipment (vacciness, date, id_doc, docName, id_adm) VALUES (?,?,?,?,?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, s.getVaccines());
 			prep.setDate(2, s.getDate_ship());
@@ -385,7 +385,7 @@ public class JDBCManagment implements Cov_Manager {
 
 
 	// TODO UPDATE goverment vaccines used, patient (pic from whatsapp group), all
-	// doctor including image, all lab
+	// doctor including image, all doc
 	public void addOtherPathologies(Other_Pathologies op) {
 		try {
 			String sql = "INSERT INTO Other_Pathologies (name) VALUES (?)";
@@ -491,7 +491,7 @@ public class JDBCManagment implements Cov_Manager {
 	public void modifyLab(int iden, String atrib, String value) {
 		try {
 			String sql;
-			sql = "UPDATE lab SET " + atrib + " = ? WHERE id = " + iden;
+			sql = "UPDATE doc SET " + atrib + " = ? WHERE id = " + iden;
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, value);
 			prep.executeUpdate();
@@ -506,7 +506,7 @@ public class JDBCManagment implements Cov_Manager {
 	public void ModifyVaccinesFromLab(int amount, int id) {
 		try {
 			String sql;
-			sql = "UPDATE lab SET vacciness = (vacciness + ?) WHERE id = ?";
+			sql = "UPDATE doc SET vacciness = (vacciness + ?) WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, amount);
 			prep.setInt(2, id);
@@ -828,8 +828,8 @@ public class JDBCManagment implements Cov_Manager {
 				int vacc = rs.getInt("vacciness");
 				Date d1 = rs.getDate("date");
 				int idAD= rs.getInt("id_adm");
-				String labName = rs.getString("labName");
-				allShips.add(new Shipment(vacc, d1, labName,idAD));
+				String docName = rs.getString("docName");
+				allShips.add(new Shipment(vacc, d1, docName,idAD));
 			}
 
 			prep.close();
@@ -1016,15 +1016,15 @@ try {
 	public List<Shipment> getAllShipmentforAdminView(int id) {
 		List<Shipment> allShips = new ArrayList();
 		try {
-			String sql = "SELECT s.vacciness, s.date, s.labName FROM shipment WHERE id_adm=?  ";
+			String sql = "SELECT s.vacciness, s.date, s.docName FROM shipment WHERE id_adm=?  ";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, id);
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int vacc = rs.getInt("vacciness");
 				Date d1 = rs.getDate("date");
-				String labName = rs.getString("labName");
-				allShips.add(new Shipment(vacc, d1, labName));
+				String docName = rs.getString("docName");
+				allShips.add(new Shipment(vacc, d1, docName));
 			}
 
 			prep.close();
@@ -1059,7 +1059,7 @@ try {
 	@Override
 	public int getNumberVaccinesLab(int id) {
 		try {
-			String sql = "SELECT vacciness FROM lab WHERE id=? ";
+			String sql = "SELECT vacciness FROM doc WHERE id=? ";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, id);
 			ResultSet rs = prep.executeQuery();
@@ -1078,12 +1078,12 @@ try {
 	@Override
 	public Lab getLab(int id) {
 		try {
-			String sql = "SELECT * FROM lab WHERE id = ?";
+			String sql = "SELECT * FROM doc WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, id);
 			ResultSet rs = prep.executeQuery();
 			if (rs.next()) {
-				String lab_name = rs.getString("name");
+				String doc_name = rs.getString("name");
 				String direccion = rs.getString("adress");
 				String doc = rs.getString("cif");
 				Integer vacc = rs.getInt("vacciness");
@@ -1091,10 +1091,10 @@ try {
 				// TODO test, if doesn't work
 				/*
 				 * InputStream blobStream = rs.getBinaryStream("photo"); byte[] pic = new
-				 * byte[blobStream.available()]; blobStream.read(pic);
+				 * byte[blobStream.avaidocle()]; blobStream.read(pic);
 				 * 
 				 */
-				return new Lab(id, vacc, direccion, lab_name, doc, pic);
+				return new Lab(id, vacc, direccion, doc_name, doc, pic);
 			}
 			prep.close();
 			rs.close();
@@ -1106,12 +1106,12 @@ try {
 
 	@Override
 	public List<Lab> showLabs() {
-		List<Lab> labs = new ArrayList<Lab>();
+		List<Lab> docs = new ArrayList<Lab>();
 		try {
-			String lab_name = "";
-			String sql = "SELECT * FROM lab WHERE name = ?";
+			String doc_name = "";
+			String sql = "SELECT * FROM doc WHERE name = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, lab_name);
+			prep.setString(1, doc_name);
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -1123,16 +1123,16 @@ try {
 				// TODO test, if doesn't work
 				/*
 				 * InputStream blobStream = rs.getBinaryStream("photo"); byte[] pic = new
-				 * byte[blobStream.available()]; blobStream.read(pic);
+				 * byte[blobStream.avaidocle()]; blobStream.read(pic);
 				 * 
 				 */
-				Lab lab = new Lab(id, Lvacciness, Ladress, Lname, Lcif, pic);
-				labs.add(lab);
+				Lab doc = new Lab(id, Lvacciness, Ladress, Lname, Lcif, pic);
+				docs.add(doc);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return labs;
+		return docs;
 	}
 
 	@Override
@@ -1551,7 +1551,7 @@ try {
 	}
 
 	@Override
-	public List<Patient> getSimulatedPatients(int availableVaccines, int id0) {
+	public List<Patient> getSimulatedPatients(int avaidocleVaccines, int id0) {
 		List<Patient> patients = new ArrayList<Patient>();
 
 		try {
@@ -1601,7 +1601,7 @@ try {
 		}
 //TODO COMPROBAR SI FUNCIONA BIEN CUANDO TENGAMOS PUNTUACIONES
 
-		return getFinalList(patients,availableVaccines);
+		return getFinalList(patients,avaidocleVaccines);
 	}
 
 	private List<Patient> getFinalList(List<Patient> allpatients, int numberVaccines) {
@@ -2240,7 +2240,7 @@ try {
 	public void changeLabPic(Lab l, byte[] pic) {
 		try {
 			String sql;
-			sql = "UPDATE lab SET image = ? WHERE id = ?";
+			sql = "UPDATE doc SET image = ? WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setBytes(1, pic);
 			prep.setInt(2, l.getId() );
@@ -2271,7 +2271,7 @@ try {
 	public void getPicFromLab(int id) {
 		try {
 			String sql;
-			sql = "SELECT image FROM lab WHERE id = ?";
+			sql = "SELECT image FROM doc WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, id);
 			prep.executeQuery();
@@ -2330,14 +2330,15 @@ try {
 	}
 
 	@Override
-	public boolean checkLab(Lab labo) {
-		List<Lab> labs = showLabs();
+	public boolean checkLab(Lab doco) {
+		List<Lab> docs = showLabs();
 		Lab tmp = null;
 		try {
-			for(int i =0; i<= labs.size(); i++) {
-				tmp=labs.get(i);
-				if(tmp.getAddress().equalsIgnoreCase(labo.getAddress()) && tmp.getCif().equalsIgnoreCase(labo.getCif()) && tmp.getName().equalsIgnoreCase(tmp.getName()) 
-						&& tmp.getVaccines_produce() == labo.getVaccines_produce() && tmp.getPatients().equals(labo.getPatients())) {
+			for(int i =0; i<= docs.size(); i++) {
+				tmp=docs.get(i);
+				if(tmp.getAddress().equalsIgnoreCase(doco.getAddress()) && tmp.getCif().equalsIgnoreCase(doco.getCif()) 
+						&& tmp.getName().equalsIgnoreCase(doco.getName()) && tmp.getVaccines_produce() == doco.getVaccines_produce() 
+						&& tmp.getPatients().equals(doco.getPatients())) {
 					return true;
 				}
 			}
@@ -2493,25 +2494,81 @@ try {
 
 	@Override
 	public boolean checkMeds(Medication med) {
-		// TODO Auto-generated method stub
+		List<Medication> meds = getAllMedication();
+		Medication tmp = null;
+		try {
+			for(int i =0; i<= meds.size(); i++) {
+				tmp=meds.get(i);
+				if(tmp.getName().equalsIgnoreCase(med.getName())) {
+					return true;
+				}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 
+
 	@Override
 	public boolean checkOther_Pat(Other_Pathologies other) {
-		// TODO Auto-generated method stub
+		List<Other_Pathologies> others = getAllPatho();
+		Other_Pathologies tmp = null;
+		try {
+			for(int i =0; i<= others.size(); i++) {
+				tmp=others.get(i);
+				if(tmp.getName().equalsIgnoreCase(other.getName())) {
+					return true;
+				}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return false;
+
 	}
 
 	@Override
 	public boolean checkPatient(Patient pat) {
-		// TODO Auto-generated method stub
+		List<Patient> pats = getAllPatient();
+		Patient tmp = null;
+		try {
+			for(int i =0; i<= pats.size(); i++) {
+				tmp=pats.get(i);
+				if(tmp.getBirthday().equals(pat.getBirthday()) && tmp.getSocial_security().equalsIgnoreCase(pat.getSocial_security()) 
+						&& tmp.getName().equalsIgnoreCase(pat.getName()) && tmp.getVaccinated() == pat.getVaccinated() 
+						&& tmp.getBloodType().equalsIgnoreCase(pat.getBloodType()) && tmp.getDoctors().equals(pat.getDoctors())
+						&& tmp.getDateIntroduced().equals(pat.getDateIntroduced()) && tmp.getHeight() == pat.getHeight()
+						&& tmp.getWeight() == pat.getWeight() && tmp.getHos_location().equalsIgnoreCase(pat.getHos_location())
+						&& tmp.getHospital().equalsIgnoreCase(pat.getHospital()) && tmp.getMedication().equals(pat.getMedication())
+						&& tmp.getOther_pathologies().equals(pat.getOther_pathologies()) && tmp.getScore() == pat.getScore()
+						&& tmp.getSex().equals(pat.getSex())) {
+					return true;
+				}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
-
+	
 	@Override
 	public boolean checkDoctor(Doctor doc) {
-		// TODO Auto-generated method stub
+		List<Doctor> docs = getAllDoctors();
+		Doctor tmp = null;
+		try {
+			for(int i =0; i<= docs.size(); i++) {
+				tmp=docs.get(i);
+				if(tmp.getName().equalsIgnoreCase(doc.getName()) && tmp.getBirthday().equals(doc.getBirthday()) 
+						&& tmp.getCollegiate_number().equalsIgnoreCase(doc.getCollegiate_number()) 
+						&& tmp.getHospital().equalsIgnoreCase(doc.getHospital()) && tmp.getSex().equals(doc.getSex())
+						&& tmp.getSpeciality().equalsIgnoreCase(doc.getSpeciality())) {
+					return true;
+				}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 
