@@ -177,7 +177,7 @@ public class JDBCManagment implements Cov_Manager {
 		}
 	}
 
-	// TODO INSERT & SELECT pat_medi, pat_pathologies
+	
 	public void addPatient(Patient p) {
 		try {
 			String sexo;

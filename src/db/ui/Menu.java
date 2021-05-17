@@ -3,7 +3,11 @@ package db.ui;
 import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -21,16 +25,34 @@ import db.jpa.JPAUserManagment;
 public class Menu {
 	//public Day today=ultimo dia a�adido a la lista de dias;
 
-	
+	private static Connection c;
 	private static Cov_Manager inter = new JDBCManagment();
 	private static UserManager userman = new JPAUserManagment();
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	
-	//TODO metodo parseador de los pacientes de un documento externo
+	public static void connect() {
+		try {
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:./database/covid.database");
+			c.createStatement().execute("PRAGMA foreign_keys = ON");
+			System.out.println("Database connection opened");
+			inter.creatTables();
+		} catch (SQLException E) {
+			System.out.println("There was a database exception.");
+			E.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("There was a general exception.");
+			e.printStackTrace();
+		}
+
+	}
+	
+	
 	public static void parse() {
 		BufferedReader lector;
+		connect();
 		try {
 			lector = new BufferedReader(new FileReader("/Users/alvaro/Desktop/Covid_App/COVID_APP/export.csv"));
 			
@@ -42,20 +64,18 @@ public class Menu {
 
 				}else {
 					String linea = lector.readLine();
-					Patient p = patientParse(linea);
-					inter.addPatient(p);
+					patientParse(linea);
 				}
 				
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	private static Patient patientParse(String linea) {
+	private static void patientParse(String linea) {
 		String[] datos = linea.split(",");
 		System.out.println(datos.toString());
 		
@@ -95,13 +115,40 @@ public class Menu {
 			vaccinated = Boolean.parseBoolean("FALSE");
 		}
 		String blood = datos[14];
-		Date dateIntro = Date.valueOf(datos[15]);
+		long dateIntro = Long.parseLong(datos[15]);
 		String b = datos[3];
-		Date birthday = Date.valueOf(LocalDate.parse(b));  
-		
-		Patient p = new Patient(name, hos_location, birthday, social_security, 
-				height, weight, sex, infected, alive, hos, score, id_adm, vaccinated, blood, dateIntro);
-		return p;
+		long birthday = Long.parseLong(b);  
+
+		try {
+			String sexo;
+			if (sex.equals(Sex.Male)) {
+				sexo = "M";
+			} else {
+				sexo = "F";
+			}
+			String sql = "INSERT INTO patients (name, birthday, social_security, height, weight, sex, infected, alive, hospital, hos_location, score,id_adm, bloodType, vaccinated, dateIntroduced)"
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, name);
+			prep.setLong(2, birthday);
+			prep.setString(3, social_security);
+			prep.setFloat(4, height);
+			prep.setFloat(5, weight);
+			prep.setString(6, sexo);
+			prep.setBoolean(7, infected);
+			prep.setBoolean(8, alive);
+			prep.setString(9, hos);
+			prep.setString(10, hos_location);
+			prep.setFloat(11, score); 
+			prep.setInt(12, id_adm);
+			prep.setString(13, blood);
+			prep.setBoolean(14, vaccinated);
+			prep.setLong(15, dateIntro);
+			prep.executeUpdate();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static void main(String[] args) throws Exception {

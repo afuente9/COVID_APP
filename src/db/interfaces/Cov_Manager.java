@@ -55,7 +55,8 @@ public interface Cov_Manager {
 	public List<Lab> showLabs();
 
 
-	
+	//Create tables
+	public void creatTables();
 		
 	//get total number of patients
 	public int getNumberofPatients();
