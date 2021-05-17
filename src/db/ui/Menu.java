@@ -162,6 +162,7 @@ public class Menu {
 				byte[] hash = md.digest();
 				User u = new User(email, hash, role);
 				userman.newUser(u);
+				addDoctor(u);
 			}
 		}else if(role.getName().equalsIgnoreCase("laboratory")) {
 			System.out.println("Please, introduce your email address:");
@@ -177,6 +178,7 @@ public class Menu {
 				byte[] hash = md.digest();
 				User u = new User(email, hash, role);
 				userman.newUser(u);
+				addLab(u);
 			}
 		}else {
 			System.out.println("Please, introduce your email address:");
@@ -191,6 +193,7 @@ public class Menu {
 				byte[] hash = md.digest();
 				User u = new User(email, hash, role);
 				userman.newUser(u);
+				addAdmin(u);
 			}
 		}
 		
@@ -504,7 +507,7 @@ public class Menu {
 		System.out.println("Those are the patients: \n" + result.toString());
 	}
 	
-	private static void addDoctor() throws Exception{
+	private static void addDoctor(User u) throws Exception{
 		System.out.println("Please, input the DOCTOR info:");
 		System.out.print("Name: ");
 		String d_name = reader.readLine();
@@ -518,10 +521,10 @@ public class Menu {
 		String d_hosp = reader.readLine();
 		System.out.print("Sex (male, female): ");
 		Sex d_sex = Sex.parse(reader.readLine());
-		inter.addDoctor(new Doctor(d_name, d_speciality, Date.valueOf(d_bday), d_cn, d_hosp, d_sex));
+		inter.addDoctorUser(new Doctor(d_name, d_speciality, Date.valueOf(d_bday), d_cn, d_hosp, d_sex), u);
 	}
 	
-	private static void addLab() throws Exception{
+	private static void addLab(User u) throws Exception{
 		System.out.println("Please, input the LAB info:");
 		System.out.print("Name: ");
 		String l_name = reader.readLine();
@@ -531,7 +534,16 @@ public class Menu {
 		String l_cif = reader.readLine();
 		System.out.print("Vaccines: ");
 		int l_vac = Integer.parseInt(reader.readLine());
-		inter.addLab(new Lab(l_name, l_adress, l_cif, l_vac));
+		inter.addLabUser(new Lab(l_name, l_adress, l_cif, l_vac), u);
+	}
+	
+	private static void addAdmin(User u) throws Exception{
+		System.out.println("Please, input the LAB info:");
+		System.out.print("Name: ");
+		String a_name = reader.readLine();
+		System.out.print("Vaccines: ");
+		int a_vac = Integer.parseInt(reader.readLine());
+		inter.addGovermentUser(new Administration(a_vac, a_name), u);
 	}
 	
 	private static void modifyDoctor() {

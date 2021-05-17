@@ -21,7 +21,12 @@ public class Administration implements Serializable{
 		super();
 	}
 	
-	
+
+	public Administration(int vaccines, String name) {
+		super();
+		this.vaccines = vaccines;
+		this.name = name;
+	}
 
 
 	public Administration(Integer id, int vaccines, String name, byte[] image) {
@@ -34,7 +39,7 @@ public class Administration implements Serializable{
 
 
 	public Administration(String name2) {
-this.name= name2;	}
+		this.name= name2;	}
 
 
 	@Override
