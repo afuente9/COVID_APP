@@ -234,7 +234,7 @@ public class Menu {
 		String newEmail = reader.readLine();
 		System.out.println("Now, please, introduce again your password:");
 		String password = reader.readLine();
-		System.out.println("Are you sure you want to change your password? (YES / NO)");
+		System.out.println("Are you sure you want to change your email address? (YES / NO)");
 		String sure = reader.readLine();
 		if(sure.equalsIgnoreCase("yes")) {
 			userman.updateUserMail(newEmail, oldEmail, password);
@@ -263,6 +263,7 @@ public class Menu {
 			System.out.println("|	3.  Vaccines used		|");
 			System.out.println("|	4.  Delete account		|");
 			System.out.println("|	5.  Change email		|");
+			System.out.println("|	6.  Change password		|");
 			System.out.println("|	0.  Go back			|");
 			
 			int choice = Integer.parseInt(reader.readLine());
@@ -281,6 +282,9 @@ public class Menu {
 				break;
 			case 5:
 				changeMail();
+				break;
+			case 6:
+				changePassword();
 				break;
 			case 0:
 				return;
