@@ -2,6 +2,16 @@ package db.pojos;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Administration")
+@XmlType(propOrder = { "id", "name", "vaccines"})
+
+
 public class Administration implements Serializable{
 
 	private Integer id;
