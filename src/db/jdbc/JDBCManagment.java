@@ -85,7 +85,7 @@ public class JDBCManagment implements Cov_Manager {
 			stmt2.close();
 
 			Statement stmt3 = c.createStatement();
-			String sql3 = "CREATE TABLE doc " 
+			String sql3 = "CREATE TABLE lab " 
 					+ "(id       		INTEGER  	 	PRIMARY KEY AUTOINCREMENT,"
 					+ " name     		TEXT    	 	NOT NULL," 
 					+ " adress	 		TEXT	 	 	NOT NULL,"
@@ -308,7 +308,7 @@ public class JDBCManagment implements Cov_Manager {
 	public void addLab(Lab l) {
 		try {
 
-			String sql = "INSERT INTO doc (name, adress, cif, vacciness) VALUES (?, ?, ?, ?)";
+			String sql = "INSERT INTO lab (name, adress, cif, vacciness) VALUES (?, ?, ?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, l.getName());
 			prep.setString(2, l.getAddress());
@@ -325,7 +325,7 @@ public class JDBCManagment implements Cov_Manager {
 	public void addLabUser(Lab l, User u) {
 		try {
 
-			String sql = "INSERT INTO doc (name, adress, cif, vacciness, user_id) VALUES (?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO  lab (name, adress, cif, vacciness, user_id) VALUES (?, ?, ?, ?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, l.getName());
 			prep.setString(2, l.getAddress());
@@ -374,7 +374,7 @@ public class JDBCManagment implements Cov_Manager {
 			String sql = "INSERT INTO Administration (total_vacciness, name, user_id) VALUES (?, ?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, a.getVaccines());
-			prep.setString(1, a.getName());
+			prep.setString(2, a.getName());
 			prep.setInt(3, u.getId());
 			prep.executeUpdate();
 			prep.close();

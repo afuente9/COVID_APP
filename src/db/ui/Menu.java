@@ -49,7 +49,6 @@ public class Menu {
 
 	}
 	
-	
 	public static void parse() {
 		BufferedReader lector;
 		connect();
@@ -151,6 +150,7 @@ public class Menu {
 		}
 	}
 	
+	
 	public static void main(String[] args) throws Exception {
 		inter.connect();
 		userman.connect();
@@ -188,6 +188,7 @@ public class Menu {
 		}
 		while(true);
 	}
+	
 
 	private static void register() throws Exception{ 
 		//TODO como queremos que eligan el role que tienen, ¿es lo primero que eligen o lo ultimo?
@@ -585,7 +586,7 @@ public class Menu {
 	}
 	
 	private static void addAdmin(User u) throws Exception{
-		System.out.println("Please, input the LAB info:");
+		System.out.println("Please, input the Goverment info:");
 		System.out.print("Name: ");
 		String a_name = reader.readLine();
 		System.out.print("Vaccines: ");
