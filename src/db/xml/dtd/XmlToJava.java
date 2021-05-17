@@ -35,7 +35,25 @@ public class XmlToJava {
 		tx1.begin();
 		if (inter.checkLab(labo) == false) {
 			for (Patient person : pats) {
-				em.persist(person);
+				if (inter.checkPatient(person) == false) {
+					for (Doctor doc : person.getDoctors()) {
+						if (inter.checkDoctor(doc) == false) {
+							em.persist(doc);
+						}
+					}
+					for (Medication med : person.getMedication()) {
+						if (inter.checkMeds(med)) {
+							em.persist(med);
+						}
+					}
+					for (Other_Pathologies op : person.getOther_pathologies()) {
+						if(inter.checkOther_Pat(op) == false) {
+							em.persist(op);
+						}
+					}
+					em.persist(person);
+				}
+				
 			}
 			em.persist(labo);
 		}
