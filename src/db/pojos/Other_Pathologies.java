@@ -20,9 +20,9 @@ import javax.xml.bind.annotation.XmlType;
 
 public class Other_Pathologies implements Serializable{
 	
-	@XmlAttribute
+	@XmlElement
 	private Integer id;
-	@XmlAttribute
+	@XmlElement
 	private String Name;
 	@XmlTransient
 	private List<Patient> patient;

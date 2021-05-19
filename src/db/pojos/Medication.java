@@ -14,14 +14,14 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "Other_Pathologies")
+@XmlRootElement(name = "Medication")
 @XmlType(propOrder = { "id", "name"})
 
 public class Medication implements Serializable{
 	
-	@XmlAttribute
+	@XmlElement
 	private Integer id;
-	@XmlAttribute
+	@XmlElement
 	private String name;
 	@XmlTransient
 	private List<Patient> patients;

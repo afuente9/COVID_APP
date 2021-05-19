@@ -1,0 +1,5 @@
+<!DOCTYPE Other_Pathologies [
+   <!ELEMENT Other_Pathologies (id, name)>
+   <!ELEMENT id (#PCDATA)>
+   <!ELEMENT name (#PCDATA)>
+]>

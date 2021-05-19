@@ -1,0 +1,11 @@
+<!DOCTYPE Doctor [
+   <!ELEMENT Doctor ( speciality ,  birthday ,  collegiate_number ,  sex ,  hospital )>
+   <!ATTLIST Doctor name CDATA #REQUIRED
+                  	  id CDATA #REQUIRED>
+   <!ELEMENT speciality (#PCDATA)>
+   <!ELEMENT birthday (#PCDATA)>
+   <!ELEMENT collegiate_number (#PCDATA)>
+   <!ELEMENT sex (#PCDATA)>
+   <!ELEMENT hospital (#PCDATA)>
+   
+]>
