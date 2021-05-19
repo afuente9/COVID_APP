@@ -19,6 +19,7 @@ import db.pojos.Medication;
 import db.pojos.Other_Pathologies;
 import db.pojos.Patient;
 import db.pojos.Sex;
+import db.pojos.users.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.*;
@@ -235,7 +236,70 @@ public class MainMenuController implements Initializable {
 
 	@FXML
 	void OnEnterUser(ActionEvent event) {
-		System.out.println(UserTextField.getText());
+		Main.getUserman().connect();
+		String user = UserTextField.getText();
+				String password=PasswordTextField.getText();
+				User u = Main.getUserman().checkPassword(user, password);
+		
+		
+				if(u == null) {
+					System.out.println("Wrong email or password");
+					return;
+				}else if(u.getRole().getName().equalsIgnoreCase("administration")) {
+					administrationMenu();
+				}else if(u.getRole().getName().equalsIgnoreCase("doctor")) {
+					String name = "DoctorMenuView.fxml";
+					DoctorMenuController controller = null;
+					try {
+						FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+						Doctor d= 
+						Parent root;
+
+						root = loader.load();
+
+						controller = loader.getController();
+						controller.setD(d);
+						controller.setDoctorName(d.getName());
+						// controller.setDoctorPic(Main.getInter().getPicFromDoc(1));
+						/*
+						 * BufferedImage bImage = ImageIO.read(new File("sample.jpg"));
+						 * ByteArrayOutputStream bos = new ByteArrayOutputStream();
+						 * ImageIO.write(bImage, "jpg", bos ); byte [] data = bos.toByteArray();
+						 * ByteArrayInputStream bis = new ByteArrayInputStream(data); BufferedImage
+						 * bImage2 = ImageIO.read(bis); ImageIO.write(bImage2, "jpg", new
+						 * File("output.jpg") ); System.out.println("image created");
+						 */
+						Scene scene = new Scene(root);
+						Stage stage = new Stage();
+
+						stage.initModality(Modality.APPLICATION_MODAL);
+						stage.setScene(scene);
+						stage.showAndWait();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}				}else if(u.getRole().getName().equalsIgnoreCase("laboratory")) {
+					labMenu();
+				}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*
 		if (UserTextField.getText().equals("doctor") && PasswordTextField.getText().equals("doctor")) {
 			byte[] image = null;
 			Doctor d = new Doctor(0, "cardio", "Lucas Pérez", Date.valueOf("2000-10-10"), "34234", Sex.valueOf("Male"),
@@ -259,7 +323,7 @@ public class MainMenuController implements Initializable {
 				 * ByteArrayInputStream bis = new ByteArrayInputStream(data); BufferedImage
 				 * bImage2 = ImageIO.read(bis); ImageIO.write(bImage2, "jpg", new
 				 * File("output.jpg") ); System.out.println("image created");
-				 */
+				 
 				Scene scene = new Scene(root);
 				Stage stage = new Stage();
 
@@ -324,6 +388,7 @@ public class MainMenuController implements Initializable {
 				e.printStackTrace();
 			}
 		}
+		*/
 
 	}
 

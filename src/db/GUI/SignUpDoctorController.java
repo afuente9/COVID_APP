@@ -184,15 +184,16 @@ public class SignUpDoctorController implements Initializable {
 
 			if (doctorPassword.equals(RepeatPassword.getText()) && correctData == true) {
 
-				Main.getInter().disconnect();
 				Main.getUserman().connect();
-				Role role = Main.getUserman().getRole(1);
+
 
 				if (Main.getUserman().checkEmail(doctoremail)) {
 					JOptionPane.showMessageDialog(null, "Email already used, try to log in");
 
 				} else {
 					try {
+						Main.getInter().disconnect();
+						Role role = Main.getUserman().getRole(1);
 
 						MessageDigest md = MessageDigest.getInstance("MD5");
 						md.update(doctorPassword.getBytes());

@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class RegisterGovController {
 	User u;
@@ -72,19 +73,22 @@ public class RegisterGovController {
 
     	if (!passwordgovernment.getText().equals("")&&!repeatpasswordgovernment1.getText().equals("")&&!emailgov.getText().equals("")&&
     			!secretnumbtext.getText().equals("")&&!NameTextField.getText().equals("")) {
+    		boolean is= Main.getInter().checkAdminName(NameTextField.getText());
+    		if(is==false) {
         	if(passwordgovernment.getText().equals(repeatpasswordgovernment1.getText())){
         		
-        		Main.getInter().disconnect();
-            	Main.getUserman().connect();
+        	
             	Role role = Main.getUserman().getRole(3);   
             	if (Main.getUserman().checkEmail(emailgov.getText())) {
     				JOptionPane.showMessageDialog(null, "Email already used, try to log in");
 
     			}else {
+    				Main.getInter().disconnect();
+                	Main.getUserman().connect();
               List <String> secretPaswords = new ArrayList<>();
-              secretPaswords.add("US4");
+              secretPaswords.add("U54");
               secretPaswords.add("C4N4D4");
-              secretPaswords.add("SP41N");
+              secretPaswords.add("5P41N");
               secretPaswords.add("FR4NC3");
               secretPaswords.add("UN1T3D K1N6D0M");
               secretPaswords.add("174LY");
@@ -111,6 +115,8 @@ public class RegisterGovController {
     						
     						Main.getInter().addGovermentUser(new Administration(0,NameTextField.getText()), u);
     						JOptionPane.showMessageDialog(null, "Government registered");
+    						Stage stage = (Stage) this.NameTextField.getScene().getWindow();
+    						stage.close();
 
     			}
     				catch(Exception e) {
@@ -128,19 +134,24 @@ public class RegisterGovController {
         		
         		
         	} else {
-    			JOptionPane.showMessageDialog(null, "Passwords are not equal");
+        		JOptionPane.showMessageDialog(null, "Passwords are not equal");
 
         	}
     	
     	
     }else {
-		JOptionPane.showMessageDialog(null, "Empty fields");
+		JOptionPane.showMessageDialog(null, "Government already registered");
 
 	}
+    	}else {
+    		JOptionPane.showMessageDialog(null, "Country already registered");
+
+    	}
     }
 
     @FXML
     void OnCancelLabClick(ActionEvent event) {
-
+    	Stage stage = (Stage) this.NameTextField.getScene().getWindow();
+		stage.close();
     }
 }

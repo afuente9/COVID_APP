@@ -1548,6 +1548,31 @@ try {
 			e.printStackTrace();
 		}
 		return count;
+	}	
+	@Override
+	public boolean checkAdminName(String name) {
+boolean is=false;
+try {
+			String sql = "SELECT id FROM  administration WHERE name LIKE ?" ;
+
+			
+
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, "%"+name+"%");
+
+			ResultSet rs = prep.executeQuery();
+
+			if(rs.next()) {
+is=true;
+
+			}
+
+			rs.close();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return is;
 	}
 
 	@Override

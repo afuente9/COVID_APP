@@ -183,6 +183,7 @@ public interface Cov_Manager {
 	public boolean checkOther_Pat(Other_Pathologies other);
 	public boolean checkPatient(Patient pat);
 	public boolean checkDoctor(Doctor doc);
+	boolean checkAdminName(String name);
 	
 
 }
