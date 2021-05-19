@@ -45,6 +45,27 @@ public class ChooseSignUpController {
 		
 		
 	}
+	  @FXML
+	    void SIgngovernment(ActionEvent event) {
+	    	//String name = "RegisterGovView.fxml";
+	    	
+	    	try {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("RegisterGovView.fxml"));
+				Parent root = loader.load();
+
+				SignGovController controller = loader.getController();
+				Scene scene = new Scene(root);
+				Stage stage = new Stage();
+				stage.initModality(Modality.APPLICATION_MODAL);
+				stage.setScene(scene);
+				stage.showAndWait();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			Stage stage = (Stage) this.BackButton.getScene().getWindow();
+			stage.close();
+	    }
+
 
 	void openWindow(String name, Object controller) {
 		try {
@@ -65,13 +86,6 @@ public class ChooseSignUpController {
 		}
 
 	}
-    @FXML
-    void SIgngovernment(ActionEvent event) {
-    	String name = "SignUpGovView.fxml.fxml";
-		SignUpLaboratoryController controller = null;
-		openWindow(name, controller);
-		Stage stage = (Stage) this.BackButton.getScene().getWindow();
-		stage.close();
-    }
+  
 
 }

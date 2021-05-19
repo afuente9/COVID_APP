@@ -34,12 +34,13 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="516.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SignGovController">
+<fx:root prefHeight="516.0" prefWidth="791.0" type="VBox" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="db.GUI.SignGovController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="451.0" prefWidth="697.0" VBox.vgrow="ALWAYS">
       <children>
@@ -48,15 +49,15 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="52.0" layoutY="258.0" prefHeight="27.0" prefWidth="79.0" text="Country:">
+            <Label layoutX="52.0" layoutY="290.0" prefHeight="27.0" prefWidth="79.0" text="Country:">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="NameTextField" layoutX="159.0" layoutY="259.0" onAction="#countrytext" prefHeight="26.0" prefWidth="175.0" />
+            <TextField fx:id="NameTextField" layoutX="159.0" layoutY="291.0" prefHeight="26.0" prefWidth="175.0" />
             <Button layoutX="475.0" layoutY="444.0" mnemonicParsing="false" onAction="#OnAcceptLabClick" prefHeight="43.0" prefWidth="79.0" text="Accept" />
             <Button layoutX="590.0" layoutY="444.0" mnemonicParsing="false" onAction="#OnCancelLabClick" prefHeight="43.0" prefWidth="79.0" text="Cancel" />
-            <TextField fx:id="CifTextField" layoutX="193.0" layoutY="92.0" onAction="#secretnumbtext" prefHeight="26.0" prefWidth="175.0" />
+            <TextField fx:id="secretnumbtext" layoutX="193.0" layoutY="92.0" prefHeight="26.0" prefWidth="175.0" />
             <Label layoutX="37.0" layoutY="14.0" prefHeight="43.0" prefWidth="162.0" text="Government">
                <font>
                   <Font size="29.0" />
@@ -72,9 +73,15 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="NameTextField2" layoutX="155.0" layoutY="154.0" onAction="#emailgov" prefHeight="26.0" prefWidth="175.0" />
-            <TextField fx:id="CifTextField2" layoutX="155.0" layoutY="204.0" onAction="#pasgovtext" prefHeight="26.0" prefWidth="175.0" />
+            <TextField fx:id="emailgov" layoutX="155.0" layoutY="154.0" prefHeight="26.0" prefWidth="175.0" />
+            <PasswordField fx:id="passwordgovernment" layoutX="159.0" layoutY="205.0" />
+            <Label layoutX="50.0" layoutY="244.0" text="Repeat password">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="repeatpasswordgovernment1" layoutX="153.0" layoutY="245.0" />
       </children>
     </AnchorPane>
   </children>
-</VBox>
+</fx:root>
