@@ -210,6 +210,7 @@ public class Menu {
 				byte[] hash = md.digest();
 				User u = new User(email, hash, role);
 				userman.newUser(u);
+				
 				addDoctor(u);
 			}
 		}else if(role.getName().equalsIgnoreCase("laboratory")) {

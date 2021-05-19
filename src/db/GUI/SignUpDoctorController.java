@@ -23,7 +23,7 @@ import db.pojos.users.User;
 
 public class SignUpDoctorController implements Initializable {
 
-  
+
 
     @FXML
     private Button createUserbutton;
@@ -165,7 +165,25 @@ public class SignUpDoctorController implements Initializable {
 					md.update(doctorPassword.getBytes());
 					byte[] hash = md.digest();
 					User u = new User(doctoremail, hash, role);
+					System.out.println("hola");
+
 					Main.getUserman().newUser(u);
+					System.out.println("hola");
+					String name = NameTextField.getText();
+			    	String date_text = DateTextField.getText();
+			    	String colnum = ColNumTextField.getText();
+			    	String spetiality = SpetialityTextField.getText();
+			    	String hospital = HospitalTextField.getText();
+
+
+			    	String sex_text = SexTextField.getText();
+			    	db.pojos.Sex sex= Sex.valueOf(sex_text);
+			    	Date date = Date.valueOf(date_text);
+			        int id=0;
+			    	byte[] image=null;
+			    	Doctor d_new= new Doctor(name,spetiality,date,colnum,hospital,sex,image);
+			    	//añadir doctor a la lista de doctores
+			    	Main.getInter().addDoctorUser(d_new, u);
 					
 				}catch(Exception e) {
 					e.printStackTrace();

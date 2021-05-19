@@ -71,5 +71,12 @@
 	<classpathentry kind="lib" path="lib/javax.persistence_2.1.1.v201509150925.jar"/>
 	<classpathentry kind="lib" path="lib/eclipselink-2.7.7.jar"/>
 	<classpathentry kind="lib" path="lib/itext5-itextpdf-5.5.12.jar"/>
+	<classpathentry kind="lib" path="lib/javafx-base-17-ea+9.jar"/>
+	<classpathentry kind="lib" path="lib/javafx-graphics-17-ea+9.jar"/>
+	<classpathentry kind="lib" path="lib/javafx-swing-17-ea+9.jar"/>
+	<classpathentry kind="lib" path="lib/jasperreports-6.17.0.jar"/>
+	<classpathentry kind="lib" path="lib/jasperreports-chart-customizers-6.17.0.jar"/>
+	<classpathentry kind="lib" path="lib/jasperreports-chart-themes-6.17.0.jar"/>
+	<classpathentry kind="lib" path="lib/jasperreports-custom-visualization-6.17.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

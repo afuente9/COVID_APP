@@ -1,6 +1,10 @@
 package db.GUI;
 
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
@@ -16,12 +20,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -32,14 +46,25 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import com.itextpdf.*;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Font;
+import javafx.embed.swing.*;
 
 public class StatisticsController implements Initializable {
 	ObservableList list = FXCollections.observableArrayList();
@@ -422,6 +447,30 @@ public class StatisticsController implements Initializable {
 		typeofpatient.getItems().addAll(list);
 
 	}
+	/*
+	@FXML
+	public void saveAsPng() {
+
+	    WritableImage image = lineChart.snapshot(new SnapshotParameters(), null);
+	    File file = new File("C://Users//Dania//Desktop");
+		doResize((Node)lineChart,file,30,30);
+
+	    try {
+	        ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}*/
+	
+	 public void saveAsPng(Scene scene, String path) {
+		    WritableImage image = scene.snapshot(null);
+         File file = new File(path);
+         try {
+             ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+     }
 
 	@FXML
 	void ongeneratePdf(ActionEvent event) {
@@ -429,31 +478,79 @@ public class StatisticsController implements Initializable {
 		try {
 			String path = System.getProperty("user.home");
 			PdfWriter.getInstance(document, new FileOutputStream(path + "/Desktop/data.pdf"));
+			Image header= Image.getInstance("src\\db\\img\\header.png");
+			header.scaleToFit(650,1000);
+			header.setAlignment(Chunk.ALIGN_CENTER);
+			Paragraph parr= new Paragraph();
+		    parr.setAlignment(Paragraph.ALIGN_CENTER);
+			parr.add("estos son los resultados");
+			parr.setFont(FontFactory.getFont("tahoma", 18,Font.ITALIC,BaseColor.BLUE));
+			parr.add("esta es la tabla \n\n");
+		
+			
+			//Obtaining all the charts
+			
+			
+			Stage stage = new Stage();
+			 stage.setTitle("Line Chart Sample");
+	            //defining the axes
+	            final NumberAxis xAxis = new NumberAxis();
+	            final NumberAxis yAxis = new NumberAxis();
+	            xAxis.setLabel("Number of Month");
+	            xAxis.setLabel("Number of Month");
+	            //creating the chart
+	            LineChart<Number, Number> lineChart =
+	                    new LineChart<Number, Number>(xAxis, yAxis);
+	            lineChart.setTitle("Stock Monitoring, 2010");
+	            //defining a series
+	            XYChart.Series series = new XYChart.Series();
+	            series.setName("My portfolio");
+	            //populating the series with data
+	            series.getData().add(new XYChart.Data(1, 23));
+	            series.getData().add(new XYChart.Data(2, 14));
+	            series.getData().add(new XYChart.Data(3, 15));
+	            series.getData().add(new XYChart.Data(4, 24));
+	            series.getData().add(new XYChart.Data(5, 34));
+	            Scene scene = new Scene(lineChart, 800, 600);
+	            lineChart.setAnimated(false);
+	            lineChart.getData().add(series);
+	           
+	            saveAsPng(scene, "c:\\temp\\chart.png");
+	            stage.setScene(scene);
+	            saveAsPng(scene, "c:\\temp\\chart1.png");
+	            //stage.show();
+	            System.out.println("After show");
+			
+			
+			
+			
+			
+			
+			
 			document.open();
-			PdfPTable table = new PdfPTable(14);
+document.add(header);
+document.add(parr);
+			
+			PdfPTable table = new PdfPTable(13);
 			table.addCell("Name");
 			table.addCell("Birth date");
 			table.addCell("Sex");
-
 			table.addCell("Height");
 			table.addCell("Weight");
-			table.addCell("Grupo");
-
 			table.addCell("SS Num");
 			table.addCell("Hospital");
-			table.addCell("Grupo");
-
 			table.addCell("Infected");
 			table.addCell("Introduced");
 			table.addCell("Alive");
-
+			table.addCell("Location");
 			table.addCell("Blood group");
 			table.addCell("Vaccinated");
-			table.addCell("Medication");
-			table.addCell("Other pathologies");
-
-			Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/bd_ins", "root", "");
-			PreparedStatement pst = cn.prepareStatement("select * from patient");
+			//table.addCell("Medication");
+			//table.addCell("Other pathologies");
+try {
+	
+			Connection cn = DriverManager.getConnection("jdbc:sqlite:./database/covid.database", "root", "");
+			PreparedStatement pst = cn.prepareStatement("select name,  birthday, sex, height, weight,social_security, hospital, alive, hos_location, bloodType, vaccinated    from patients");
 
 			ResultSet rs = pst.executeQuery();
 
@@ -471,17 +568,78 @@ public class StatisticsController implements Initializable {
 					table.addCell(rs.getString(9));
 					table.addCell(rs.getString(10));
 					table.addCell(rs.getString(11));
-					table.addCell(rs.getString(12));
-					table.addCell(rs.getString(13));
-					table.addCell(rs.getString(14));
+				
+					
 				} while (rs.next());
 				document.add(table);
+				
 			}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+document.close();
+JOptionPane.showMessageDialog(null, "creado pdf"); 
 
 		} catch (Exception e) {
 			e.printStackTrace();
 
 		}
-	}
+	}/*
+	void doResize(final Node node, final File file, final int aWidth, final int aHeight) {
 
+	    final AnchorPane anchorPane = new AnchorPane();
+	    anchorPane.setMinSize(aWidth, aHeight);
+	    anchorPane.setMaxSize(aWidth, aHeight);
+	    anchorPane.setPrefSize(aWidth, aHeight);
+
+	    final ScrollPane scrollPane = new ScrollPane();
+	    scrollPane.setContent(anchorPane);
+
+	    final JFXPanel fxPanel = new JFXPanel();
+	    fxPanel.setScene(new Scene(scrollPane));
+
+	    final JFrame frame = new JFrame();
+
+	    final Pane previousParentPane = (Pane) node.getParent();
+
+	    frame.setSize(new Dimension(64, 64));
+	    frame.setVisible(false);
+	    frame.add(fxPanel);
+
+	    anchorPane.getChildren().clear();
+	    AnchorPane.setLeftAnchor(node, 0.0);
+	    AnchorPane.setRightAnchor(node, 0.0);
+	    AnchorPane.setTopAnchor(node, 0.0);
+	    AnchorPane.setBottomAnchor(node, 0.0);
+	    anchorPane.getChildren().add(node);
+
+	    anchorPane.layout();
+
+	    try {
+	        final SnapshotParameters snapshotParameters = new SnapshotParameters();
+	        snapshotParameters.setViewport(new Rectangle2D(0.0, 0.0, aWidth, aHeight));
+	        ImageIO.write(SwingFXUtils.fromFXImage(anchorPane.snapshot(snapshotParameters, new WritableImage(aWidth, aHeight)), new BufferedImage(aWidth, aHeight, BufferedImage.TYPE_INT_ARGB)), "png", file);
+
+	    }
+	    catch (final Exception e) {
+	        e.printStackTrace();
+	    }
+	    finally {
+	        Platform.runLater(new Runnable() {
+	            @Override
+	            public void run() {
+	                // Return the node back into it's previous parent
+	                previousParentPane.getChildren().clear();
+	                AnchorPane.setLeftAnchor(node, 0.0);
+	                AnchorPane.setRightAnchor(node, 0.0);
+	                AnchorPane.setTopAnchor(node, 0.0);
+	                AnchorPane.setBottomAnchor(node, 0.0);
+	                previousParentPane.getChildren().add(node);
+
+	                frame.dispose();
+	            }
+	        });
+	    }
+	}
+*/
 }

@@ -491,7 +491,7 @@ public class JDBCManagment implements Cov_Manager {
 	public void modifyLab(int iden, String atrib, String value) {
 		try {
 			String sql;
-			sql = "UPDATE doc SET " + atrib + " = ? WHERE id = " + iden;
+			sql = "UPDATE lab SET " + atrib + " = ? WHERE id = " + iden;
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, value);
 			prep.executeUpdate();
@@ -506,7 +506,7 @@ public class JDBCManagment implements Cov_Manager {
 	public void ModifyVaccinesFromLab(int amount, int id) {
 		try {
 			String sql;
-			sql = "UPDATE doc SET vacciness = (vacciness + ?) WHERE id = ?";
+			sql = "UPDATE lab SET vacciness = (vacciness + ?) WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, amount);
 			prep.setInt(2, id);
@@ -1059,7 +1059,7 @@ try {
 	@Override
 	public int getNumberVaccinesLab(int id) {
 		try {
-			String sql = "SELECT vacciness FROM doc WHERE id=? ";
+			String sql = "SELECT vacciness FROM lab WHERE id=? ";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, id);
 			ResultSet rs = prep.executeQuery();
@@ -1078,14 +1078,14 @@ try {
 	@Override
 	public Lab getLab(int id) {
 		try {
-			String sql = "SELECT * FROM doc WHERE id = ?";
+			String sql = "SELECT * FROM lab WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, id);
 			ResultSet rs = prep.executeQuery();
 			if (rs.next()) {
-				String doc_name = rs.getString("name");
+				String lab_name = rs.getString("name");
 				String direccion = rs.getString("adress");
-				String doc = rs.getString("cif");
+				String cif = rs.getString("cif");
 				Integer vacc = rs.getInt("vacciness");
 				byte[] pic = rs.getBytes("image");
 				// TODO test, if doesn't work
@@ -1094,7 +1094,7 @@ try {
 				 * byte[blobStream.avaidocle()]; blobStream.read(pic);
 				 * 
 				 */
-				return new Lab(id, vacc, direccion, doc_name, doc, pic);
+				return new Lab(id, vacc, direccion, lab_name, cif, pic);
 			}
 			prep.close();
 			rs.close();
@@ -1109,7 +1109,7 @@ try {
 		List<Lab> docs = new ArrayList<Lab>();
 		try {
 			String doc_name = "";
-			String sql = "SELECT * FROM doc WHERE name = ?";
+			String sql = "SELECT * FROM lab WHERE name = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, doc_name);
 			ResultSet rs = prep.executeQuery();
@@ -1126,8 +1126,8 @@ try {
 				 * byte[blobStream.avaidocle()]; blobStream.read(pic);
 				 * 
 				 */
-				Lab doc = new Lab(id, Lvacciness, Ladress, Lname, Lcif, pic);
-				docs.add(doc);
+				Lab lab = new Lab(id, Lvacciness, Ladress, Lname, Lcif, pic);
+				docs.add(lab);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -2240,7 +2240,7 @@ try {
 	public void changeLabPic(Lab l, byte[] pic) {
 		try {
 			String sql;
-			sql = "UPDATE doc SET image = ? WHERE id = ?";
+			sql = "UPDATE lab SET image = ? WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setBytes(1, pic);
 			prep.setInt(2, l.getId() );
@@ -2271,7 +2271,7 @@ try {
 	public void getPicFromLab(int id) {
 		try {
 			String sql;
-			sql = "SELECT image FROM doc WHERE id = ?";
+			sql = "SELECT image FROM lab WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, id);
 			prep.executeQuery();

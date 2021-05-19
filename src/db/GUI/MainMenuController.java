@@ -305,9 +305,9 @@ public class MainMenuController implements Initializable {
 			try {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
 				Parent root;
-				// Administration admin= new Administration(1,100);
+				//Administration admin= new Administration(1,100);
 				// Main.getInter().addGoverment(admin);
-				// Main.getInter().addLab(l_new);
+				 Main.getInter().addLab(l_new);
 				root = loader.load();
 
 				controller = loader.getController();
