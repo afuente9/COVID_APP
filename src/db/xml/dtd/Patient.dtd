@@ -1,0 +1,31 @@
+<!DOCTYPE Patient [
+   <!ELEMENT Patient ( hos_location ,  birthday ,  social_security ,  height ,  weight ,  sex 
+		,  infected ,  alive ,  hospital ,  vaccinated ,  bloodType ,  DateIntroduced ,  medication 
+		,  other_pathologies ,  doctors ,  govId )>
+	<!ATTLIST Patient name CDATA #REQUIRED
+                  	   id CDATA #REQUIRED>
+   <!ELEMENT hos_location (#PCDATA)>
+   <!ELEMENT birthday (#PCDATA)>
+   <!ELEMENT social_security (#PCDATA)>
+   <!ELEMENT height (#PCDATA)>
+   <!ELEMENT weight (#PCDATA)>
+   <!ELEMENT sex (#PCDATA)>
+   <!ELEMENT alive (#PCDATA)>
+   <!ELEMENT hospital (#PCDATA)>
+   <!ELEMENT vaccinated (#PCDATA)>
+   <!ELEMENT bloodType (#PCDATA)>
+   <!ELEMENT DateIntroduced (#PCDATA)>
+   <!ELEMENT govId (#PCDATA)>
+   <!ELEMENT Patient (Lab+)>
+   <!ELEMENT Lab (address ,  vaccines_produce ,  cif ,  patients )>
+   <!ATTLIST Lab id CDATA #REQUIRED
+                  	  name CDATA #REQUIRED>
+   <!ELEMENT Patient (Doctor+)>
+   <!ELEMENT Doctor ( speciality ,  birthday ,  collegiate_number ,  sex ,  hospital )>
+   <!ATTLIST Doctor name CDATA #REQUIRED
+                  	  id CDATA #REQUIRED>
+   
+   <!ELEMENT Other_Pathologies (id, name)>
+   <!ELEMENT Patient (Medication+)>
+   <!ELEMENT Medication (id, name)>
+]>

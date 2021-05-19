@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import db.xml.utils.SQLDateAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "Patient")
+@XmlRootElement(name = "Doctor")
 @XmlType(propOrder = { "id", "name", "speciality", "birthday", "collegiate_number", "sex", "hospital"})
 
 public class Doctor implements Serializable{

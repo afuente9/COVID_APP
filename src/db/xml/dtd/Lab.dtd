@@ -1,0 +1,13 @@
+
+
+<!DOCTYPE Lab [
+   <!ELEMENT Lab (address ,  vaccines_produce ,  cif ,  patients )>
+   <!ATTLIST Lab id CDATA #REQUIRED
+                  	  name CDATA #REQUIRED>
+   <!ELEMENT address (#PCDATA)>
+   <!ELEMENT cif (#PCDATA)>
+   <!ELEMENT vaccines_produce (#PCDATA)>
+   <!ELEMENT patients (Patient+)>
+   <!ATTLIST Patient name CDATA #REQUIRED
+                  	  id CDATA #REQUIRED>
+]>
