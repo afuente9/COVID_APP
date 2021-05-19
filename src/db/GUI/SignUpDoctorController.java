@@ -151,10 +151,10 @@ public class SignUpDoctorController implements Initializable {
 	        	pasDoctorTxtF.setDisable(true);
 	        	RepeatPassword.setDisable(true);
 	        	createUserbutton.setDisable(true);
+	        	Main.getInter().disconnect();
+	        	Main.getUserman().connect();
 	        	Role role = Main.getUserman().getRole(1);
-	        	
-	        	System.out.println(role.getName());
-	        	System.out.println(doctoremail);
+	        
 	        	if (Main.getUserman().checkEmail(doctoremail)) {
 					JOptionPane.showMessageDialog(null, "Email already used, try to log in");
 
@@ -165,10 +165,10 @@ public class SignUpDoctorController implements Initializable {
 					md.update(doctorPassword.getBytes());
 					byte[] hash = md.digest();
 					User u = new User(doctoremail, hash, role);
-					System.out.println("hola");
 
 					Main.getUserman().newUser(u);
-					System.out.println("hola");
+					Main.getInter().connect();
+					
 					String name = NameTextField.getText();
 			    	String date_text = DateTextField.getText();
 			    	String colnum = ColNumTextField.getText();

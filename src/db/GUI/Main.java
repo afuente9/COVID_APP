@@ -51,7 +51,7 @@ public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			getUserman().connect();
+		//	getUserman().connect();
 
 			getInter().connect();
 
