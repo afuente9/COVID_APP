@@ -51,9 +51,11 @@ public class ChooseSignUpController {
 	    	
 	    	try {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("RegisterGovView.fxml"));
+				//loader.setRoot("RegisterGovView.fxml");
 				Parent root = loader.load();
+			
 
-				SignGovController controller = loader.getController();
+				RegisterGovController controller = loader.getController();
 				Scene scene = new Scene(root);
 				Stage stage = new Stage();
 				stage.initModality(Modality.APPLICATION_MODAL);

@@ -138,7 +138,7 @@ Main.getInter().modifyDoctor(this.dmodif.getId(), "collegiate_number", new_colnu
 			List <Integer> ascciNumsName= ConvertAscii(new_name);
 		    	
 		    	for (int i =0; i<ascciNumsName.size();i++) {
-		    		if (!(ascciNumsName.get(i)>65&&ascciNumsName.get(i)<122)) {
+		    		if (!(ascciNumsName.get(i)>=65&&ascciNumsName.get(i)<=122)) {
 		    			correctData=false;
 
 		    		}
