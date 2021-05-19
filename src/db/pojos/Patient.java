@@ -13,25 +13,30 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import db.xml.utils.SQLDateAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Patient")
 @XmlType(propOrder = { "id", "name", "hos_location", "birthday", "social_security", "height", "weight", "sex"
-		, "infected", "alive", "hospital", "score", "vaccinated", "bloodType", "DateIntroduced", "medication"
+		, "infected", "alive", "hospital", "vaccinated", "bloodType", "DateIntroduced", "medication"
 		, "other_pathologies", "doctors", "govId"})
 
 public class Patient implements Serializable{
 	
 	@XmlAttribute
 	private Integer id;
-	@XmlAttribute
+	@XmlElement
 	private String hos_location;
 	@XmlAttribute
 	private String name;
-	@XmlAttribute
+	@XmlElement
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date birthday;
-	@XmlAttribute
+	@XmlElement
 	private String social_security;
 	@XmlAttribute
 	private float height;
@@ -39,19 +44,20 @@ public class Patient implements Serializable{
 	private float weight;
 	@XmlAttribute
 	private Sex sex;
-	@XmlAttribute
+	@XmlElement
 	private boolean infected;
-	@XmlAttribute
+	@XmlElement
 	private boolean alive;
-	@XmlAttribute
+	@XmlElement
 	private String hospital;
-	@XmlAttribute
+	@XmlTransient
 	private Float score;
-	@XmlAttribute
+	@XmlElement
 	private boolean Vaccinated;
-	@XmlAttribute
+	@XmlElement
 	private String bloodType;	
 	@XmlAttribute
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date DateIntroduced;
 	@XmlElement(name = "Medication")
     @XmlElementWrapper(name = "medication")

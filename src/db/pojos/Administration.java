@@ -4,7 +4,9 @@ import java.io.Serializable;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -14,9 +16,13 @@ import javax.xml.bind.annotation.XmlType;
 
 public class Administration implements Serializable{
 
+	@XmlAttribute
 	private Integer id;
+	@XmlAttribute
 	private int vaccines;
+	@XmlAttribute
 	private String name;
+	@XmlTransient
 	byte[] image;
 	
 	public Administration(Integer id,int vaccines, String name) {
