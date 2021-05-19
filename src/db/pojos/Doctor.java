@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import db.xml.utils.SQLDateAdapter;
+import db.xml.utils.SexAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Doctor")
@@ -34,7 +35,8 @@ public class Doctor implements Serializable{
 	private Date birthday;
 	@XmlElement
 	private String collegiate_number;
-	@XmlElement	
+	@XmlElement
+	@XmlJavaTypeAdapter(SexAdapter.class)	
 	private Sex sex;
 	@XmlElement
 	private String hospital;
