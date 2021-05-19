@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -20,14 +21,15 @@ import javax.xml.bind.annotation.XmlType;
 public class Lab implements Serializable{
 	@XmlAttribute
 	private int id;
-	@XmlAttribute
+	@XmlElement
 	private int vaccines_produce;
-	@XmlAttribute
+	@XmlElement
 	private String address;
 	@XmlAttribute
 	private String name;
-	@XmlAttribute
+	@XmlElement
 	private String cif;
+	@XmlTransient
 	byte[] image;
 	@XmlElement(name = "Patient")
     @XmlElementWrapper(name = "Patients")

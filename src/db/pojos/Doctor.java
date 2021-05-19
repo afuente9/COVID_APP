@@ -11,31 +11,36 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import db.xml.utils.SQLDateAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Patient")
-@XmlType(propOrder = { "id", "name", "speciality", "birthday", "collegiate_number", "sex", "hospital", "patients"})
+@XmlType(propOrder = { "id", "name", "speciality", "birthday", "collegiate_number", "sex", "hospital"})
 
 public class Doctor implements Serializable{
 	
 	@XmlAttribute
 	private Integer id;
-	@XmlAttribute
+	@XmlElement
 	private String speciality;
 	@XmlAttribute
 	private String name;
-	@XmlAttribute
+	@XmlElement
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date birthday;
-	@XmlAttribute
+	@XmlElement
 	private String collegiate_number;
-	@XmlAttribute
+	@XmlElement	
 	private Sex sex;
-	@XmlAttribute
+	@XmlElement
 	private String hospital;
+	@XmlTransient
 	private byte[] image;
-	@XmlElement(name = "Patient")
-    @XmlElementWrapper(name = "Patients")
+	@XmlTransient
 	private List<Patient> patients;
 
 	public Doctor() {

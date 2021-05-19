@@ -10,11 +10,12 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Other_Pathologies")
-@XmlType(propOrder = { "id", "name", "patients"})
+@XmlType(propOrder = { "id", "name"})
 
 public class Medication implements Serializable{
 	
@@ -22,8 +23,7 @@ public class Medication implements Serializable{
 	private Integer id;
 	@XmlAttribute
 	private String name;
-	@XmlElement(name = "Patient")
-    @XmlElementWrapper(name = "Patients")
+	@XmlTransient
 	private List<Patient> patients;
 	
 	public Medication() {
