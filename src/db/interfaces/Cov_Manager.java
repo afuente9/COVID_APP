@@ -187,6 +187,10 @@ public interface Cov_Manager {
 	Doctor getDoctorbyUser(User u);
 	Lab getLabByUser(User u);
 	Administration getAdministrationbyUser(User u);
+	User getUserbydoctor(Doctor d);
+	String getUserMailbydoctor(Doctor d);
+	String getUserMailbylab(Lab l);
+	String getUserMailbyadmin(Administration admin);
 	
 
 }

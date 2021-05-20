@@ -91,6 +91,7 @@ public void setL(Lab l) {
 	    	  controller.setOldlabadress(l.getAddress());
 	    	  controller.setOldlabcif(l.getCif());
 	    	  controller.setOldlabname(l.getName());
+	    	  controller.setOldusername(Main.getInter().getUserMailbylab(l));
 	    	  controller.setLmodif(l);
 	    	  
     	

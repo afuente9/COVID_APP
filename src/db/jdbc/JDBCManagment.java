@@ -710,6 +710,61 @@ public class JDBCManagment implements Cov_Manager {
 		}
 		return null;
 	}
+	@Override
+	public String getUserMailbydoctor(Doctor d) {
+		try {
+			String sql = "SELECT u.EMAIL FROM users AS u JOIN doctors AS d ON u.id= d.user_id WHERE d.id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, d.getId());
+			ResultSet rs = prep.executeQuery();
+			if (rs.next()) {
+				String mail = rs.getString("EMAIL");
+				
+				
+
+				return mail;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}@Override
+	public String getUserMailbylab(Lab l) {
+		try {
+			String sql = "SELECT u.EMAIL FROM users AS u JOIN lab AS l ON u.id= l.user_id WHERE l.id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, l.getId());
+			ResultSet rs = prep.executeQuery();
+			if (rs.next()) {
+				String mail = rs.getString("EMAIL");
+				
+				
+
+				return mail;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}@Override
+	public String getUserMailbyadmin(Administration admin) {
+		try {
+			String sql = "SELECT u.EMAIL FROM users AS u JOIN administration AS ad ON u.id= ad.user_id WHERE ad.id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, admin.getId());
+			ResultSet rs = prep.executeQuery();
+			if (rs.next()) {
+				String mail = rs.getString("EMAIL");
+				
+				
+
+				return mail;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	@Override
 	public List<Doctor> getDoctorsOfPatient(int pat_id) {
@@ -2653,6 +2708,12 @@ public class JDBCManagment implements Cov_Manager {
 
 	@Override
 	public Administration getAdministration() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User getUserbydoctor(Doctor d) {
 		// TODO Auto-generated method stub
 		return null;
 	}

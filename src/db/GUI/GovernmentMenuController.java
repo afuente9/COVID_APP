@@ -27,7 +27,28 @@ public class GovernmentMenuController {
 	public void setAdmin(Administration admin) {
 		this.admin = admin;
 	}
-
+	  @FXML
+	    void modifyuserdata(ActionEvent event) {
+		 	String name= "ModifyGovUserView.fxml";
+		 	
+		 	ModifyGovUserController controller = null;
+		 	try {
+	    		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+	    	Parent root;
+	    	
+	    		root = loader.load();
+	    	
+	    	  controller = loader.getController();
+	    	  controller.setOldusername(Main.getInter().getUserMailbyadmin(admin));
+	    	Scene scene = new Scene(root);
+	    	Stage stage = new Stage();
+	        stage.initModality(Modality.APPLICATION_MODAL);
+	        stage.setScene(scene);
+	        stage.showAndWait();
+	    	} catch (IOException e) {
+	    		// TODO Auto-generated catch block
+	    		e.printStackTrace();
+	    	}	    }
 	@FXML
     void NotifyVaccines(ActionEvent event) {
     	String name= "NotifyVaccinesUsedView.fxml";

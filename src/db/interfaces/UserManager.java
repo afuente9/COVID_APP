@@ -18,4 +18,6 @@ public interface UserManager {
 	public void deleteUser(String mail, String password);
 	public void updateUserMail(String newMail, String oldMail, String password);
 	public void updateUserPassword(String mail, String newPassword, String oldPassword);
+	void updateUserMailWithoutpass(String newMail, String oldMail);
+	boolean updateUserPassword(String mail, String newPassword, String oldPassword, boolean ca);
 }

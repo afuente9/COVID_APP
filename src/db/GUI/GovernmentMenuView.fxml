@@ -58,6 +58,7 @@
             <Button layoutX="396.0" layoutY="247.0" mnemonicParsing="false" onAction="#TriggerSimulation" prefHeight="43.0" prefWidth="254.0" text="Trigger a simulation" />
             <Button fx:id="buttonvaccines" layoutX="396.0" layoutY="153.0" mnemonicParsing="false" onAction="#ViewTotalNumber" prefHeight="43.0" prefWidth="254.0" text="View the total number of vaccines" />
             <Button layoutX="33.0" layoutY="432.0" mnemonicParsing="false" onAction="#OnSignOutClick" prefHeight="43.0" prefWidth="79.0" text="Sign out" />
+            <Button layoutX="396.0" layoutY="410.0" mnemonicParsing="false" onAction="#modifyuserdata" prefHeight="43.0" prefWidth="254.0" text="Modify user data" />
       </children>
     </AnchorPane>
   </children>

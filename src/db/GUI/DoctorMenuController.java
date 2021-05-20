@@ -85,6 +85,7 @@ import javafx.stage.Stage;
 	    	  controller.setOldHospi(d.getHospital());
 	    	  controller.setOldSex(d.getSex().toString());
 	    	  controller.setOldSpetiality(d.getSpeciality());
+	    	  controller.setOldusername(Main.getInter().getUserMailbydoctor(d));
 	    	Scene scene = new Scene(root);
 	    	Stage stage = new Stage();
 	        stage.initModality(Modality.APPLICATION_MODAL);

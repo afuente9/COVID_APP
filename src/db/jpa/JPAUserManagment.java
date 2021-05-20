@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.swing.JOptionPane;
 
 import db.interfaces.UserManager;
 import db.pojos.users.Role;
@@ -127,9 +128,24 @@ public class JPAUserManagment implements UserManager{
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			md.update(password.getBytes());
 			byte[] hash = md.digest();
-			Query q = em.createNativeQuery("SELECT * FROM users WHERE email = ? AND password = ?", User.class);
+			Query q = em.createNativeQuery("SELECT * FROM users WHERE email = ? ", User.class);
 			q.setParameter(1, oldMail);
 			q.setParameter(2, hash);
+			User u = (User) q.getSingleResult();
+			
+			em.getTransaction().begin();
+			u.setEmail(newMail);
+			em.getTransaction().commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}@Override
+	public void updateUserMailWithoutpass(String newMail, String oldMail) {
+		try {
+			
+			Query q = em.createNativeQuery("SELECT * FROM users WHERE email = ? ", User.class);
+			q.setParameter(1, oldMail);
 			User u = (User) q.getSingleResult();
 			
 			em.getTransaction().begin();
@@ -142,7 +158,7 @@ public class JPAUserManagment implements UserManager{
 	}
 	
 	@Override
- 	public void updateUserPassword(String mail, String newPassword, String oldPassword) {
+ 	public boolean updateUserPassword(String mail, String newPassword, String oldPassword,boolean catchdone) {
  		try {
  			MessageDigest md = MessageDigest.getInstance("MD5");
  			md.update(oldPassword.getBytes());
@@ -159,10 +175,19 @@ public class JPAUserManagment implements UserManager{
  			u.setPassword(hash2);
  			em.getTransaction().commit();
  		}catch(Exception e) {
- 			e.printStackTrace();
+ 			catchdone=true;
+ 		    JOptionPane.showMessageDialog(null, "The current password is not correct");
+
  		}
+ 		return catchdone;
 
 
  	}
+
+	@Override
+	public void updateUserPassword(String mail, String newPassword, String oldPassword) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
