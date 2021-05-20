@@ -58,7 +58,7 @@
             </Label>
             <Pane layoutX="41.0" layoutY="133.0" prefHeight="314.0" prefWidth="718.0">
                <children>
-                  <TableView fx:id="tablesimulation" prefHeight="290.0" prefWidth="703.0">
+                  <TableView fx:id="tablesimulation" disable="true" prefHeight="290.0" prefWidth="703.0">
                     <columns>
                       <TableColumn fx:id="scoreCol" prefWidth="97.60000610351562" text="Score" />
                       <TableColumn fx:id="nameCol" prefWidth="187.19998168945312" text="Name" />

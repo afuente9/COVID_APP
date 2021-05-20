@@ -184,6 +184,9 @@ public interface Cov_Manager {
 	public boolean checkPatient(Patient pat);
 	public boolean checkDoctor(Doctor doc);
 	boolean checkAdminName(String name);
+	Doctor getDoctorbyUser(User u);
+	Lab getLabByUser(User u);
+	Administration getAdministrationbyUser(User u);
 	
 
 }

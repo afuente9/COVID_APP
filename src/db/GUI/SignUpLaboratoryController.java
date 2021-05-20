@@ -34,7 +34,8 @@ public class SignUpLaboratoryController {
     	
     	if (!(emailLab.getText().equals("")&&PassTextf.getText().equals("")&&confirmpastx.getText().equals("")&&NameTextField.getText().equals("")&&CifTextField.getText().equals("")&&AdressTextField.getText().equals(""))) {
     	if(PassTextf.getText().equals(confirmpastx.getText())){
-    		
+    		Main.getUserman().connect();
+
     		   		
     		
         	if (Main.getUserman().checkEmail(emailLab.getText())) {
@@ -43,7 +44,6 @@ public class SignUpLaboratoryController {
 			}else {
 try {
 	Main.getInter().disconnect();
-	Main.getUserman().connect();
 	Role role = Main.getUserman().getRole(2); 
 					MessageDigest md = MessageDigest.getInstance("MD5");
 					md.update(PassTextf.getText().getBytes());

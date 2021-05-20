@@ -91,7 +91,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="EmailLabel" layoutX="70.0" layoutY="74.0" prefHeight="27.0" prefWidth="64.0" text="Email:">
+            <Label fx:id="EmailLabel" layoutX="70.0" layoutY="74.0" prefHeight="27.0" prefWidth="98.0" text="User name:">
                <font>
                   <Font size="18.0" />
                </font>

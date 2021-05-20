@@ -20,6 +20,7 @@ public class TriggerSimulationController implements Initializable{
 
     @FXML
     private TableView<Patient> tablesimulation;
+    public int id;
 
     @FXML
     private TableColumn scoreCol;
@@ -33,9 +34,7 @@ private Administration admin;
     @FXML
     private TableColumn SSnumcol;
 
-    public TableView<Patient> getTablesimulation() {
-		return tablesimulation;
-	}
+   
 
 
 	public TableColumn getScoreCol() {
@@ -78,9 +77,6 @@ private Administration admin;
 	}
 
 
-	public void setTablesimulation(TableView<Patient> tablesimulation) {
-		this.tablesimulation = tablesimulation;
-	}
 
 
 	public void setScoreCol(TableColumn scoreCol) {
@@ -147,13 +143,13 @@ private Administration admin;
         this.SSnumcol.setCellValueFactory(new PropertyValueFactory("social_security"));
         this.HospitalCol.setCellValueFactory(new PropertyValueFactory("hospital"));
 		  this.DateIntroducedCol.setCellValueFactory(new PropertyValueFactory("DateIntroduced"));
-
-    	
-    	
+	    	this.tablesimulation.setItems(patientsTableList);
+	
 		
 	}
 	 @FXML
 	    void simulation(ActionEvent event) {
+		 tablesimulation.setDisable(false);
 	        List <Patient> allpatients= Main.getInter().getSimulatedPatients(Main.getInter().getNumberVaccinesAdmin(this.admin.getId()), this.admin.getId());
 	    	this.patientsTableList.addAll(allpatients);
 	    	this.tablesimulation.setItems(patientsTableList);

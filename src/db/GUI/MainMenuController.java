@@ -159,20 +159,18 @@ public class MainMenuController implements Initializable {
 		}
 
 		this.labelDate.setText("" + Date.valueOf(LocalDate.now()));
-		if (Main.getInter().getNumberofDays()<7&&Main.getInter().getNumberofDays()<0) {
-			int daystoadd = 7-Main.getInter().getNumberofDays();
-			for (int i= 0;i <daystoadd; i++) {
+		if (Main.getInter().getNumberofDays() < 7 && Main.getInter().getNumberofDays() < 0) {
+			int daystoadd = 7 - Main.getInter().getNumberofDays();
+			for (int i = 0; i < daystoadd; i++) {
 				Day d = new Day(Main.getInter().getLastDay().getDeaths(),
-						Main.getInter().getLastDay().getInfectedPatients(),
-						0, 
+						Main.getInter().getLastDay().getInfectedPatients(), 0,
 						Date.valueOf(Main.getInter().getLastDay().getDate().toLocalDate().plusDays(1)));
 				Main.getInter().addDay(Main.getInter().getLastDay());
 			}
-			
-		}
-		else if(Main.getInter().getNumberofDays()==0) {
-		
-			for (int i= 0;i <7; i++) {
+
+		} else if (Main.getInter().getNumberofDays() == 0) {
+
+			for (int i = 0; i < 7; i++) {
 				Day newToday = new Day(Main.getInter().getNumberofDeads(), Main.getInter().getNumberofInfecteds(), 0,
 						Date.valueOf(LocalDate.now()));
 
@@ -199,13 +197,8 @@ public class MainMenuController implements Initializable {
 					}
 					average = suma / 7;
 
-					
-					
-					
-
 					Day d = new Day(Main.getInter().getLastDay().getDeaths(),
-							Main.getInter().getLastDay().getInfectedPatients(),
-							average, 
+							Main.getInter().getLastDay().getInfectedPatients(), average,
 							Date.valueOf(Main.getInter().getLastDay().getDate().toLocalDate().plusDays(1)));
 					Main.getInter().addDay(Main.getInter().getLastDay());
 
@@ -238,76 +231,42 @@ public class MainMenuController implements Initializable {
 	void OnEnterUser(ActionEvent event) {
 		Main.getUserman().connect();
 		String user = UserTextField.getText();
-				String password=PasswordTextField.getText();
-				User u = Main.getUserman().checkPassword(user, password);
-		
-		
-				if(u == null) {
-					System.out.println("Wrong email or password");
-					return;
-				}else if(u.getRole().getName().equalsIgnoreCase("administration")) {
-					administrationMenu();
-				}else if(u.getRole().getName().equalsIgnoreCase("doctor")) {
-					String name = "DoctorMenuView.fxml";
-					DoctorMenuController controller = null;
-					try {
-						FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
-						Doctor d= 
-						Parent root;
+		String password = PasswordTextField.getText();
+		User u = Main.getUserman().checkPassword(user, password);
 
-						root = loader.load();
+		if (u == null) {
+			JOptionPane.showMessageDialog(null, "Wrong user name or password.");
 
-						controller = loader.getController();
-						controller.setD(d);
-						controller.setDoctorName(d.getName());
-						// controller.setDoctorPic(Main.getInter().getPicFromDoc(1));
-						/*
-						 * BufferedImage bImage = ImageIO.read(new File("sample.jpg"));
-						 * ByteArrayOutputStream bos = new ByteArrayOutputStream();
-						 * ImageIO.write(bImage, "jpg", bos ); byte [] data = bos.toByteArray();
-						 * ByteArrayInputStream bis = new ByteArrayInputStream(data); BufferedImage
-						 * bImage2 = ImageIO.read(bis); ImageIO.write(bImage2, "jpg", new
-						 * File("output.jpg") ); System.out.println("image created");
-						 */
-						Scene scene = new Scene(root);
-						Stage stage = new Stage();
 
-						stage.initModality(Modality.APPLICATION_MODAL);
-						stage.setScene(scene);
-						stage.showAndWait();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}				}else if(u.getRole().getName().equalsIgnoreCase("laboratory")) {
-					labMenu();
-				}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		/*
-		if (UserTextField.getText().equals("doctor") && PasswordTextField.getText().equals("doctor")) {
-			byte[] image = null;
-			Doctor d = new Doctor(0, "cardio", "Lucas Pérez", Date.valueOf("2000-10-10"), "34234", Sex.valueOf("Male"),
-					"La Paz", image);
+			return;
+		} else if (u.getRole().getName().equalsIgnoreCase("administration")) {
+
+			String name = "GovernmentMenuView.fxml";
+			GovernmentMenuController controller = null;
+			try {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+				Parent root;
+
+				root = loader.load();
+				controller = loader.getController();
+				controller.setAdmin(Main.getInter().getAdministrationbyUser(u));
+
+				Scene scene = new Scene(root);
+				Stage stage = new Stage();
+				stage.initModality(Modality.APPLICATION_MODAL);
+				stage.setScene(scene);
+				stage.showAndWait();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (u.getRole().getName().equalsIgnoreCase("doctor")) {
 			String name = "DoctorMenuView.fxml";
 			DoctorMenuController controller = null;
 			try {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+				Doctor d = Main.getInter().getDoctorbyUser(u);
+
 				Parent root;
 
 				root = loader.load();
@@ -323,7 +282,7 @@ public class MainMenuController implements Initializable {
 				 * ByteArrayInputStream bis = new ByteArrayInputStream(data); BufferedImage
 				 * bImage2 = ImageIO.read(bis); ImageIO.write(bImage2, "jpg", new
 				 * File("output.jpg") ); System.out.println("image created");
-				 
+				 */
 				Scene scene = new Scene(root);
 				Stage stage = new Stage();
 
@@ -334,49 +293,20 @@ public class MainMenuController implements Initializable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
-		}
-		if (UserTextField.getText().equals("government") && PasswordTextField.getText().equals("government")) {
-			String name = "GovernmentMenuView.fxml";
-			GovernmentMenuController controller = null;
-			try {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
-				Parent root;
-
-				root = loader.load();
-
-				controller = loader.getController();
-		controller.setAdmin(Main.getInter().getAdministration(1));
-		System.out.println("la admin es "+Main.getInter().getAdministration(1));
-
-				Scene scene = new Scene(root);
-				Stage stage = new Stage();
-				stage.initModality(Modality.APPLICATION_MODAL);
-				stage.setScene(scene);
-				stage.showAndWait();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		if (UserTextField.getText().equals("") && PasswordTextField.getText().equals("")) {
+		} else if (u.getRole().getName().equalsIgnoreCase("laboratory")) {
 
 			String name = "LabMenuView.fxml";
 			LabMenuController controller = null;
 			byte[] image = null;
-			Lab l_new = new Lab(0, 0, "28223, Pozuelo", "Pfizer", "23433453F", image);
-			// Main.getInter().addLab(l_new);
 			try {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
 				Parent root;
-				//Administration admin= new Administration(1,100);
-				// Main.getInter().addGoverment(admin);
-				 Main.getInter().addLab(l_new);
+
 				root = loader.load();
 
 				controller = loader.getController();
-				controller.setL(Main.getInter().getLab(1));
-				controller.setLabName(Main.getInter().getLab(1).getName());
+				controller.setL(Main.getInter().getLabByUser(u));
+				controller.setLabName(Main.getInter().getLabByUser(u).getName());
 
 				Scene scene = new Scene(root);
 				Stage stage = new Stage();
@@ -388,7 +318,68 @@ public class MainMenuController implements Initializable {
 				e.printStackTrace();
 			}
 		}
-		*/
+
+		/*
+		 * if (UserTextField.getText().equals("doctor") &&
+		 * PasswordTextField.getText().equals("doctor")) { byte[] image = null; Doctor d
+		 * = new Doctor(0, "cardio", "Lucas Pérez", Date.valueOf("2000-10-10"), "34234",
+		 * Sex.valueOf("Male"), "La Paz", image); String name = "DoctorMenuView.fxml";
+		 * DoctorMenuController controller = null; try { FXMLLoader loader = new
+		 * FXMLLoader(getClass().getResource(name)); Parent root;
+		 * 
+		 * root = loader.load();
+		 * 
+		 * controller = loader.getController(); controller.setD(d);
+		 * controller.setDoctorName(d.getName()); //
+		 * controller.setDoctorPic(Main.getInter().getPicFromDoc(1)); /* BufferedImage
+		 * bImage = ImageIO.read(new File("sample.jpg")); ByteArrayOutputStream bos =
+		 * new ByteArrayOutputStream(); ImageIO.write(bImage, "jpg", bos ); byte [] data
+		 * = bos.toByteArray(); ByteArrayInputStream bis = new
+		 * ByteArrayInputStream(data); BufferedImage bImage2 = ImageIO.read(bis);
+		 * ImageIO.write(bImage2, "jpg", new File("output.jpg") );
+		 * System.out.println("image created");
+		 * 
+		 * Scene scene = new Scene(root); Stage stage = new Stage();
+		 * 
+		 * stage.initModality(Modality.APPLICATION_MODAL); stage.setScene(scene);
+		 * stage.showAndWait(); } catch (IOException e) { // TODO Auto-generated catch
+		 * block e.printStackTrace(); }
+		 * 
+		 * } if (UserTextField.getText().equals("government") &&
+		 * PasswordTextField.getText().equals("government")) { String name =
+		 * "GovernmentMenuView.fxml"; GovernmentMenuController controller = null; try {
+		 * FXMLLoader loader = new FXMLLoader(getClass().getResource(name)); Parent
+		 * root;
+		 * 
+		 * root = loader.load();
+		 * 
+		 * controller = loader.getController();
+		 * controller.setAdmin(Main.getInter().getAdministration(1));
+		 * System.out.println("la admin es "+Main.getInter().getAdministration(1));
+		 * 
+		 * Scene scene = new Scene(root); Stage stage = new Stage();
+		 * stage.initModality(Modality.APPLICATION_MODAL); stage.setScene(scene);
+		 * stage.showAndWait(); } catch (IOException e) { // TODO Auto-generated catch
+		 * block e.printStackTrace(); } } if (UserTextField.getText().equals("") &&
+		 * PasswordTextField.getText().equals("")) {
+		 * 
+		 * String name = "LabMenuView.fxml"; LabMenuController controller = null; byte[]
+		 * image = null; Lab l_new = new Lab(0, 0, "28223, Pozuelo", "Pfizer",
+		 * "23433453F", image); // Main.getInter().addLab(l_new); try { FXMLLoader
+		 * loader = new FXMLLoader(getClass().getResource(name)); Parent root;
+		 * //Administration admin= new Administration(1,100); //
+		 * Main.getInter().addGoverment(admin); Main.getInter().addLab(l_new); root =
+		 * loader.load();
+		 * 
+		 * controller = loader.getController();
+		 * controller.setL(Main.getInter().getLab(1));
+		 * controller.setLabName(Main.getInter().getLab(1).getName());
+		 * 
+		 * Scene scene = new Scene(root); Stage stage = new Stage();
+		 * stage.initModality(Modality.APPLICATION_MODAL); stage.setScene(scene);
+		 * stage.showAndWait(); } catch (IOException e) { // TODO Auto-generated catch
+		 * block e.printStackTrace(); } }
+		 */
 
 	}
 
@@ -430,7 +421,7 @@ public class MainMenuController implements Initializable {
 			suma += (last7.get(i).getDeaths() - last7.get(i - 1).getDeaths());
 
 		}
-		
+
 		average = suma / 7;
 
 		// crear un nuevo dia
@@ -445,10 +436,10 @@ public class MainMenuController implements Initializable {
 		// recorrer la lista de pacientes para calcularles el score TODO mirar cual es
 		// mas optima para recorrer, arraylist o linkedlist
 		for (int i = 1; i <= Main.getInter().getNumberofPatients(); i++) {
-			System.out.println( " el paciente que va a saere caer " + i);
+			System.out.println(" el paciente que va a saere caer " + i);
 
 			float score = calculateScore(Main.getInter().getPatient(i), deadImportance);
-			Main.getInter().modifyScore(i, (int)score);
+			Main.getInter().modifyScore(i, (int) score);
 
 		}
 
@@ -461,9 +452,9 @@ public class MainMenuController implements Initializable {
 		List<Float> agePercentagesAlive = getAgesALIVE();
 		List<Float> agePercentagesDead = getAgesDEAD();
 		/*
-		List<Float> HeighPerAlive = getHeightALIVE();
-		List<Float> HeighPerDead = getHeightDEAD();
-*/
+		 * List<Float> HeighPerAlive = getHeightALIVE(); List<Float> HeighPerDead =
+		 * getHeightDEAD();
+		 */
 		List<Float> WeightPerAlive = getWeightALIVE();
 		List<Float> WeightPerDead = getWeightDEAD();
 		List<Float> perHospitalAlive = getHosALIVE();
@@ -490,99 +481,112 @@ public class MainMenuController implements Initializable {
 				AGEPercentagePatientAlive, agePercentagesAlive.size());
 		float contributionAgeAlive = patientScoreBasicAgeAlive * (1 - DeadImportance);
 		contributions.add(contributionAgeAlive);
-	//	System.out.println(p.getId() + " contribucion edad vivo" + contributionAgeAlive);
+		// System.out.println(p.getId() + " contribucion edad vivo" +
+		// contributionAgeAlive);
 		float AGEPercentagePatientDead = getPercentageAgePatient(p.getTheAge(p.getBirthday()), agePercentagesDead);
 		float patientScoreBasicAgeDead = patientScore(getMaxNum(agePercentagesDead), getMinNum(agePercentagesDead),
 				AGEPercentagePatientDead, agePercentagesDead.size());
 		float contributionAgeDead = patientScoreBasicAgeAlive * (DeadImportance);
 		contributions.add(contributionAgeDead);
-		//System.out.println(p.getId() + " contribucion edad muerto" + contributionAgeDead);
-/*
-		float HeightPercentageAlive = HeightPercentage(p.getHeight(), HeighPerAlive);
-		float patientScoreBasicHeightAlive = patientScore(getMaxNum(HeighPerAlive), getMinNum(HeighPerAlive),
-				HeightPercentageAlive, HeighPerAlive.size());
-		float contributionHeightAlive = patientScoreBasicHeightAlive * (1 - DeadImportance);
-		contributions.add(contributionHeightAlive);
-		System.out.println(p.getId() + " contribucion altura vivo" + contributionHeightAlive);
-
-		float HeightPercentageDead = HeightPercentage(p.getHeight(), HeighPerDead);
-		float patientScoreBasicHeightDead = patientScore(getMaxNum(HeighPerDead), getMinNum(HeighPerDead),
-				HeightPercentageDead, HeighPerDead.size());
-		float contributionHeightDead = patientScoreBasicHeightDead * (1 - DeadImportance);
-		contributions.add(contributionHeightDead);
-		System.out.println(p.getId() + " contribucion altura muerto" + contributionHeightDead);
-*/
+		// System.out.println(p.getId() + " contribucion edad muerto" +
+		// contributionAgeDead);
+		/*
+		 * float HeightPercentageAlive = HeightPercentage(p.getHeight(), HeighPerAlive);
+		 * float patientScoreBasicHeightAlive = patientScore(getMaxNum(HeighPerAlive),
+		 * getMinNum(HeighPerAlive), HeightPercentageAlive, HeighPerAlive.size()); float
+		 * contributionHeightAlive = patientScoreBasicHeightAlive * (1 -
+		 * DeadImportance); contributions.add(contributionHeightAlive);
+		 * System.out.println(p.getId() + " contribucion altura vivo" +
+		 * contributionHeightAlive);
+		 * 
+		 * float HeightPercentageDead = HeightPercentage(p.getHeight(), HeighPerDead);
+		 * float patientScoreBasicHeightDead = patientScore(getMaxNum(HeighPerDead),
+		 * getMinNum(HeighPerDead), HeightPercentageDead, HeighPerDead.size()); float
+		 * contributionHeightDead = patientScoreBasicHeightDead * (1 - DeadImportance);
+		 * contributions.add(contributionHeightDead); System.out.println(p.getId() +
+		 * " contribucion altura muerto" + contributionHeightDead);
+		 */
 		float WeightPercentageAlive = WeightPercentage(p.getWeight(), WeightPerAlive);
 		float patientScoreBasicWeightAlive = patientScore(getMaxNum(WeightPerAlive), getMinNum(WeightPerAlive),
 				WeightPercentageAlive, WeightPerAlive.size());
 		float contributionWeightAlive = patientScoreBasicWeightAlive * (1 - DeadImportance);
 		contributions.add(contributionWeightAlive);
-		//System.out.println(p.getId() + " contribucion peso vivo" + contributionWeightAlive);
+		// System.out.println(p.getId() + " contribucion peso vivo" +
+		// contributionWeightAlive);
 
 		float WeightPercentageDead = WeightPercentage(p.getWeight(), WeightPerDead);
 		float patientScoreBasicWeightDead = patientScore(getMaxNum(WeightPerDead), getMinNum(WeightPerDead),
 				WeightPercentageDead, WeightPerDead.size());
 		float contributionWeightDead = patientScoreBasicWeightDead * (DeadImportance);
 		contributions.add(contributionWeightDead);
-		//System.out.println(p.getId() + " contribucion peso muerto" + contributionWeightDead);
+		// System.out.println(p.getId() + " contribucion peso muerto" +
+		// contributionWeightDead);
 
 		float locationPercentageAlive = LocationPercentage(p.getHos_location(), perLocationAlive);
 		float patientScoreBasicLocationAlive = patientScore(getMaxNum(perLocationAlive), getMinNum(perLocationAlive),
 				locationPercentageAlive, perLocationAlive.size());
 		float contributionLocationAlive = patientScoreBasicLocationAlive * (1 - DeadImportance);
 		contributions.add(contributionLocationAlive);
-		//System.out.println(p.getId() + " contribucion location vivo" + contributionLocationAlive);
+		// System.out.println(p.getId() + " contribucion location vivo" +
+		// contributionLocationAlive);
 
 		float locationPercentageDead = LocationPercentage(p.getHos_location(), perLocationDead);
 		float patientScoreBasicLocationDead = patientScore(getMaxNum(perLocationDead), getMinNum(perLocationDead),
 				locationPercentageDead, perLocationDead.size());
 		float contributionLocationDead = patientScoreBasicLocationDead * (DeadImportance);
 		contributions.add(contributionLocationDead);
-		//System.out.println(p.getId() + " contribucion location muerto" + contributionLocationDead);
+		// System.out.println(p.getId() + " contribucion location muerto" +
+		// contributionLocationDead);
 
 		float sexPercentageAlive = SexPercentage(p.getSex(), PerSexAlive);
 		float patientScoreBasicSexAlive = patientScore(getMaxNum(PerSexAlive), getMinNum(PerSexAlive),
 				sexPercentageAlive, PerSexAlive.size());
 		float contributionSexAlive = patientScoreBasicSexAlive * (1 - DeadImportance);
 		contributions.add(contributionSexAlive);
-		//System.out.println(p.getId() + " contribucion sexo vivo" + contributionSexAlive);
+		// System.out.println(p.getId() + " contribucion sexo vivo" +
+		// contributionSexAlive);
 
 		float sexPercentageDead = SexPercentage(p.getSex(), PerSexDead);
 		float patientScoreBasicSexDead = patientScore(getMaxNum(PerSexDead), getMinNum(PerSexDead), sexPercentageDead,
 				PerSexDead.size());
 		float contributionSexDead = patientScoreBasicSexDead * (DeadImportance);
 		contributions.add(contributionSexDead);
-		//System.out.println(p.getId() + " contribucion sexo muerto" + contributionSexDead);
+		// System.out.println(p.getId() + " contribucion sexo muerto" +
+		// contributionSexDead);
 
 		float bloodPercentageAlive = BloodPercentage(p.getBloodType(), PerBloodAlive);
 		float patientScoreBasicBloodAlive = patientScore(getMaxNum(PerBloodAlive), getMinNum(PerBloodAlive),
 				bloodPercentageAlive, PerBloodAlive.size());
-		//System.out.println("pppppppppppppppppppppppppppppppppppppppppppppppppp"+patientScoreBasicBloodAlive);
+		// System.out.println("pppppppppppppppppppppppppppppppppppppppppppppppppp"+patientScoreBasicBloodAlive);
 
 		float contributionBloodAlive = patientScoreBasicBloodAlive * (1 - DeadImportance);
 		contributions.add(contributionBloodAlive);
-		//System.out.println(p.getId() + " contribucion sangre  vivo" + contributionBloodAlive);
+		// System.out.println(p.getId() + " contribucion sangre vivo" +
+		// contributionBloodAlive);
 
 		float bloodPercentageDead = BloodPercentage(p.getBloodType(), PerBloodDead);
 		float patientScoreBasicBloodDead = patientScore(getMaxNum(PerBloodDead), getMinNum(PerBloodDead),
 				bloodPercentageDead, PerBloodDead.size());
 		float contributionBloodDead = patientScoreBasicBloodDead * (DeadImportance);
 		contributions.add(contributionBloodDead);
-		//System.out.println(p.getId() + " contribucion sangre muerto" + contributionBloodDead);
+		// System.out.println(p.getId() + " contribucion sangre muerto" +
+		// contributionBloodDead);
 
 		float hospitalPercentage = HospitalPercentage(p.getHospital(), perHospitalAlive, true);
 		float patientScoreBasicHospitalAlive = patientScore(getMaxNum(perHospitalAlive), getMinNum(perHospitalAlive),
 				bloodPercentageAlive, perHospitalAlive.size());
 		float contributionHospitalAlive = patientScoreBasicHospitalAlive * (1 - DeadImportance);
 		contributions.add(contributionHospitalAlive);
-		//System.out.println(p.getId() + " contribucion hos vivo" + contributionHospitalAlive);
+		// System.out.println(p.getId() + " contribucion hos vivo" +
+		// contributionHospitalAlive);
 
 		float HospitalPercentageDead = HospitalPercentage(p.getHospital(), perHospitalDead, false);
 		float patientScoreBasicHospitalDead = patientScore(getMaxNum(perHospitalDead), getMinNum(perHospitalDead),
 				bloodPercentageDead, perHospitalDead.size());
 		float contributionHospitalDead = patientScoreBasicHospitalDead * (DeadImportance);
 		contributions.add(contributionHospitalDead);
-		//System.out.println(p.getId() + " contribucionhopital muerto" + contributionHospitalDead);
+		// System.out.println(p.getId() + " contribucionhopital muerto" +
+		// contributionHospitalDead);
 
 		List<String> Medication_Patient = Main.getInter().getMedicationfromPatientNAME(p.getId());
 
@@ -594,17 +598,19 @@ public class MainMenuController implements Initializable {
 
 			float contributionMedlAlive = patientScoreBasicmedicationAlive * (1 - DeadImportance);
 			contributions.add(contributionMedlAlive);
-			//System.out.println(p.getId() + " contribucion medication vivo" + contributionMedlAlive);
+			// System.out.println(p.getId() + " contribucion medication vivo" +
+			// contributionMedlAlive);
 
 			float medicationPercentageDead = MedicationPercentage(medication, perMedDead, false);
 			float patientScoreBasicmedicationDead = patientScore(getMaxNum(perMedDead), getMinNum(perMedDead),
 					medicationPercentageDead, perMedDead.size());
 			float contributionMedlDead = patientScoreBasicmedicationDead * (DeadImportance);
 			contributions.add(contributionMedlDead);
-			//System.out.println(p.getId() + " contribucion medication muerto" + contributionMedlDead);
+			// System.out.println(p.getId() + " contribucion medication muerto" +
+			// contributionMedlDead);
 
 		}
-		System.out.println("el desde el metodo final"+ getMaxNum(perMedAlive));
+		System.out.println("el desde el metodo final" + getMaxNum(perMedAlive));
 
 		List<String> Patho_Patient = Main.getInter().getPathofromPatientNAME(p.getId());
 
@@ -615,14 +621,16 @@ public class MainMenuController implements Initializable {
 					pathologyPercentageAlive, PerOPATAlive.size());
 			float contributionPatAlive = patientScoreBasicpathologyAlive * (1 - DeadImportance);
 			contributions.add(contributionPatAlive);
-			//System.out.println(p.getId() + " contribucion pat vivo" + contributionPatAlive);
+			// System.out.println(p.getId() + " contribucion pat vivo" +
+			// contributionPatAlive);
 
 			float pathologyPercentageDead = PathologyPercentage(pathology, PerOPATDead, false);
 			float patientScoreBasicPathologyDead = patientScore(getMaxNum(PerOPATDead), getMinNum(PerOPATDead),
 					pathologyPercentageDead, PerOPATDead.size());
 			float contributionPatDead = patientScoreBasicPathologyDead * (DeadImportance);
 			contributions.add(contributionPatDead);
-			//System.out.println(p.getId() + " contribucion pat muerto" + contributionPatDead);
+			// System.out.println(p.getId() + " contribucion pat muerto" +
+			// contributionPatDead);
 
 		}
 		float totalContributions = 0;
@@ -631,14 +639,13 @@ public class MainMenuController implements Initializable {
 		}
 
 		Main.getInter().modifyScore(p.getId(), totalContributions);
-		return  totalContributions;
+		return totalContributions;
 
 	}
 
 	public Float PathologyPercentage(String pathologyName, List<Float> percentages, boolean alive) {
 		float percentage = 0;
 
-		
 		List<String> difPathologiesname = Main.getInter().getdifferentPaths(alive);
 		for (int i = 0; i < percentages.size(); i++) {
 
@@ -647,7 +654,6 @@ public class MainMenuController implements Initializable {
 			}
 
 		}
-
 
 		return percentage;
 
@@ -786,8 +792,6 @@ public class MainMenuController implements Initializable {
 
 	public float patientScore(float MaxPercentage, float MinPercentage, float PatientPercentage,
 			int NumberOptionsFeature) {
-		
-	
 
 		float difference = MaxPercentage - MinPercentage;
 
@@ -797,7 +801,6 @@ public class MainMenuController implements Initializable {
 
 		float score = (float) Math.pow(base, exponent);
 
-		
 		return score;
 	}
 
@@ -1020,7 +1023,6 @@ public class MainMenuController implements Initializable {
 		List<Float> listofpercentages = new ArrayList<>();
 		int add = 0;
 
-
 		for (int i = 0; i < heights.size(); i++) {
 			add += heights.get(i);
 
@@ -1033,14 +1035,15 @@ public class MainMenuController implements Initializable {
 			listofpercentages.add(percentage);
 
 		}
-	
+
 		return listofpercentages;
 
-	}public List<Float> calculatePercentagesMedication(List<Integer> heights) {
+	}
+
+	public List<Float> calculatePercentagesMedication(List<Integer> heights) {
 		List<Float> listofpercentages = new ArrayList<>();
 		int add = 0;
 
-
 		for (int i = 0; i < heights.size(); i++) {
 			add += heights.get(i);
 
@@ -1053,8 +1056,8 @@ public class MainMenuController implements Initializable {
 			listofpercentages.add(percentage);
 
 		}
-		System.out.println(" en porcent desde calculate percentagfes maximo "+ getMaxNum(listofpercentages));
-		System.out.println(" en porcent desde calculate percentagfes minimo"+ getMinNum(listofpercentages));
+		System.out.println(" en porcent desde calculate percentagfes maximo " + getMaxNum(listofpercentages));
+		System.out.println(" en porcent desde calculate percentagfes minimo" + getMinNum(listofpercentages));
 		return listofpercentages;
 
 	}

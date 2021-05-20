@@ -74,7 +74,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="118.0" layoutY="77.0" prefHeight="27.0" prefWidth="64.0" text="Email:">
+            <Label layoutX="118.0" layoutY="77.0" prefHeight="27.0" prefWidth="106.0" text="User name:">
                <font>
                   <Font size="18.0" />
                </font>

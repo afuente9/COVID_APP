@@ -37,6 +37,7 @@ public class RegisterGovController {
 			List<Integer> ascciNumsName = new ArrayList<>();
 
 			try {
+				
 				for (int i = 0; i < StringtoConvert.length(); i++) {
 					char chartoconvert = StringtoConvert.charAt(i);
 					int asciinum = (int) chartoconvert;
@@ -77,14 +78,14 @@ public class RegisterGovController {
     		if(is==false) {
         	if(passwordgovernment.getText().equals(repeatpasswordgovernment1.getText())){
         		
-        	
+            	Main.getUserman().connect();
+
             	Role role = Main.getUserman().getRole(3);   
             	if (Main.getUserman().checkEmail(emailgov.getText())) {
     				JOptionPane.showMessageDialog(null, "Email already used, try to log in");
 
     			}else {
     				Main.getInter().disconnect();
-                	Main.getUserman().connect();
               List <String> secretPaswords = new ArrayList<>();
               secretPaswords.add("U54");
               secretPaswords.add("C4N4D4");
