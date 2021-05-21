@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportSimulation2" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5021b7ab-4d36-456c-9e0a-66c9724f9ebb">
+	<property name="template.engine" value="tabular_template"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="687"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<style name="Table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<leftPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+			<rightPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="PieChartDataset" uuid="33d77d72-cefc-44b5-96f2-92f62ab217b3"/>
+	<subDataset name="tableDataset" uuid="27b054fe-a0a9-4a60-8902-19161c50fe9d">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="coviddb"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<queryString language="SQL">
+			<![CDATA[SELECT score, name, birthday,social_security,hospital, dateIntroduced FROM patients 
+ WHERE alive= 1 ORDER BY score DESC]]>
+		</queryString>
+		<field name="score" class="java.lang.Object">
+			<property name="com.jaspersoft.studio.field.name" value="score"/>
+			<property name="com.jaspersoft.studio.field.label" value="score"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="patients"/>
+		</field>
+		<field name="name" class="java.lang.Object">
+			<property name="com.jaspersoft.studio.field.name" value="name"/>
+			<property name="com.jaspersoft.studio.field.label" value="name"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="patients"/>
+		</field>
+		<field name="birthday" class="java.lang.Object">
+			<property name="com.jaspersoft.studio.field.name" value="birthday"/>
+			<property name="com.jaspersoft.studio.field.label" value="birthday"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="patients"/>
+		</field>
+		<field name="social_security" class="java.lang.Object">
+			<property name="com.jaspersoft.studio.field.name" value="social_security"/>
+			<property name="com.jaspersoft.studio.field.label" value="social_security"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="patients"/>
+		</field>
+		<field name="hospital" class="java.lang.Object">
+			<property name="com.jaspersoft.studio.field.name" value="hospital"/>
+			<property name="com.jaspersoft.studio.field.label" value="hospital"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="patients"/>
+		</field>
+		<field name="dateIntroduced" class="java.lang.Object">
+			<property name="com.jaspersoft.studio.field.name" value="dateIntroduced"/>
+			<property name="com.jaspersoft.studio.field.label" value="dateIntroduced"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="patients"/>
+		</field>
+	</subDataset>
+	<queryString>
+		<![CDATA[SELECT p.score,
+	p.name,
+	p.social_security,
+	p.hospital,
+	a.id,
+	a.total_vacciness
+FROM patients AS p
+	JOIN administration AS a ON 
+	 p.id_adm = a.id 
+WHERE 
+	 p.alive = 1 
+ORDER BY p.score DESC]]>
+	</queryString>
+	<field name="score" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="score"/>
+		<property name="com.jaspersoft.studio.field.label" value="score"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="patients"/>
+	</field>
+	<field name="name" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="name"/>
+		<property name="com.jaspersoft.studio.field.label" value="name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="patients"/>
+	</field>
+	<field name="social_security" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="social_security"/>
+		<property name="com.jaspersoft.studio.field.label" value="social_security"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="patients"/>
+	</field>
+	<field name="hospital" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="hospital"/>
+		<property name="com.jaspersoft.studio.field.label" value="hospital"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="patients"/>
+	</field>
+	<field name="id" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="administration"/>
+	</field>
+	<field name="total_vacciness" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="total_vacciness"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_vacciness"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="administration"/>
+	</field>
+	<background>
+		<band height="802" splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="102" splitType="Stretch">
+			<staticText>
+				<reportElement style="SubTitle" x="211" y="65" width="342" height="29" uuid="649287ac-fc0c-4d2a-b452-b8614b1d7b48"/>
+				<textElement textAlignment="Right">
+					<font size="22" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Simulation of vaccinations]]></text>
+			</staticText>
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="0" width="597" height="65" forecolor="#006699" backcolor="#006699" uuid="184ed0d3-9801-4c46-ba21-3cc37a3a18f0"/>
+				<staticText>
+					<reportElement style="Title" x="231" y="0" width="346" height="65" uuid="745f25f7-7025-4153-981e-c7b55b127c2d"/>
+					<textElement textAlignment="Right">
+						<font size="54" isBold="false"/>
+					</textElement>
+					<text><![CDATA[COVIDIST]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="88" width="555" height="13" forecolor="#D0B48E" backcolor="#006699" uuid="38532e1d-6af6-4e2c-9e72-b46a93e345aa"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="510" y="0" width="40" height="13" forecolor="#FFFFFF" uuid="0c354c8c-8e51-4e78-961f-18b288231268"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="430" y="0" width="80" height="13" forecolor="#FFFFFF" uuid="9fb2c5f1-8ad5-4a4b-be6c-eea548125c43"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="0" width="197" height="13" forecolor="#FFFFFF" uuid="a011f8b7-ada3-40f2-b40a-324c1159d074"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="83">
+			<staticText>
+				<reportElement x="0" y="10" width="100" height="30" uuid="3141cfd3-69fa-47d2-90ec-fe3833bdcb02"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Country:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="179" y="10" width="196" height="30" uuid="5a540e3e-1217-451b-a394-f73afa4d8941"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Number of vaccines:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="40" width="139" height="30" uuid="79a3ad42-1e05-4bdd-947a-7a282b24dd19"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="209" y="40" width="145" height="30" uuid="1722ad45-1fd1-4dba-b77a-27260f7d7481"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_vacciness}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="52">
+			<staticText>
+				<reportElement x="0" y="0" width="141" height="30" uuid="35763fd1-b6b7-401f-8449-cb5ad3746d0e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aff194f6-3c7b-4775-9d9b-d4e6b831ec4c"/>
+				</reportElement>
+				<box>
+					<pen lineStyle="Double" lineColor="#006699"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="19"/>
+				</textElement>
+				<text><![CDATA[Score]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="0" width="138" height="30" uuid="2688e362-6df8-4d33-9822-3f34a23bef88">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="88db4312-ad8c-40a1-ac8e-3aa6dc99b56a"/>
+				</reportElement>
+				<box>
+					<pen lineStyle="Double" lineColor="#006699"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="19"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="0" width="138" height="30" uuid="0d8a9f7e-fe86-4bfe-9129-5e724dcb68b6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="745d06c3-e7c2-4848-9297-57862e68f03a"/>
+				</reportElement>
+				<box>
+					<pen lineStyle="Double" lineColor="#006699"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="19"/>
+				</textElement>
+				<text><![CDATA[Social s. num]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="417" y="0" width="138" height="30" uuid="c01020b3-1021-4753-bb20-a66fffe73ab9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="df0f3189-d48a-4036-81a7-0c76be31c294"/>
+				</reportElement>
+				<box>
+					<pen lineStyle="Double" lineColor="#006699"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="19"/>
+				</textElement>
+				<text><![CDATA[Hospital]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
+			<textField>
+				<reportElement x="0" y="0" width="139" height="30" uuid="eb33f220-978c-4044-a9b4-72323a151e23">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aff194f6-3c7b-4775-9d9b-d4e6b831ec4c"/>
+				</reportElement>
+				<box>
+					<pen lineColor="#006699"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#006699"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#006699"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{score}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="139" y="0" width="139" height="30" uuid="827220c4-a004-4ede-bbab-3fd02c8c8ddc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="88db4312-ad8c-40a1-ac8e-3aa6dc99b56a"/>
+				</reportElement>
+				<box>
+					<pen lineColor="#006699"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#006699"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#006699"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="278" y="0" width="139" height="30" uuid="940e758b-f280-4c40-b80f-d864ab05e466">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="745d06c3-e7c2-4848-9297-57862e68f03a"/>
+				</reportElement>
+				<box>
+					<pen lineColor="#006699"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#006699"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#006699"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{social_security}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="417" y="0" width="138" height="30" uuid="4526511a-e4e5-4064-92db-fa1989913e3a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="df0f3189-d48a-4036-81a7-0c76be31c294"/>
+				</reportElement>
+				<box>
+					<pen lineColor="#006699"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#006699"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#006699"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hospital}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="13" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="200" splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+		</band>
+	</summary>
+</jasperReport>

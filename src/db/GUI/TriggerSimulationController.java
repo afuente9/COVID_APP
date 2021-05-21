@@ -15,6 +15,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class TriggerSimulationController implements Initializable{
 
@@ -147,6 +153,20 @@ private Administration admin;
 	
 		
 	}
+	 @FXML
+	     void ongerepdf(ActionEvent event) {
+		
+	        List <Patient> allpatients= Main.getInter().getSimulatedPatients(Main.getInter().getNumberVaccinesAdmin(this.admin.getId()), this.admin.getId());
+try {
+	JasperCompileManager.compileReportToFile("src\\db\\reports\\reportSimulation2.jrxml");
+	JasperPrint reportToPrint = JasperFillManager.fillReport("src\\db\\reports\\reportSimulation2.jasper", null, new JRBeanCollectionDataSource(allpatients));
+	
+	JasperViewer jasperViewer = new JasperViewer (reportToPrint);
+	jasperViewer.setVisible(true);
+}catch(JRException ex) {
+ex.printStackTrace();
+}
+	    }
 	 @FXML
 	    void simulation(ActionEvent event) {
 		 tablesimulation.setDisable(false);

@@ -71,6 +71,7 @@
                </children>
             </Pane>
             <Button layoutX="572.0" layoutY="62.0" mnemonicParsing="false" onAction="#simulation" prefHeight="43.0" prefWidth="79.0" text="Simulation" />
+            <Button layoutX="642.0" layoutY="434.0" mnemonicParsing="false" onAction="#ongerepdf" prefHeight="34.0" prefWidth="102.0" text="Generate PDF" />
       </children>
     </AnchorPane>
   </children>
