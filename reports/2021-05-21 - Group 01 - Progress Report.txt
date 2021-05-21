@@ -1,0 +1,14 @@
+This week we expected to be able to do...
+the presentation, finish xml and start html and implememnt it on the gui 
+
+This week we did...
+The presentation script, start HTML, finish XML and start with the web page
+
+Optional: Reasons why
+---------------------
+
+Next weeks we will do...
+Finish HTML and the web page and implement them on the GUI, optimize the GUI and record the presentation.
+
+Optional: Reasons why
+---------------------
