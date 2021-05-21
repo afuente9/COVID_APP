@@ -12,6 +12,12 @@
 		<!-- Entity Class -->
 		<class>db.pojos.users.User</class>
 		<class>db.pojos.users.Role</class>
+		<class>db.pojos.Lab</class>
+		<class>db.pojos.Administration</class>
+		<class>db.pojos.Patient</class>
+		<class>db.pojos.Medication</class>
+		<class>db.pojos.Other_Pathologies</class>
+		<class>db.pojos.Doctor</class>
  
 		<properties>	
 			<!-- Connection properties -->

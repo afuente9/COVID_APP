@@ -22,7 +22,7 @@ import db.xml.utils.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Patient")
 @XmlType(propOrder = { "id", "name", "hos_location", "birthday", "social_security", "height", "weight", "sex"
-		, "infected", "alive", "hospital", "vaccinated", "bloodType", "DateIntroduced", "medication"
+		, "infected", "alive", "hospital", "Vaccinated", "bloodType", "DateIntroduced", "medication"
 		, "other_pathologies", "doctors", "govId"})
 
 public class Patient implements Serializable{

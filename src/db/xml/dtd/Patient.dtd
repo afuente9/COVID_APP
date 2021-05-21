@@ -1,6 +1,6 @@
 <!DOCTYPE Patient [
    <!ELEMENT Patient ( hos_location ,  birthday ,  social_security ,  height ,  weight ,  sex 
-		,  infected ,  alive ,  hospital ,  vaccinated ,  bloodType ,  DateIntroduced ,  medication 
+		,  infected ,  alive ,  hospital ,  Vaccinated ,  bloodType ,  DateIntroduced ,  medication 
 		,  other_pathologies ,  doctors ,  govId )>
 	<!ATTLIST Patient name CDATA #REQUIRED
                   	   id CDATA #REQUIRED>
@@ -12,7 +12,7 @@
    <!ELEMENT sex (#PCDATA)>
    <!ELEMENT alive (#PCDATA)>
    <!ELEMENT hospital (#PCDATA)>
-   <!ELEMENT vaccinated (#PCDATA)>
+   <!ELEMENT Vaccinated (#PCDATA)>
    <!ELEMENT bloodType (#PCDATA)>
    <!ELEMENT DateIntroduced (#PCDATA)>
    <!ELEMENT govId (#PCDATA)>
@@ -33,7 +33,7 @@
    <!ELEMENT sex (#PCDATA)>
    <!ELEMENT hospital (#PCDATA)>
    <!ELEMENT Patient (Other_Pathologies+)>
-   <!ELEMENT Other_Pathologies (id, name)>
+   <!ELEMENT Other_Pathologies (id, Name)>
    <!ELEMENT id (#PCDATA)>
    <!ELEMENT name (#PCDATA)>
    <!ELEMENT Patient (Medication+)>
