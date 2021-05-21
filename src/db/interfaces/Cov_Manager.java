@@ -125,10 +125,6 @@ public interface Cov_Manager {
 	List<Patient> getPatientbyDateIntro(String dateintro);
 	Administration getAdministration();
 	void ModifyVaccinesFromLab(int amount, int id);
-	void ModifyVaccinesAdmin(int amount);
-	List<Shipment> getAllShipment();
-	int getNumberVaccinesAdmin();
-	List<Shipment> getAllShipmentforAdminView();
 	int getNumberVaccinesLab(int id);
 	
 	//Changes the picture from X
@@ -191,6 +187,7 @@ public interface Cov_Manager {
 	String getUserMailbydoctor(Doctor d);
 	String getUserMailbylab(Lab l);
 	String getUserMailbyadmin(Administration admin);
+	List<Shipment> getAllShipment(int id);
 	
 
 }

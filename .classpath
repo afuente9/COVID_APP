@@ -74,14 +74,13 @@
 	<classpathentry kind="lib" path="lib/javafx-base-17-ea+9.jar"/>
 	<classpathentry kind="lib" path="lib/javafx-graphics-17-ea+9.jar"/>
 	<classpathentry kind="lib" path="lib/javafx-swing-17-ea+9.jar"/>
-	<classpathentry kind="lib" path="lib/jasperreports-6.17.0.jar"/>
-	<classpathentry kind="lib" path="lib/jasperreports-chart-customizers-6.17.0.jar"/>
-	<classpathentry kind="lib" path="lib/jasperreports-chart-themes-6.17.0.jar"/>
-	<classpathentry kind="lib" path="lib/jasperreports-custom-visualization-6.17.0.jar"/>
 	<classpathentry kind="lib" path="lib/org-apache-commons-logging.jar"/>
 	<classpathentry kind="lib" path="lib/com.lowagie.text-2.1.7.jar"/>
 	<classpathentry kind="lib" path="lib/commons-beanutils-1.9.4.jar"/>
-	<classpathentry kind="lib" path="lib/commons-collections4-4.4.jar"/>
+	<classpathentry kind="lib" path="lib/jasperreports-6.12.2.jar"/>
+	<classpathentry kind="lib" path="lib/commons-collections-3.2.2.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.2.jar"/>
 	<classpathentry kind="lib" path="lib/commons-digester-2.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-collections4-4.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

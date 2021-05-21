@@ -62,7 +62,7 @@
             <Pane layoutX="130.0" layoutY="192.0" prefHeight="309.0" prefWidth="513.0">
                <children>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="502.0" />
-                  <TableView fx:id="TableShipments" prefHeight="302.0" prefWidth="512.0">
+                  <TableView fx:id="TableShipments" disable="true" prefHeight="302.0" prefWidth="512.0">
                     <columns>
                       <TableColumn fx:id="colNumberVaccines" prefWidth="155.199951171875" text="Number of vaccines" />
                       <TableColumn fx:id="DateShipment" prefWidth="150.4000244140625" text="Date" />

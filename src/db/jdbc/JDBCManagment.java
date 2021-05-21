@@ -95,7 +95,7 @@ public class JDBCManagment implements Cov_Manager {
 			String sql5 = "CREATE TABLE administration "
 					+ "(id       				INTEGER  		PRIMARY KEY AUTOINCREMENT,"
 					+ " total_vacciness  		INTEGER	 		NOT NULL,"
-					+ " name					TEXT			NOT NULL,"
+					+ " nameCountry					TEXT			NOT NULL,"
 					+ " image 				    BLOB            NULL,"
 					+ " user_id				INTEGER			REFERENCES users(id))";
 			stmt5.executeUpdate(sql5);
@@ -334,7 +334,7 @@ public class JDBCManagment implements Cov_Manager {
 
 	public void addGoverment(Administration a) {
 		try {
-			String sql = "INSERT INTO Administration (total_vacciness, name) VALUES (?, ?)";
+			String sql = "INSERT INTO Administration (total_vacciness, nameCountry) VALUES (?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, a.getVaccines());
 			prep.setString(1, a.getName());
@@ -347,7 +347,7 @@ public class JDBCManagment implements Cov_Manager {
 
 	public void addGovermentUser(Administration a, User u) {
 		try {
-			String sql = "INSERT INTO Administration (total_vacciness, name, user_id) VALUES (?, ?, ?)";
+			String sql = "INSERT INTO Administration (total_vacciness, nameCountry, user_id) VALUES (?, ?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, a.getVaccines());
 			prep.setString(2, a.getName());
@@ -848,7 +848,7 @@ public class JDBCManagment implements Cov_Manager {
 			if (rs.next()) {
 				int vacc = rs.getInt("total_vacciness");
 				Integer id = rs.getInt("id");
-				String name = rs.getString("name");
+				String name = rs.getString("nameCountry");
 				return new Administration(id, vacc, name);
 			}
 			prep.close();
@@ -862,13 +862,13 @@ public class JDBCManagment implements Cov_Manager {
 	@Override
 	public String getAdministrationOnlyName(int id0) {
 		try {
-			String sql = "SELECT name FROM administration WHERE id = ?";
+			String sql = "SELECT nameCountry FROM administration WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, id0);
 			ResultSet rs = prep.executeQuery();
 			if (rs.next()) {
 
-				String name = rs.getString("name");
+				String name = rs.getString("nameCountry");
 				return name;
 			}
 			prep.close();
@@ -880,11 +880,12 @@ public class JDBCManagment implements Cov_Manager {
 	}
 
 	@Override
-	public List<Shipment> getAllShipment() {
+	public List<Shipment> getAllShipment(int id) {
 		List<Shipment> allShips = new ArrayList();
 		try {
-			String sql = "SELECT * FROM shipment ";
+			String sql = "SELECT * FROM shipment WHERE id_lab= ?";
 			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, id);
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int vacc = rs.getInt("vacciness");
@@ -1080,7 +1081,7 @@ public class JDBCManagment implements Cov_Manager {
 	public List<Shipment> getAllShipmentforAdminView(int id) {
 		List<Shipment> allShips = new ArrayList();
 		try {
-			String sql = "SELECT s.vacciness, s.date, s.labName FROM shipment WHERE id_adm=?  ";
+			String sql = "SELECT s.vacciness, s.date, s.labName FROM shipment AS s WHERE id_adm=?  ";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, id);
 			ResultSet rs = prep.executeQuery();
@@ -1639,7 +1640,7 @@ public class JDBCManagment implements Cov_Manager {
 	public boolean checkAdminName(String name) {
 		boolean is = false;
 		try {
-			String sql = "SELECT id FROM  administration WHERE name LIKE ?";
+			String sql = "SELECT id FROM  administration WHERE nameCountry LIKE ?";
 
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, "%" + name + "%");
@@ -1908,7 +1909,7 @@ public class JDBCManagment implements Cov_Manager {
 	public int searchadminIDByName(String name) {
 		int id = 0;
 		try {
-			String sql = "SELECT id FROM administration WHERE name LIKE ?";
+			String sql = "SELECT id FROM administration WHERE nameCountry LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, "%" + name + "%");
 			ResultSet rs = prep.executeQuery();
@@ -1928,7 +1929,7 @@ public class JDBCManagment implements Cov_Manager {
 	public boolean adminRegisteredByName(String name) {
 		boolean registered = false;
 		try {
-			String sql = "SELECT id FROM administration WHERE name LIKE ?";
+			String sql = "SELECT id FROM administration WHERE nameCountry LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, name);
 			ResultSet rs = prep.executeQuery();
@@ -2413,7 +2414,7 @@ public class JDBCManagment implements Cov_Manager {
 			if (rs.next()) {
 				int vacc = rs.getInt("total_vacciness");
 				Integer id = rs.getInt("id");
-				String name = rs.getString("name");
+				String name = rs.getString("nameCountry");
 				return new Administration(id, vacc, name);
 			}
 			prep.close();
@@ -2424,23 +2425,11 @@ public class JDBCManagment implements Cov_Manager {
 		return null;		
 	}
 
-	@Override
-	public List<Shipment> getAllShipmentforAdminView() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public void ModifyVaccinesAdmin(int amount) {
-		// TODO Auto-generated method stub
 
-	}
+	
 
-	@Override
-	public int getNumberVaccinesAdmin() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 
 	@Override
 	public boolean checkAdmin(Administration admin) {
@@ -2484,13 +2473,13 @@ public class JDBCManagment implements Cov_Manager {
 		List<Administration> admins = new ArrayList<Administration>();
 		try {
 			String gov_name = "";
-			String sql = "SELECT * FROM administration WHERE name = ?";
+			String sql = "SELECT * FROM administration WHERE nameCountry = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, gov_name);
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");
-				String name = rs.getString("name");
+				String name = rs.getString("nameCountry");
 				int vacciness = rs.getInt("total_vacciness");
 				byte[] pic = rs.getBytes("image");
 				Administration gov = new Administration(id, vacciness, name, pic);
@@ -2717,5 +2706,7 @@ public class JDBCManagment implements Cov_Manager {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }

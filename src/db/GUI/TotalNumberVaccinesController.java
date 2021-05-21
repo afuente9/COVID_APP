@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import db.pojos.Administration;
 import db.pojos.Shipment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,8 +21,17 @@ public class TotalNumberVaccinesController implements Initializable {
     private ObservableList<Shipment> ShipmentList1;
     @FXML
     private TableView<Shipment> TableShipments1;
+    Administration admin;
 
-    @FXML
+    public Administration getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Administration admin) {
+		this.admin = admin;
+	}
+
+	@FXML
     private TableColumn colNumberVaccines1;
 
     @FXML
@@ -40,16 +50,22 @@ public class TotalNumberVaccinesController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		totalNumberVaccines.setText("Total number of available vaccines: "+ Main.getInter().getNumberVaccinesAdmin());
-		//rellenar la tabla
-
-    	ShipmentList1 = FXCollections.observableArrayList();
-        this.colNumberVaccines1.setCellValueFactory(new PropertyValueFactory("Vaccines"));
-        this.DateShipment1.setCellValueFactory(new PropertyValueFactory("date_ship"));
-        this.colLabName1.setCellValueFactory(new PropertyValueFactory("LabName"));
-    	List <Shipment> allships= Main.getInter().getAllShipment();
-    	ShipmentList1.addAll(allships);
-    	this.TableShipments1.setItems(ShipmentList1);
+		
+		
 	}
+	 @FXML
+	    void seeinfo(ActionEvent event) {
+		 totalNumberVaccines.setText("Total number of available vaccines: "+ Main.getInter().getNumberVaccinesAdmin(admin.getId()));
+			//rellenar la tabla
+
+	    	ShipmentList1 = FXCollections.observableArrayList();
+	        this.colNumberVaccines1.setCellValueFactory(new PropertyValueFactory("Vaccines"));
+	        this.DateShipment1.setCellValueFactory(new PropertyValueFactory("date_ship"));
+	        this.colLabName1.setCellValueFactory(new PropertyValueFactory("LabName"));
+	    	List <Shipment> allships= Main.getInter().getAllShipmentforAdminView(admin.getId());
+	    	ShipmentList1.addAll(allships);
+	    	this.TableShipments1.setItems(ShipmentList1);
+	    	this.TableShipments1.setDisable(false);
+	    }
 
 }

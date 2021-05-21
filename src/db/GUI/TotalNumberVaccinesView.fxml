@@ -56,9 +56,9 @@
                   <Font size="19.0" />
                </font>
             </Label>
-            <Pane layoutX="43.0" layoutY="134.0" prefHeight="314.0" prefWidth="718.0">
+            <Pane layoutX="49.0" layoutY="171.0" prefHeight="314.0" prefWidth="718.0">
                <children>
-                  <TableView fx:id="TableShipments1" prefHeight="290.0" prefWidth="703.0">
+                  <TableView fx:id="TableShipments1" disable="true" prefHeight="290.0" prefWidth="703.0">
                     <columns>
                       <TableColumn fx:id="colLabName1" prefWidth="319.20001220703125" text="Laboratory name" />
                       <TableColumn fx:id="DateShipment1" prefWidth="170.39996337890625" text="Date" />
@@ -67,6 +67,7 @@
                   </TableView>
                </children>
             </Pane>
+            <Button layoutX="289.0" layoutY="89.0" mnemonicParsing="false" onAction="#seeinfo" prefHeight="43.0" prefWidth="79.0" text="See the info" />
       </children>
     </AnchorPane>
   </children>

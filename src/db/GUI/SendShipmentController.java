@@ -29,7 +29,7 @@ public class SendShipmentController implements Initializable {
 
 	Lab lsendvaccines=null;
 	
-
+boolean firsttime=true;
 
     @FXML
     private Label totalNumberVaccines;
@@ -61,14 +61,6 @@ public class SendShipmentController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		
-	    	ShipmentList = FXCollections.observableArrayList();
-	        this.colNumberVaccines.setCellValueFactory(new PropertyValueFactory("Vaccines"));
-	        
-	        this.DateShipment.setCellValueFactory(new PropertyValueFactory("date_ship"));
-	        this.countrycolumn.setCellValueFactory(new PropertyValueFactory("governmentID"));
-	    	List <Shipment> allships= Main.getInter().getAllShipment();
-	    	ShipmentList.addAll(allships);
-	    	this.TableShipments.setItems(ShipmentList);
 	    	
 	    	
 	}
@@ -81,6 +73,7 @@ public class SendShipmentController implements Initializable {
 
     @FXML
     void sendvaccinesbutton(ActionEvent event) {
+
     	if(textamountvaccinessend.getText()==""||countryTF.getText()=="") {
     		
     	    JOptionPane.showMessageDialog(null, "Empty field");
@@ -106,25 +99,60 @@ public class SendShipmentController implements Initializable {
     		}
     		if (correctData==true) {
     		if(Integer.parseInt(textamountvaccinessend.getText())>0 ){
-    	this.ShipmentList.clear();
+    			if (firsttime==true) {
+        	    	this.TableShipments.setDisable(false);
 
-    	
-    	Shipment snew= new Shipment(Integer.parseInt(textamountvaccinessend.getText()),Date.valueOf(LocalDate.now()),lsendvaccines.getName(),Main.getInter().searchadminIDByName(countryTF.getText()));
+    				ShipmentList = FXCollections.observableArrayList();
+        	        this.colNumberVaccines.setCellValueFactory(new PropertyValueFactory("Vaccines"));
+        	        
+        	        this.DateShipment.setCellValueFactory(new PropertyValueFactory("date_ship"));
+        	        this.countrycolumn.setCellValueFactory(new PropertyValueFactory("governmentID"));
+        	        
+        	    	List <Shipment> allships= Main.getInter().getAllShipment(lsendvaccines.getId());
+        	    	ShipmentList.addAll(allships);
+        	    	this.TableShipments.setItems(ShipmentList);
+        	    	firsttime=false;
+        	    	this.ShipmentList.clear();
 
-    	Main.getInter().addShipment(snew, Main.getInter().getLab(lsendvaccines.getId()), Main.getInter().getAdministration(Main.getInter().searchadminIDByName(countryTF.getText())));
-        Main.getInter().ModifyVaccinesFromLab(Integer.parseInt("-"+textamountvaccinessend.getText()), lsendvaccines.getId());
+        	    	Shipment snew= new Shipment(Integer.parseInt(textamountvaccinessend.getText()),Date.valueOf(LocalDate.now()),lsendvaccines.getName(),Main.getInter().searchadminIDByName(countryTF.getText()));
 
-        Main.getInter().ModifyVaccinesAdmin(Integer.parseInt(textamountvaccinessend.getText()),Main.getInter().searchadminIDByName(countryTF.getText()));
-        List<Shipment> result = Main.getInter().getAllShipment();
+        	    	Main.getInter().addShipment(snew, Main.getInter().getLab(lsendvaccines.getId()), Main.getInter().getAdministration(Main.getInter().searchadminIDByName(countryTF.getText())));
+        	        Main.getInter().ModifyVaccinesFromLab(Integer.parseInt("-"+textamountvaccinessend.getText()), lsendvaccines.getId());
 
-		this.ShipmentList.addAll(result);
-		
-    	this.TableShipments.setItems(ShipmentList);  
-    	
-    	textamountvaccinessend.setText("");
-    	countryTF.setText("");
-    	}
-    	}
+        	        Main.getInter().ModifyVaccinesAdmin(Integer.parseInt(textamountvaccinessend.getText()),Main.getInter().searchadminIDByName(countryTF.getText()));
+        	        List<Shipment> result = Main.getInter().getAllShipment(lsendvaccines.getId());
+
+        			this.ShipmentList.addAll(result);
+        			
+        	    	this.TableShipments.setItems(ShipmentList);  
+        	    	
+        	    	textamountvaccinessend.setText("");
+        	    	countryTF.setText("");
+
+        	
+    			}else {
+        	    	this.ShipmentList.clear();
+        	    	this.TableShipments.setDisable(false);
+        	    	
+        	    	Shipment snew= new Shipment(Integer.parseInt(textamountvaccinessend.getText()),Date.valueOf(LocalDate.now()),lsendvaccines.getName(),Main.getInter().searchadminIDByName(countryTF.getText()));
+
+        	    	Main.getInter().addShipment(snew, Main.getInter().getLab(lsendvaccines.getId()), Main.getInter().getAdministration(Main.getInter().searchadminIDByName(countryTF.getText())));
+        	        Main.getInter().ModifyVaccinesFromLab(Integer.parseInt("-"+textamountvaccinessend.getText()), lsendvaccines.getId());
+
+        	        Main.getInter().ModifyVaccinesAdmin(Integer.parseInt(textamountvaccinessend.getText()),Main.getInter().searchadminIDByName(countryTF.getText()));
+        	        List<Shipment> result = Main.getInter().getAllShipment(lsendvaccines.getId());
+
+        			this.ShipmentList.addAll(result);
+        			
+        	    	this.TableShipments.setItems(ShipmentList);  
+        	    	
+        	    	textamountvaccinessend.setText("");
+        	    	countryTF.setText("");
+        	    	}
+    		}
+    			}
+
+    		
     	}
 
     }

@@ -53,7 +53,23 @@ public class GovernmentMenuController {
     void NotifyVaccines(ActionEvent event) {
     	String name= "NotifyVaccinesUsedView.fxml";
     	NotifyVaccinesUsedController controller = null;
-		openWindow(name,controller);
+    	try {
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+    	Parent root;
+    	
+    		root = loader.load();
+    	
+    	  controller = loader.getController();
+    	  controller.setAdmin(admin);
+    	Scene scene = new Scene(root);
+    	Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.showAndWait();
+    	} catch (IOException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}
     }
 
     @FXML
@@ -97,7 +113,24 @@ public class GovernmentMenuController {
     void ViewTotalNumber(ActionEvent event) {
     	String name= "TotalNumberVaccinesView.fxml";
     	TotalNumberVaccinesController controller = null;
-		openWindow(name,controller);
+    	try {
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+    	Parent root;
+    	
+    		root = loader.load();
+    	
+    	  controller = loader.getController();
+  		controller.setAdmin(admin);
+
+    	Scene scene = new Scene(root);
+    	Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.showAndWait();
+    	} catch (IOException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}
 
     }
     void openWindow(String name,Object controller) {
