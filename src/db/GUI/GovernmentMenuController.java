@@ -12,6 +12,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -33,6 +36,13 @@ public class GovernmentMenuController {
 		 	
 		 	ModifyGovUserController controller = null;
 		 	try {
+		 		Pane root0 = (Pane) this.buttonvaccines.getScene().getRoot();
+
+				 ColorAdjust adj = new ColorAdjust(0, -0.9, -0.5, 0);
+
+				 GaussianBlur blur = new GaussianBlur(10); 
+				    adj.setInput(blur);
+				 root0.setEffect(adj);
 	    		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
 	    	Parent root;
 	    	
@@ -42,9 +52,15 @@ public class GovernmentMenuController {
 	    	  controller.setOldusername(Main.getInter().getUserMailbyadmin(admin));
 	    	Scene scene = new Scene(root);
 	    	Stage stage = new Stage();
+			stage.setResizable(false);
+
 	        stage.initModality(Modality.APPLICATION_MODAL);
 	        stage.setScene(scene);
 	        stage.showAndWait();
+			stage.setTitle("Modify user data of administration");
+
+			root0.setEffect(null);
+
 	    	} catch (IOException e) {
 	    		// TODO Auto-generated catch block
 	    		e.printStackTrace();
@@ -54,6 +70,13 @@ public class GovernmentMenuController {
     	String name= "NotifyVaccinesUsedView.fxml";
     	NotifyVaccinesUsedController controller = null;
     	try {
+    		Pane root0 = (Pane) this.buttonvaccines.getScene().getRoot();
+
+			 ColorAdjust adj = new ColorAdjust(0, -0.9, -0.5, 0);
+
+			 GaussianBlur blur = new GaussianBlur(10); 
+			    adj.setInput(blur);
+			 root0.setEffect(adj);
     		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
     	Parent root;
     	
@@ -63,9 +86,15 @@ public class GovernmentMenuController {
     	  controller.setAdmin(admin);
     	Scene scene = new Scene(root);
     	Stage stage = new Stage();
+		stage.setTitle("Notify vaccines");
+
+		stage.setResizable(false);
+
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.showAndWait();
+		root0.setEffect(null);
+
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();
@@ -84,6 +113,13 @@ public class GovernmentMenuController {
     	TriggerSimulationController controller = null;
 
     	try {
+    		Pane root0 = (Pane) this.buttonvaccines.getScene().getRoot();
+
+			 ColorAdjust adj = new ColorAdjust(0, -0.9, -0.5, 0);
+
+			 GaussianBlur blur = new GaussianBlur(10); 
+			    adj.setInput(blur);
+			 root0.setEffect(adj);
     		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
 
     		Parent root= loader.load();
@@ -99,9 +135,14 @@ public class GovernmentMenuController {
 
     	Scene scene = new Scene(root);
     	Stage stage = new Stage();
+    	stage.setTitle("Trigger simulation");
+		stage.setResizable(false);
+
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.showAndWait();
+		root0.setEffect(null);
+
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();
@@ -114,6 +155,13 @@ public class GovernmentMenuController {
     	String name= "TotalNumberVaccinesView.fxml";
     	TotalNumberVaccinesController controller = null;
     	try {
+    		Pane root0 = (Pane) this.buttonvaccines.getScene().getRoot();
+
+			 ColorAdjust adj = new ColorAdjust(0, -0.9, -0.5, 0);
+
+			 GaussianBlur blur = new GaussianBlur(10); 
+			    adj.setInput(blur);
+			 root0.setEffect(adj);
     		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
     	Parent root;
     	
@@ -124,9 +172,14 @@ public class GovernmentMenuController {
 
     	Scene scene = new Scene(root);
     	Stage stage = new Stage();
+    	stage.setTitle("Total number of vaccines");
+		stage.setResizable(false);
+
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.showAndWait();
+		root0.setEffect(null);
+
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();
@@ -135,6 +188,13 @@ public class GovernmentMenuController {
     }
     void openWindow(String name,Object controller) {
     	try {
+    		Pane root0 = (Pane) this.buttonvaccines.getScene().getRoot();
+
+			 ColorAdjust adj = new ColorAdjust(0, -0.9, -0.5, 0);
+
+			 GaussianBlur blur = new GaussianBlur(10); 
+			    adj.setInput(blur);
+			 root0.setEffect(adj);
     		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
     	Parent root;
     	
@@ -143,9 +203,12 @@ public class GovernmentMenuController {
     	  controller = loader.getController();
     	Scene scene = new Scene(root);
     	Stage stage = new Stage();
+		stage.setResizable(false);
+
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.showAndWait();
+        root0.setEffect(null);
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();

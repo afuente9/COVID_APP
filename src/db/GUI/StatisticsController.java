@@ -327,11 +327,29 @@ public class StatisticsController implements Initializable {
 
 		List<String> Hospitals = Main.getInter().getdifferentHospitals(this.alive);
 		List<PieChart.Data> piedatas = new ArrayList<>();
-		for (int i = 0; i < Hospitals.size(); i++) {
-			System.out.println(Hospitals.get(i));
-			piedatas.add(new PieChart.Data("" + Hospitals.get(i),
-					Main.getInter().getNumberPatientsbyanyString("hospital", "" + Hospitals.get(i), this.alive)));
+		if(alive==true){
+			for (int i = 0; i < Hospitals.size(); i++) {
+				
+				if(((float)Main.getInter().getNumberPatientsbyanyString("hospital", "" + Hospitals.get(i), this.alive)/(float)Main.getInter().getNumberofInfecteds())*100>5){
+					piedatas.add(new PieChart.Data("" + Hospitals.get(i),
+							Main.getInter().getNumberPatientsbyanyString("hospital", "" + Hospitals.get(i), this.alive)));
+					
+				}
+				}
 		}
+		else {
+for (int i = 0; i < Hospitals.size(); i++) {
+				
+				if(((float)Main.getInter().getNumberPatientsbyanyString("hospital", "" + Hospitals.get(i), this.alive)/(float)Main.getInter().getNumberofDeads())*100>5){
+					piedatas.add(new PieChart.Data("" + Hospitals.get(i),
+							Main.getInter().getNumberPatientsbyanyString("hospital", "" + Hospitals.get(i), this.alive)));
+					
+				}
+				}
+		}
+		
+			
+		
 
 		pieChartData = FXCollections.observableArrayList();
 		pieChartData.addAll(piedatas);
@@ -367,12 +385,22 @@ public class StatisticsController implements Initializable {
 
 		List<String> Medics = Main.getInter().getdifferentMeds(this.alive);
 		List<PieChart.Data> piedatas = new ArrayList<>();
-
+		if(alive==true){
 		for (int i = 0; i < Medics.size(); i++) {
-			System.out.println(Medics.get(i));
+			if(((float)Main.getInter().getdifferentMedsCOUNT(Medics.get(i), this.alive)/(float)Main.getInter().getNumberofInfecteds())*100>=1){
 			piedatas.add(new PieChart.Data("" + Medics.get(i),
 					Main.getInter().getdifferentMedsCOUNT(Medics.get(i), this.alive)));
 
+		}
+		}
+		}else {
+			for (int i = 0; i < Medics.size(); i++) {
+				if(((float)Main.getInter().getdifferentMedsCOUNT(Medics.get(i), this.alive)/(float)Main.getInter().getNumberofDeads())*100>=1){
+				piedatas.add(new PieChart.Data("" + Medics.get(i),
+						Main.getInter().getdifferentMedsCOUNT(Medics.get(i), this.alive)));
+
+			}
+			}
 		}
 		pieChartData = FXCollections.observableArrayList();
 		pieChartData.addAll(piedatas);
@@ -426,11 +454,25 @@ public class StatisticsController implements Initializable {
 		List<String> paths = Main.getInter().getdifferentPaths(this.alive);
 		List<PieChart.Data> piedatas = new ArrayList<>();
 
+		if(alive==true){
+
 		for (int i = 0; i < paths.size(); i++) {
-			System.out.println(paths.get(i));
+
+			if(((float)Main.getInter().getdifferentPathsCOUNT(paths.get(i), this.alive)/(float)Main.getInter().getNumberofInfecteds())*100>=1){
 			piedatas.add(new PieChart.Data("" + paths.get(i),
 					Main.getInter().getdifferentPathsCOUNT(paths.get(i), this.alive)));
 
+		}
+		}
+		}
+		else {
+			for (int i = 0; i < paths.size(); i++) {
+				if(((float)Main.getInter().getdifferentPathsCOUNT(paths.get(i), this.alive)/(float)Main.getInter().getNumberofDeads())*100>=1){
+				piedatas.add(new PieChart.Data("" + paths.get(i),
+						Main.getInter().getdifferentPathsCOUNT(paths.get(i), this.alive)));
+
+			}
+			}	
 		}
 		pieChartData = FXCollections.observableArrayList();
 		pieChartData.addAll(piedatas);

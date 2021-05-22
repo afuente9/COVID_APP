@@ -11,7 +11,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.swing.JOptionPane;
+import javax.swing.text.html.ImageView;
 
+import db.GUI.ImageWindow;
 import db.GUI.Main;
 import db.interfaces.Cov_Manager;
 import db.pojos.*;
@@ -20,6 +22,7 @@ import db.pojos.users.User;
 public class JDBCManagment implements Cov_Manager {
 
 	private Connection c;
+	private static boolean showImage = true;
 
 	// Open database connection
 	public void connect() {
@@ -1207,10 +1210,9 @@ public class JDBCManagment implements Cov_Manager {
 	public List<Lab> showLabs() {
 		List<Lab> labs = new ArrayList<Lab>();
 		try {
-			String lab_name = "";
-			String sql = "SELECT * FROM lab WHERE name = ?";
+			String sql = "SELECT * FROM lab WHERE name LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, lab_name);
+			prep.setString(1, '%'+""+'%');
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -1218,14 +1220,7 @@ public class JDBCManagment implements Cov_Manager {
 				String Ladress = rs.getString("adress");
 				String Lcif = rs.getString("cif");
 				int Lvacciness = rs.getInt("vacciness");
-				byte[] pic = rs.getBytes("image");
-				// TODO test, if doesn't work
-				/*
-				 * InputStream blobStream = rs.getBinaryStream("photo"); byte[] pic = new
-				 * byte[blobStream.available()]; blobStream.read(pic);
-				 * 
-				 */
-				Lab lab = new Lab(id, Lvacciness, Ladress, Lname, Lcif, pic);
+				Lab lab = new Lab(id, Lvacciness, Ladress, Lname, Lcif);
 				labs.add(lab);
 			}
 		} catch (Exception e) {
@@ -1447,6 +1442,9 @@ public class JDBCManagment implements Cov_Manager {
 
 	@Override
 	public List<Patient> searchPatientGeneric(String feature, String type) {
+	
+			
+		
 		List<Patient> patients = new ArrayList<Patient>();
 //TODO PARA LA DATE INTRODUCED
 		try {
@@ -1518,6 +1516,7 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 		return patients;
+		
 	}
 
 	@Override
@@ -2401,6 +2400,102 @@ public class JDBCManagment implements Cov_Manager {
 
 
 	}
+	@Override
+	public void openpicturedoctor(Doctor d) {
+		try {
+		String sql = "SELECT * FROM doctors WHERE id LIKE ?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1, d.getId());
+		ResultSet rs = prep.executeQuery();
+		while (rs.next()) {
+			int id = rs.getInt("id");
+			
+			byte[] photo = rs.getBytes("image");
+			// Note that department is going to show null, even if the
+			// employee is assigned to one, that's because we didn't
+			// retrieve the department from the database. We should!!
+			
+			// Process the photo
+			if (photo!=null) {
+				ByteArrayInputStream blobIn = new ByteArrayInputStream(photo);
+				// Show the photo
+				if (showImage) {
+				         	ImageWindow window = new ImageWindow();
+					window.showBlob(blobIn);
+				}
+				// Write the photo in a file
+				else {
+						File outFile = new File("./photos/Output.png");
+					OutputStream blobOut = new FileOutputStream(outFile);
+					byte[] buffer = new byte[blobIn.available()];
+					blobIn.read(buffer);
+					blobOut.write(buffer);
+					blobOut.close();
+					
+				
+				
+					
+				}
+				
+			}
+		}
+		
+			rs.close();
+			prep.close();
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	@Override
+	public void openpicturelab(Lab d) {
+		try {
+		String sql = "SELECT * FROM lab WHERE id LIKE ?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1, d.getId());
+		ResultSet rs = prep.executeQuery();
+		while (rs.next()) {
+			int id = rs.getInt("id");
+			
+			byte[] photo = rs.getBytes("image");
+			// Note that department is going to show null, even if the
+			// employee is assigned to one, that's because we didn't
+			// retrieve the department from the database. We should!!
+			
+			// Process the photo
+			if (photo!=null) {
+				ByteArrayInputStream blobIn = new ByteArrayInputStream(photo);
+				// Show the photo
+				if (showImage) {
+				         	ImageWindow window = new ImageWindow();
+					window.showBlob(blobIn);
+				}
+				// Write the photo in a file
+				else {
+						File outFile = new File("./photos/Output.png");
+					OutputStream blobOut = new FileOutputStream(outFile);
+					byte[] buffer = new byte[blobIn.available()];
+					blobIn.read(buffer);
+					blobOut.write(buffer);
+					blobOut.close();
+					
+				
+				
+					
+				}
+				
+			}
+		}
+		
+			rs.close();
+			prep.close();
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	/*@Override
 	public byte[] getPicFromLab(int id) {
@@ -2491,10 +2586,9 @@ public class JDBCManagment implements Cov_Manager {
 	public List<Administration> getAllAdmins() {
 		List<Administration> admins = new ArrayList<Administration>();
 		try {
-			String gov_name = "";
 			String sql = "SELECT * FROM administration WHERE nameCountry = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, gov_name);
+			prep.setString(1, '%'+""+'%');
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -2514,10 +2608,9 @@ public class JDBCManagment implements Cov_Manager {
 	public List<Doctor> getAllDoctors() {
 		List<Doctor> docs = new ArrayList<Doctor>();
 		try {
-			String doc_name = "";
 			String sql = "SELECT * FROM doctors WHERE name = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, doc_name);
+			prep.setString(1, '%'+""+'%');
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -2547,10 +2640,9 @@ public class JDBCManagment implements Cov_Manager {
 	public List<Medication> getAllMedication() {
 		List<Medication> meds = new ArrayList<Medication>();
 		try {
-			String stri = "";
 			String sql = "SELECT * FROM doctors WHERE name = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, stri);
+			prep.setString(1, '%'+""+'%');
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -2571,7 +2663,7 @@ public class JDBCManagment implements Cov_Manager {
 		try {
 			String sql = "SELECT * FROM  patients WHERE name LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, "");
+			prep.setString(1, '%'+""+'%');
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -2613,10 +2705,9 @@ public class JDBCManagment implements Cov_Manager {
 	public List<Other_Pathologies> getAllPatho() {
 		List<Other_Pathologies> patos = new ArrayList<Other_Pathologies>();
 		try {
-			String stri = "";
 			String sql = "SELECT * FROM doctors WHERE name = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, stri);
+			prep.setString(1, '%'+""+'%');
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");

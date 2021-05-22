@@ -24,7 +24,10 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -501,6 +504,13 @@ public class AddPatientController {
 
 	void openWindow(String name, Object controller) {
 		try {
+			Pane root0 = (Pane) this.addMed.getScene().getRoot();
+
+			 ColorAdjust adj = new ColorAdjust(0, -0.9, -0.5, 0);
+
+			 GaussianBlur blur = new GaussianBlur(10); 
+			    adj.setInput(blur);
+			 root0.setEffect(adj);
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
 			Parent root;
 
@@ -509,9 +519,14 @@ public class AddPatientController {
 			controller = loader.getController();
 			Scene scene = new Scene(root);
 			Stage stage = new Stage();
+			stage.setResizable(false);
+
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.setScene(scene);
+			stage.setTitle("All pathologies");
 			stage.showAndWait();
+			root0.setEffect(null);
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

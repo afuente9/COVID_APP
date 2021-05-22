@@ -63,7 +63,7 @@
 						<NumberAxis fx:id="numAxis" side="LEFT" />
 					</yAxis>
 				</LineChart>
-				<Label fx:id="plotTittle" layoutX="556.0" layoutY="40.0" text="Title" textFill="#35657f">
+				<Label fx:id="plotTittle" layoutX="526.0" layoutY="39.0" text="Title" textAlignment="CENTER" textFill="#35657f">
 					<font>
 						<Font name="Times New Roman" size="26.0" />
 					</font>

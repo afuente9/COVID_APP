@@ -8,6 +8,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -29,7 +32,7 @@ public class ChooseSignUpController {
 		
 		String name = "SignUpDoctorView.fxml";
 		SignUpDoctorController controller = null;
-		openWindow(name, controller);
+		openWindow(name, controller,"Sign up as doctor");
 		Stage stage = (Stage) this.BackButton.getScene().getWindow();
 		stage.close();
 	}
@@ -39,7 +42,7 @@ public class ChooseSignUpController {
 // TODO abre registrar lab
 		String name = "SignUpLaboratoryView.fxml";
 		SignUpLaboratoryController controller = null;
-		openWindow(name, controller);
+		openWindow(name, controller,"Sign up as laboratory");
 		Stage stage = (Stage) this.BackButton.getScene().getWindow();
 		stage.close();
 		
@@ -50,6 +53,13 @@ public class ChooseSignUpController {
 	    	//String name = "RegisterGovView.fxml";
 	    	
 	    	try {
+	    		Pane root0 = (Pane) this.BackButton.getScene().getRoot();
+
+				 ColorAdjust adj = new ColorAdjust(0, -0.9, -0.5, 0);
+
+				 GaussianBlur blur = new GaussianBlur(10); 
+				    adj.setInput(blur);
+				 root0.setEffect(adj);
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("RegisterGovView.fxml"));
 				//loader.setRoot("RegisterGovView.fxml");
 				Parent root = loader.load();
@@ -58,9 +68,15 @@ public class ChooseSignUpController {
 				RegisterGovController controller = loader.getController();
 				Scene scene = new Scene(root);
 				Stage stage = new Stage();
+				stage.setResizable(false);
+
 				stage.initModality(Modality.APPLICATION_MODAL);
 				stage.setScene(scene);
+				stage.setTitle("Register government");
+
 				stage.showAndWait();
+				root0.setEffect(null);
+
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -69,8 +85,15 @@ public class ChooseSignUpController {
 	    }
 
 
-	void openWindow(String name, Object controller) {
+	void openWindow(String name, Object controller, String title) {
 		try {
+			Pane root0 = (Pane) this.BackButton.getScene().getRoot();
+
+			 ColorAdjust adj = new ColorAdjust(0, -0.9, -0.5, 0);
+
+			 GaussianBlur blur = new GaussianBlur(10); 
+			    adj.setInput(blur);
+			 root0.setEffect(adj);
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
 			Parent root;
 
@@ -79,9 +102,15 @@ public class ChooseSignUpController {
 			controller = loader.getController();
 			Scene scene = new Scene(root);
 			Stage stage = new Stage();
+			stage.setResizable(false);
+
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.setScene(scene);
+			stage.setTitle(title);
+
 			stage.showAndWait();
+			root0.setEffect(null);
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

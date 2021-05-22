@@ -167,9 +167,9 @@ public class Menu {
 			System.out.println("|	1.  Register			|");
 			System.out.println("|	2.  Login			|");
 			System.out.println("|	3.  Add patients CSV		|");
-			System.out.println("|   4.  Generate XML                    |");
-			System.out.println("|   5.  Add from XML                    |");
-			System.out.println("|   6.  Generate HTML                   |");
+			System.out.println("|	4.  Generate XML              |");
+			System.out.println("|	5.  Add from XML              |");
+			System.out.println("|	6.  Generate HTML             |");
 			System.out.println("|	0.  Exit			|");
 			
 			int choice = Integer.parseInt(reader.readLine());
@@ -216,11 +216,9 @@ public class Menu {
 	}
 
 	private static void xmlgen() throws Exception{
-		for(int a =0; a< inter.showLabs().size(); a++) {
+		
+		System.out.println(inter.showLabs().toString());
 			
-			System.out.println(inter.showLabs().get(a).toString());
-			
-		}
 		System.out.println("Inicate id of the lab you want to XML: ");
 		int id = Integer.parseInt(reader.readLine());
 		jx.getXMLforLab(id);

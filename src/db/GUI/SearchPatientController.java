@@ -30,7 +30,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -110,9 +113,13 @@ public class SearchPatientController implements Initializable {
 
     @FXML
     void ModifySearch(ActionEvent event) {
-    	this.patientsTableList.clear();
+    	
+    	
     	String feature = SearchOptions.getValue();
 		String type = typeTextfield.getText();
+		if(!type.equals("")&&!feature.equals("Select an option")){
+	    	this.patientsTableList.clear();
+
 		if (feature == "Birth date") {
 			boolean correctdate=true;
 			try {
@@ -152,7 +159,10 @@ public class SearchPatientController implements Initializable {
 	    	this.tablePatients.setItems(patientsTableList);  
 	    	typeTextfield.setText("");
 		}
-		
+    }
+	else {
+		JOptionPane.showMessageDialog(null, "Empty field ");
+	}
     	
     	
     }
@@ -190,7 +200,13 @@ public class SearchPatientController implements Initializable {
     	else {
     	String name= "ModifyPatient.fxml";
 		ModifyPatientController controller = null;
-		try {
+		try {Pane root0 = (Pane) this.numberofpatients.getScene().getRoot();
+
+		 ColorAdjust adj = new ColorAdjust(0, -0.9, -0.5, 0);
+
+		 GaussianBlur blur = new GaussianBlur(10); 
+		    adj.setInput(blur);
+		 root0.setEffect(adj);
     		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
     	Parent root;
     	
@@ -231,15 +247,57 @@ public class SearchPatientController implements Initializable {
     	 
     	Scene scene = new Scene(root);
     	Stage stage = new Stage();
+
+		stage.setResizable(false);
+
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.showAndWait();
         
+		root0.setEffect(null);
+
+
+    	SearchOptions.setValue("Select an option");
+    	int numberpatients= Main.getInter().getNumberofPatients();
+    	numberofpatients.setText("There are "+numberpatients+" patients");
+    	patientsTableList = FXCollections.observableArrayList();
+        this.colName.setCellValueFactory(new PropertyValueFactory("name"));
+        this.colBirth.setCellValueFactory(new PropertyValueFactory("birthday"));
+        this.colSex.setCellValueFactory(new PropertyValueFactory("sex"));
+        this.colHeight.setCellValueFactory(new PropertyValueFactory("height"));
+        this.colWeight.setCellValueFactory(new PropertyValueFactory("weight"));
+        this.colSSnum.setCellValueFactory(new PropertyValueFactory("social_security"));
+        this.colHos.setCellValueFactory(new PropertyValueFactory("hospital"));
+        this.colInfected.setCellValueFactory(new PropertyValueFactory("infected"));
+        this.colAlive.setCellValueFactory(new PropertyValueFactory("alive"));
+        this.colBloodType.setCellValueFactory(new PropertyValueFactory("bloodType"));
+        this.colVaccinated.setCellValueFactory(new PropertyValueFactory("Vaccinated"));
+        this.colMedica.setCellValueFactory(new PropertyValueFactory("medication"));
+        this.colPatho.setCellValueFactory(new PropertyValueFactory("other_pathologies"));
+        this.colDateIntroduced.setCellValueFactory(new PropertyValueFactory("DateIntroduced"));
+        
+        
+
+    	List <Patient> allpatients= Main.getInter().searchPatientByName("");
+    	this.patientsTableList.addAll(allpatients);
+    	this.tablePatients.setItems(patientsTableList);
+    	
+    	
+    	
+    	
+    	
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();
     	}			
     }
+    	
+    
+        
+        
+
+    	
+    	
     }
     
     @Override
@@ -275,6 +333,7 @@ public class SearchPatientController implements Initializable {
     	
     	
     }
+    
     private void loadData() {
     	list.removeAll(list);
     	String a="Name";
