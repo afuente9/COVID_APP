@@ -2661,12 +2661,15 @@ public class JDBCManagment implements Cov_Manager {
 	public List<Doctor> getAllDoctors() {
 		List<Doctor> docs = new ArrayList<Doctor>();
 		try {
-			String sql = "SELECT * FROM doctors WHERE name = ?";
+		
+			String sql = "SELECT * FROM doctors WHERE name LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, '%'+""+'%');
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");
+				System.out.println(id);
+
 				String doctorName = rs.getString("name");
 				String espe = rs.getString("speciality");
 				Date nacido = rs.getDate("birth_date");

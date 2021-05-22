@@ -269,7 +269,9 @@ public class AddPatientController {
 				Main.getInter().addPatient(p_new);
 				Patient lastpatient= Main.getInter().getLastPatient();
 				List<Doctor> alldoctors = Main.getInter().getAllDoctors();
+				System.out.println("df"+alldoctors.size());
 				for (int i=0;i<alldoctors.size();i++) {
+					
 				Main.getInter().assignPattoDoc(lastpatient.getId(), alldoctors.get(i));
 			
 				
