@@ -253,6 +253,7 @@ public class MainMenuController implements Initializable {
 
             System.out.println(ex);
 
+            
         }catch(IOException e){
 
             System.out.println(e);
