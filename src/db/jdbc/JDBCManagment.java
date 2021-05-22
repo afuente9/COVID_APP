@@ -865,7 +865,9 @@ public class JDBCManagment implements Cov_Manager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}public void assignPattoLab(int idPati, Lab l) {
+	}
+	@Override
+	public void assignPattoLab(int idPati, Lab l) {
 		try {
 			String sql = "INSERT INTO pat_lab (id_pat, id_lab) VALUES (?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);

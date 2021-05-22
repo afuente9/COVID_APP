@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import db.pojos.Doctor;
+import db.pojos.Lab;
 import db.pojos.Medication;
 import db.pojos.Other_Pathologies;
 import db.pojos.Patient;
@@ -268,14 +269,23 @@ public class AddPatientController {
 						Hospital_Text, vaccinated, Blood_Text, dateIntroduced, countryId);
 				Main.getInter().addPatient(p_new);
 				Patient lastpatient= Main.getInter().getLastPatient();
+				
 				List<Doctor> alldoctors = Main.getInter().getAllDoctors();
+				List<Lab> alllabs= Main.getInter().showLabs();
 				System.out.println("df"+alldoctors.size());
 				for (int i=0;i<alldoctors.size();i++) {
 					
-				Main.getInter().assignPattoDoc(lastpatient.getId(), alldoctors.get(i));
-			
+					Main.getInter().assignPattoDoc(lastpatient.getId(), alldoctors.get(i));
 				
-				}
+					
+					}
+				for (int i=0;i<alllabs.size();i++) {
+						
+						Main.getInter().assignPattoLab((int)lastpatient.getId(),alllabs.get(i));
+					
+						
+						}
+				
 
 				NamePatientTextField.setDisable(true);
 				SexPatientTextField.setDisable(true);

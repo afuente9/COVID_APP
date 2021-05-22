@@ -192,6 +192,7 @@ public interface Cov_Manager {
 	void openpicturelab(Lab l);
 	void assignPattoDoc(int idPati, Doctor doc);
 	Doctor getLastDoctor();
+	void assignPattoLab(int idPati, Lab l);
 	
 
 }
