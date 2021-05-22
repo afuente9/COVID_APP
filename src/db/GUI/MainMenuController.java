@@ -28,13 +28,18 @@ import db.pojos.Other_Pathologies;
 import db.pojos.Patient;
 import db.pojos.Sex;
 import db.pojos.users.User;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -224,7 +229,7 @@ public class MainMenuController implements Initializable {
 
 		String name = "ChooseSignUpView.fxml";
 		ChooseSignUpController controller = null;
-		openWindow(name, controller);
+		openWindow(name, controller,"Choose user");
 
 	}
     @FXML
@@ -279,6 +284,7 @@ public class MainMenuController implements Initializable {
 	@FXML
 	void onClose(ActionEvent event) {
 		Stage stage = (Stage) this.PasswordTextField.getScene().getWindow();
+		
 		stage.close();
 
 		Main.getInter().disconnect();
@@ -302,6 +308,13 @@ public class MainMenuController implements Initializable {
 			String name = "GovernmentMenuView.fxml";
 			GovernmentMenuController controller = null;
 			try {
+				Pane root0 = (Pane) this.PasswordTextField.getScene().getRoot();
+
+				 ColorAdjust adj = new ColorAdjust(0, -0.9, -0.5, 0);
+
+				 GaussianBlur blur = new GaussianBlur(10); 
+				    adj.setInput(blur);
+				 root0.setEffect(adj);
 				FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
 				Parent root;
 
@@ -311,9 +324,14 @@ public class MainMenuController implements Initializable {
 
 				Scene scene = new Scene(root);
 				Stage stage = new Stage();
+				stage.setResizable(false);
+				stage.setTitle("Covidist");
+stage.setTitle("Administration menu");				
 				stage.initModality(Modality.APPLICATION_MODAL);
 				stage.setScene(scene);
 				stage.showAndWait();
+				root0.setEffect(null);
+
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -321,14 +339,22 @@ public class MainMenuController implements Initializable {
 		} else if (u.getRole().getName().equalsIgnoreCase("doctor")) {
 			String name = "DoctorMenuView.fxml";
 			DoctorMenuController controller = null;
-			try {
+			try { 
+				Pane root0 = (Pane) this.PasswordTextField.getScene().getRoot();
+
+				 ColorAdjust adj = new ColorAdjust(0, -0.9, -0.5, 0);
+
+				 GaussianBlur blur = new GaussianBlur(10); 
+				    adj.setInput(blur);
+				 root0.setEffect(adj);
+
 				FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
 				Doctor d = Main.getInter().getDoctorbyUser(u);
 
 				Parent root;
 
 				root = loader.load();
-
+        
 				controller = loader.getController();
 				controller.setD(d);
 				
@@ -355,10 +381,14 @@ public class MainMenuController implements Initializable {
 				
 				Scene scene = new Scene(root);
 				Stage stage = new Stage();
-
+				stage.setResizable(false);
+stage.setTitle("Doctor menu");
 				stage.initModality(Modality.APPLICATION_MODAL);
 				stage.setScene(scene);
+				stage.setResizable(false);
+                //stage.setTitle(name);			   
 				stage.showAndWait();
+				root0.setEffect(null);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -369,6 +399,13 @@ public class MainMenuController implements Initializable {
 			LabMenuController controller = null;
 			byte[] image = null;
 			try {
+				Pane root0 = (Pane) this.PasswordTextField.getScene().getRoot();
+
+				 ColorAdjust adj = new ColorAdjust(0, -0.9, -0.5, 0);
+
+				 GaussianBlur blur = new GaussianBlur(10); 
+				    adj.setInput(blur);
+				 root0.setEffect(adj);
 				FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
 				Parent root;
 
@@ -380,9 +417,14 @@ public class MainMenuController implements Initializable {
 
 				Scene scene = new Scene(root);
 				Stage stage = new Stage();
+				stage.setResizable(false);
+				stage.setTitle("Laboratory menu");
+
 				stage.initModality(Modality.APPLICATION_MODAL);
 				stage.setScene(scene);
 				stage.showAndWait();
+				root0.setEffect(null);
+
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -453,8 +495,15 @@ public class MainMenuController implements Initializable {
 
 	}
 
-	void openWindow(String name, Object controller) {
+	void openWindow(String name, Object controller, String title) {
 		try {
+			Pane root0 = (Pane) this.PasswordTextField.getScene().getRoot();
+
+			 ColorAdjust adj = new ColorAdjust(0, -0.9, -0.5, 0);
+
+			 GaussianBlur blur = new GaussianBlur(10); 
+			    adj.setInput(blur);
+			 root0.setEffect(adj);
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
 			Parent root;
 
@@ -463,9 +512,14 @@ public class MainMenuController implements Initializable {
 			controller = loader.getController();
 			Scene scene = new Scene(root);
 			Stage stage = new Stage();
+			stage.setResizable(false);
+stage.setTitle(title);
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.setScene(scene);
 			stage.showAndWait();
+			
+			root0.setEffect(null);
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

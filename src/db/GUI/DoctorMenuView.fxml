@@ -80,6 +80,11 @@
                   <Font name="Times New Roman" size="16.0" />
                </font></Button>
             <ImageView fx:id="DoctorPic" fitHeight="158.0" fitWidth="131.0" layoutX="646.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" />
+            <Button layoutX="650.0" layoutY="139.0" mnemonicParsing="false" onAction="#onseePicDoc" text="See the picture" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="16.0" />
+               </font>
+            </Button>
       </children>
     </AnchorPane>
   </children>

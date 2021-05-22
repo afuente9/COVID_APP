@@ -17,6 +17,7 @@ public class Window {
 				try {
 					Window window = new Window();
 					window.frame.setVisible(true);
+					window.frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

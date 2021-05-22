@@ -11,7 +11,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.swing.JOptionPane;
+import javax.swing.text.html.ImageView;
 
+import db.GUI.ImageWindow;
 import db.GUI.Main;
 import db.interfaces.Cov_Manager;
 import db.pojos.*;
@@ -20,6 +22,7 @@ import db.pojos.users.User;
 public class JDBCManagment implements Cov_Manager {
 
 	private Connection c;
+	private static boolean showImage = true;
 
 	// Open database connection
 	public void connect() {
@@ -1447,6 +1450,9 @@ public class JDBCManagment implements Cov_Manager {
 
 	@Override
 	public List<Patient> searchPatientGeneric(String feature, String type) {
+	
+			
+		
 		List<Patient> patients = new ArrayList<Patient>();
 //TODO PARA LA DATE INTRODUCED
 		try {
@@ -1518,6 +1524,7 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 		return patients;
+		
 	}
 
 	@Override
@@ -2400,6 +2407,102 @@ public class JDBCManagment implements Cov_Manager {
         return null;
 
 
+	}
+	@Override
+	public void openpicturedoctor(Doctor d) {
+		try {
+		String sql = "SELECT * FROM doctors WHERE id LIKE ?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1, d.getId());
+		ResultSet rs = prep.executeQuery();
+		while (rs.next()) {
+			int id = rs.getInt("id");
+			
+			byte[] photo = rs.getBytes("image");
+			// Note that department is going to show null, even if the
+			// employee is assigned to one, that's because we didn't
+			// retrieve the department from the database. We should!!
+			
+			// Process the photo
+			if (photo!=null) {
+				ByteArrayInputStream blobIn = new ByteArrayInputStream(photo);
+				// Show the photo
+				if (showImage) {
+				         	ImageWindow window = new ImageWindow();
+					window.showBlob(blobIn);
+				}
+				// Write the photo in a file
+				else {
+						File outFile = new File("./photos/Output.png");
+					OutputStream blobOut = new FileOutputStream(outFile);
+					byte[] buffer = new byte[blobIn.available()];
+					blobIn.read(buffer);
+					blobOut.write(buffer);
+					blobOut.close();
+					
+				
+				
+					
+				}
+				
+			}
+		}
+		
+			rs.close();
+			prep.close();
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	@Override
+	public void openpicturelab(Lab d) {
+		try {
+		String sql = "SELECT * FROM lab WHERE id LIKE ?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1, d.getId());
+		ResultSet rs = prep.executeQuery();
+		while (rs.next()) {
+			int id = rs.getInt("id");
+			
+			byte[] photo = rs.getBytes("image");
+			// Note that department is going to show null, even if the
+			// employee is assigned to one, that's because we didn't
+			// retrieve the department from the database. We should!!
+			
+			// Process the photo
+			if (photo!=null) {
+				ByteArrayInputStream blobIn = new ByteArrayInputStream(photo);
+				// Show the photo
+				if (showImage) {
+				         	ImageWindow window = new ImageWindow();
+					window.showBlob(blobIn);
+				}
+				// Write the photo in a file
+				else {
+						File outFile = new File("./photos/Output.png");
+					OutputStream blobOut = new FileOutputStream(outFile);
+					byte[] buffer = new byte[blobIn.available()];
+					blobIn.read(buffer);
+					blobOut.write(buffer);
+					blobOut.close();
+					
+				
+				
+					
+				}
+				
+			}
+		}
+		
+			rs.close();
+			prep.close();
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/*@Override

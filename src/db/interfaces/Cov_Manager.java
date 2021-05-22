@@ -189,6 +189,8 @@ public interface Cov_Manager {
 	String getUserMailbylab(Lab l);
 	String getUserMailbyadmin(Administration admin);
 	List<Shipment> getAllShipment(int id);
+	void openpicturedoctor(Doctor ds);
+	void openpicturelab(Lab l);
 	
 
 }

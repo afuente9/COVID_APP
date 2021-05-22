@@ -110,9 +110,14 @@ public class SearchPatientbyLabController implements Initializable {
 
     @FXML
     void ModifySearch(ActionEvent event) {
-    	this.patientsTableList.clear();
+
+    	
+    	
     	String feature = SearchOptions.getValue();
 		String type = typeTextfield.getText();
+		if(!type.equals("")&&!feature.equals("Select an option")){
+	    	this.patientsTableList.clear();
+
 		if (feature == "Birth date") {
 			boolean correctdate=true;
 			try {
@@ -152,7 +157,11 @@ public class SearchPatientbyLabController implements Initializable {
 	    	this.tablePatients.setItems(patientsTableList);  
 	    	typeTextfield.setText("");
 		}
-		
+    }
+	else {
+		JOptionPane.showMessageDialog(null, "Empty field ");
+	}
+    	
     	
     	
     }

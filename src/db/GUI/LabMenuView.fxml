@@ -84,10 +84,16 @@
                <font>
                   <Font name="Times New Roman" size="19.0" />
                </font></Button>
-            <Button layoutX="664.0" layoutY="192.0" mnemonicParsing="false" text="Change picture" textFill="#2f5569">
+            <Button layoutX="664.0" layoutY="212.0" mnemonicParsing="false" onAction="#changelabpic" text="Change picture" textFill="#2f5569">
                <font>
                   <Font name="Times New Roman" size="16.0" />
-               </font></Button>
+               </font>
+            </Button>
+            <Button layoutX="664.0" layoutY="172.0" mnemonicParsing="false" onAction="#seepiclab" prefHeight="31.0" prefWidth="120.0" text="See picture" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="16.0" />
+               </font>
+            </Button>
       </children>
     </AnchorPane>
   </children>

@@ -18,8 +18,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -63,6 +66,13 @@ public void setL(Lab l) {
     	NewVaccinesController controller = null;
 
      	try {
+     		Pane root0 = (Pane) this.LabName.getScene().getRoot();
+
+			 ColorAdjust adj = new ColorAdjust(0, -0.9, -0.5, 0);
+
+			 GaussianBlur blur = new GaussianBlur(10); 
+			    adj.setInput(blur);
+			 root0.setEffect(adj);
     		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
 
            	Parent root = loader.load();
@@ -75,9 +85,14 @@ public void setL(Lab l) {
 
     	Scene scene = new Scene(root);
     	Stage stage = new Stage();
+		stage.setResizable(false);
+		stage.setTitle("Add vaccines");
+
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.showAndWait();
+		root0.setEffect(null);
+
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();
@@ -90,6 +105,13 @@ public void setL(Lab l) {
     	String name= "ModifyLaboratoryView.fxml";
     	ModifyLaboratoryController controller = null;
     	try {
+    		Pane root0 = (Pane) this.LabName.getScene().getRoot();
+
+			 ColorAdjust adj = new ColorAdjust(0, -0.9, -0.5, 0);
+
+			 GaussianBlur blur = new GaussianBlur(10); 
+			    adj.setInput(blur);
+			 root0.setEffect(adj);
     		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
     	Parent root;
     	
@@ -105,9 +127,20 @@ public void setL(Lab l) {
     	  controller = loader.getController();
     	Scene scene = new Scene(root);
     	Stage stage = new Stage();
+    	stage.setTitle("Modify laboratory");
+		stage.setResizable(false);
+
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
-        stage.showAndWait();
+		stage.showAndWait();
+
+		root0.setEffect(null);
+
+        this.LabName.setText(Main.getInter().getLab(l.getId()).getName());
+        
+        
+        
+        
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();
@@ -152,16 +185,29 @@ public void setL(Lab l) {
     	String name= "SearchPatientbyLabView.fxml";
     	SearchPatientbyLabController controller = null;
     	
-    	openWindow(name,controller);
+    	openWindow(name,controller, "Search patient");
     	
     	
     }
 
+
+    @FXML
+    void seepiclab(ActionEvent event) {
+Main.getInter().openpicturelab(l);
+    }
+    
     @FXML
     void sendshipmentbutton(ActionEvent event) {
     	String name= "SendShipmentView.fxml";
     	SendShipmentController controller = null;
      	try {
+     		Pane root0 = (Pane) this.LabName.getScene().getRoot();
+
+			 ColorAdjust adj = new ColorAdjust(0, -0.9, -0.5, 0);
+
+			 GaussianBlur blur = new GaussianBlur(10); 
+			    adj.setInput(blur);
+			 root0.setEffect(adj);
     		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
     	Parent root;
     	
@@ -173,9 +219,14 @@ public void setL(Lab l) {
     	  controller.setLabname("Recent shipments from " +l.getName());
     	Scene scene = new Scene(root);
     	Stage stage = new Stage();
+		stage.setResizable(false);
+
         stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Send shipment");
         stage.setScene(scene);
         stage.showAndWait();
+		root0.setEffect(null);
+
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();
@@ -187,11 +238,18 @@ public void setL(Lab l) {
     void viewStatisticsButton(ActionEvent event) {
     	String name= "StatisticsView.fxml";
     	StatisticsController controller = null;
-    	openWindow(name,controller);
+    	openWindow(name,controller, "Statistics");
     	
     }
-    void openWindow(String name,Object controller) {
+    void openWindow(String name,Object controller, String title) {
     	try {
+    		Pane root0 = (Pane) this.LabName.getScene().getRoot();
+
+			 ColorAdjust adj = new ColorAdjust(0, -0.9, -0.5, 0);
+
+			 GaussianBlur blur = new GaussianBlur(10); 
+			    adj.setInput(blur);
+			 root0.setEffect(adj);
     		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
     	Parent root;
     	
@@ -201,9 +259,13 @@ public void setL(Lab l) {
     	  
     	Scene scene = new Scene(root);
     	Stage stage = new Stage();
+		stage.setResizable(false);
+stage.setTitle(title);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.showAndWait();
+		root0.setEffect(null);
+
     	} catch (IOException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();

@@ -18,8 +18,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 	import javafx.scene.control.Label;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -64,7 +67,7 @@ import javafx.stage.Stage;
 	    void OnAddPatient(ActionEvent event) {
 	    	String name= "AddPatientView.fxml";
 			AddPatientController controller = null;
-			openWindow(name,controller);
+			openWindow(name,controller,"Add patient");
 	    }
 
 	   
@@ -74,6 +77,13 @@ import javafx.stage.Stage;
 			String name= "ModifyDoctorDataView.fxml";
 			ModifyDoctorDataController controller = null;
 			try {
+				Pane root0 = (Pane) this.Add_Patient.getScene().getRoot();
+
+				 ColorAdjust adj = new ColorAdjust(0, -0.9, -0.5, 0);
+
+				 GaussianBlur blur = new GaussianBlur(10); 
+				    adj.setInput(blur);
+				 root0.setEffect(adj);
 	    		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
 	    	Parent root;
 	    	
@@ -89,23 +99,35 @@ import javafx.stage.Stage;
 	    	  controller.setOldSpetiality(d.getSpeciality());
 	    	  controller.setOldusername(Main.getInter().getUserMailbydoctor(d));
 	    	Scene scene = new Scene(root);
+	    	
 	    	Stage stage = new Stage();
+			stage.setResizable(false);
+			stage.setTitle("Modify doctor");
+
 	        stage.initModality(Modality.APPLICATION_MODAL);
 	        stage.setScene(scene);
 	        stage.showAndWait();
+			root0.setEffect(null);
+
 	        
 	    	} catch (IOException e) {
 	    		// TODO Auto-generated catch block
 	    		e.printStackTrace();
-	    	}			
-	    }
+	    	}	
+			
+			this.DoctorName.setText(Main.getInter().getDoctor(d.getId()).getName());
+			}
 
 	    @FXML
 	    void OnSearchPatient(ActionEvent event) {
 	    	String name= "SearchPatientView.fxml";
 			SearchPatientController controller = null;
-			openWindow(name,controller);
+			openWindow(name,controller,"Search patient");
 
+	    }
+	    @FXML
+	    void onseePicDoc(ActionEvent event) {
+        Main.getInter().openpicturedoctor(d);
 	    }
 
 	    @FXML
@@ -113,8 +135,15 @@ import javafx.stage.Stage;
 	    	Stage stage = (Stage) this.DoctorName.getScene().getWindow();
 	    	stage.close();
 	    }
-	    void openWindow(String name,Object controller) {
+	    void openWindow(String name,Object controller,String title) {
 	    	try {
+	    		Pane root0 = (Pane) this.Add_Patient.getScene().getRoot();
+
+				 ColorAdjust adj = new ColorAdjust(0, -0.9, -0.5, 0);
+
+				 GaussianBlur blur = new GaussianBlur(10); 
+				    adj.setInput(blur);
+				 root0.setEffect(adj);
 	    		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
 	    	Parent root;
 	    	
@@ -123,9 +152,15 @@ import javafx.stage.Stage;
 	    	  controller = loader.getController();
 	    	Scene scene = new Scene(root);
 	    	Stage stage = new Stage();
+			stage.setResizable(false);
+
 	        stage.initModality(Modality.APPLICATION_MODAL);
 	        stage.setScene(scene);
+			stage.setTitle(title);
+
 	        stage.showAndWait();
+			root0.setEffect(null);
+
 	    	} catch (IOException e) {
 	    		// TODO Auto-generated catch block
 	    		e.printStackTrace();
@@ -153,7 +188,7 @@ import javafx.stage.Stage;
 	    		
 	    	}
 	    		
-	    	}catch (Exception e) {e.printStackTrace();
+	    	}catch (Exception e) {
 	    	}
 	    }
 
