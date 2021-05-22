@@ -35,30 +35,43 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="343.0" prefWidth="637.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="db.GUI.NewVaccinesController">
+<VBox prefHeight="343.0" prefWidth="551.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="db.GUI.NewVaccinesController">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="451.0" prefWidth="697.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="343.0" prefWidth="554.0" VBox.vgrow="ALWAYS">
       <children>
-            <Label fx:id="totalNumberVaccines" layoutX="126.0" layoutY="48.0" text="How many vaccines have you created?">
+            <ImageView fitHeight="343.0" fitWidth="553.0" pickOnBounds="true">
+               <image>
+                  <Image url="@backgrounds/laboratorio.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="totalNumberVaccines" layoutX="77.0" layoutY="98.0" prefHeight="30.0" prefWidth="434.0" text="How many vaccines have you created?" textFill="#35657f">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Times New Roman" size="26.0" />
                </font>
             </Label>
-            <Button layoutX="198.0" layoutY="214.0" mnemonicParsing="false" onAction="#addvaccines" prefHeight="43.0" prefWidth="79.0" text="Add" />
-            <TextField fx:id="textamountnew" layoutX="238.0" layoutY="126.0" prefHeight="35.0" prefWidth="66.0" />
-            <Button layoutX="328.0" layoutY="214.0" mnemonicParsing="false" onAction="#BackFromNewVaccines" prefHeight="43.0" prefWidth="79.0" text="Back" />
-            <Label fx:id="labname1" layoutX="325.0" layoutY="130.0" prefHeight="28.0" prefWidth="86.0" text="vaccines">
+            <Button layoutX="173.0" layoutY="244.0" mnemonicParsing="false" onAction="#addvaccines" prefHeight="43.0" prefWidth="79.0" text="Add" textFill="#2f5569">
                <font>
-                  <Font size="19.0" />
+                  <Font name="Times New Roman" size="15.0" />
+               </font></Button>
+            <TextField fx:id="textamountnew" layoutX="244.0" layoutY="173.0" prefHeight="35.0" prefWidth="66.0" />
+            <Button layoutX="303.0" layoutY="244.0" mnemonicParsing="false" onAction="#BackFromNewVaccines" prefHeight="43.0" prefWidth="79.0" text="Back" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="15.0" />
+               </font></Button>
+            <Label fx:id="labname1" layoutX="322.0" layoutY="176.0" prefHeight="30.0" prefWidth="192.0" text="vaccines" textFill="#35657f">
+               <font>
+                  <Font name="Times New Roman" size="26.0" />
                </font>
             </Label>
-            <Label fx:id="totalNumberVaccines1" layoutX="80.0" layoutY="14.0" text="You have x vaccines">
+            <Label fx:id="totalNumberVaccines1" layoutX="76.0" layoutY="47.0" prefHeight="30.0" prefWidth="434.0" text="You have x vaccines" textFill="#35657f">
                <font>
-                  <Font size="16.0" />
+                  <Font name="Times New Roman" size="26.0" />
                </font>
             </Label>
       </children>

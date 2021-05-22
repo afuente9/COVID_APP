@@ -1,5 +1,6 @@
 package db.interfaces;
 
+import java.io.OutputStream;
 import java.sql.Date;
 import java.util.*;
 
@@ -132,8 +133,8 @@ public interface Cov_Manager {
 	public void changeLabPic(Lab l, byte[] pic);
 	
 	//Gets the actual image from X
-	public void getPicFromDoc(int id);
-	public void getPicFromLab(int id);
+	public byte[] getPicFromDoc(int id);
+	public byte[] getPicFromLab(int id);
 	
 	//Used for calculating the score
 	Day getLastDay();

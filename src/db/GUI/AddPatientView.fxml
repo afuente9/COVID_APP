@@ -32,105 +32,114 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="516.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="db.GUI.AddPatientController">
+<VBox blendMode="DARKEN" prefHeight="631.0" prefWidth="791.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="db.GUI.AddPatientController">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="451.0" prefWidth="697.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="614.0" prefWidth="791.0" style="-fx-background-image: ..\..\..\..\..\Desktop\proyec\Imagen1.png;" VBox.vgrow="ALWAYS">
       <children>
-            <Label layoutX="26.0" layoutY="11.0" text="Introduce the data of the new patient">
+            <ImageView fitHeight="664.0" fitWidth="821.0" layoutX="-24.0" layoutY="-14.0" opacity="0.58" pickOnBounds="true">
+               <image>
+                  <Image url="@backgrounds/Imagen1.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="26.0" layoutY="11.0" text="Introduce the data of the new patient" textFill="#35657f">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Times New Roman" size="27.0" />
                </font>
             </Label>
-            <TextField fx:id="NamePatientTextField" layoutX="111.0" layoutY="59.0" prefHeight="26.0" prefWidth="175.0" />
-            <Button layoutX="698.0" layoutY="495.0" mnemonicParsing="false" onAction="#OnCancelPatient" prefHeight="43.0" prefWidth="79.0" text="Accept" />
-            <Label layoutX="58.0" layoutY="494.0" text="Other pathologies:">
+            <Button layoutX="658.0" layoutY="353.0" mnemonicParsing="false" onAction="#OnCancelPatient" prefHeight="43.0" prefWidth="79.0" text="Back" textFill="#2f5569">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="14.0" />
+               </font></Button>
+            <Label fx:id="otherpatlabel" disable="true" layoutX="444.0" layoutY="429.0" text="Other pathologies" textFill="#35657f">
+               <font>
+                  <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="58.0" layoutY="455.0" text="Medication:">
+            <Label fx:id="medicationslabel" disable="true" layoutX="102.0" layoutY="433.0" text="Medications" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="48.0" layoutY="329.0" prefHeight="27.0" prefWidth="58.0" text="Place:">
+            <Label layoutX="294.0" layoutY="256.0" prefHeight="27.0" prefWidth="58.0" text="Place" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="45.0" layoutY="295.0" text="Hospital:">
+            <Label layoutX="29.0" layoutY="256.0" text="Hospital" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="43.0" layoutY="254.0" text="Blood group:">
+            <Label layoutX="227.0" layoutY="159.0" text="Blood group" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="43.0" layoutY="218.0" text="Weight:">
+            <Label layoutX="605.0" layoutY="159.0" text="Weight" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="42.0" layoutY="186.0" text="Height:">
+            <Label layoutX="446.0" layoutY="159.0" text="Height" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="42.0" layoutY="154.0" text="Social security number:">
+            <Label layoutX="227.0" layoutY="61.0" text="Social security number" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="42.0" layoutY="124.0" text="Birth date:">
+            <Label layoutX="442.0" layoutY="61.0" text="Birth date" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="42.0" layoutY="93.0" text="Sex:">
+            <Label layoutX="28.0" layoutY="157.0" text="Sex" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="42.0" layoutY="59.0" text="Name:">
+            <Label layoutX="26.0" layoutY="61.0" text="Name" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="SexPatientTextField" layoutX="103.0" layoutY="93.0" prefHeight="26.0" prefWidth="175.0" />
-            <TextField fx:id="BirthDatePatientTextField" layoutX="155.0" layoutY="124.0" prefHeight="26.0" prefWidth="175.0" />
-            <TextField fx:id="SSNumPatientTextField" layoutX="254.0" layoutY="156.0" prefHeight="26.0" prefWidth="175.0" />
-            <TextField fx:id="HeihtPatientTextField" layoutX="125.0" layoutY="187.0" prefHeight="26.0" prefWidth="175.0" />
-            <TextField fx:id="WeightPatientTextField" layoutX="125.0" layoutY="220.0" prefHeight="26.0" prefWidth="175.0" />
-            <TextField fx:id="BloodPatientTextField" layoutX="167.0" layoutY="254.0" prefHeight="26.0" prefWidth="175.0" />
-            <TextField fx:id="HospitalPatientTextField" layoutX="125.0" layoutY="295.0" prefHeight="26.0" prefWidth="175.0" />
-            <TextField fx:id="PlacePatientTextField" layoutX="107.0" layoutY="329.0" prefHeight="26.0" prefWidth="175.0" />
-            <TextField fx:id="MedicationPatientTextField" disable="true" layoutX="178.0" layoutY="456.0" prefHeight="26.0" prefWidth="175.0" />
-            <TextField fx:id="OtherPathologiesPatientTextField" disable="true" layoutX="235.0" layoutY="494.0" prefHeight="26.0" prefWidth="175.0" />
-            <Button fx:id="addMed" disable="true" layoutX="365.0" layoutY="454.0" mnemonicParsing="false" onAction="#OnAddMedication" prefHeight="26.0" prefWidth="31.0" text="+">
+            <TextField fx:id="SexPatientTextField" layoutX="28.0" layoutY="184.0" prefHeight="26.0" prefWidth="94.0" promptText="Male - Female" />
+            <TextField fx:id="BirthDatePatientTextField" layoutX="445.0" layoutY="88.0" prefHeight="26.0" prefWidth="122.0" promptText="yyyy-mm-dd" />
+            <TextField fx:id="SSNumPatientTextField" layoutX="224.0" layoutY="88.0" prefHeight="26.0" prefWidth="186.0" promptText="Social security number" />
+            <TextField fx:id="HeihtPatientTextField" layoutX="444.0" layoutY="187.0" prefHeight="26.0" prefWidth="79.0" promptText="Height" />
+            <TextField fx:id="WeightPatientTextField" layoutX="605.0" layoutY="187.0" prefHeight="26.0" prefWidth="79.0" promptText="Weight" />
+            <TextField fx:id="BloodPatientTextField" layoutX="227.0" layoutY="184.0" prefHeight="26.0" prefWidth="94.0" promptText="Blood group" />
+            <TextField fx:id="HospitalPatientTextField" layoutX="29.0" layoutY="283.0" prefHeight="26.0" prefWidth="175.0" promptText="Hospital" />
+            <TextField fx:id="PlacePatientTextField" layoutX="293.0" layoutY="283.0" prefHeight="26.0" prefWidth="175.0" promptText="ICU - Floor - Home" />
+            <TextField fx:id="MedicationPatientTextField" disable="true" layoutX="117.0" layoutY="465.0" prefHeight="26.0" prefWidth="175.0" promptText="Medications" />
+            <TextField fx:id="OtherPathologiesPatientTextField" disable="true" layoutX="457.0" layoutY="463.0" prefHeight="26.0" prefWidth="175.0" promptText="Other pathologies" />
+            <Button fx:id="addMed" disable="true" layoutX="311.0" layoutY="463.0" mnemonicParsing="false" onAction="#OnAddMedication" prefHeight="30.0" prefWidth="48.0" text="add" textFill="#2f5569">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="addPat" disable="true" layoutX="424.0" layoutY="492.0" mnemonicParsing="false" onAction="#OnAddPathology" prefHeight="26.0" prefWidth="31.0" text="+">
+            <Button fx:id="addPat" disable="true" layoutX="650.0" layoutY="459.0" mnemonicParsing="false" onAction="#OnAddPathology" prefHeight="30.0" prefWidth="48.0" text="add" textFill="#2f5569">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font size="14.0" />
                </font>
             </Button>
-            <Accordion layoutX="86.0" layoutY="406.0" />
-            <Accordion layoutX="460.0" layoutY="255.0" />
-          <TitledPane fx:id="SeeAllMedication" disable="true" expanded="false" layoutX="410.0" layoutY="456.0" text="See all">
+          <TitledPane fx:id="SeeAllMedication" disable="true" expanded="false" layoutX="119.0" layoutY="503.0" text="See all medications" textFill="#2f5569">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -157,7 +166,7 @@
                   </AnchorPane>
             </content>
           </TitledPane>
-            <TitledPane fx:id="SeeAllMedication1" disable="true" expanded="false" layoutX="471.0" layoutY="494.0" text="See all">
+            <TitledPane fx:id="SeeAllMedication1" disable="true" expanded="false" layoutX="461.0" layoutY="502.0" text="See all pathologies" textFill="#2f5569">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -184,20 +193,34 @@
                   </AnchorPane>
                </content>
             </TitledPane>
-            <Button fx:id="buttonConfirm" layoutX="335.0" layoutY="409.0" mnemonicParsing="false" onAction="#onConfirmWithoutMedPat" text="Confirm" />
-            <Label layoutX="48.0" layoutY="364.0" prefHeight="27.0" prefWidth="94.0" text="Vaccinated">
+            <Button fx:id="buttonConfirm" layoutX="287.0" layoutY="353.0" mnemonicParsing="false" onAction="#onConfirmWithoutMedPat" prefHeight="43.0" prefWidth="240.0" text="Confirm personal information" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="14.0" />
+               </font></Button>
+            <Label layoutX="554.0" layoutY="256.0" prefHeight="27.0" prefWidth="94.0" text="Vaccinated" textFill="#35657f">
+               <font>
+                  <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="VaccinatedTEXTFIELD" layoutX="147.0" layoutY="364.0" prefHeight="26.0" prefWidth="175.0" />
-            <Label layoutX="41.0" layoutY="408.0" prefHeight="27.0" prefWidth="94.0" text="Country">
+            <TextField fx:id="VaccinatedTEXTFIELD" layoutX="552.0" layoutY="283.0" prefHeight="26.0" prefWidth="175.0" promptText="True - False" />
+            <Label layoutX="605.0" layoutY="61.0" prefHeight="27.0" prefWidth="94.0" text="Country" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="countrytext" layoutX="140.0" layoutY="408.0" prefHeight="26.0" prefWidth="175.0" />
+            <TextField fx:id="countrytext" layoutX="605.0" layoutY="88.0" prefHeight="26.0" prefWidth="122.0" promptText="Country" />
+            <TextField fx:id="NamePatientTextField" layoutX="26.0" layoutY="88.0" prefHeight="26.0" prefWidth="163.0" promptText="Name" />
       </children>
     </AnchorPane>
   </children>
+   <effect>
+      <Lighting diffuseConstant="2.0">
+         <bumpInput>
+            <Shadow />
+         </bumpInput>
+         <light>
+            <Light.Distant />
+         </light>
+      </Lighting>
+   </effect>
 </VBox>

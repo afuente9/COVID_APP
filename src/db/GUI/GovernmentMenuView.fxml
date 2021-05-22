@@ -44,21 +44,36 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="451.0" prefWidth="697.0" VBox.vgrow="ALWAYS">
       <children>
-            <Label layoutX="615.0" layoutY="14.0" text="Government">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="408.0" fitWidth="319.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="516.0" fitWidth="820.0" layoutX="-29.0" pickOnBounds="true">
                <image>
-                  <Image url="@../../../../../1588147924-ministerio-de-sanidad-1.jpg" />
+                  <Image url="@backgrounds/gobierno.png" />
                </image>
             </ImageView>
-            <Button layoutX="396.0" layoutY="343.0" mnemonicParsing="false" onAction="#NotifyVaccines" prefHeight="43.0" prefWidth="254.0" text="Notify used vaccines" />
-            <Button layoutX="396.0" layoutY="247.0" mnemonicParsing="false" onAction="#TriggerSimulation" prefHeight="43.0" prefWidth="254.0" text="Trigger a simulation" />
-            <Button fx:id="buttonvaccines" layoutX="396.0" layoutY="153.0" mnemonicParsing="false" onAction="#ViewTotalNumber" prefHeight="43.0" prefWidth="254.0" text="View the total number of vaccines" />
-            <Button layoutX="33.0" layoutY="432.0" mnemonicParsing="false" onAction="#OnSignOutClick" prefHeight="43.0" prefWidth="79.0" text="Sign out" />
-            <Button layoutX="396.0" layoutY="410.0" mnemonicParsing="false" onAction="#modifyuserdata" prefHeight="43.0" prefWidth="254.0" text="Modify user data" />
+            <Label layoutX="21.0" layoutY="57.0" text="Administration" textFill="#35657f">
+               <font>
+                  <Font name="Times New Roman" size="29.0" />
+               </font>
+            </Label>
+            <Button layoutX="373.0" layoutY="325.0" mnemonicParsing="false" onAction="#NotifyVaccines" prefHeight="43.0" prefWidth="254.0" text="Notify used vaccines" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="16.0" />
+               </font></Button>
+            <Button layoutX="373.0" layoutY="233.0" mnemonicParsing="false" onAction="#TriggerSimulation" prefHeight="43.0" prefWidth="254.0" text="Trigger a simulation" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="16.0" />
+               </font></Button>
+            <Button fx:id="buttonvaccines" layoutX="373.0" layoutY="145.0" mnemonicParsing="false" onAction="#ViewTotalNumber" prefHeight="43.0" prefWidth="254.0" text="View the total number of vaccines" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="16.0" />
+               </font></Button>
+            <Button layoutX="677.0" layoutY="458.0" mnemonicParsing="false" onAction="#OnSignOutClick" prefHeight="43.0" prefWidth="79.0" text="Sign out" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="16.0" />
+               </font></Button>
+            <Button layoutX="373.0" layoutY="414.0" mnemonicParsing="false" onAction="#modifyuserdata" prefHeight="43.0" prefWidth="254.0" text="Modify user data" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="16.0" />
+               </font></Button>
       </children>
     </AnchorPane>
   </children>

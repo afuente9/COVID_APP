@@ -37,28 +37,41 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="516.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="db.GUI.SendShipmentController">
+<VBox prefHeight="518.0" prefWidth="711.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="db.GUI.SendShipmentController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="451.0" prefWidth="697.0" VBox.vgrow="ALWAYS">
       <children>
-            <Label fx:id="totalNumberVaccines" layoutX="42.0" layoutY="27.0" text="How many vaccines do you want to send?">
+            <ImageView fitHeight="515.0" fitWidth="772.0" layoutY="2.0" pickOnBounds="true">
+               <image>
+                  <Image url="@backgrounds/laboratorio.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="totalNumberVaccines" layoutX="42.0" layoutY="27.0" text="How many vaccines do you want to send?" textFill="#35657f">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Times New Roman" size="25.0" />
                </font>
             </Label>
-            <Button layoutX="614.0" layoutY="23.0" mnemonicParsing="false" onAction="#sendvaccinesbutton" prefHeight="43.0" prefWidth="79.0" text="Send" />
-            <Label fx:id="labname" layoutX="42.0" layoutY="148.0" prefHeight="28.0" prefWidth="400.0" text="Recent shipments from &quot;labname&quot;">
+            <Button layoutX="652.0" layoutY="23.0" mnemonicParsing="false" onAction="#sendvaccinesbutton" prefHeight="43.0" prefWidth="79.0" text="Send" textFill="#2f5569">
                <font>
-                  <Font size="19.0" />
+                  <Font name="Times New Roman" size="15.0" />
+               </font></Button>
+            <Label fx:id="labname" layoutX="42.0" layoutY="148.0" prefHeight="28.0" prefWidth="400.0" text="Recent shipments from &quot;labname&quot;" textFill="#35657f">
+               <font>
+                  <Font name="Times New Roman" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="textamountvaccinessend" layoutX="502.0" layoutY="27.0" prefHeight="35.0" prefWidth="66.0" />
-            <Button layoutX="680.0" layoutY="429.0" mnemonicParsing="false" onAction="#BackFromSendVaccines" prefHeight="43.0" prefWidth="79.0" text="Back" />
+            <TextField fx:id="textamountvaccinessend" layoutX="480.0" layoutY="27.0" prefHeight="35.0" prefWidth="66.0" promptText="Vaccines" />
+            <Button layoutX="652.0" layoutY="132.0" mnemonicParsing="false" onAction="#BackFromSendVaccines" prefHeight="43.0" prefWidth="79.0" text="Back" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="15.0" />
+               </font></Button>
             <Pane layoutX="130.0" layoutY="192.0" prefHeight="309.0" prefWidth="513.0">
                <children>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="502.0" />
@@ -71,12 +84,12 @@
                   </TableView>
                </children>
             </Pane>
-            <Label layoutX="42.0" layoutY="77.0" prefHeight="28.0" prefWidth="79.0" text="Country: ">
+            <Label layoutX="42.0" layoutY="77.0" prefHeight="28.0" prefWidth="79.0" text="Country: " textFill="#35657f">
                <font>
-                  <Font size="19.0" />
+                  <Font name="Times New Roman" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="countryTF" layoutX="130.0" layoutY="73.0" prefHeight="35.0" prefWidth="66.0" />
+            <TextField fx:id="countryTF" layoutX="130.0" layoutY="73.0" prefHeight="35.0" prefWidth="66.0" promptText="Country" />
       </children>
     </AnchorPane>
   </children>

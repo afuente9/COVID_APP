@@ -33,6 +33,8 @@
 -->
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -41,18 +43,26 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="451.0" prefWidth="697.0" VBox.vgrow="ALWAYS">
       <children>
-            <Button layoutX="172.0" layoutY="103.0" mnemonicParsing="false" onAction="#OnSignUpAsDoctorClick" prefHeight="146.0" prefWidth="179.0" text="Doctor">
+            <ImageView fitHeight="516.0" fitWidth="791.0" pickOnBounds="true">
+               <image>
+                  <Image url="@backgrounds/Usuario.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="33.0" layoutY="124.0" mnemonicParsing="false" onAction="#OnSignUpAsDoctorClick" prefHeight="90.0" prefWidth="194.0" text="Doctor" textFill="#2f5569">
                <font>
-                  <Font size="23.0" />
+                  <Font name="Times New Roman" size="23.0" />
                </font></Button>
-            <Button layoutX="455.0" layoutY="103.0" mnemonicParsing="false" onAction="#OnSignUpAsLaboratoryClick" prefHeight="146.0" prefWidth="188.0" text="Laboratory">
+            <Button layoutX="298.0" layoutY="124.0" mnemonicParsing="false" onAction="#OnSignUpAsLaboratoryClick" prefHeight="90.0" prefWidth="194.0" text="Laboratory" textFill="#2f5569">
                <font>
-                  <Font size="23.0" />
+                  <Font name="Times New Roman" size="23.0" />
                </font></Button>
-            <Button fx:id="BackButton" layoutX="618.0" layoutY="459.0" mnemonicParsing="false" onAction="#OnBacktoFirstScreenClick" prefHeight="23.0" prefWidth="121.0" text="Back" />
-            <Button layoutX="297.0" layoutY="278.0" mnemonicParsing="false" onAction="#SIgngovernment" prefHeight="146.0" prefWidth="188.0" text="Government">
+            <Button fx:id="BackButton" layoutX="618.0" layoutY="459.0" mnemonicParsing="false" onAction="#OnBacktoFirstScreenClick" prefHeight="23.0" prefWidth="121.0" text="Back" textFill="#2f5569">
                <font>
-                  <Font size="23.0" />
+                  <Font name="Times New Roman" size="15.0" />
+               </font></Button>
+            <Button layoutX="562.0" layoutY="124.0" mnemonicParsing="false" onAction="#SIgngovernment" prefHeight="90.0" prefWidth="194.0" text="Administration" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="23.0" />
                </font>
             </Button>
       </children>

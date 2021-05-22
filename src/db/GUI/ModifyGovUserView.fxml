@@ -44,33 +44,36 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="451.0" prefWidth="697.0" VBox.vgrow="ALWAYS">
       <children>
-            <Button layoutX="437.0" layoutY="298.0" mnemonicParsing="false" onAction="#backfrommodify" prefHeight="43.0" prefWidth="79.0" text="Back" />
-            <Label layoutX="37.0" layoutY="14.0" prefHeight="43.0" prefWidth="162.0" text="Modify data">
+            <Button layoutX="476.0" layoutY="316.0" mnemonicParsing="false" onAction="#backfrommodify" prefHeight="43.0" prefWidth="79.0" text="Back" textFill="#2f5569">
                <font>
-                  <Font size="29.0" />
+                  <Font name="Times New Roman" size="15.0" />
+               </font></Button>
+            <Label layoutX="37.0" layoutY="82.0" prefHeight="43.0" prefWidth="162.0" text="Modify data" textFill="#35657f">
+               <font>
+                  <Font name="Times New Roman" size="25.0" />
                </font>
             </Label>
-            <Label layoutX="37.0" layoutY="180.0" prefHeight="27.0" prefWidth="99.0" text="Password">
+            <Label layoutX="37.0" layoutY="185.0" prefHeight="27.0" prefWidth="99.0" text="Password:" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="20.0" />
                </font>
             </Label>
-            <Button layoutX="526.0" layoutY="180.0" mnemonicParsing="false" onAction="#modifypass" prefHeight="26.0" prefWidth="23.0" text="ijiujjh" />
-            <Label layoutX="38.0" layoutY="145.0" prefHeight="27.0" prefWidth="106.0" text="User name:">
+            <Button layoutX="526.0" layoutY="185.0" mnemonicParsing="false" onAction="#modifypass" prefHeight="26.0" prefWidth="30.0" text="🔄" />
+            <Label layoutX="38.0" layoutY="145.0" prefHeight="27.0" prefWidth="106.0" text="User name:" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="modifyusername" layoutX="136.0" layoutY="145.0" prefHeight="26.0" prefWidth="175.0" />
-            <Label fx:id="oldusername" layoutX="426.0" layoutY="145.0" prefHeight="27.0" prefWidth="64.0" text="olduserna">
+            <TextField fx:id="modifyusername" layoutX="136.0" layoutY="145.0" prefHeight="26.0" prefWidth="175.0" promptText="User name" />
+            <Label fx:id="oldusername" layoutX="426.0" layoutY="145.0" prefHeight="27.0" prefWidth="114.0" text="olduserna" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <Button layoutX="332.0" layoutY="145.0" mnemonicParsing="false" onAction="#modifyuser" prefHeight="26.0" prefWidth="23.0" text="Accept" />
-            <Button layoutX="494.0" layoutY="180.0" mnemonicParsing="false" onMouseEntered="#visualizepassword7" onMouseExited="#visualizepassword8" prefHeight="26.0" prefWidth="23.0" text="*" />
-            <PasswordField fx:id="oldpastf" layoutX="135.0" layoutY="180.0" prefHeight="26.0" prefWidth="175.0" promptText="Old password" />
-            <PasswordField fx:id="newpasstf" layoutX="328.0" layoutY="180.0" prefHeight="26.0" prefWidth="163.0" promptText="New password" />
+            <Button layoutX="332.0" layoutY="145.0" mnemonicParsing="false" onAction="#modifyuser" prefHeight="26.0" prefWidth="30.0" text="🔄" />
+            <Button layoutX="494.0" layoutY="185.0" mnemonicParsing="false" onMouseEntered="#visualizepassword7" onMouseExited="#visualizepassword8" prefHeight="26.0" prefWidth="30.0" text="👁" />
+            <PasswordField fx:id="oldpastf" layoutX="135.0" layoutY="185.0" prefHeight="26.0" prefWidth="175.0" promptText="Old password" />
+            <PasswordField fx:id="newpasstf" layoutX="328.0" layoutY="185.0" prefHeight="26.0" prefWidth="163.0" promptText="New password" />
             <TextField fx:id="showOld" editable="false" layoutX="135.0" layoutY="180.0" prefHeight="26.0" prefWidth="175.0" promptText="Old password" visible="false" />
             <TextField fx:id="showNew" editable="false" layoutX="329.0" layoutY="180.0" prefHeight="26.0" prefWidth="162.0" promptText="New password" visible="false" />
       </children>

@@ -7,8 +7,10 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 import db.pojos.Doctor;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -214,8 +216,13 @@ import javafx.stage.Stage;
 
 
 
-		public void setDoctorPic(ImageView doctorPic) {
-			DoctorPic = doctorPic;
+		public void setDoctorPic(ImageIcon imgi) {
+			java.awt.Image image = imgi.getImage();
+			//BufferedImage tempCard = (BufferedImage) imgi;
+			Image card = SwingFXUtils.toFXImage((BufferedImage) image, null );
+			
+			DoctorPic.setImage(card);
+
 		}
 	    
 

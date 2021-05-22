@@ -1,8 +1,13 @@
 package db.GUI;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javax.imageio.ImageIO;
 
 import db.pojos.Lab;
 import javafx.event.ActionEvent;
@@ -13,7 +18,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -33,7 +40,7 @@ public void setL(Lab l) {
 	}
 	@FXML
     private Button viewStatistics;
-
+ 
     @FXML
     private Button SearchModify_Patient;
 
@@ -107,6 +114,30 @@ public void setL(Lab l) {
     	}
     	
 
+    }
+    @FXML
+    void changelabpic(ActionEvent event) {
+    	try {
+    		
+    	    
+	    	final FileChooser fileChooser= new FileChooser();
+	    	File file = fileChooser.showOpenDialog((Stage) this.LabName.getScene().getWindow());
+	    	
+	    	if(file.isFile() && file.getName().contains(".jpg")) {
+	    		String thumbURL = file.toURI().toURL().toString();
+	    		Image imgLoad= new Image(thumbURL,500,300,true,true,true);
+	    		System.out.println("fnriuferiusiaoiasdfj");
+	    		this.Doctor_Picture.setImage(imgLoad);
+	    		 BufferedImage bImage = ImageIO.read(file);
+	    	      ByteArrayOutputStream bos = new ByteArrayOutputStream();
+	    	      ImageIO.write(bImage, "jpg", bos );
+	    	      byte [] data = bos.toByteArray();
+	    		Main.getInter().changeLabPic(l, data);
+	    		
+	    	}
+	    		
+	    	}catch (Exception e) {e.printStackTrace();
+	    	}
     }
 
     @FXML

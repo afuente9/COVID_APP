@@ -35,19 +35,32 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="223.0" prefWidth="457.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="db.GUI.NotifyVaccinesUsedController">
+<VBox prefHeight="247.0" prefWidth="458.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="db.GUI.NotifyVaccinesUsedController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="230.0" prefWidth="494.0" VBox.vgrow="ALWAYS">
       <children>
-            <Button layoutX="90.0" layoutY="145.0" mnemonicParsing="false" onAction="#AcceptVaccinesUsed" prefHeight="43.0" prefWidth="114.0" text="Accept" />
-            <Button layoutX="252.0" layoutY="145.0" mnemonicParsing="false" onAction="#CancelandBack" prefHeight="43.0" prefWidth="125.0" text="Cancel" />
-            <Label layoutX="41.0" layoutY="64.0" text="Amount of vaccines used: " textOverrun="CLIP">
+            <ImageView fitHeight="247.0" fitWidth="457.0" pickOnBounds="true">
+               <image>
+                  <Image url="@backgrounds/gobierno.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="90.0" layoutY="145.0" mnemonicParsing="false" onAction="#AcceptVaccinesUsed" prefHeight="43.0" prefWidth="114.0" text="Accept" textFill="#35657f">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Times New Roman" size="16.0" />
+               </font></Button>
+            <Button layoutX="252.0" layoutY="145.0" mnemonicParsing="false" onAction="#CancelandBack" prefHeight="43.0" prefWidth="125.0" text="Cancel" textFill="#35657f">
+               <font>
+                  <Font name="Times New Roman" size="16.0" />
+               </font></Button>
+            <Label layoutX="41.0" layoutY="64.0" text="Amount of vaccines used: " textFill="#35657f" textOverrun="CLIP">
+               <font>
+                  <Font name="Times New Roman" size="27.0" />
                </font>
             </Label>
             <TextField fx:id="textamountofvaccines" layoutX="337.0" layoutY="64.0" prefHeight="35.0" prefWidth="79.0" />

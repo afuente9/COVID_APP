@@ -36,51 +36,64 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="516.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="db.GUI.RegisterGovController">
+<VBox prefHeight="432.0" prefWidth="612.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="db.GUI.RegisterGovController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="451.0" prefWidth="697.0" VBox.vgrow="ALWAYS">
       <children>
-            <Label layoutX="56.0" layoutY="92.0" prefHeight="43.0" prefWidth="236.0" text="Secret government password">
+            <ImageView fitHeight="432.0" fitWidth="612.0" pickOnBounds="true">
+               <image>
+                  <Image url="@backgrounds/gobierno.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="50.0" layoutY="108.0" prefHeight="43.0" prefWidth="288.0" text="Secret government password:" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="23.0" />
                </font>
             </Label>
-            <Label layoutX="52.0" layoutY="290.0" prefHeight="27.0" prefWidth="79.0" text="Country:">
+            <Label layoutX="50.0" layoutY="270.0" prefHeight="27.0" prefWidth="133.0" text="Country:" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="23.0" />
                </font>
             </Label>
-            <TextField fx:id="NameTextField" layoutX="298.0" layoutY="296.0" prefHeight="26.0" prefWidth="175.0" />
-            <Button layoutX="475.0" layoutY="444.0" mnemonicParsing="false" onAction="#OnAcceptLabClick" prefHeight="43.0" prefWidth="79.0" text="Accept" />
-            <Button layoutX="590.0" layoutY="444.0" mnemonicParsing="false" onAction="#OnCancelLabClick" prefHeight="43.0" prefWidth="79.0" text="Cancel" />
-            <TextField fx:id="secretnumbtext" layoutX="292.0" layoutY="98.0" prefHeight="26.0" prefWidth="175.0" />
-            <Label layoutX="37.0" layoutY="14.0" prefHeight="43.0" prefWidth="162.0" text="Government">
+            <TextField fx:id="NameTextField" layoutX="338.0" layoutY="270.0" prefHeight="26.0" prefWidth="175.0" promptText="Country" />
+            <Button layoutX="358.0" layoutY="359.0" mnemonicParsing="false" onAction="#OnAcceptLabClick" prefHeight="43.0" prefWidth="79.0" text="Accept" textFill="#2f5569">
                <font>
-                  <Font size="29.0" />
+                  <Font name="Times New Roman" size="16.0" />
+               </font></Button>
+            <Button layoutX="473.0" layoutY="359.0" mnemonicParsing="false" onAction="#OnCancelLabClick" prefHeight="43.0" prefWidth="79.0" text="Cancel" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="16.0" />
+               </font></Button>
+            <TextField fx:id="secretnumbtext" layoutX="338.0" layoutY="116.0" prefHeight="26.0" prefWidth="175.0" promptText="Secret government password" />
+            <Label layoutX="50.0" layoutY="48.0" prefHeight="43.0" prefWidth="162.0" text="Government" textFill="#35657f">
+               <font>
+                  <Font name="Times New Roman" size="31.0" />
                </font>
             </Label>
-            <Label layoutX="56.0" layoutY="204.0" text="Password:">
+            <Label layoutX="52.0" layoutY="193.0" text="Password:" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="23.0" />
                </font>
             </Label>
-            <Label layoutX="56.0" layoutY="154.0" prefHeight="27.0" prefWidth="110.0" text="User name:">
+            <Label layoutX="52.0" layoutY="153.0" prefHeight="27.0" prefWidth="110.0" text="User name:" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="23.0" />
                </font>
             </Label>
-            <TextField fx:id="emailgov" layoutX="292.0" layoutY="160.0" prefHeight="26.0" prefWidth="175.0" />
-            <PasswordField fx:id="passwordgovernment" layoutX="292.0" layoutY="211.0" prefHeight="26.0" prefWidth="175.0" />
-            <Label layoutX="50.0" layoutY="244.0" text="Repeat password">
+            <TextField fx:id="emailgov" layoutX="338.0" layoutY="153.0" prefHeight="26.0" prefWidth="175.0" promptText="User name" />
+            <PasswordField fx:id="passwordgovernment" layoutX="338.0" layoutY="193.0" prefHeight="26.0" prefWidth="175.0" promptText="Password" />
+            <Label layoutX="50.0" layoutY="230.0" text="Confirm password:" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="23.0" />
                </font>
             </Label>
-            <PasswordField fx:id="repeatpasswordgovernment1" layoutX="292.0" layoutY="251.0" prefHeight="26.0" prefWidth="175.0" />
+            <PasswordField fx:id="repeatpasswordgovernment1" layoutX="338.0" layoutY="230.0" prefHeight="26.0" prefWidth="175.0" promptText="Confirm password" />
       </children>
     </AnchorPane>
   </children>

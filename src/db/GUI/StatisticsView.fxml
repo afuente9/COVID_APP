@@ -29,6 +29,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -37,15 +39,23 @@
 	<children>
 		<AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="451.0" prefWidth="697.0" VBox.vgrow="ALWAYS">
 			<children>
-				<Button fx:id="backfromstatistics" layoutX="516.0" layoutY="453.0" mnemonicParsing="false" onAction="#backfromstatistics" prefHeight="43.0" prefWidth="79.0" text="Back" />
-				<Label layoutX="57.0" layoutY="35.0" text="Type of patients: ">
+            <ImageView fitHeight="516.0" fitWidth="810.0" layoutX="-10.0" layoutY="-1.0" pickOnBounds="true">
+               <image>
+                  <Image url="@backgrounds/laboratorio.png" />
+               </image>
+            </ImageView>
+				<Button fx:id="backfromstatistics" layoutX="534.0" layoutY="452.0" mnemonicParsing="false" onAction="#backfromstatistics" prefHeight="43.0" prefWidth="79.0" text="Back" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="15.0" />
+               </font></Button>
+				<Label layoutX="30.0" layoutY="36.0" text="Type of patients: " textFill="#35657f">
 					<font>
 						<Font size="24.0" />
 					</font>
 				</Label>
-				<ChoiceBox fx:id="typeofpatient" layoutX="258.0" layoutY="40.0" prefWidth="150.0" />
-				<PieChart fx:id="pieChart" layoutX="310.0" layoutY="70.0" legendVisible="false" prefHeight="382.0" prefWidth="482.0" />
-				<LineChart fx:id="lineChart" layoutX="348.0" layoutY="74.0" legendVisible="false" prefHeight="356.0" prefWidth="432.0">
+				<ChoiceBox fx:id="typeofpatient" layoutX="231.0" layoutY="41.0" prefWidth="150.0" />
+				<PieChart fx:id="pieChart" layoutX="310.0" layoutY="70.0" legendVisible="false" prefHeight="382.0" prefWidth="482.0" scaleShape="false" />
+				<LineChart fx:id="lineChart" layoutX="335.0" layoutY="83.0" legendVisible="false" prefHeight="356.0" prefWidth="432.0">
 					<xAxis>
 						<CategoryAxis fx:id="daysAxis" side="BOTTOM" />
 					</xAxis>
@@ -53,21 +63,51 @@
 						<NumberAxis fx:id="numAxis" side="LEFT" />
 					</yAxis>
 				</LineChart>
-				<Label fx:id="plotTittle" layoutX="503.0" layoutY="26.0" text="Title">
+				<Label fx:id="plotTittle" layoutX="556.0" layoutY="40.0" text="Title" textFill="#35657f">
 					<font>
-						<Font size="19.0" />
+						<Font name="Times New Roman" size="26.0" />
 					</font>
 				</Label>
-				<Button fx:id="checkAge" disable="true" layoutX="76.0" layoutY="99.0" mnemonicParsing="false" onAction="#CheckAge" text="By age" />
-				<Button fx:id="checkWeight" disable="true" layoutX="79.0" layoutY="135.0" mnemonicParsing="false" onAction="#checkWei" text="By weight" />
-				<Button fx:id="checkHeight" disable="true" layoutX="80.0" layoutY="172.0" mnemonicParsing="false" onAction="#checkHei" text="By height" />
-				<Button fx:id="checkSex" disable="true" layoutX="96.0" layoutY="207.0" mnemonicParsing="false" onAction="#oncheckSex" text="By sex" />
-				<Button fx:id="checkHospital" disable="true" layoutX="91.0" layoutY="245.0" mnemonicParsing="false" onAction="#onCheckHos" text="By hospital" />
-				<Button fx:id="checkPatientLocation" disable="true" layoutX="92.0" layoutY="284.0" mnemonicParsing="false" onAction="#onCheckLocation" text="By patient location" />
-				<Button fx:id="checkMedication" disable="true" layoutX="89.0" layoutY="328.0" mnemonicParsing="false" onAction="#onCheckMedication" text="By medication" />
-				<Button fx:id="ckeckOtherPathologies" disable="true" layoutX="96.0" layoutY="372.0" mnemonicParsing="false" onAction="#onckeckOtherPathologies" text="By other pathologies" />
-				<Button fx:id="ckeckBloodType" disable="true" layoutX="102.0" layoutY="440.0" mnemonicParsing="false" onAction="#onckeckBloodType" text="By blood type" />
-            <Button fx:id="bycountry" disable="true" layoutX="101.0" layoutY="404.0" mnemonicParsing="false" onAction="#nBycotry" text="By country" />
+				<Button fx:id="checkAge" disable="true" layoutX="30.0" layoutY="103.0" mnemonicParsing="false" onAction="#CheckAge" prefHeight="32.0" prefWidth="102.0" text="By age" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="17.0" />
+               </font></Button>
+				<Button fx:id="checkWeight" disable="true" layoutX="154.0" layoutY="103.0" mnemonicParsing="false" onAction="#checkWei" prefHeight="32.0" prefWidth="102.0" text="By weight" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="17.0" />
+               </font></Button>
+				<Button fx:id="checkHeight" disable="true" layoutX="30.0" layoutY="157.0" mnemonicParsing="false" onAction="#checkHei" prefHeight="32.0" prefWidth="102.0" text="By height" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="17.0" />
+               </font></Button>
+				<Button fx:id="checkSex" disable="true" layoutX="155.0" layoutY="157.0" mnemonicParsing="false" onAction="#oncheckSex" prefHeight="32.0" prefWidth="102.0" text="By sex" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="17.0" />
+               </font></Button>
+				<Button fx:id="checkHospital" disable="true" layoutX="30.0" layoutY="207.0" mnemonicParsing="false" onAction="#onCheckHos" prefHeight="32.0" prefWidth="102.0" text="By hospital" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="17.0" />
+               </font></Button>
+				<Button fx:id="checkPatientLocation" disable="true" layoutX="34.0" layoutY="257.0" mnemonicParsing="false" onAction="#onCheckLocation" prefHeight="32.0" prefWidth="222.0" text="By patient location" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="17.0" />
+               </font></Button>
+				<Button fx:id="checkMedication" disable="true" layoutX="34.0" layoutY="305.0" mnemonicParsing="false" onAction="#onCheckMedication" prefHeight="32.0" prefWidth="222.0" text="By medication" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="17.0" />
+               </font></Button>
+				<Button fx:id="ckeckOtherPathologies" disable="true" layoutX="34.0" layoutY="351.0" mnemonicParsing="false" onAction="#onckeckOtherPathologies" prefHeight="32.0" prefWidth="222.0" text="By other pathologies" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="17.0" />
+               </font></Button>
+				<Button fx:id="ckeckBloodType" disable="true" layoutX="34.0" layoutY="398.0" mnemonicParsing="false" onAction="#onckeckBloodType" prefHeight="32.0" prefWidth="222.0" text="By blood type" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="17.0" />
+               </font></Button>
+            <Button fx:id="bycountry" disable="true" layoutX="154.0" layoutY="207.0" mnemonicParsing="false" onAction="#nBycotry" prefHeight="32.0" prefWidth="102.0" text="By country" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="17.0" />
+               </font></Button>
 			</children>
 		</AnchorPane>
 	</children>

@@ -36,75 +36,88 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="516.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="db.GUI.SignUpDoctorController">
+<VBox prefHeight="514.0" prefWidth="703.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="db.GUI.SignUpDoctorController">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="451.0" prefWidth="697.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="507.0" prefWidth="707.0" VBox.vgrow="ALWAYS">
       <children>
-            <Label fx:id="Sexlabel" layoutX="71.0" layoutY="269.0" text="Sex:">
+            <ImageView fitHeight="532.0" fitWidth="714.0" layoutX="-10.0" layoutY="-15.0" pickOnBounds="true">
+               <image>
+                  <Image url="@backgrounds/Imagen1.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="Sexlabel" layoutX="38.0" layoutY="233.0" text="Sex:" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="21.0" />
                </font>
             </Label>
-            <Label fx:id="namelabel" layoutX="71.0" layoutY="219.0" prefHeight="27.0" prefWidth="64.0" text="Name:">
+            <Label fx:id="namelabel" layoutX="37.0" layoutY="191.0" prefHeight="27.0" prefWidth="64.0" text="Name:" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="21.0" />
                </font>
             </Label>
-            <TextField fx:id="NameTextField" layoutX="170.0" layoutY="219.0" prefHeight="26.0" prefWidth="175.0" />
-            <Button layoutX="590.0" layoutY="444.0" mnemonicParsing="false" onAction="#OnCancelClick" prefHeight="43.0" prefWidth="79.0" text="Cancel" />
-            <Label fx:id="specialityLabel" layoutX="71.0" layoutY="459.0" text="Spetiality">
+            <TextField fx:id="NameTextField" layoutX="271.0" layoutY="191.0" prefHeight="26.0" prefWidth="175.0" promptText="Name" />
+            <Button layoutX="579.0" layoutY="450.0" mnemonicParsing="false" onAction="#OnCancelClick" prefHeight="43.0" prefWidth="90.0" text="Cancel" textFill="#2f5569">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="15.0" />
+               </font></Button>
+            <Label fx:id="specialityLabel" layoutX="38.0" layoutY="393.0" prefHeight="24.0" prefWidth="98.0" text="Speciality" textFill="#35657f">
+               <font>
+                  <Font name="Times New Roman" size="21.0" />
                </font>
             </Label>
-            <Label fx:id="collabel" layoutX="71.0" layoutY="367.0" prefWidth="79.0" text="Collegiate number:">
+            <Label fx:id="collabel" layoutX="37.0" layoutY="317.0" prefHeight="24.0" prefWidth="226.0" text="Collegiate number:" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="21.0" />
                </font>
             </Label>
-            <Label fx:id="bdlabel" layoutX="71.0" layoutY="316.0" text="Birth date:">
+            <Label fx:id="bdlabel" layoutX="39.0" layoutY="275.0" text="Birth date:" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="21.0" />
                </font>
             </Label>
-            <TextField fx:id="SpetialityTextField" layoutX="170.0" layoutY="460.0" prefHeight="26.0" prefWidth="175.0" />
-            <TextField fx:id="SexTextField" layoutX="170.0" layoutY="269.0" prefHeight="26.0" prefWidth="175.0" />
-            <Label layoutX="37.0" layoutY="14.0" prefHeight="43.0" prefWidth="98.0" text="Doctor">
+            <TextField fx:id="SpetialityTextField" layoutX="271.0" layoutY="392.0" prefHeight="26.0" prefWidth="175.0" promptText="Speciality" />
+            <TextField fx:id="SexTextField" layoutX="271.0" layoutY="232.0" prefHeight="26.0" prefWidth="175.0" promptText="Male - Female" />
+            <Label layoutX="37.0" layoutY="14.0" prefHeight="43.0" prefWidth="238.0" text="Register doctor" textFill="#35657f">
                <font>
-                  <Font size="29.0" />
+                  <Font name="Times New Roman" size="29.0" />
                </font>
             </Label>
-            <TextField fx:id="ColNumTextField" layoutX="170.0" layoutY="367.0" prefHeight="26.0" prefWidth="175.0" />
-            <TextField fx:id="DateTextField" layoutX="170.0" layoutY="316.0" prefHeight="26.0" prefWidth="175.0" />
-            <Label fx:id="hoslabel" layoutX="71.0" layoutY="412.0" text="Hospital">
+            <TextField fx:id="ColNumTextField" layoutX="271.0" layoutY="316.0" prefHeight="26.0" prefWidth="175.0" promptText="Collegiate number" />
+            <TextField fx:id="DateTextField" layoutX="271.0" layoutY="274.0" prefHeight="26.0" prefWidth="175.0" promptText="yyyy-mm-dd" />
+            <Label fx:id="hoslabel" layoutX="38.0" layoutY="355.0" prefHeight="24.0" prefWidth="90.0" text="Hospital" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="21.0" />
                </font>
             </Label>
-            <TextField fx:id="HospitalTextField" layoutX="170.0" layoutY="413.0" prefHeight="26.0" prefWidth="175.0" />
-            <Label fx:id="passwordlabel" layoutX="71.0" layoutY="110.0" prefHeight="27.0" prefWidth="98.0" text="Password:">
+            <TextField fx:id="HospitalTextField" layoutX="271.0" layoutY="354.0" prefHeight="26.0" prefWidth="175.0" promptText="Hospital" />
+            <Label fx:id="passwordlabel" layoutX="38.0" layoutY="114.0" prefHeight="27.0" prefWidth="98.0" text="Password:" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="21.0" />
                </font>
             </Label>
-            <Label fx:id="EmailLabel" layoutX="70.0" layoutY="74.0" prefHeight="27.0" prefWidth="98.0" text="User name:">
+            <Label fx:id="EmailLabel" layoutX="37.0" layoutY="78.0" prefHeight="27.0" prefWidth="98.0" text="User name:" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="21.0" />
                </font>
             </Label>
-            <TextField fx:id="EmaDcotorText" layoutX="170.0" layoutY="75.0" prefHeight="26.0" prefWidth="175.0" />
-            <Button fx:id="createUserbutton" layoutX="490.0" layoutY="444.0" mnemonicParsing="false" onAction="#oncreateuser" prefHeight="43.0" prefWidth="82.0" text="Create user" />
-            <PasswordField fx:id="pasDoctorTxtF" layoutX="169.0" layoutY="111.0" prefHeight="26.0" prefWidth="175.0" />
-            <Label fx:id="repeatLabel" layoutX="70.0" layoutY="149.0" prefHeight="27.0" prefWidth="193.0" text="Repeat your password:">
+            <TextField fx:id="EmaDcotorText" layoutX="271.0" layoutY="78.0" prefHeight="26.0" prefWidth="175.0" promptText="User name" />
+            <Button fx:id="createUserbutton" layoutX="453.0" layoutY="450.0" mnemonicParsing="false" onAction="#oncreateuser" prefHeight="43.0" prefWidth="90.0" text="Create user" textFill="#2f5569">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="15.0" />
+               </font></Button>
+            <PasswordField fx:id="pasDoctorTxtF" layoutX="271.0" layoutY="114.0" prefHeight="26.0" prefWidth="175.0" promptText="Password" />
+            <Label fx:id="repeatLabel" layoutX="37.0" layoutY="153.0" prefHeight="27.0" prefWidth="193.0" text="Confirm password:" textFill="#35657f">
+               <font>
+                  <Font name="Times New Roman" size="21.0" />
                </font>
             </Label>
-            <PasswordField fx:id="RepeatPassword" layoutX="271.0" layoutY="149.0" prefHeight="26.0" prefWidth="175.0" />
+            <PasswordField fx:id="RepeatPassword" layoutX="271.0" layoutY="153.0" prefHeight="26.0" prefWidth="175.0" promptText="Confirm password" />
       </children>
     </AnchorPane>
   </children>

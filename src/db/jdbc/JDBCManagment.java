@@ -1,5 +1,9 @@
 package db.jdbc;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.sql.*;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -2369,22 +2373,37 @@ public class JDBCManagment implements Cov_Manager {
 	}
 
 	@Override
-	public void getPicFromDoc(int id) {
+	public byte[] getPicFromDoc(int id) {
 		try {
 			String sql;
 			sql = "SELECT image FROM doctors WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, id);
-			prep.executeQuery();
+			ResultSet rs = prep.executeQuery();
+
+			while (rs.next()) {
+				
+				byte[] photo = rs.getBytes("image");
+			
+		        return photo;
+
+				
+			}
+			
+			rs.close();
 			prep.close();
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+        return null;
+
 
 	}
 
-	@Override
-	public void getPicFromLab(int id) {
+	/*@Override
+	public byte[] getPicFromLab(int id) {
 		try {
 			String sql;
 			sql = "SELECT image FROM lab WHERE id = ?";
@@ -2396,7 +2415,7 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 
-	}
+	}*/
 
 	@Override
 	public List<Day> getDay(int id) {
@@ -2703,6 +2722,12 @@ public class JDBCManagment implements Cov_Manager {
 
 	@Override
 	public User getUserbydoctor(Doctor d) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public byte[] getPicFromLab(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

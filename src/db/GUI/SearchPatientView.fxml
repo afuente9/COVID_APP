@@ -40,6 +40,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -49,21 +51,32 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="451.0" prefWidth="697.0" VBox.vgrow="ALWAYS">
       <children>
-            <Label fx:id="numberofpatients" layoutX="46.0" layoutY="31.0" prefHeight="35.0" prefWidth="410.0" text="There are x patients with coronavirus">
+            <ImageView fitHeight="518.0" fitWidth="791.0" pickOnBounds="true">
+               <image>
+                  <Image url="@backgrounds/Imagen1.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="numberofpatients" layoutX="46.0" layoutY="31.0" prefHeight="35.0" prefWidth="410.0" text="There are x patients with coronavirus" textFill="#35657f">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Times New Roman" size="22.0" />
                </font>
             </Label>
-            <Button layoutX="674.0" layoutY="124.0" mnemonicParsing="false" onAction="#ModifyPatient" prefHeight="43.0" prefWidth="79.0" text="Modify" />
-            <Button layoutX="683.0" layoutY="14.0" mnemonicParsing="false" onAction="#BackFromModify" prefHeight="43.0" prefWidth="79.0" text="Back" />
-            <Label layoutX="46.0" layoutY="73.0" prefHeight="35.0" prefWidth="410.0" text="Filter date from                              to ">
+            <Button layoutX="674.0" layoutY="124.0" mnemonicParsing="false" onAction="#ModifyPatient" prefHeight="43.0" prefWidth="79.0" text="Modify" textFill="#2f5569">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Times New Roman" size="15.0" />
+               </font></Button>
+            <Button layoutX="697.0" layoutY="14.0" mnemonicParsing="false" onAction="#BackFromModify" prefHeight="43.0" prefWidth="79.0" text="Back" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="15.0" />
+               </font></Button>
+            <Label layoutX="46.0" layoutY="73.0" prefHeight="35.0" prefWidth="410.0" text="Filter date from                              to " textFill="#35657f">
+               <font>
+                  <Font name="Times New Roman" size="22.0" />
                </font>
             </Label>
-            <Label layoutX="46.0" layoutY="125.0" prefHeight="35.0" prefWidth="410.0" text="Search by                         :">
+            <Label layoutX="46.0" layoutY="125.0" prefHeight="35.0" prefWidth="410.0" text="Search by                         :" textFill="#35657f">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Times New Roman" size="22.0" />
                </font>
             </Label>
             <ChoiceBox fx:id="SearchOptions" layoutX="160.0" layoutY="133.0" prefWidth="150.0">
@@ -81,8 +94,14 @@
             <TextField fx:id="typeTextfield" layoutX="338.0" layoutY="133.0" />
             <DatePicker fx:id="dateFrom" editable="false" layoutX="223.0" layoutY="78.0" />
             <DatePicker fx:id="dateTo" editable="false" layoutX="441.0" layoutY="78.0" />
-            <Button layoutX="631.0" layoutY="78.0" mnemonicParsing="false" onAction="#Filterclick" text="Filter" />
-            <Button fx:id="SearchButton" layoutX="509.0" layoutY="128.0" mnemonicParsing="false" onAction="#ModifySearch" prefHeight="35.0" prefWidth="54.0" text="Search" />
+            <Button layoutX="631.0" layoutY="78.0" mnemonicParsing="false" onAction="#Filterclick" text="Filter" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="15.0" />
+               </font></Button>
+            <Button fx:id="SearchButton" layoutX="509.0" layoutY="128.0" mnemonicParsing="false" onAction="#ModifySearch" prefHeight="35.0" prefWidth="37.0" text="🔎" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="15.0" />
+               </font></Button>
             <Pane layoutX="33.0" layoutY="178.0" prefHeight="323.0" prefWidth="730.0">
                <children>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="318.0" prefWidth="730.0">

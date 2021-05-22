@@ -46,39 +46,63 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="451.0" prefWidth="697.0" VBox.vgrow="ALWAYS">
       <children>
-            <Label layoutX="320.0" layoutY="25.0" text="Welcome">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="370.0" layoutY="216.0" text="Password:">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="370.0" layoutY="126.0" text="User:">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="408.0" fitWidth="319.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="516.0" fitWidth="805.0" layoutX="-4.0" pickOnBounds="true">
                <image>
-                  <Image url="@Imagen1.png" />
+                  <Image url="@backgrounds/covidist.png" />
                </image>
             </ImageView>
-            <PasswordField fx:id="PasswordTextField" layoutX="394.0" layoutY="258.0" prefHeight="27.0" prefWidth="175.0" />
-            <TextField fx:id="UserTextField" layoutX="394.0" layoutY="169.0" prefHeight="26.0" prefWidth="175.0" />
-            <Button layoutX="475.0" layoutY="444.0" mnemonicParsing="false" onAction="#OnSignUpClick" prefHeight="43.0" prefWidth="79.0" text="Sign up" />
-            <Button layoutX="590.0" layoutY="444.0" mnemonicParsing="false" onAction="#OnEnterUser" prefHeight="43.0" prefWidth="79.0" text="Enter" />
-            <Label layoutX="14.0" layoutY="466.0" text="COVIDIST" textOverrun="CLIP">
+            <ImageView fitHeight="516.0" fitWidth="315.0" onMouseClicked="#openurl" pickOnBounds="true">
+               <image>
+                  <Image url="@backgrounds/covid-19-vaccine-789x367.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="63.0" layoutX="713.0" layoutY="89.0" onMouseClicked="#opengit" pickOnBounds="true">
+               <image>
+                  <Image url="@backgrounds/Imagen1git.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="63.0" layoutX="713.0" layoutY="162.0" onMouseClicked="#openyt" pickOnBounds="true">
+               <image>
+                  <Image url="@backgrounds/8a7efbf2dbfbfa3fd17f19657195c900.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="377.0" layoutY="88.0" text="Welcome!" textFill="#35657f">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Times New Roman" size="27.0" />
                </font>
             </Label>
-            <Button layoutX="524.0" layoutY="30.0" mnemonicParsing="false" onAction="#onClose" text="Close" />
-            <Label fx:id="labelDate" layoutX="40.0" layoutY="12.0" text="COVIDIST" textOverrun="CLIP">
+            <Label layoutX="381.0" layoutY="236.0" text="Password:" textFill="#35657f">
                <font>
-                  <Font size="11.0" />
+                  <Font name="Times New Roman" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="381.0" layoutY="146.0" text="User:" textFill="#35657f">
+               <font>
+                  <Font name="Times New Roman" size="22.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="PasswordTextField" layoutX="379.0" layoutY="280.0" prefHeight="27.0" prefWidth="175.0" />
+            <TextField fx:id="UserTextField" layoutX="379.0" layoutY="191.0" prefHeight="26.0" prefWidth="175.0" />
+            <Button layoutX="574.0" layoutY="458.0" mnemonicParsing="false" onAction="#OnSignUpClick" prefHeight="43.0" prefWidth="88.0" text="Register" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="17.0" />
+               </font></Button>
+            <Button layoutX="689.0" layoutY="458.0" mnemonicParsing="false" onAction="#OnEnterUser" prefHeight="43.0" prefWidth="88.0" text="Enter" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="17.0" />
+               </font></Button>
+            <Label layoutX="23.0" layoutY="19.0" prefHeight="38.0" prefWidth="162.0" text="COVIDIST" textFill="#35657f" textOverrun="CLIP">
+               <font>
+                  <Font name="Times New Roman" size="32.0" />
+               </font>
+            </Label>
+            <Button layoutX="713.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClose" text="Close" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="17.0" />
+               </font></Button>
+            <Label fx:id="labelDate" layoutX="23.0" layoutY="54.0" prefHeight="27.0" prefWidth="88.0" text="COVIDIST" textFill="#35657f" textOverrun="CLIP">
+               <font>
+                  <Font name="Times New Roman" size="13.0" />
                </font>
             </Label>
       </children>

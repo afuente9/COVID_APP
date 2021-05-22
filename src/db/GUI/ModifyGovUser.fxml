@@ -36,6 +36,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -44,35 +46,43 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="451.0" prefWidth="697.0" VBox.vgrow="ALWAYS">
       <children>
-            <Button layoutX="437.0" layoutY="298.0" mnemonicParsing="false" onAction="#backfrommodify" prefHeight="43.0" prefWidth="79.0" text="Back" />
-            <Label layoutX="37.0" layoutY="14.0" prefHeight="43.0" prefWidth="162.0" text="Modify data">
+            <ImageView fitHeight="374.0" fitWidth="587.0" pickOnBounds="true">
+               <image>
+                  <Image url="@backgrounds/gobierno.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="486.0" layoutY="310.0" mnemonicParsing="false" onAction="#backfrommodify" prefHeight="43.0" prefWidth="79.0" text="Back" textFill="#2f5569">
                <font>
-                  <Font size="29.0" />
+                  <Font name="Times New Roman" size="16.0" />
+               </font></Button>
+            <Label layoutX="37.0" layoutY="63.0" prefHeight="43.0" prefWidth="162.0" text="Modify data" textFill="#35657f">
+               <font>
+                  <Font name="Times New Roman" size="25.0" />
                </font>
             </Label>
-            <Label layoutX="54.0" layoutY="162.0" prefHeight="27.0" prefWidth="99.0" text="Password">
+            <Label layoutX="37.0" layoutY="185.0" prefHeight="27.0" prefWidth="99.0" text="Password:" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <Button layoutX="543.0" layoutY="162.0" mnemonicParsing="false" onAction="#modifypass" prefHeight="26.0" prefWidth="23.0" text="ijiujjh" />
-            <Label layoutX="54.0" layoutY="113.0" prefHeight="27.0" prefWidth="106.0" text="User name:">
+            <Button layoutX="526.0" layoutY="185.0" mnemonicParsing="false" onAction="#modifypass" prefHeight="26.0" prefWidth="30.0" text="🔄" />
+            <Label layoutX="37.0" layoutY="136.0" prefHeight="27.0" prefWidth="106.0" text="User name:" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="modifyusername" layoutX="152.0" layoutY="113.0" prefHeight="26.0" prefWidth="175.0" />
-            <Label fx:id="oldusername" layoutX="442.0" layoutY="113.0" prefHeight="27.0" prefWidth="64.0" text="olduserna">
+            <TextField fx:id="modifyusername" layoutX="135.0" layoutY="136.0" prefHeight="26.0" prefWidth="175.0" promptText="User name" />
+            <Label fx:id="oldusername" layoutX="410.0" layoutY="135.0" prefHeight="27.0" prefWidth="106.0" text="olduserna" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <Button layoutX="348.0" layoutY="113.0" mnemonicParsing="false" onAction="#modifyuser" prefHeight="26.0" prefWidth="23.0" text="Accept" />
-            <Button layoutX="511.0" layoutY="162.0" mnemonicParsing="false" onMouseEntered="#visualizepassword7" onMouseExited="#visualizepassword8" prefHeight="26.0" prefWidth="23.0" text="*" />
-            <PasswordField fx:id="oldpastf" layoutX="152.0" layoutY="162.0" prefHeight="26.0" prefWidth="175.0" promptText="Old password" />
-            <PasswordField fx:id="newpasstf" layoutX="345.0" layoutY="162.0" prefHeight="26.0" prefWidth="163.0" promptText="New password" />
-            <TextField fx:id="showOld" layoutX="152.0" layoutY="162.0" prefHeight="26.0" prefWidth="175.0" promptText="Old password" visible="false" />
-            <TextField fx:id="showNew" disable="true" layoutX="346.0" layoutY="162.0" prefHeight="26.0" prefWidth="162.0" promptText="New password" visible="false" />
+            <Button layoutX="331.0" layoutY="136.0" mnemonicParsing="false" onAction="#modifyuser" prefHeight="26.0" prefWidth="30.0" text="🔄" />
+            <Button layoutX="494.0" layoutY="184.0" mnemonicParsing="false" onMouseEntered="#visualizepassword7" onMouseExited="#visualizepassword8" prefHeight="27.0" prefWidth="30.0" text="👁" />
+            <PasswordField fx:id="oldpastf" layoutX="135.0" layoutY="185.0" prefHeight="26.0" prefWidth="175.0" promptText="Old password" />
+            <PasswordField fx:id="newpasstf" layoutX="328.0" layoutY="185.0" prefHeight="26.0" prefWidth="163.0" promptText="New password" />
+            <TextField fx:id="showOld" layoutX="135.0" layoutY="185.0" prefHeight="26.0" prefWidth="175.0" promptText="Old password" visible="false" />
+            <TextField fx:id="showNew" disable="true" layoutX="329.0" layoutY="185.0" prefHeight="26.0" prefWidth="162.0" promptText="New password" visible="false" />
       </children>
     </AnchorPane>
   </children>

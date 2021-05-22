@@ -56,7 +56,7 @@ public class Main extends Application{
 			getInter().connect();
 
 			Pane root = (Pane)FXMLLoader.load(getClass().getResource("MainMenuView.fxml"));
-			Scene scene = new Scene(root,700,700);
+			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();

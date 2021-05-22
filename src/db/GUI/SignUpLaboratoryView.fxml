@@ -36,57 +36,70 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="516.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="db.GUI.SignUpLaboratoryController">
+<VBox prefHeight="476.0" prefWidth="582.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="db.GUI.SignUpLaboratoryController">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="451.0" prefWidth="697.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="476.0" prefWidth="558.0" VBox.vgrow="ALWAYS">
       <children>
-            <Label layoutX="126.0" layoutY="258.0" text="Cif:">
+            <ImageView fitHeight="476.0" fitWidth="585.0" layoutX="-7.0" pickOnBounds="true">
+               <image>
+                  <Image url="@backgrounds/laboratorio.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="37.0" layoutY="274.0" text="Cif:" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="21.0" />
                </font>
             </Label>
-            <Label layoutX="126.0" layoutY="208.0" prefHeight="27.0" prefWidth="64.0" text="Name:">
+            <Label layoutX="37.0" layoutY="224.0" prefHeight="27.0" prefWidth="64.0" text="Name:" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="21.0" />
                </font>
             </Label>
-            <TextField fx:id="NameTextField" layoutX="225.0" layoutY="208.0" prefHeight="26.0" prefWidth="175.0" />
-            <Button layoutX="475.0" layoutY="444.0" mnemonicParsing="false" onAction="#OnAcceptLabClick" prefHeight="43.0" prefWidth="79.0" text="Accept" />
-            <Button layoutX="590.0" layoutY="444.0" mnemonicParsing="false" onAction="#OnCancelLabClick" prefHeight="43.0" prefWidth="79.0" text="Cancel" />
-            <Label layoutX="126.0" layoutY="305.0" text="Adress:">
+            <TextField fx:id="NameTextField" layoutX="225.0" layoutY="224.0" prefHeight="26.0" prefWidth="175.0" promptText="Name" />
+            <Button layoutX="347.0" layoutY="395.0" mnemonicParsing="false" onAction="#OnAcceptLabClick" prefHeight="43.0" prefWidth="94.0" text="Create user" textFill="#2f5569">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="15.0" />
+               </font></Button>
+            <Button layoutX="470.0" layoutY="396.0" mnemonicParsing="false" onAction="#OnCancelLabClick" prefHeight="43.0" prefWidth="94.0" text="Cancel" textFill="#2f5569">
+               <font>
+                  <Font name="Times New Roman" size="15.0" />
+               </font></Button>
+            <Label layoutX="37.0" layoutY="321.0" text="Adress:" textFill="#35657f">
+               <font>
+                  <Font name="Times New Roman" size="21.0" />
                </font>
             </Label>
-            <TextField fx:id="CifTextField" layoutX="225.0" layoutY="258.0" prefHeight="26.0" prefWidth="175.0" />
-            <Label layoutX="37.0" layoutY="14.0" prefHeight="43.0" prefWidth="162.0" text="Laboratory">
+            <TextField fx:id="CifTextField" layoutX="225.0" layoutY="273.0" prefHeight="26.0" prefWidth="175.0" promptText="Cif" />
+            <Label layoutX="37.0" layoutY="14.0" prefHeight="43.0" prefWidth="267.0" text="Register laboratory" textFill="#35657f">
                <font>
-                  <Font size="29.0" />
+                  <Font name="Times New Roman" size="31.0" />
                </font>
             </Label>
-            <TextField fx:id="AdressTextField" layoutX="225.0" layoutY="305.0" prefHeight="26.0" prefWidth="175.0" />
-            <Label layoutX="118.0" layoutY="127.0" text="Password:">
+            <TextField fx:id="AdressTextField" layoutX="225.0" layoutY="320.0" prefHeight="26.0" prefWidth="175.0" promptText="Adress" />
+            <Label layoutX="37.0" layoutY="129.0" text="Password:" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="21.0" />
                </font>
             </Label>
-            <Label layoutX="118.0" layoutY="77.0" prefHeight="27.0" prefWidth="106.0" text="User name:">
+            <Label layoutX="37.0" layoutY="81.0" prefHeight="27.0" prefWidth="106.0" text="User name:" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="21.0" />
                </font>
             </Label>
-            <TextField fx:id="emailLab" layoutX="217.0" layoutY="77.0" prefHeight="26.0" prefWidth="175.0" />
-            <Label layoutX="52.0" layoutY="162.0" text="Confirm password:">
+            <TextField fx:id="emailLab" layoutX="225.0" layoutY="81.0" prefHeight="26.0" prefWidth="175.0" promptText="User name" />
+            <Label layoutX="37.0" layoutY="177.0" text="Confirm password:" textFill="#35657f">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Times New Roman" size="21.0" />
                </font>
             </Label>
-            <PasswordField fx:id="PassTextf" layoutX="230.0" layoutY="128.0" />
-            <PasswordField fx:id="confirmpastx" layoutX="230.0" layoutY="163.0" />
+            <PasswordField fx:id="PassTextf" layoutX="225.0" layoutY="128.0" prefHeight="26.0" prefWidth="175.0" promptText="Password" />
+            <PasswordField fx:id="confirmpastx" layoutX="225.0" layoutY="177.0" prefHeight="26.0" prefWidth="175.0" promptText="Confirm password" />
       </children>
     </AnchorPane>
   </children>

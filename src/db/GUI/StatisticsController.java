@@ -125,7 +125,7 @@ public class StatisticsController implements Initializable {
 
 	@FXML
 	void backfromstatistics(ActionEvent event) {
-		Stage stage = (Stage) this.pdfbutton.getScene().getWindow();
+		Stage stage = (Stage) this.pieChart.getScene().getWindow();
 		stage.close();
 	}
 	@FXML

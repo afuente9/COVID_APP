@@ -1,6 +1,12 @@
 package db.GUI;
 
+import java.awt.Desktop;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -9,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import db.pojos.Administration;
@@ -24,6 +32,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -217,6 +227,53 @@ public class MainMenuController implements Initializable {
 		openWindow(name, controller);
 
 	}
+    @FXML
+    void opengit(MouseEvent event) {
+    	try {
+
+            Desktop.getDesktop().browse(new URI("https://github.com/afuente9/COVID_APP"));
+
+        } catch (URISyntaxException ex) {
+
+            System.out.println(ex);
+
+        }catch(IOException e){
+
+            System.out.println(e);
+
+        }
+    }
+    @FXML
+    void openyt(MouseEvent event) {
+    	try {
+
+            Desktop.getDesktop().browse(new URI("https://www.youtube.com/channel/UCBQV-dq1lpqNpiz5kmO7V8Q"));
+
+        } catch (URISyntaxException ex) {
+
+            System.out.println(ex);
+
+        }catch(IOException e){
+
+            System.out.println(e);
+
+        }}
+	 @FXML
+	    void openurl(MouseEvent event) {
+		 try {
+
+	            Desktop.getDesktop().browse(new URI("https://alvarodelafuentebo.wixsite.com/covidist"));
+
+	        } catch (URISyntaxException ex) {
+
+	            System.out.println(ex);
+
+	        }catch(IOException e){
+
+	            System.out.println(e);
+
+	        }
+	    }
 
 	@FXML
 	void onClose(ActionEvent event) {
@@ -274,15 +331,26 @@ public class MainMenuController implements Initializable {
 				controller = loader.getController();
 				controller.setD(d);
 				controller.setDoctorName(d.getName());
-				// controller.setDoctorPic(Main.getInter().getPicFromDoc(1));
-				/*
-				 * BufferedImage bImage = ImageIO.read(new File("sample.jpg"));
-				 * ByteArrayOutputStream bos = new ByteArrayOutputStream();
-				 * ImageIO.write(bImage, "jpg", bos ); byte [] data = bos.toByteArray();
-				 * ByteArrayInputStream bis = new ByteArrayInputStream(data); BufferedImage
-				 * bImage2 = ImageIO.read(bis); ImageIO.write(bImage2, "jpg", new
-				 * File("output.jpg") ); System.out.println("image created");
-				 */
+				
+				
+				 try{
+	                    byte[] bi = Main.getInter().getPicFromDoc(d.getId());
+	                    BufferedImage image = null;
+	                    InputStream in = new ByteArrayInputStream(bi);
+	                    image = ImageIO.read(in);
+	                    ImageIcon imgi = new ImageIcon(image.getScaledInstance(60, 60, 0));
+	                    System.out.println("hola");
+	    				controller.setDoctorPic(imgi);
+
+
+	                }catch(Exception ex){
+                      ex.printStackTrace();
+
+	                }
+				
+				
+				
+				
 				Scene scene = new Scene(root);
 				Stage stage = new Stage();
 
