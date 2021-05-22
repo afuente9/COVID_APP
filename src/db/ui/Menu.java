@@ -167,9 +167,9 @@ public class Menu {
 			System.out.println("|	1.  Register			|");
 			System.out.println("|	2.  Login			|");
 			System.out.println("|	3.  Add patients CSV		|");
-			System.out.println("|	4.  Generate XML              |");
-			System.out.println("|	5.  Add from XML              |");
-			System.out.println("|	6.  Generate HTML             |");
+			System.out.println("|	4.  Generate XML                |");
+			System.out.println("|	5.  Add from XML                |");
+			System.out.println("|	6.  Generate HTML               |");
 			System.out.println("|	0.  Exit			|");
 			
 			int choice = Integer.parseInt(reader.readLine());
