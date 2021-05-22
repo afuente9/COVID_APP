@@ -1,9 +1,11 @@
 package db.GUI;
 import java.security.MessageDigest;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import db.pojos.Lab;
+import db.pojos.Patient;
 import db.pojos.users.Role;
 import db.pojos.users.User;
 import javafx.event.ActionEvent;
@@ -63,6 +65,19 @@ try {
     	    	 byte[] image=null;
     	      	Lab l_new= new Lab(name,adress,cif_text,number_vaccines, image);
     			Main.getInter().addLabUser(l_new,u);
+    	      	Lab lastlab= Main.getInter().getLastLab();
+    	      	System.out.println("sss"+lastlab);
+    	      			
+    	      			
+    	      			
+              	List<Patient> allpatients= Main.getInter().getAllPatient();
+             	
+				for (int i=0;i<allpatients.size();i++) {
+					
+					Main.getInter().assignPattoLab((int)allpatients.get(i).getId(), lastlab      );
+				}
+				
+    			
 				JOptionPane.showMessageDialog(null, "Laboraty registered");
 
     	      	Stage stage = (Stage) this.CifTextField.getScene().getWindow();

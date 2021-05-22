@@ -221,7 +221,6 @@ public class SignUpDoctorController implements Initializable {
 						System.out.println(""+dlast);
 		              	List<Patient> allpatients= Main.getInter().getAllPatient();
 		              	
-		              	System.out.println(""+allpatients.size());
 						for (int i=0;i<allpatients.size();i++) {
 							System.out.println("hola");
 							

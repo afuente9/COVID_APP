@@ -1229,6 +1229,34 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 		return null;
+	}	
+	@Override
+	public Lab getLastLab() {
+		try {
+			String sql = "SELECT * FROM lab WHERE id = (SELECT MAX(id) FROM lab)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			if (rs.next()) {
+				int id= rs.getInt("id");
+				String lab_name = rs.getString("name");
+				String direccion = rs.getString("adress");
+				String cif = rs.getString("cif");
+				Integer vacc = rs.getInt("vacciness");
+				byte[] pic = rs.getBytes("image");
+				// TODO test, if doesn't work
+				/*
+				 * InputStream blobStream = rs.getBinaryStream("photo"); byte[] pic = new
+				 * byte[blobStream.available()]; blobStream.read(pic);
+				 * 
+				 */
+				return new Lab(id, vacc, direccion, lab_name, cif, pic);
+			}
+			prep.close();
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override
