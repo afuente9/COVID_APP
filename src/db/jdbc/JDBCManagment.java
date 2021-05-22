@@ -2861,11 +2861,7 @@ public class JDBCManagment implements Cov_Manager {
 		return false;
 	}
 
-	@Override
-	public Administration getAdministration() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public User getUserbydoctor(Doctor d) {

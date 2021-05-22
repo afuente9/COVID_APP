@@ -124,7 +124,6 @@ public interface Cov_Manager {
 	List<Other_Pathologies> getPathofromPatient(int id);
 	List<Patient> getPatientbyBD(String BDdate);
 	List<Patient> getPatientbyDateIntro(String dateintro);
-	Administration getAdministration();
 	void ModifyVaccinesFromLab(int amount, int id);
 	int getNumberVaccinesLab(int id);
 	
