@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 @Entity
-@Table(name = "otherPath")
+@Table(name = "other_pathologies")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Other_Pathologies")
 @XmlType(propOrder = { "id", "Name"})
@@ -34,18 +34,18 @@ public class Other_Pathologies implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(generator = "otherPath")
-	@TableGenerator(name = "otherPath", table = "sqlite_sequence", 
-		pkColumnName = "name", valueColumnName = "seq", pkColumnValue = "otherPath")	
+	@GeneratedValue(generator = "other_pathologies")
+	@TableGenerator(name = "other_pathologies", table = "sqlite_sequence", 
+		pkColumnName = "name", valueColumnName = "seq", pkColumnValue = "other_pathologies")	
 	@XmlElement
 	private Integer id;
 	@XmlElement
 	private String Name;
 	
 	@ManyToMany
-	@JoinTable(name="patients", 
-	joinColumns = {@JoinColumn(name="other_path_id", referencedColumnName="id")}, 
-	inverseJoinColumns= {@JoinColumn(name= "patient_id", referencedColumnName="id")})
+	@JoinTable(name="pat_patho", 
+	joinColumns = {@JoinColumn(name="id_patho", referencedColumnName="id")}, 
+	inverseJoinColumns= {@JoinColumn(name= "id_pat", referencedColumnName="id")})
 	@XmlTransient
 	private List<Patient> patient;
 	
@@ -57,7 +57,7 @@ public class Other_Pathologies implements Serializable{
 	public Other_Pathologies(Integer id, String name) {
 		super();
 		this.id = id;
-		Name = name;
+		Name = name; 
 	}
 	public Other_Pathologies(String name) {
 		super();
