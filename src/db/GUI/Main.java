@@ -61,7 +61,7 @@ public class Main extends Application{
 
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setIconified(false);
-
+  
 			primaryStage.setScene(scene);
 
 			primaryStage.setResizable(false);
