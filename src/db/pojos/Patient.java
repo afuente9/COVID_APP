@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -18,8 +17,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import db.xml.utils.*;
 
-@Entity
-@Table(name = "patients")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Patient")
 @XmlType(propOrder = { "id", "name", "hos_location", "birthday", "social_security", "height", "weight", "sex"
@@ -28,14 +25,11 @@ import db.xml.utils.*;
 
 public class Patient implements Serializable{
 	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(generator = "patients")
-	@TableGenerator(name = "patients", table = "sqlite_sequence", 
-		pkColumnName = "name", valueColumnName = "seq", pkColumnValue = "patients")
 	@XmlAttribute
 	private Integer id;
 	@XmlElement
@@ -70,27 +64,20 @@ public class Patient implements Serializable{
 	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date DateIntroduced;
 	
-	@ManyToMany(mappedBy = "patients")
 	@XmlElement(name = "Medication")
     @XmlElementWrapper(name = "medication")
 	private List<Medication> medication;
 	
-	@ManyToMany(mappedBy = "patients")
 	@XmlElement(name = "Other_Pathologies")
     @XmlElementWrapper(name = "other_pathologies")
 	private List<Other_Pathologies> other_pathologies;
 	
-	@ManyToMany
-	@JoinTable(name="doctors", 
-	joinColumns = {@JoinColumn(name="patient_id", referencedColumnName="id")}, 
-	inverseJoinColumns= {@JoinColumn(name= "doctor_id", referencedColumnName="id")})
+
 	@XmlElement(name = "Doctor")
     @XmlElementWrapper(name = "doctors")
 	private List<Doctor> doctors;
 	
-	@ManyToMany(mappedBy = "patients")
-	@XmlElement(name = "Lab")
-    @XmlElementWrapper(name = "labs")
+	@XmlTransient
 	private List<Lab> labs;
 	
 	@XmlAttribute

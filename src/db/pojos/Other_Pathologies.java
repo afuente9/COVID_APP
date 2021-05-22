@@ -3,15 +3,6 @@ package db.pojos;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.persistence.TableGenerator;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -21,31 +12,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-@Entity
-@Table(name = "other_pathologies")
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Other_Pathologies")
 @XmlType(propOrder = { "id", "Name"})
 
 public class Other_Pathologies implements Serializable{
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(generator = "other_pathologies")
-	@TableGenerator(name = "other_pathologies", table = "sqlite_sequence", 
-		pkColumnName = "name", valueColumnName = "seq", pkColumnValue = "other_pathologies")	
 	@XmlElement
 	private Integer id;
 	@XmlElement
 	private String Name;
 	
-	@ManyToMany
-	@JoinTable(name="pat_patho", 
-	joinColumns = {@JoinColumn(name="id_patho", referencedColumnName="id")}, 
-	inverseJoinColumns= {@JoinColumn(name= "id_pat", referencedColumnName="id")})
+
 	@XmlTransient
 	private List<Patient> patient;
 	

@@ -4,12 +4,10 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
@@ -18,23 +16,16 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import db.xml.utils.SQLDateAdapter;
 import db.xml.utils.SexAdapter;
 
-@Entity
-@Table(name = "doctors")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Doctor")
 @XmlType(propOrder = { "id", "name", "speciality", "birthday", "collegiate_number", "sex", "hospital"})
 
 public class Doctor implements Serializable{
 
-	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(generator = "doctors")
-	@TableGenerator(name = "doctors", table = "sqlite_sequence", 
-		pkColumnName = "name", valueColumnName = "seq", pkColumnValue = "doctors")
 	@XmlAttribute
 	private Integer id;
 	@XmlElement
@@ -51,11 +42,9 @@ public class Doctor implements Serializable{
 	private Sex sex;
 	@XmlElement
 	private String hospital;
-	@Basic(fetch = FetchType.LAZY)
-	@Lob
+	
 	@XmlTransient
 	private byte[] image;
-	@ManyToMany(mappedBy = "doctors")
 	@XmlTransient
 	private List<Patient> patients;
 

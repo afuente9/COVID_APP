@@ -4,18 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.TableGenerator;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -25,22 +13,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-@Entity
-@Table(name = "labs")
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Lab")
 @XmlType(propOrder = { "id", "name", "address", "vaccines_produce", "cif", "patients"})
 
 public class Lab implements Serializable{
+
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(generator = "labs")
-	@TableGenerator(name = "labs", table = "sqlite_sequence", 
-		pkColumnName = "name", valueColumnName = "seq", pkColumnValue = "labs")
 	@XmlAttribute
 	private int id;
 	@XmlElement
@@ -51,16 +35,11 @@ public class Lab implements Serializable{
 	private String name;
 	@XmlElement
 	private String cif;
-	@Basic(fetch = FetchType.LAZY)
-	@Lob
+	
 	@XmlTransient
 	byte[] image;
-	@ManyToMany
-	@JoinTable(name="patients", 
-	joinColumns = {@JoinColumn(name="lab_id", referencedColumnName="id")}, 
-	inverseJoinColumns= {@JoinColumn(name= "patient_id", referencedColumnName="id")})
-	@XmlElement(name = "Patient")
-    @XmlElementWrapper(name = "Patients")
+	
+	@XmlTransient
 	private List<Patient> patients;
 
 	public Lab() {
