@@ -329,6 +329,8 @@ public class MainMenuController implements Initializable {
 stage.setTitle("Administration menu");				
 				stage.initModality(Modality.APPLICATION_MODAL);
 				stage.setScene(scene);
+				stage.getIcons().add(new Image("https://image.flaticon.com/icons/png/512/2833/2833315.png"));
+
 				stage.showAndWait();
 				root0.setEffect(null);
 
@@ -386,7 +388,9 @@ stage.setTitle("Doctor menu");
 				stage.initModality(Modality.APPLICATION_MODAL);
 				stage.setScene(scene);
 				stage.setResizable(false);
-                //stage.setTitle(name);			   
+                //stage.setTitle(name);	
+				stage.getIcons().add(new Image("https://image.flaticon.com/icons/png/512/2833/2833315.png"));
+
 				stage.showAndWait();
 				root0.setEffect(null);
 			} catch (IOException e) {
@@ -422,6 +426,8 @@ stage.setTitle("Doctor menu");
 
 				stage.initModality(Modality.APPLICATION_MODAL);
 				stage.setScene(scene);
+				stage.getIcons().add(new Image("https://image.flaticon.com/icons/png/512/2833/2833315.png"));
+
 				stage.showAndWait();
 				root0.setEffect(null);
 
@@ -516,6 +522,8 @@ stage.setTitle("Doctor menu");
 stage.setTitle(title);
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.setScene(scene);
+			stage.getIcons().add(new Image("https://image.flaticon.com/icons/png/512/2833/2833315.png"));
+
 			stage.showAndWait();
 			
 			root0.setEffect(null);

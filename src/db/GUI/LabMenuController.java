@@ -90,6 +90,8 @@ public void setL(Lab l) {
 
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
+		stage.getIcons().add(new Image("https://image.flaticon.com/icons/png/512/2833/2833315.png"));
+
         stage.showAndWait();
 		root0.setEffect(null);
 
@@ -132,6 +134,8 @@ public void setL(Lab l) {
 
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
+		stage.getIcons().add(new Image("https://image.flaticon.com/icons/png/512/2833/2833315.png"));
+
 		stage.showAndWait();
 
 		root0.setEffect(null);
@@ -224,6 +228,8 @@ Main.getInter().openpicturelab(l);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Send shipment");
         stage.setScene(scene);
+		stage.getIcons().add(new Image("https://image.flaticon.com/icons/png/512/2833/2833315.png"));
+
         stage.showAndWait();
 		root0.setEffect(null);
 
@@ -263,6 +269,8 @@ Main.getInter().openpicturelab(l);
 stage.setTitle(title);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
+		stage.getIcons().add(new Image("https://image.flaticon.com/icons/png/512/2833/2833315.png"));
+
         stage.showAndWait();
 		root0.setEffect(null);
 

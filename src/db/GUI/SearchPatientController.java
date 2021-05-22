@@ -32,6 +32,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -252,6 +253,9 @@ public class SearchPatientController implements Initializable {
 
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
+        stage.setTitle("Modify patient");
+		stage.getIcons().add(new Image("https://image.flaticon.com/icons/png/512/2833/2833315.png"));
+
         stage.showAndWait();
         
 		root0.setEffect(null);

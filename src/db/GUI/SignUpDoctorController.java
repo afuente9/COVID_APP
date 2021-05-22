@@ -217,6 +217,17 @@ public class SignUpDoctorController implements Initializable {
 						Doctor d_new = new Doctor(name, spetiality, date, colnum, hospital, sex, image);
 						// añadir doctor a la lista de doctores
 						Main.getInter().addDoctorUser(d_new, u);
+						Doctor dlast= Main.getInter().getLastDoctor();
+						System.out.println(""+dlast);
+		              	List<Patient> allpatients= Main.getInter().getAllPatient();
+		              	
+		              	System.out.println(""+allpatients.size());
+						for (int i=0;i<allpatients.size();i++) {
+							System.out.println("hola");
+							
+							Main.getInter().assignPattoDoc(allpatients.get(i).getId(), dlast);
+						}
+						
 			            JOptionPane.showMessageDialog(null, "Doctor registered. ");
 			        	Stage stage = (Stage) this.NameTextField.getScene().getWindow();
 			    		stage.close();

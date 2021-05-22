@@ -685,6 +685,36 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 		return null;
+	}	
+	
+	@Override
+	public Doctor getLastDoctor() {
+		try {
+			String sql = "SELECT * FROM doctors WHERE id = (SELECT MAX(id) FROM doctors)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			if (rs.next()) {
+				int id = rs.getInt("id");
+				String doctorName = rs.getString("name");
+				String espe = rs.getString("speciality");
+				Date nacido = rs.getDate("birth_date");
+				String numCol = rs.getString("collegiate_number");
+				String hos = rs.getString("hospital");
+				byte[] foto = rs.getBytes("image");
+				String sexo = rs.getString("sex");
+				Sex sexoo;
+				if (sexo.equalsIgnoreCase("M")) {
+					sexoo = Sex.Male;
+				} else {
+					sexoo = Sex.Female;
+				}
+
+				return new Doctor(id, espe, doctorName, nacido, numCol, sexoo, hos, foto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override
@@ -818,6 +848,29 @@ public class JDBCManagment implements Cov_Manager {
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, id);
 			prep.setInt(2, op.getId());
+			prep.executeUpdate();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}	@Override
+	public void assignPattoDoc(int idPati, Doctor doc) {
+		try {
+			String sql = "INSERT INTO pat_doc (id_doc, id_pat) VALUES (?, ?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, doc.getId());
+			prep.setInt(2, idPati);
+			prep.executeUpdate();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}public void assignPattoLab(int idPati, Lab l) {
+		try {
+			String sql = "INSERT INTO pat_lab (id_pat, id_lab) VALUES (?, ?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, idPati);
+			prep.setInt(2, l.getId());
 			prep.executeUpdate();
 			prep.close();
 		} catch (Exception e) {
@@ -2674,7 +2727,7 @@ public class JDBCManagment implements Cov_Manager {
 		try {
 			String sql = "SELECT * FROM  patients WHERE name LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, "");
+			prep.setString(1, "%"+"%");
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -2719,7 +2772,7 @@ public class JDBCManagment implements Cov_Manager {
 			String stri = "";
 			String sql = "SELECT * FROM doctors WHERE name = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, stri);
+			prep.setString(1, "%"+stri+"%");
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");

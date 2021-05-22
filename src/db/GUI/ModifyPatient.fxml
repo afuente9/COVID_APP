@@ -58,7 +58,7 @@
                   <Font name="Times New Roman" size="26.0" />
                </font>
             </Label>
-            <TextField fx:id="NamePatientTextField" layoutX="37.0" layoutY="90.0" prefHeight="26.0" prefWidth="175.0" promptText="Name" />
+            <TextField fx:id="NamePatientTextField" layoutX="41.0" layoutY="90.0" prefHeight="26.0" prefWidth="175.0" promptText="Name" />
             <Button layoutX="696.0" layoutY="606.0" mnemonicParsing="false" onAction="#OnCancelPatient" prefHeight="43.0" prefWidth="79.0" text="Back" textFill="#2f5569">
                <font>
                   <Font name="Times New Roman" size="15.0" />
@@ -68,7 +68,7 @@
                   <Font name="Times New Roman" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="39.0" layoutY="511.0" text="Medication:" textFill="#35657f">
+            <Label layoutX="42.0" layoutY="511.0" text="Medication:" textFill="#35657f">
                <font>
                   <Font name="Times New Roman" size="20.0" />
                </font>
@@ -118,17 +118,17 @@
                   <Font name="Times New Roman" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="SexPatientTextField" layoutX="404.0" layoutY="91.0" prefHeight="26.0" prefWidth="175.0" promptText="Male - Female" />
-            <TextField fx:id="BirthDatePatientTextField" layoutX="37.0" layoutY="160.0" prefHeight="26.0" prefWidth="175.0" promptText="yyyy-mm-dd" />
+            <TextField fx:id="SexPatientTextField" layoutX="403.0" layoutY="91.0" prefHeight="26.0" prefWidth="175.0" promptText="Male - Female" />
+            <TextField fx:id="BirthDatePatientTextField" layoutX="40.0" layoutY="160.0" prefHeight="26.0" prefWidth="175.0" promptText="yyyy-mm-dd" />
             <TextField fx:id="SSNumPatientTextField" layoutX="402.0" layoutY="180.0" prefHeight="26.0" prefWidth="175.0" promptText="Social security number" />
-            <TextField fx:id="HeihtPatientTextField" layoutX="35.0" layoutY="223.0" prefHeight="26.0" prefWidth="175.0" promptText="Height" />
+            <TextField fx:id="HeihtPatientTextField" layoutX="40.0" layoutY="223.0" prefHeight="26.0" prefWidth="175.0" promptText="Height" />
             <TextField fx:id="WeightPatientTextField" layoutX="402.0" layoutY="278.0" prefHeight="26.0" prefWidth="175.0" promptText="Weight" />
-            <TextField fx:id="BloodPatientTextField" layoutX="34.0" layoutY="302.0" prefHeight="26.0" prefWidth="175.0" promptText="Blood group" />
+            <TextField fx:id="BloodPatientTextField" layoutX="39.0" layoutY="302.0" prefHeight="26.0" prefWidth="175.0" promptText="Blood group" />
             <TextField fx:id="HospitalPatientTextField" layoutX="403.0" layoutY="365.0" prefHeight="26.0" prefWidth="175.0" promptText="Hospital" />
-            <TextField fx:id="PlacePatientTextField" layoutX="37.0" layoutY="378.0" prefHeight="26.0" prefWidth="175.0" promptText="ICU - Floor- Home" />
-            <TextField fx:id="MedicationPatientTextField" layoutX="41.0" layoutY="550.0" prefHeight="26.0" prefWidth="175.0" promptText="Medication" />
+            <TextField fx:id="PlacePatientTextField" layoutX="41.0" layoutY="378.0" prefHeight="26.0" prefWidth="175.0" promptText="ICU - Floor- Home" />
+            <TextField fx:id="MedicationPatientTextField" layoutX="44.0" layoutY="550.0" prefHeight="26.0" prefWidth="175.0" promptText="Medication" />
             <TextField fx:id="OtherPathologiesPatientTextField" layoutX="404.0" layoutY="550.0" prefHeight="26.0" prefWidth="175.0" promptText="Other pathologies" />
-            <Button fx:id="addMed" layoutX="231.0" layoutY="548.0" mnemonicParsing="false" onAction="#OnAddMedication" prefHeight="26.0" prefWidth="31.0" text="+">
+            <Button fx:id="addMed" layoutX="234.0" layoutY="548.0" mnemonicParsing="false" onAction="#OnAddMedication" prefHeight="26.0" prefWidth="31.0" text="+">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -140,7 +140,7 @@
             </Button>
             <Accordion layoutX="441.0" layoutY="328.0" />
             <Accordion layoutX="457.0" layoutY="291.0" />
-          <TitledPane fx:id="SeeAllMedication" expanded="false" layoutX="161.0" layoutY="510.0" text="See all">
+          <TitledPane fx:id="SeeAllMedication" expanded="false" layoutX="164.0" layoutY="510.0" text="See all">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -250,22 +250,22 @@
                   <Font name="Times New Roman" size="20.0" />
                </font>
             </Label>
-            <Button layoutX="213.0" layoutY="90.0" mnemonicParsing="false" onAction="#acceptName" prefHeight="26.0" prefWidth="31.0" text="🔄" />
+            <Button layoutX="222.0" layoutY="90.0" mnemonicParsing="false" onAction="#acceptName" prefHeight="26.0" prefWidth="31.0" text="🔄" />
             <Button layoutX="589.0" layoutY="91.0" mnemonicParsing="false" onAction="#acceptSex" prefHeight="26.0" prefWidth="31.0" text="🔄" />
-            <Button layoutX="589.0" layoutY="459.0" mnemonicParsing="false" onAction="#acceptVaccinated" prefHeight="26.0" prefWidth="31.0" text="🔄" />
-            <Button layoutX="220.0" layoutY="378.0" mnemonicParsing="false" onAction="#AcceptPlace" prefHeight="26.0" prefWidth="31.0" text="🔄" />
-            <Button layoutX="587.0" layoutY="365.0" mnemonicParsing="false" onAction="#AcceptHosp" prefHeight="26.0" prefWidth="31.0" text="🔄" />
-            <Button layoutX="217.0" layoutY="302.0" mnemonicParsing="false" onAction="#acceptBlood" prefHeight="26.0" prefWidth="31.0" text="🔄" />
-            <Button layoutX="587.0" layoutY="278.0" mnemonicParsing="false" onAction="#AcceptWeig" prefHeight="26.0" prefWidth="31.0" text="🔄" />
-            <Button layoutX="218.0" layoutY="223.0" mnemonicParsing="false" onAction="#acceptHeight" prefHeight="26.0" prefWidth="31.0" text="🔄" />
+            <Button layoutX="589.0" layoutY="465.0" mnemonicParsing="false" onAction="#acceptVaccinated" prefHeight="26.0" prefWidth="31.0" text="🔄" />
+            <Button layoutX="222.0" layoutY="378.0" mnemonicParsing="false" onAction="#AcceptPlace" prefHeight="26.0" prefWidth="31.0" text="🔄" />
+            <Button layoutX="589.0" layoutY="365.0" mnemonicParsing="false" onAction="#AcceptHosp" prefHeight="26.0" prefWidth="31.0" text="🔄" />
+            <Button layoutX="222.0" layoutY="302.0" mnemonicParsing="false" onAction="#acceptBlood" prefHeight="26.0" prefWidth="31.0" text="🔄" />
+            <Button layoutX="589.0" layoutY="278.0" mnemonicParsing="false" onAction="#AcceptWeig" prefHeight="26.0" prefWidth="31.0" text="🔄" />
+            <Button layoutX="222.0" layoutY="223.0" mnemonicParsing="false" onAction="#acceptHeight" prefHeight="26.0" prefWidth="31.0" text="🔄" />
             <Button layoutX="589.0" layoutY="180.0" mnemonicParsing="false" onAction="#acceptSSNUM" prefHeight="26.0" prefWidth="31.0" text="🔄" />
-            <Button layoutX="228.0" layoutY="160.0" mnemonicParsing="false" onAction="#acceptBD" prefHeight="26.0" prefWidth="31.0" text="🔄" />
+            <Button layoutX="222.0" layoutY="160.0" mnemonicParsing="false" onAction="#acceptBD" prefHeight="26.0" prefWidth="31.0" text="🔄" />
             <Label layoutX="39.0" layoutY="423.0" prefHeight="27.0" prefWidth="94.0" text="Infected: " textFill="#35657f">
                <font>
                   <Font name="Times New Roman" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="InfectedTEXTFIELD1" layoutX="38.0" layoutY="459.0" prefHeight="26.0" prefWidth="175.0" promptText="True - False" />
+            <TextField fx:id="InfectedTEXTFIELD1" layoutX="42.0" layoutY="459.0" prefHeight="26.0" prefWidth="175.0" promptText="True - False" />
             <Label fx:id="oldInfected" layoutX="118.0" layoutY="423.0" prefHeight="27.0" prefWidth="94.0" text="Infected" textFill="#35657f">
                <font>
                   <Font name="Times New Roman" size="20.0" />

@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -56,8 +57,10 @@ public class GovernmentMenuController {
 
 	        stage.initModality(Modality.APPLICATION_MODAL);
 	        stage.setScene(scene);
-	        stage.showAndWait();
+			stage.getIcons().add(new Image("https://image.flaticon.com/icons/png/512/2833/2833315.png"));
 			stage.setTitle("Modify user data of administration");
+
+	        stage.showAndWait();
 
 			root0.setEffect(null);
 
@@ -92,6 +95,8 @@ public class GovernmentMenuController {
 
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
+		stage.getIcons().add(new Image("https://image.flaticon.com/icons/png/512/2833/2833315.png"));
+
         stage.showAndWait();
 		root0.setEffect(null);
 
@@ -140,6 +145,8 @@ public class GovernmentMenuController {
 
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
+		stage.getIcons().add(new Image("https://image.flaticon.com/icons/png/512/2833/2833315.png"));
+
         stage.showAndWait();
 		root0.setEffect(null);
 
@@ -177,6 +184,8 @@ public class GovernmentMenuController {
 
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
+		stage.getIcons().add(new Image("https://image.flaticon.com/icons/png/512/2833/2833315.png"));
+
         stage.showAndWait();
 		root0.setEffect(null);
 
@@ -207,6 +216,8 @@ public class GovernmentMenuController {
 
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
+		stage.getIcons().add(new Image("https://image.flaticon.com/icons/png/512/2833/2833315.png"));
+
         stage.showAndWait();
         root0.setEffect(null);
     	} catch (IOException e) {

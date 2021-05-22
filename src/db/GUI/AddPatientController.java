@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import db.pojos.Doctor;
 import db.pojos.Medication;
 import db.pojos.Other_Pathologies;
 import db.pojos.Patient;
@@ -266,6 +267,13 @@ public class AddPatientController {
 				p_new = new Patient(Place_Text, Name_Text, date, SSNum_Text, height, weight, sex, infected, alive,
 						Hospital_Text, vaccinated, Blood_Text, dateIntroduced, countryId);
 				Main.getInter().addPatient(p_new);
+				Patient lastpatient= Main.getInter().getLastPatient();
+				List<Doctor> alldoctors = Main.getInter().getAllDoctors();
+				for (int i=0;i<alldoctors.size();i++) {
+				Main.getInter().assignPattoDoc(lastpatient.getId(), alldoctors.get(i));
+			
+				
+				}
 
 				NamePatientTextField.setDisable(true);
 				SexPatientTextField.setDisable(true);

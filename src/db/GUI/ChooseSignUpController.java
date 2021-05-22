@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -73,6 +74,7 @@ public class ChooseSignUpController {
 				stage.initModality(Modality.APPLICATION_MODAL);
 				stage.setScene(scene);
 				stage.setTitle("Register government");
+				stage.getIcons().add(new Image("https://image.flaticon.com/icons/png/512/2833/2833315.png"));
 
 				stage.showAndWait();
 				root0.setEffect(null);
@@ -107,6 +109,7 @@ public class ChooseSignUpController {
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.setScene(scene);
 			stage.setTitle(title);
+			stage.getIcons().add(new Image("https://image.flaticon.com/icons/png/512/2833/2833315.png"));
 
 			stage.showAndWait();
 			root0.setEffect(null);

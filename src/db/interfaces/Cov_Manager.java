@@ -191,6 +191,8 @@ public interface Cov_Manager {
 	List<Shipment> getAllShipment(int id);
 	void openpicturedoctor(Doctor ds);
 	void openpicturelab(Lab l);
+	void assignPattoDoc(int idPati, Doctor doc);
+	Doctor getLastDoctor();
 	
 
 }

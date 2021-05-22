@@ -106,6 +106,8 @@ import javafx.stage.Stage;
 
 	        stage.initModality(Modality.APPLICATION_MODAL);
 	        stage.setScene(scene);
+			stage.getIcons().add(new Image("https://image.flaticon.com/icons/png/512/2833/2833315.png"));
+
 	        stage.showAndWait();
 			root0.setEffect(null);
 
@@ -157,6 +159,7 @@ import javafx.stage.Stage;
 	        stage.initModality(Modality.APPLICATION_MODAL);
 	        stage.setScene(scene);
 			stage.setTitle(title);
+			stage.getIcons().add(new Image("https://image.flaticon.com/icons/png/512/2833/2833315.png"));
 
 	        stage.showAndWait();
 			root0.setEffect(null);

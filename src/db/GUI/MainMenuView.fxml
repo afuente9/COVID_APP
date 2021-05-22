@@ -51,7 +51,7 @@
                   <Image url="@backgrounds/covidist.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="516.0" fitWidth="315.0" onMouseClicked="#openurl" pickOnBounds="true">
+            <ImageView fitHeight="516.0" fitWidth="269.0" onMouseClicked="#openurl" pickOnBounds="true">
                <image>
                   <Image url="@backgrounds/covid-19-vaccine-789x367.jpg" />
                </image>
@@ -66,23 +66,23 @@
                   <Image url="@backgrounds/8a7efbf2dbfbfa3fd17f19657195c900.png" />
                </image>
             </ImageView>
-            <Label layoutX="377.0" layoutY="88.0" text="Welcome!" textFill="#35657f">
+            <Label layoutX="328.0" layoutY="88.0" text="Welcome!" textFill="#35657f">
                <font>
                   <Font name="Times New Roman" size="27.0" />
                </font>
             </Label>
-            <Label layoutX="381.0" layoutY="236.0" text="Password:" textFill="#35657f">
+            <Label layoutX="332.0" layoutY="236.0" text="Password:" textFill="#35657f">
                <font>
                   <Font name="Times New Roman" size="22.0" />
                </font>
             </Label>
-            <Label layoutX="381.0" layoutY="146.0" text="User:" textFill="#35657f">
+            <Label layoutX="332.0" layoutY="146.0" text="User:" textFill="#35657f">
                <font>
                   <Font name="Times New Roman" size="22.0" />
                </font>
             </Label>
-            <PasswordField fx:id="PasswordTextField" layoutX="379.0" layoutY="280.0" prefHeight="27.0" prefWidth="175.0" />
-            <TextField fx:id="UserTextField" layoutX="379.0" layoutY="191.0" prefHeight="26.0" prefWidth="175.0" />
+            <PasswordField fx:id="PasswordTextField" layoutX="330.0" layoutY="280.0" prefHeight="27.0" prefWidth="239.0" />
+            <TextField fx:id="UserTextField" layoutX="330.0" layoutY="191.0" prefHeight="26.0" prefWidth="239.0" />
             <Button layoutX="574.0" layoutY="458.0" mnemonicParsing="false" onAction="#OnSignUpClick" prefHeight="43.0" prefWidth="88.0" text="Register" textFill="#2f5569">
                <font>
                   <Font name="Times New Roman" size="17.0" />
