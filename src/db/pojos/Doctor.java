@@ -4,12 +4,10 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
@@ -23,7 +21,11 @@ import db.xml.utils.SexAdapter;
 @XmlType(propOrder = { "id", "name", "speciality", "birthday", "collegiate_number", "sex", "hospital"})
 
 public class Doctor implements Serializable{
-	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@XmlAttribute
 	private Integer id;
 	@XmlElement
@@ -40,6 +42,7 @@ public class Doctor implements Serializable{
 	private Sex sex;
 	@XmlElement
 	private String hospital;
+	
 	@XmlTransient
 	private byte[] image;
 	@XmlTransient

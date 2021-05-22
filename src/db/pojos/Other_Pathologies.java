@@ -3,7 +3,6 @@ package db.pojos;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -13,17 +12,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Other_Pathologies")
 @XmlType(propOrder = { "id", "Name"})
 
-
 public class Other_Pathologies implements Serializable{
-	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@XmlElement
 	private Integer id;
 	@XmlElement
 	private String Name;
+	
+
 	@XmlTransient
 	private List<Patient> patient;
 	
@@ -35,7 +40,7 @@ public class Other_Pathologies implements Serializable{
 	public Other_Pathologies(Integer id, String name) {
 		super();
 		this.id = id;
-		Name = name;
+		Name = name; 
 	}
 	public Other_Pathologies(String name) {
 		super();

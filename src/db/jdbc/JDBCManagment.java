@@ -1263,10 +1263,9 @@ public class JDBCManagment implements Cov_Manager {
 	public List<Lab> showLabs() {
 		List<Lab> labs = new ArrayList<Lab>();
 		try {
-			String lab_name = "";
-			String sql = "SELECT * FROM lab WHERE name = ?";
+			String sql = "SELECT * FROM lab WHERE name LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, lab_name);
+			prep.setString(1, '%'+""+'%');
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -1274,14 +1273,7 @@ public class JDBCManagment implements Cov_Manager {
 				String Ladress = rs.getString("adress");
 				String Lcif = rs.getString("cif");
 				int Lvacciness = rs.getInt("vacciness");
-				byte[] pic = rs.getBytes("image");
-				// TODO test, if doesn't work
-				/*
-				 * InputStream blobStream = rs.getBinaryStream("photo"); byte[] pic = new
-				 * byte[blobStream.available()]; blobStream.read(pic);
-				 * 
-				 */
-				Lab lab = new Lab(id, Lvacciness, Ladress, Lname, Lcif, pic);
+				Lab lab = new Lab(id, Lvacciness, Ladress, Lname, Lcif);
 				labs.add(lab);
 			}
 		} catch (Exception e) {
@@ -2647,10 +2639,9 @@ public class JDBCManagment implements Cov_Manager {
 	public List<Administration> getAllAdmins() {
 		List<Administration> admins = new ArrayList<Administration>();
 		try {
-			String gov_name = "";
 			String sql = "SELECT * FROM administration WHERE nameCountry = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, gov_name);
+			prep.setString(1, '%'+""+'%');
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -2670,10 +2661,9 @@ public class JDBCManagment implements Cov_Manager {
 	public List<Doctor> getAllDoctors() {
 		List<Doctor> docs = new ArrayList<Doctor>();
 		try {
-			String doc_name = "";
 			String sql = "SELECT * FROM doctors WHERE name = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, doc_name);
+			prep.setString(1, '%'+""+'%');
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -2703,10 +2693,9 @@ public class JDBCManagment implements Cov_Manager {
 	public List<Medication> getAllMedication() {
 		List<Medication> meds = new ArrayList<Medication>();
 		try {
-			String stri = "";
 			String sql = "SELECT * FROM doctors WHERE name = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, stri);
+			prep.setString(1, '%'+""+'%');
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -2727,7 +2716,7 @@ public class JDBCManagment implements Cov_Manager {
 		try {
 			String sql = "SELECT * FROM  patients WHERE name LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, "%"+"%");
+			prep.setString(1, '%'+""+'%');
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -2769,10 +2758,9 @@ public class JDBCManagment implements Cov_Manager {
 	public List<Other_Pathologies> getAllPatho() {
 		List<Other_Pathologies> patos = new ArrayList<Other_Pathologies>();
 		try {
-			String stri = "";
 			String sql = "SELECT * FROM doctors WHERE name = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, "%"+stri+"%");
+			prep.setString(1, '%'+""+'%');
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");

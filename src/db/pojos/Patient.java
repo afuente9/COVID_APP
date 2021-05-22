@@ -1,12 +1,10 @@
 package db.pojos;
 
 import java.io.Serializable;
-
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -27,6 +25,11 @@ import db.xml.utils.*;
 
 public class Patient implements Serializable{
 	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@XmlAttribute
 	private Integer id;
 	@XmlElement
@@ -60,15 +63,23 @@ public class Patient implements Serializable{
 	@XmlAttribute
 	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date DateIntroduced;
+	
 	@XmlElement(name = "Medication")
     @XmlElementWrapper(name = "medication")
 	private List<Medication> medication;
+	
 	@XmlElement(name = "Other_Pathologies")
     @XmlElementWrapper(name = "other_pathologies")
 	private List<Other_Pathologies> other_pathologies;
+	
+
 	@XmlElement(name = "Doctor")
     @XmlElementWrapper(name = "doctors")
 	private List<Doctor> doctors;
+	
+	@XmlTransient
+	private List<Lab> labs;
+	
 	@XmlAttribute
 	private int govId;
 	

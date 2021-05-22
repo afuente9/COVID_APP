@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -14,11 +13,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Lab")
 @XmlType(propOrder = { "id", "name", "address", "vaccines_produce", "cif", "patients"})
 
 public class Lab implements Serializable{
+
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@XmlAttribute
 	private int id;
 	@XmlElement
@@ -29,10 +35,11 @@ public class Lab implements Serializable{
 	private String name;
 	@XmlElement
 	private String cif;
+	
 	@XmlTransient
 	byte[] image;
-	@XmlElement(name = "Patient")
-    @XmlElementWrapper(name = "Patients")
+	
+	@XmlTransient
 	private List<Patient> patients;
 
 	public Lab() {
@@ -40,7 +47,15 @@ public class Lab implements Serializable{
 		this.patients = new ArrayList<Patient>();
 	}
 
-
+	public Lab(int id, int vaccines_produce, String address, String name, String cif) {
+		super();
+		this.id = id;
+		this.vaccines_produce = vaccines_produce;
+		this.address = address;
+		this.name = name;
+		this.cif = cif;
+	}
+	
 	public Lab(int id, int vaccines_produce, String address, String name, String cif,  byte[] image) {
 		super();
 		this.id = id;
