@@ -2,6 +2,14 @@ package db.pojos;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -9,6 +17,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
+@Entity
+@Table(name = "admins")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Administration")
 @XmlType(propOrder = { "id", "name", "vaccines"})
@@ -16,12 +26,22 @@ import javax.xml.bind.annotation.XmlType;
 
 public class Administration implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(generator = "admins")
+	@TableGenerator(name = "admins", table = "sqlite_sequence", 
+		pkColumnName = "name", valueColumnName = "seq", pkColumnValue = "admins")	
 	@XmlAttribute
 	private Integer id;
 	@XmlAttribute
 	private int vaccines;
 	@XmlAttribute
 	private String name;
+	@Basic(fetch = FetchType.LAZY)
+	@Lob
 	@XmlTransient
 	byte[] image;
 	
