@@ -75,7 +75,7 @@ public class Medication implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Medication [id=" + id + ", name=" + name + "]";
+		return ""+id + ": " + name ;
 	}
 
 	public Integer getId() {

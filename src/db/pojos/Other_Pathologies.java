@@ -75,7 +75,7 @@ public class Other_Pathologies implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Other_Pathologies [id=" + id + ", Name=" + Name + "]";
+		return id + ": " + Name ;
 	}
 	
 	public Integer getId() {

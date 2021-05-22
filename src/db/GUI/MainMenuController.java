@@ -331,8 +331,9 @@ public class MainMenuController implements Initializable {
 
 				controller = loader.getController();
 				controller.setD(d);
-				controller.setDoctorName(d.getName());
 				
+				controller.setDoctorName(d.getName());
+				/*
 				
 				 try{
 	                    byte[] bi = Main.getInter().getPicFromDoc(d.getId());
@@ -347,7 +348,7 @@ public class MainMenuController implements Initializable {
 	                }catch(Exception ex){
                       ex.printStackTrace();
 
-	                }
+	                }*/
 				
 				
 				

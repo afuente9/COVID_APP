@@ -29,7 +29,42 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class AddPatientController {
+    @FXML
+    private Label country;
+    @FXML
+    private Label otherpatlabel; 
+    @FXML
+    private Label sexlab;
 
+    @FXML
+    private Label medicationslabel;
+
+    @FXML
+    private Label place;
+
+    @FXML
+    private Label hos;
+
+    @FXML
+    private Label bloodg;
+
+    @FXML
+    private Label wei;
+
+    @FXML
+    private Label hei;
+
+    @FXML
+    private Label ss;
+
+    @FXML
+    private Label bd;
+
+    @FXML
+    private Label countrylbl;
+
+    @FXML
+    private Label namelab;
 	@FXML
 	private TextField NamePatientTextField;
 
@@ -240,6 +275,22 @@ public class AddPatientController {
 				PlacePatientTextField.setDisable(true);
 				VaccinatedTEXTFIELD.setDisable(true);
 				buttonConfirm.setDisable(true);
+				place.setDisable(true);
+				hos.setDisable(true);
+				bloodg.setDisable(true);
+				wei.setDisable(true);
+				hei.setDisable(true);
+				ss.setDisable(true);
+				bd.setDisable(true);
+				sexlab.setDisable(true);
+				namelab.setDisable(true);
+				countrylbl.setDisable(true);
+				
+				otherpatlabel.setDisable(false);
+				medicationslabel.setDisable(false);
+				
+				
+				
 				OtherPathologiesPatientTextField.setDisable(false);
 				MedicationPatientTextField.setDisable(false);
 				countrytext.setDisable(true);
