@@ -28,7 +28,7 @@ public class JavaToXml {
 	}*/
 	
 	private static void generateEntityManager() {
-		em = Persistence.createEntityManagerFactory("type-info").createEntityManager();
+		em = Persistence.createEntityManagerFactory("user-login").createEntityManager();
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 		em.getTransaction().commit();

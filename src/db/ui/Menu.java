@@ -13,7 +13,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import db.pojos.*;
 import db.pojos.users.Role;
 import db.pojos.users.User;
@@ -21,11 +20,15 @@ import db.interfaces.Cov_Manager;
 import db.interfaces.UserManager;
 import db.jdbc.JDBCManagment;
 import db.jpa.JPAUserManagment;
+import db.xml.dtd.*;
 
 public class Menu {
 	//public Day today=ultimo dia a�adido a la lista de dias;
 
 	private static Connection c;
+	private static XmlToJava xj = new XmlToJava();
+	private static JavaToXml jx = new JavaToXml();
+	private static XmlToHtml xh = new XmlToHtml();
 	private static Cov_Manager inter = new JDBCManagment();
 	private static UserManager userman = new JPAUserManagment();
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -164,6 +167,9 @@ public class Menu {
 			System.out.println("|	1.  Register			|");
 			System.out.println("|	2.  Login			|");
 			System.out.println("|	3.  Add patients CSV		|");
+			System.out.println("|   4.  Generate XML                    |");
+			System.out.println("|   5.  Add from XML                    |");
+			System.out.println("|   6.  Generate HTML                   |");
 			System.out.println("|	0.  Exit			|");
 			
 			int choice = Integer.parseInt(reader.readLine());
@@ -177,6 +183,15 @@ public class Menu {
 			case 3:
 				parse();
 				break;
+			case 4:
+				xmlgen();
+				break;
+			case 5:
+				addFromXml();
+				break;
+			case 6: 
+				htmlgen();
+				break;
 			case 0:
 				//TODO ESTO PARA LA GUI?
 				inter.disconnect();
@@ -189,6 +204,32 @@ public class Menu {
 		while(true);
 	}
 	
+
+	private static void htmlgen() throws Exception{
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void addFromXml() throws Exception{
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void xmlgen() throws Exception{
+		for(int a =0; a< inter.showLabs().size(); a++) {
+			
+			System.out.println(inter.showLabs().get(a).toString());
+			
+		}
+		System.out.println("Inicate id of the lab you want to XML: ");
+		int id = Integer.parseInt(reader.readLine());
+		jx.getXMLforLab(id);
+		System.out.println(inter.getAllDoctors().toString());
+		System.out.println("Inicate id of the admin you want to XML: ");
+		 id = Integer.parseInt(reader.readLine());
+		jx.getXMLforAdministration(id);
+		
+	}
 
 	private static void register() throws Exception{ 
 		//TODO como queremos que eligan el role que tienen, ¿es lo primero que eligen o lo ultimo?

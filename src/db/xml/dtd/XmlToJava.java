@@ -16,7 +16,7 @@ import db.pojos.*;
 
 public class XmlToJava {
 	
-	private static final String PERSISTENCE_PROVIDER = "company-provider";
+	private static final String PERSISTENCE_PROVIDER = "user-login";
 	private static EntityManagerFactory factory;
 	private static Cov_Manager inter = new JDBCManagment();
 	public void getLabFromXml(String fileName) {
