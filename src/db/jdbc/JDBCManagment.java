@@ -676,7 +676,7 @@ public class JDBCManagment implements Cov_Manager {
 	public List<Patient> getPatientsOfLab(int lab_id) {
 		List<Patient> patients = new ArrayList<Patient>();
 		try {
-			String sql = "SELECT * FROM pat_lab WHERE lab_id = ?";
+			String sql = "SELECT * FROM pat_lab WHERE id_lab = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, lab_id);
 			ResultSet rs = prep.executeQuery();

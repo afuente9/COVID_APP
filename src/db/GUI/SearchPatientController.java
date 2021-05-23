@@ -120,7 +120,7 @@ public class SearchPatientController implements Initializable {
     	
     	String feature = SearchOptions.getValue();
 		String type = typeTextfield.getText();
-		if(!type.equals("")&&!feature.equals("")){
+		if(!type.equals("")&&!feature.equals("Select an option")){
 			
 			
 			if(firsttime==true) {
