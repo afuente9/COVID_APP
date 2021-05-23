@@ -1238,7 +1238,7 @@ public class JDBCManagment implements Cov_Manager {
 	@Override
 	public Lab getLab(int id) {
 		try {
-			String sql = "SELECT * FROM lab WHERE id = ?";
+			String sql = "SELECT * FROM lab WHERE id_lab = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, id);
 			ResultSet rs = prep.executeQuery();
