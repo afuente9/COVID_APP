@@ -561,7 +561,6 @@ stage.setTitle(title);
 		// recorrer la lista de pacientes para calcularles el score TODO mirar cual es
 		// mas optima para recorrer, arraylist o linkedlist
 		for (int i = 1; i <= Main.getInter().getNumberofPatients(); i++) {
-			System.out.println(" el paciente que va a saere caer " + i);
 
 			float score = calculateScore(Main.getInter().getPatient(i), deadImportance);
 			Main.getInter().modifyScore(i, (int) score);
@@ -735,7 +734,6 @@ stage.setTitle(title);
 			// contributionMedlDead);
 
 		}
-		System.out.println("el desde el metodo final" + getMaxNum(perMedAlive));
 
 		List<String> Patho_Patient = Main.getInter().getPathofromPatientNAME(p.getId());
 
@@ -1181,8 +1179,6 @@ stage.setTitle(title);
 			listofpercentages.add(percentage);
 
 		}
-		System.out.println(" en porcent desde calculate percentagfes maximo " + getMaxNum(listofpercentages));
-		System.out.println(" en porcent desde calculate percentagfes minimo" + getMinNum(listofpercentages));
 		return listofpercentages;
 
 	}
