@@ -2684,12 +2684,13 @@ public class JDBCManagment implements Cov_Manager {
 		List<Lab> labs = showLabs();
 		Lab tmp = null;
 		try {
-			for (int i = 0; i <= labs.size(); i++) {
+			for (int i = 0; i < labs.size(); i++) {
 				tmp = labs.get(i);
 				if (tmp.getAddress().equalsIgnoreCase(labo.getAddress()) && tmp.getCif().equalsIgnoreCase(labo.getCif())
 						&& tmp.getName().equalsIgnoreCase(labo.getName())
 						&& tmp.getVaccines_produce() == labo.getVaccines_produce()
-						&& tmp.getPatients().equals(labo.getPatients())) {
+						//&& tmp.getPatients().equals(labo.getPatients())
+						) {
 					return true;
 				}
 			}

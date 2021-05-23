@@ -233,13 +233,17 @@ public class Menu {
 	
 
 	private static void htmlgen() throws Exception{
-		// TODO Auto-generated method stub
+		XmlToHtml.createHTML("W:\\DOCS\\java-2020-12\\COVID_APP\\xmlFileSave\\erereergegerg.xml", "W:\\DOCS\\java-2020-12\\COVID_APP\\src\\db\\xmls\\AppStyle.xslt", "./xmlFileSave/result.html");
 		
 	}
 
 	private static void addFromXml() throws Exception{
-		// TODO Auto-generated method stub
-		
+		System.out.println("1. Insert Lab: ");
+		System.out.println("2. Insert govern: ");
+		int op = Integer.parseInt(reader.readLine());
+		if (op==1) {
+			xj.getLabFromXml("erereergegerg");
+		}
 	}
 
 	private static void xmlgen() throws Exception{

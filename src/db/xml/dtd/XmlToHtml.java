@@ -9,7 +9,7 @@ import javax.xml.transform.stream.StreamSource;
 
 public class XmlToHtml {
 	
-	public static void simpleTransform(String filePath, String stylePath,String htmlSavePath) {
+	public static void createHTML(String filePath, String stylePath,String htmlSavePath) {
 		TransformerFactory changeFact = TransformerFactory.newInstance();
 		try {
 			Transformer changer = changeFact.newTransformer(new StreamSource(new File(stylePath)));
