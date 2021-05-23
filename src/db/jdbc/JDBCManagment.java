@@ -41,6 +41,22 @@ public class JDBCManagment implements Cov_Manager {
 		}
 
 	}
+	
+	public void connectWithNoPrint() {
+		try {
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:./database/covid.database");
+			c.createStatement().execute("PRAGMA foreign_keys = ON");
+			this.creatTables();
+		} catch (SQLException E) {
+			System.out.println("There was a database exception.");
+			E.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("There was a general exception.");
+			e.printStackTrace();
+		}
+
+	}
 
 	// Close database connection
 	public void disconnect() {
@@ -1230,6 +1246,7 @@ public class JDBCManagment implements Cov_Manager {
 		}
 		return null;
 	}	
+	
 	@Override
 	public Lab getLastLab() {
 		try {
@@ -2698,7 +2715,6 @@ public class JDBCManagment implements Cov_Manager {
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");
-				System.out.println(id);
 
 				String doctorName = rs.getString("name");
 				String espe = rs.getString("speciality");

@@ -14,13 +14,14 @@ public class JavaToXml {
 
 	public void getXMLforLab(int id) {
 		try {
+			inter.connectWithNoPrint();
 			JAXBContext jaxbContextLab = JAXBContext.newInstance(Lab.class);
 			Marshaller lab_marshaller = jaxbContextLab.createMarshaller();
 			lab_marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
 			
 			Lab result_lab= inter.getLab(id);
-			File file = new File("./xmls/"+result_lab.getName()+ ".xml");
-			lab_marshaller.marshal(result_lab, file);
+			//File file = new File("./xmls/"+result_lab.getName()+ ".xml"); //TODO mirar porque no funciona esto
+			//lab_marshaller.marshal(result_lab, file); //Error
 			lab_marshaller.marshal(result_lab, System.out);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -29,13 +30,14 @@ public class JavaToXml {
 	
 	public void getXMLforAdministration(int id) {
 		try {
-		JAXBContext jaxbContextAdmin = JAXBContext.newInstance(Administration.class);	
-		Marshaller admin_marshaller = jaxbContextAdmin.createMarshaller();
-		admin_marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
-		Administration result_admin= inter.getAdministration(id);
-		File file = new File("./xmls/"+result_admin.getName()+ ".xml");
-		admin_marshaller.marshal(result_admin, file);
-		admin_marshaller.marshal(result_admin, System.out);
+			inter.connectWithNoPrint();
+			JAXBContext jaxbContextAdmin = JAXBContext.newInstance(Administration.class);
+			Marshaller admin_marshaller = jaxbContextAdmin.createMarshaller();
+			admin_marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			Administration result_admin = inter.getAdministration(id);
+			//File file = new File("./xmls/" + result_admin.getName() + ".xml"); /TODO mirar porque no funciona esto
+			//admin_marshaller.marshal(result_admin, file);
+			admin_marshaller.marshal(result_admin, System.out);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

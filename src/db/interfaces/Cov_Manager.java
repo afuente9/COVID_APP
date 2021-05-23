@@ -15,6 +15,7 @@ public interface Cov_Manager {
 
 	// Connects with the database and, if needed, performs necessary setup
 	public void connect();
+	public void connectWithNoPrint();
 	// Closes the connection with the database
 	public void disconnect();
 
