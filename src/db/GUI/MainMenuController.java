@@ -239,11 +239,9 @@ public class MainMenuController implements Initializable {
 
         } catch (URISyntaxException ex) {
 
-            System.out.println(ex);
 
         }catch(IOException e){
 
-            System.out.println(e);
 
         }
     }
@@ -255,12 +253,10 @@ public class MainMenuController implements Initializable {
 
         } catch (URISyntaxException ex) {
 
-            System.out.println(ex);
 
             
         }catch(IOException e){
 
-            System.out.println(e);
 
         }}
 	 @FXML
@@ -271,11 +267,9 @@ public class MainMenuController implements Initializable {
 
 	        } catch (URISyntaxException ex) {
 
-	            System.out.println(ex);
 
 	        }catch(IOException e){
 
-	            System.out.println(e);
 
 	        }
 	    }

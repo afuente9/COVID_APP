@@ -162,7 +162,6 @@ public class StatisticsController implements Initializable {
 					series = new XYChart.Series();
 					lineChart.setTitle("");
 
-					System.out.println(typeofpatient.getValue());
 					if (typeofpatient.getValue().equals("Alive") == true) {
 						// did it like that so it works well
 						plotTittle.setText("Dead people per day");
@@ -222,7 +221,6 @@ public class StatisticsController implements Initializable {
 		List<Integer> ages = new ArrayList<>();
 		LocalDate today = LocalDate.now();
 		for (int i = 0; i < dates.size(); i++) {
-			System.out.println(i);
 
 			LocalDate fHoy = LocalDate.now();
 			LocalDate cumple = dates.get(i).toLocalDate();
