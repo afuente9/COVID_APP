@@ -153,6 +153,15 @@ public class Menu {
 		}
 	}
 	
+	private static void addPatientsToLabs() {
+		for(int i = 0; i < inter.showLabs().size(); i++) {
+			System.out.println(i);
+			for(int j = 0; j < inter.getAllPatient().size(); j++) {
+				Lab l = inter.getLab(i);
+				inter.assignPattoLab(j, l);
+			}
+		}
+	}
 	
 	public static void main(String[] args) throws Exception {
 		inter.connect();
@@ -170,6 +179,7 @@ public class Menu {
 			System.out.println("|	4.  Generate XML                |");
 			System.out.println("|	5.  Add from XML                |");
 			System.out.println("|	6.  Generate HTML               |");
+			System.out.println("|	7.  Add Relation Lab            |");
 			System.out.println("|	0.  Exit			|");
 			
 			int choice = Integer.parseInt(reader.readLine());
@@ -191,6 +201,9 @@ public class Menu {
 				break;
 			case 6: 
 				htmlgen();
+				break;
+			case 7: 
+				addPatientsToLabs();
 				break;
 			case 0:
 				//TODO ESTO PARA LA GUI?
