@@ -22,9 +22,6 @@ import db.xml.utils.SexAdapter;
 
 public class Doctor implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@XmlAttribute
 	private Integer id;

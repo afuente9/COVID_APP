@@ -20,4 +20,25 @@
    <!ELEMENT birthday (#PCDATA)>
    <!ELEMENT collegiate_number (#PCDATA)>
    <!ELEMENT sex (#PCDATA)>
+   
+   <!ELEMENT doctors (Doctor+)>
+   <!ELEMENT Doctor ( speciality ,  birthday ,  collegiate_number ,  sex ,  hospital )>
+   <!ATTLIST Doctor name CDATA #REQUIRED
+                  	  id CDATA #REQUIRED>
+   <!ELEMENT speciality (#PCDATA)>
+   <!ELEMENT birthday (#PCDATA)>
+   <!ELEMENT collegiate_number (#PCDATA)>
+   <!ELEMENT sex (#PCDATA)>
+   <!ELEMENT hospital (#PCDATA)>
+   
+   <!ELEMENT medication (Medication+)>
+   <!ELEMENT Medication (id, name)>
+   <!ELEMENT id (#PCDATA)>
+   <!ELEMENT name (#PCDATA)>
+   
+   <!ELEMENT other_pathologies (Other_Pathologies+)>
+   <!ELEMENT Other_Pathologies (id, Name)>
+   <!ELEMENT id (#PCDATA)>
+   <!ELEMENT name (#PCDATA)>
+   
 ]>

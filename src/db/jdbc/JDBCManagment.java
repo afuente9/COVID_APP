@@ -2654,13 +2654,7 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 		return null;		
-	}
-
-
-
-	
-
-	
+	}	
 
 	@Override
 	public boolean checkAdmin(Administration admin) {
@@ -2689,8 +2683,7 @@ public class JDBCManagment implements Cov_Manager {
 				if (tmp.getAddress().equalsIgnoreCase(labo.getAddress()) && tmp.getCif().equalsIgnoreCase(labo.getCif())
 						&& tmp.getName().equalsIgnoreCase(labo.getName())
 						&& tmp.getVaccines_produce() == labo.getVaccines_produce()
-						//&& tmp.getPatients().equals(labo.getPatients())
-						) {
+						&& tmp.getPatients().equals(labo.getPatients())) {
 					return true;
 				}
 			}
