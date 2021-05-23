@@ -249,7 +249,7 @@ public class Menu {
 		System.out.println("Inicate id of the lab you want to XML: ");
 		int id = Integer.parseInt(reader.readLine());
 		jx.getXMLforLab(id);
-		System.out.println(inter.getAllDoctors().toString());
+		System.out.println(inter.getAllAdmins().toString());
 		System.out.println("Inicate id of the admin you want to XML: ");
 		 id = Integer.parseInt(reader.readLine());
 		jx.getXMLforAdministration(id);

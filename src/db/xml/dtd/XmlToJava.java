@@ -16,8 +16,6 @@ import db.pojos.*;
 
 public class XmlToJava {
 	
-	private static final String PERSISTENCE_PROVIDER = "user-login";
-	private static EntityManagerFactory factory;
 	private static Cov_Manager inter = new JDBCManagment();
 	public void getLabFromXml(String fileName) {
 		try {
@@ -26,38 +24,7 @@ public class XmlToJava {
 		File file = new File("./xmls/"+fileName+".xml");
 		Lab labo = (Lab) lab_unmarshaller.unmarshal(file);	
 		List<Patient> pats = labo.getPatients();
-		factory = Persistence.createEntityManagerFactory(PERSISTENCE_PROVIDER);
-		EntityManager em = factory.createEntityManager();
-		em.getTransaction().begin();
-		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
-		em.getTransaction().commit();
-		EntityTransaction tx1 = em.getTransaction();
-		tx1.begin();
-		if (inter.checkLab(labo) == false) {
-			for (Patient person : pats) {
-				if (inter.checkPatient(person) == false) {
-					for (Doctor doc : person.getDoctors()) {
-						if (inter.checkDoctor(doc) == false) {
-							em.persist(doc);
-						}
-					}
-					for (Medication med : person.getMedication()) {
-						if (inter.checkMeds(med)) {
-							em.persist(med);
-						}
-					}
-					for (Other_Pathologies op : person.getOther_pathologies()) {
-						if(inter.checkOther_Pat(op) == false) {
-							em.persist(op);
-						}
-					}
-					em.persist(person);
-				}
-				
-			}
-			em.persist(labo);
-		}
-		tx1.commit();
+		
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
