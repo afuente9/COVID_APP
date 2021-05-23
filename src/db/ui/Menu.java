@@ -215,10 +215,9 @@ public class Menu {
 				htmlgen();
 				break;
 			case 7: 
-				addPatientsToLabs();
 				break;
 			case 8: 
-				addPatientsToDocs();
+			
 				break;
 			case 0:
 				//TODO ESTO PARA LA GUI?

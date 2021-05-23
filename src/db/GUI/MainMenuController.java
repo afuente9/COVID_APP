@@ -126,25 +126,24 @@ public class MainMenuController implements Initializable {
 		 * ,"Mediterráneo","El Pilar","San Juan de Dios Tenerife","2 de maig"
 		 * ,"De la Reina","Sierrallana","La inmaculada","La pedrera"
 		 * ,"Fundación de Alcorcón","Parque","Hospital de Sevilla"};
-		 * 
-		 * //infected String[] vaccinated = new
-		 * String[]{"true","false","false","false","false","false"}; String[] bloodType
-		 * = new String[]{"A+","A-","B+","B-","AB+","AB-","0+","0-"}; String[]
-		 * Medication = new String[]{"O2","Ketamine","Lidocaine","Morphine",
-		 * "Iboprufen","Acetylsalicylic acid","Paracetamol","Kodeine","Fentanyl",
-		 * "Methadone","Dexamethasone","Diacepan","Haloperidol","Lactulose",
-		 * "Metoclopramide","Peniciline","Loratadine","Hydrocortisone",
-		 * "Epinephrine","Calcium gluconate","Penicillamine","Amoxicillin","Loracepam"};
-		 * String[] Pats = new
-		 * String[]{"lung cancer","colon cancer","testicular cancer","liver cancer"
-		 * ,"arthritis","Asthma","Chronic fatigue sindrom","COPD","Diabetes",
-		 * "Crabs","Celiac disease","Hepatitis","Human papillomavirus","Gonorrhea",
-		 * "Fybromialgia","Lupus","Listediosis","ELA","Meningitis","Polio","Rubella",
-		 * "Tetanus","Tuberculosis","Siphilis","Yellow fiber","Zika"}; /*for (int i =0;
-		 * i<Medication.length;i++) { Main.getInter().addMedication(new
-		 * Medication(Medication[i])); } for (int i =0; i<Pats.length;i++) {
-		 * Main.getInter().addOtherPathologies(new Other_Pathologies(Pats[i])); }
-		 */
+		 *  */
+		  //infected String[] vaccinated = new
+		/*String[]  Medication = new String[]{"O2","Ketamine","Lidocaine","Morphine",
+		  "Iboprufen","Acetylsalicylic acid","Paracetamol","Kodeine","Fentanyl",
+		  "Methadone","Dexamethasone","Diacepan","Haloperidol","Lactulose",
+		  "Metoclopramide","Peniciline","Loratadine","Hydrocortisone",
+		  "Epinephrine","Calcium gluconate","Penicillamine","Amoxicillin","Loracepam"};
+		  String[] Pats = new String[]{"lung cancer","colon cancer","testicular cancer","liver cancer"
+		  ,"arthritis","Asthma","Chronic fatigue sindrom","COPD","Diabetes",
+		  "Crabs","Celiac disease","Hepatitis","Human papillomavirus","Gonorrhea",
+		  "Fybromialgia","Lupus","Listediosis","ELA","Meningitis","Polio","Rubella",
+		  "Tetanus","Tuberculosis","Siphilis","Yellow fiber","Zika"}; 
+		  for (int i =0; i<Medication.length;i++) {
+			  Main.getInter().addMedication(new  Medication(Medication[i])); }
+		  for (int i =0; i<Pats.length;i++) {
+			  Main.getInter().addOtherPathologies(new Other_Pathologies(Pats[i])); 
+			  }
+		*/
 
 		int contadoranmo = 2006;
 		for (int i = 0; i < 100; i++) {

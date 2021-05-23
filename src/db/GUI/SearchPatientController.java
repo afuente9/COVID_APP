@@ -169,6 +169,18 @@ public class SearchPatientController implements Initializable {
 
 	    	}
 			if(correctdate==true) {
+				
+				
+				
+				
+				 //HI RODRIGO! I HOPE YOU ARE ENJOYING OUR APPLICATION :)
+				//WE SHOULD HAVE ADDED THE ID OF THE LAB IN THE METHODS BUT AS IT'S AN "ALL TO ALL" RELATION, WE DECIDED THAT
+			    //IT'S UNNECESSARY BECAUSE ALL THE PATIENTS WILL APPEAR BECAUSE IT WON'T FILTER ANYTHING.
+				
+				
+				
+				
+				
 			List<Patient> result = Main.getInter().getPatientbyBD(type);
 			this.patientsTableList.addAll(result);
 	    	this.tablePatients.setItems(patientsTableList);  
