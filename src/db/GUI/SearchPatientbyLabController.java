@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+import db.pojos.Lab;
 import db.pojos.Medication;
 import db.pojos.Other_Pathologies;
 import db.pojos.Patient;
@@ -38,6 +39,9 @@ public class SearchPatientbyLabController implements Initializable {
  ObservableList list = FXCollections.observableArrayList();
  @FXML
  private Label numberofpatients;
+ Lab lab;
+ boolean firsttime=true;
+ 
  
     @FXML
     private ChoiceBox<String> SearchOptions;
@@ -116,7 +120,49 @@ public class SearchPatientbyLabController implements Initializable {
     	String feature = SearchOptions.getValue();
 		String type = typeTextfield.getText();
 		if(!type.equals("")&&!feature.equals("Select an option")){
-	    	this.patientsTableList.clear();
+	    
+			
+			if(firsttime==true) {
+
+				loadData();
+		    	SearchOptions.setValue("Select an option");
+		    	int numberpatients= Main.getInter().getNumberofPatients();
+		    	numberofpatients.setText("There are "+numberpatients+" patients");
+		    	patientsTableList = FXCollections.observableArrayList();
+		        this.colName.setCellValueFactory(new PropertyValueFactory("name"));
+		        this.colBirth.setCellValueFactory(new PropertyValueFactory("birthday"));
+		        this.colSex.setCellValueFactory(new PropertyValueFactory("sex"));
+		        this.colHeight.setCellValueFactory(new PropertyValueFactory("height"));
+		        this.colWeight.setCellValueFactory(new PropertyValueFactory("weight"));
+		        this.colSSnum.setCellValueFactory(new PropertyValueFactory("social_security"));
+		        this.colHos.setCellValueFactory(new PropertyValueFactory("hospital"));
+		        this.colInfected.setCellValueFactory(new PropertyValueFactory("infected"));
+		        this.colAlive.setCellValueFactory(new PropertyValueFactory("alive"));
+		        this.colBloodType.setCellValueFactory(new PropertyValueFactory("bloodType"));
+		        this.colVaccinated.setCellValueFactory(new PropertyValueFactory("Vaccinated"));
+		        this.colMedica.setCellValueFactory(new PropertyValueFactory("medication"));
+		        this.colPatho.setCellValueFactory(new PropertyValueFactory("other_pathologies"));
+		        this.colDateIntroduced.setCellValueFactory(new PropertyValueFactory("DateIntroduced"));
+		        
+		        
+
+		    	List <Patient> allpatients= Main.getInter().getPatientsOfLab(lab.getId());
+		    	this.patientsTableList.addAll(allpatients);
+		    	this.tablePatients.setItems(patientsTableList);
+		    	
+		    	
+				
+			}
+			else if (firsttime==false){
+				
+			
+		
+			
+			
+			
+			
+			
+			this.patientsTableList.clear();
 
 		if (feature == "Birth date") {
 			boolean correctdate=true;
@@ -158,6 +204,7 @@ public class SearchPatientbyLabController implements Initializable {
 	    	typeTextfield.setText("");
 		}
     }
+		}
 	else {
 		JOptionPane.showMessageDialog(null, "Empty field ");
 	}
@@ -165,7 +212,15 @@ public class SearchPatientbyLabController implements Initializable {
     	
     	
     }
-    @FXML
+    public Lab getLab() {
+		return lab;
+	}
+
+	public void setLab(Lab lab) {
+		this.lab = lab;
+	}
+
+	@FXML
     void Filterclick(ActionEvent event) {
     	this.patientsTableList.clear();
     	String dateFromText="";
@@ -194,31 +249,6 @@ public class SearchPatientbyLabController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     	loadData();
     	SearchOptions.setValue("Select an option");
-    	int numberpatients= Main.getInter().getNumberofPatients();
-    	numberofpatients.setText("There are "+numberpatients+" patients");
-    	patientsTableList = FXCollections.observableArrayList();
-        this.colName.setCellValueFactory(new PropertyValueFactory("name"));
-        this.colBirth.setCellValueFactory(new PropertyValueFactory("birthday"));
-        this.colSex.setCellValueFactory(new PropertyValueFactory("sex"));
-        this.colHeight.setCellValueFactory(new PropertyValueFactory("height"));
-        this.colWeight.setCellValueFactory(new PropertyValueFactory("weight"));
-        this.colSSnum.setCellValueFactory(new PropertyValueFactory("social_security"));
-        this.colHos.setCellValueFactory(new PropertyValueFactory("hospital"));
-        this.colInfected.setCellValueFactory(new PropertyValueFactory("infected"));
-        this.colAlive.setCellValueFactory(new PropertyValueFactory("alive"));
-        this.colBloodType.setCellValueFactory(new PropertyValueFactory("bloodType"));
-        this.colVaccinated.setCellValueFactory(new PropertyValueFactory("Vaccinated"));
-        this.colMedica.setCellValueFactory(new PropertyValueFactory("medication"));
-        this.colPatho.setCellValueFactory(new PropertyValueFactory("other_pathologies"));
-        this.colDateIntroduced.setCellValueFactory(new PropertyValueFactory("DateIntroduced"));
-        
-        
-
-    	List <Patient> allpatients= Main.getInter().searchPatientByName("");
-    	this.patientsTableList.addAll(allpatients);
-    	this.tablePatients.setItems(patientsTableList);
-    	
-    	
     			
     	
     	

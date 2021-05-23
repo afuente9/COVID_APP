@@ -124,8 +124,38 @@ import javafx.stage.Stage;
 	    void OnSearchPatient(ActionEvent event) {
 	    	String name= "SearchPatientView.fxml";
 			SearchPatientController controller = null;
-			openWindow(name,controller,"Search patient");
+			String title= "Search patient";
+			
+			try {
+	    		Pane root0 = (Pane) this.Add_Patient.getScene().getRoot();
 
+				 ColorAdjust adj = new ColorAdjust(0, -0.9, -0.5, 0);
+
+				 GaussianBlur blur = new GaussianBlur(10); 
+				    adj.setInput(blur);
+				 root0.setEffect(adj);
+	    		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+	    	Parent root;
+	    	
+	    		root = loader.load();
+	    	
+	    	  controller = loader.getController();
+	    	Scene scene = new Scene(root);
+	    	Stage stage = new Stage();
+			stage.setResizable(false);
+
+	        stage.initModality(Modality.APPLICATION_MODAL);
+	        stage.setScene(scene);
+			stage.setTitle(title);
+			stage.getIcons().add(new Image("https://image.flaticon.com/icons/png/512/2833/2833315.png"));
+            controller.setD(d);
+	        stage.showAndWait();
+			root0.setEffect(null);
+
+	    	} catch (IOException e) {
+	    		// TODO Auto-generated catch block
+	    		e.printStackTrace();
+	    	}
 	    }
 	    @FXML
 	    void onseePicDoc(ActionEvent event) {

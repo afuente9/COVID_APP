@@ -671,6 +671,23 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 		return patients;
+	}	
+	@Override
+	public List<Patient> getPatientsOfLab(int lab_id) {
+		List<Patient> patients = new ArrayList<Patient>();
+		try {
+			String sql = "SELECT * FROM pat_lab WHERE lab_id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, lab_id);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				int patientId = rs.getInt("id_pat");
+				patients.add(this.getPatient(patientId));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return patients;
 	}
 
 	@Override

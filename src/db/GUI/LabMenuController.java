@@ -188,9 +188,38 @@ public void setL(Lab l) {
     void searchpatientbutton(ActionEvent event) {
     	String name= "SearchPatientbyLabView.fxml";
     	SearchPatientbyLabController controller = null;
+    	String title="Search patient";
+    	try {
+    		Pane root0 = (Pane) this.LabName.getScene().getRoot();
+
+			 ColorAdjust adj = new ColorAdjust(0, -0.9, -0.5, 0);
+
+			 GaussianBlur blur = new GaussianBlur(10); 
+			    adj.setInput(blur);
+			 root0.setEffect(adj);
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+    	Parent root;
     	
-    	openWindow(name,controller, "Search patient");
+    		root = loader.load();
     	
+    	  controller = loader.getController();
+    	  controller.setLab(l);
+    	Scene scene = new Scene(root);
+    	Stage stage = new Stage();
+		stage.setResizable(false);
+stage.setTitle(title);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+		stage.getIcons().add(new Image("https://image.flaticon.com/icons/png/512/2833/2833315.png"));
+
+        stage.showAndWait();
+		root0.setEffect(null);
+
+    	} catch (IOException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}
+
     	
     }
 
