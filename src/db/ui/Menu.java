@@ -153,7 +153,7 @@ public class Menu {
 		}
 	}
 	
-	private static void addPatientsToLabs() {
+	/*private static void addPatientsToLabs() {
 		for(int i = 1; i <= inter.showLabs().size(); i++) {
 			System.out.println(i);
 			for(int j = 1; j <= inter.getAllPatient().size(); j++) {
@@ -172,7 +172,7 @@ public class Menu {
 				inter.assignPattoDoc(j, d);
 			}
 		}
-	}
+	}*/
 	
 	public static void main(String[] args) throws Exception {
 		inter.connect();

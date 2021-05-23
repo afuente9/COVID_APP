@@ -2804,10 +2804,8 @@ public class JDBCManagment implements Cov_Manager {
 				String blood = rs.getString("bloodType");
 				boolean vaccin = rs.getBoolean("vaccinated");
 				Date dateIntroduced = rs.getDate("dateIntroduced");
-				List<Medication> medicationPatient = getMedicationfromPatient(id);
-				List<Other_Pathologies> Other_Pathologies = getPathofromPatient(id);
-				//List<Medication> medicationPatient = Main.getInter().getMedicationfromPatient(id);
-				//List<Other_Pathologies> Other_Pathologies = Main.getInter().getPathofromPatient(id);
+				List<Medication> medicationPatient = Main.getInter().getMedicationfromPatient(id);
+				List<Other_Pathologies> Other_Pathologies = Main.getInter().getPathofromPatient(id);
 
 				Patient patient = new Patient(id, loc_hosp, patientname, birthday, social_security, height, weight,
 						sexo, infec, alive, hosp, vaccin, blood, dateIntroduced, medicationPatient, Other_Pathologies);
