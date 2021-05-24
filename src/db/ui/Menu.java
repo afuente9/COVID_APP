@@ -228,33 +228,29 @@ public class Menu {
 	
 
 	private static void htmlgen() throws Exception{
-		XmlToHtml.createHTML("./xmlFileSave/erereergegerg.xml", "/Users/alvaro/Desktop/Covid_App/COVID_APP/src/db/xmls/LabHTML.xslt", "./xmlFileSave/labResult.html");
-		XmlToHtml.createHTML("./xmlFileSave/Spain.xml", "/Users/alvaro/Desktop/Covid_App/COVID_APP/src/db/xmls/AdminHTML.xslt", "./xmlFileSave/adminResult.html");
+		XmlToHtml.createHTML("./xmlFileSave/allLabs.xml", "W:\\DOCS\\java-2020-12\\COVID_APP\\src\\db\\xmls\\LabHTML.xslt", "./xmlFileSave/labResult.html");
+		XmlToHtml.createHTML("./xmlFileSave/allAdmins.xml", "W:\\DOCS\\java-2020-12\\COVID_APP\\src\\db\\xmls\\AdminHTML.xslt", "./xmlFileSave/adminResult.html");
+		XmlToHtml.createHTML("./xmlFileSave/allDocs.xml", "W:\\DOCS\\java-2020-12\\COVID_APP\\src\\db\\xmls\\DoctorHTML.xslt", "./xmlFileSave/docResult.html");
 	}
 
 	private static void addFromXml() throws Exception{
 		System.out.println("1. Insert Lab: ");
-		System.out.println("2. Insert govern: ");
+		System.out.println("2. Insert Govern: ");
+		System.out.println("3. Insert Doc: ");
 		int op = Integer.parseInt(reader.readLine());
 		if (op==1) {
 			xj.getLabFromXml("erereergegerg");
+		} else if (op==2) {
+			xj.getAdminFromXml("Spain");
 		}
 	}
 
 	private static void xmlgen() throws Exception{
 		
-		System.out.println(inter.showLabs().toString());
-			
-		System.out.println("Inicate id of the lab you want to XML: ");
-		int id = Integer.parseInt(reader.readLine());
-		jx.getXMLforLab(id);
-		System.out.println(inter.getAllAdmins().toString());
-		System.out.println("Inicate id of the admin you want to XML: ");
-		 id = Integer.parseInt(reader.readLine());
-		jx.getXMLforAdministration(id);
+		jx.getXMLforLab();
 		
 	}
-
+	
 	private static void register() throws Exception{ 
 		//TODO como queremos que eligan el role que tienen, ¿es lo primero que eligen o lo ultimo?
 		System.out.println(userman.getRoles());

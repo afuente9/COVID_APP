@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Doctor id="1" name="jose">
+    <speciality>Cardio</speciality>
+    <birthday>2000-01-01</birthday>
+    <collegiate_number>8383838</collegiate_number>
+    <sex>M</sex>
+    <hospital>La paz</hospital>
+</Doctor>

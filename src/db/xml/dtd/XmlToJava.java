@@ -30,7 +30,7 @@ public class XmlToJava {
 	public void getAdminFromXml(String fileName) {
 		try {
 			inter.connectWithNoPrint();
-		JAXBContext jaxbContext_admin = JAXBContext.newInstance(Lab.class);
+		JAXBContext jaxbContext_admin = JAXBContext.newInstance(Administration.class);
 		Unmarshaller admin_unmarshaller = jaxbContext_admin.createUnmarshaller();
 		File file = new File("./xmlFileSave/"+fileName+".xml");
 		Administration govern = (Administration) admin_unmarshaller.unmarshal(file);
@@ -41,4 +41,20 @@ public class XmlToJava {
 			e.printStackTrace();
 		}
 	}
+	
+	public void getDocFromXml(String fileName) {
+		try {
+			inter.connectWithNoPrint();
+		JAXBContext jaxbContext_doc = JAXBContext.newInstance(Doctor.class);
+		Unmarshaller doc_unmarshaller = jaxbContext_doc.createUnmarshaller();
+		File file = new File("./xmlFileSave/"+fileName+".xml");
+		Doctor doc = (Doctor) doc_unmarshaller.unmarshal(file);
+		if(!inter.checkDoctor(doc)) {
+			inter.addDoctor(doc);
+		}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	}

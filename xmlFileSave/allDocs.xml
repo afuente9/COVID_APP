@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Doctor id="20" name="yaya">
+    <speciality>1</speciality>
+    <birthday>1111-01-01</birthday>
+    <collegiate_number>1</collegiate_number>
+    <sex>M</sex>
+    <hospital>1</hospital>
+</Doctor>
