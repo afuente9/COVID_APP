@@ -20,7 +20,7 @@ public class JavaToXml {
 			lab_marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
 			
 			Lab result_lab= inter.getLab(id);
-			File file = new File("./xmlFileSave/"+result_lab.getName()+ ".xml"); //TODO mirar porque no funciona esto
+			File file = new File("./xmlFileSave/"+result_lab.getName()+ ".xml"); 
 			file.createNewFile();
 			lab_marshaller.marshal(result_lab, file);
 			lab_marshaller.marshal(result_lab, System.out);
@@ -36,7 +36,7 @@ public class JavaToXml {
 			Marshaller admin_marshaller = jaxbContextAdmin.createMarshaller();
 			admin_marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 			Administration result_admin = inter.getAdministration(id);
-			File file = new File("./xmlFileSave/" + result_admin.getName() + ".xml"); //TODO mirar porque no funciona esto
+			File file = new File("./xmlFileSave/" + result_admin.getName() + ".xml"); 
 			file.createNewFile();
 			admin_marshaller.marshal(result_admin, file);
 			admin_marshaller.marshal(result_admin, System.out);

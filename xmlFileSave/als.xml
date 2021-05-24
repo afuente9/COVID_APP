@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Lab id="2" name="als">
+    <address>als</address>
+    <vaccines_produce>123</vaccines_produce>
+    <cif>asld</cif>
+</Lab>

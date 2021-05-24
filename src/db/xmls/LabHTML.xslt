@@ -3,9 +3,6 @@
 
 <xsl:template match="/">
    <html>
-   <p><b><xsl:value-of select="//name" /></b></p>
-   <p><b>Contents: </b><xsl:value-of select="//content" /></p>
-   <p><b>Paid authors:</b></p>
    <table border="1">
       <th>Laboratory</th>
       <th>Address</th>
@@ -19,10 +16,15 @@
          	<td><xsl:value-of select="address" /></td>
          	<td><xsl:value-of select = "cif" /></td>
          	<td><xsl:value-of select = "vaccines_produce" /></td>
-         </tr>
+            </tr>
       </xsl:for-each>
+   	  <xsl:for-each select="Lab/Patients/Patient">
+		<xsl:sort select = "@name"/>
+			<tr>
+				<td><i><xsl:value-of select = "@name"/></i></td>
+			</tr>	 	
+     </xsl:for-each>
    </table>
-   
    </html>
 </xsl:template>
 

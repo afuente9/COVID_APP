@@ -35,8 +35,8 @@ public class Lab implements Serializable{
 	@XmlTransient
 	byte[] image;
 	
-	@XmlElement(name="Patients")
-	@XmlElementWrapper(name="patient")
+	@XmlElement(name="Patient")
+	@XmlElementWrapper(name="Patients")
 	private List<Patient> patients;
 
 	public Lab() {

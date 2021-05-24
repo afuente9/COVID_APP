@@ -233,8 +233,8 @@ public class Menu {
 	
 
 	private static void htmlgen() throws Exception{
-		XmlToHtml.createHTML("W:\\DOCS\\java-2020-12\\COVID_APP\\xmlFileSave\\erereergegerg.xml", "W:\\DOCS\\java-2020-12\\COVID_APP\\src\\db\\xmls\\AppStyle.xslt", "./xmlFileSave/result.html");
-		
+		XmlToHtml.createHTML("W:\\DOCS\\java-2020-12\\COVID_APP\\xmlFileSave\\erereergegerg.xml", "W:\\DOCS\\java-2020-12\\COVID_APP\\src\\db\\xmls\\LabHTML.xslt", "./xmlFileSave/labResult.html");
+		XmlToHtml.createHTML("W:\\DOCS\\java-2020-12\\COVID_APP\\xmlFileSave\\Spain.xml", "W:\\DOCS\\java-2020-12\\COVID_APP\\src\\db\\xmls\\AdminHTML.xslt", "./xmlFileSave/adminResult.html");
 	}
 
 	private static void addFromXml() throws Exception{
