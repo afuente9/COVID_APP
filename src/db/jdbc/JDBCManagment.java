@@ -1324,29 +1324,6 @@ public class JDBCManagment implements Cov_Manager {
 	}
 
 	@Override
-	public List<Lab> showLabs() {
-		List<Lab> labs = new ArrayList<Lab>();
-		try {
-			String sql = "SELECT * FROM lab WHERE name LIKE ?";
-			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, '%'+""+'%');
-			ResultSet rs = prep.executeQuery();
-			while (rs.next()) {
-				int id = rs.getInt("id");
-				String Lname = rs.getString("name");
-				String Ladress = rs.getString("adress");
-				String Lcif = rs.getString("cif");
-				int Lvacciness = rs.getInt("vacciness");
-				Lab lab = new Lab(id, Lvacciness, Ladress, Lname, Lcif);
-				labs.add(lab);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return labs;
-	}
-
-	@Override
 	public void addDay(Day f) {
 		try {
 			String sql = "INSERT INTO days (deaths,infectedPatients, average, daytime) VALUES (?,?,?,?)";
@@ -2517,6 +2494,7 @@ public class JDBCManagment implements Cov_Manager {
 
 
 	}
+	
 	@Override
 	public void openpicturedoctor(Doctor d) {
 		try {
@@ -2565,6 +2543,7 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 	}
+	
 	@Override
 	public void openpicturelab(Lab d) {
 		try {
@@ -2694,10 +2673,35 @@ public class JDBCManagment implements Cov_Manager {
 	}
 
 	@Override
+	public List<Lab> showLabs() {
+		List<Lab> labs = new ArrayList<Lab>();
+		try {
+			String sql = "SELECT * FROM lab WHERE name LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, '%'+""+'%');
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String Lname = rs.getString("name");
+				String Ladress = rs.getString("adress");
+				String Lcif = rs.getString("cif");
+				int Lvacciness = rs.getInt("vacciness");
+				Lab lab = new Lab(id, Lvacciness, Ladress, Lname, Lcif);
+				labs.add(lab);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return labs;
+	}
+	
+	
+	
+	@Override
 	public List<Administration> getAllAdmins() {
 		List<Administration> admins = new ArrayList<Administration>();
 		try {
-			String sql = "SELECT * FROM administration WHERE nameCountry = ?";
+			String sql = "SELECT * FROM administration WHERE nameCountry LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, '%'+""+'%');
 			ResultSet rs = prep.executeQuery();

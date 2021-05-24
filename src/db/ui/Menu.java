@@ -190,8 +190,8 @@ public class Menu {
 			System.out.println("|	4.  Generate XML                |");
 			System.out.println("|	5.  Add from XML                |");
 			System.out.println("|	6.  Generate HTML               |");
-			System.out.println("|	7.  Add Relation Lab            |");
-			System.out.println("|	8.  Add Relation Doc            |");
+			//System.out.println("|	7.  Add Relation Lab            |");
+			//System.out.println("|	8.  Add Relation Doc            |");
 			System.out.println("|	0.  Exit			|");
 			
 			int choice = Integer.parseInt(reader.readLine());
@@ -214,11 +214,6 @@ public class Menu {
 			case 6: 
 				htmlgen();
 				break;
-			case 7: 
-				break;
-			case 8: 
-			
-				break;
 			case 0:
 				//TODO ESTO PARA LA GUI?
 				inter.disconnect();
@@ -233,8 +228,8 @@ public class Menu {
 	
 
 	private static void htmlgen() throws Exception{
-		XmlToHtml.createHTML("W:\\DOCS\\java-2020-12\\COVID_APP\\xmlFileSave\\erereergegerg.xml", "W:\\DOCS\\java-2020-12\\COVID_APP\\src\\db\\xmls\\LabHTML.xslt", "./xmlFileSave/labResult.html");
-		XmlToHtml.createHTML("W:\\DOCS\\java-2020-12\\COVID_APP\\xmlFileSave\\Spain.xml", "W:\\DOCS\\java-2020-12\\COVID_APP\\src\\db\\xmls\\AdminHTML.xslt", "./xmlFileSave/adminResult.html");
+		XmlToHtml.createHTML("./xmlFileSave/erereergegerg.xml", "/Users/alvaro/Desktop/Covid_App/COVID_APP/src/db/xmls/LabHTML.xslt", "./xmlFileSave/labResult.html");
+		XmlToHtml.createHTML("./xmlFileSave/Spain.xml", "/Users/alvaro/Desktop/Covid_App/COVID_APP/src/db/xmls/AdminHTML.xslt", "./xmlFileSave/adminResult.html");
 	}
 
 	private static void addFromXml() throws Exception{
