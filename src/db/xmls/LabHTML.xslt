@@ -18,9 +18,11 @@
          	<td><xsl:value-of select = "vaccines_produce" /></td>
          </tr>
          <xsl:for-each select="LabList/labs/Patients/Patient">
-		 <xsl:sort select = "@name"/>
+		 <xsl:sort select = "sex"/>
 			<tr>
-				<td><i><xsl:value-of select = "@name"/></i></td>
+				<td><i><xsl:value-of select = "sex"/></i></td>
+				<td><xsl:value-of select="height" /></td>
+         		<td><xsl:value-of select = "weight" /></td>
 			</tr>	 	
      	 </xsl:for-each>
       </xsl:for-each>

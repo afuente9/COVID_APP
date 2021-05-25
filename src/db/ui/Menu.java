@@ -432,11 +432,11 @@ public class Menu {
 				modifyDoctor();
 				break;
 			case 4:
-					deleteAccount();
-					break;
+				deleteAccount();
+				break;
 			case 5:
-					changeMail();
-					break;
+				changeMail();
+				break;
 			case 0:
 				return;
 			default:

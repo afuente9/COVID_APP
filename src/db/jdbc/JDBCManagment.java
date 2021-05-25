@@ -3006,7 +3006,7 @@ public class JDBCManagment implements Cov_Manager {
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 
-				Date birthday = rs.getDate("birthday");
+				//Date birthday = rs.getDate("birthday");
 				Sex sexo;
 				if (rs.getString("sex").equalsIgnoreCase("m")) {
 					sexo = Sex.Male;
@@ -3015,7 +3015,7 @@ public class JDBCManagment implements Cov_Manager {
 				}
 				Float height = rs.getFloat("height");
 				Float weight = rs.getFloat("weight");
-				Patient p = new Patient(birthday, sexo, height, weight);
+				Patient p = new Patient(/*birthday,*/ sexo, height, weight);
 
 				pats.add(p);
 

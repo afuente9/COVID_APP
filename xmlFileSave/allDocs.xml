@@ -1,146 +1,146 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <DocList>
-    <docs id="1" name="jose">
+    <docs name="jose">
         <speciality>Cardio</speciality>
         <birthday>2000-01-01</birthday>
         <collegiate_number>8383838</collegiate_number>
         <sex>M</sex>
         <hospital>La paz</hospital>
     </docs>
-    <docs id="2" name="angel">
+    <docs name="angel">
         <speciality>cardio</speciality>
         <birthday>1999-07-29</birthday>
         <collegiate_number>912837123</collegiate_number>
         <sex>M</sex>
         <hospital>la paz</hospital>
     </docs>
-    <docs id="3" name="alvaro">
+    <docs name="alvaro">
         <speciality>cardio</speciality>
         <birthday>1999-07-29</birthday>
         <collegiate_number>19283123</collegiate_number>
         <sex>F</sex>
         <hospital>la paz</hospital>
     </docs>
-    <docs id="4" name="Male">
+    <docs name="Male">
         <speciality>1</speciality>
         <birthday>1111-01-01</birthday>
         <collegiate_number>11</collegiate_number>
         <sex>M</sex>
         <hospital>1</hospital>
     </docs>
-    <docs id="5" name="e">
+    <docs name="e">
         <speciality>1</speciality>
         <birthday>1111-01-01</birthday>
         <collegiate_number>1</collegiate_number>
         <sex>M</sex>
         <hospital>1</hospital>
     </docs>
-    <docs id="6" name="">
+    <docs name="">
         <speciality>11</speciality>
         <birthday>1111-01-01</birthday>
         <collegiate_number>1</collegiate_number>
         <sex>M</sex>
         <hospital>11</hospital>
     </docs>
-    <docs id="7" name="p">
+    <docs name="p">
         <speciality>i</speciality>
         <birthday>1111-01-01</birthday>
         <collegiate_number>i</collegiate_number>
         <sex>M</sex>
         <hospital>i</hospital>
     </docs>
-    <docs id="8" name="2342">
+    <docs name="2342">
         <speciality>e</speciality>
         <birthday>1111-01-01</birthday>
         <collegiate_number>e</collegiate_number>
         <sex>M</sex>
         <hospital>e</hospital>
     </docs>
-    <docs id="9" name="trt">
+    <docs name="trt">
         <speciality>1</speciality>
         <birthday>1111-11-11</birthday>
         <collegiate_number>1</collegiate_number>
         <sex>M</sex>
         <hospital>1</hospital>
     </docs>
-    <docs id="10" name="s">
+    <docs name="s">
         <speciality>a</speciality>
         <birthday>1111-01-01</birthday>
         <collegiate_number>a</collegiate_number>
         <sex>M</sex>
         <hospital>a</hospital>
     </docs>
-    <docs id="11" name="Pepa">
+    <docs name="Pepa">
         <speciality>cardio</speciality>
         <birthday>2222-02-02</birthday>
         <collegiate_number>23234</collegiate_number>
         <sex>F</sex>
         <hospital>santa cruz</hospital>
     </docs>
-    <docs id="12" name="papa">
+    <docs name="papa">
         <speciality>aaa</speciality>
         <birthday>1111-11-11</birthday>
         <collegiate_number>aa</collegiate_number>
         <sex>M</sex>
         <hospital>aa</hospital>
     </docs>
-    <docs id="13" name="aa">
+    <docs name="aa">
         <speciality>1</speciality>
         <birthday>1111-01-01</birthday>
         <collegiate_number>11</collegiate_number>
         <sex>M</sex>
         <hospital>1</hospital>
     </docs>
-    <docs id="14" name="aa">
+    <docs name="aa">
         <speciality>s</speciality>
         <birthday>1111-11-11</birthday>
         <collegiate_number>s</collegiate_number>
         <sex>M</sex>
         <hospital>s</hospital>
     </docs>
-    <docs id="15" name="tt">
+    <docs name="tt">
         <speciality>e</speciality>
         <birthday>3333-03-03</birthday>
         <collegiate_number>e</collegiate_number>
         <sex>M</sex>
         <hospital>e</hospital>
     </docs>
-    <docs id="16" name="ww">
+    <docs name="ww">
         <speciality>2</speciality>
         <birthday>1111-01-01</birthday>
         <collegiate_number>222</collegiate_number>
         <sex>M</sex>
         <hospital>2</hospital>
     </docs>
-    <docs id="17" name="www">
+    <docs name="www">
         <speciality>ee</speciality>
         <birthday>1111-01-01</birthday>
         <collegiate_number>ee</collegiate_number>
         <sex>M</sex>
         <hospital>ee</hospital>
     </docs>
-    <docs id="18" name="c">
+    <docs name="c">
         <speciality>e</speciality>
         <birthday>3333-03-03</birthday>
         <collegiate_number>e</collegiate_number>
         <sex>M</sex>
         <hospital>ee</hospital>
     </docs>
-    <docs id="19" name="a">
+    <docs name="a">
         <speciality>1</speciality>
         <birthday>1111-01-01</birthday>
         <collegiate_number>1</collegiate_number>
         <sex>M</sex>
         <hospital>1</hospital>
     </docs>
-    <docs id="20" name="yaya">
+    <docs name="yaya">
         <speciality>1</speciality>
         <birthday>1111-01-01</birthday>
         <collegiate_number>1</collegiate_number>
         <sex>M</sex>
         <hospital>1</hospital>
     </docs>
-    <docs id="21" name="clara">
+    <docs name="clara">
         <speciality>cardio</speciality>
         <birthday>2000-09-09</birthday>
         <collegiate_number>213423321</collegiate_number>

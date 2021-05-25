@@ -20,7 +20,7 @@ import db.xml.utils.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Patient")
 @XmlType(propOrder = { "id", "name", "hos_location", "birthday", "social_security", "height", "weight", "sex"
-		, "infected", "alive", "hospital", "Vaccinated", "bloodType", "DateIntroduced", "medication"
+		, "infected", "alive", "hospital", "Vaccinated", "bloodType", "medication"
 		, "other_pathologies", "doctors", "govId"})
 
 public class Patient implements Serializable{
@@ -36,8 +36,8 @@ public class Patient implements Serializable{
 	private String hos_location;
 	@XmlAttribute
 	private String name;
-	@XmlElement
-	@XmlJavaTypeAdapter(SQLDateAdapter.class)
+	//@XmlElement
+	//@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date birthday;
 	@XmlElement
 	private String social_security;
@@ -60,8 +60,7 @@ public class Patient implements Serializable{
 	private boolean Vaccinated;
 	@XmlElement
 	private String bloodType;	
-	@XmlAttribute
-	@XmlJavaTypeAdapter(SQLDateAdapter.class)
+	@XmlTransient
 	private Date DateIntroduced;
 	
 	@XmlElement(name = "Medication")
@@ -95,6 +94,13 @@ public class Patient implements Serializable{
 	public Patient(Date birthday, Sex sex, float height, float weight) {
 		super();
 		this.birthday = birthday;
+		this.height = height;
+		this.weight = weight;
+		this.sex = sex;
+	}
+	
+	public Patient(Sex sex, float height, float weight) {
+		super();
 		this.height = height;
 		this.weight = weight;
 		this.sex = sex;
