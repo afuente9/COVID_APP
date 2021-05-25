@@ -2936,6 +2936,32 @@ public class JDBCManagment implements Cov_Manager {
 		return null;
 	}
 
+	@Override
+	public List<Lab> getAllLabsXML() {
+		List<Lab> labs = null;
+		try {
+			String sql = "SELECT l.name, l.adress, l.cif, l.vacciness, p.birthday, p.sex, p.height,"
+					+ " p.weight FROM lab AS l JOIN pat_lab AS pl ON l.id=pl.id_lab JOIN patients AS p ON p.id = pl.id_pat WHERE l.name LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, '%'+""+'%');
+			ResultSet rs = prep.executeQuery();
+			while(rs.next()) {
+				String Lname = rs.getString("l.name");
+				String Ladress = rs.getString("l.adress");
+				String Lcif = rs.getString("l.cif");
+				int Lvacciness = rs.getInt("l.vacciness");
+				List<Patient> pats = new ArrayList<Patient>();
+				
+				Lab lab = new Lab(Lvacciness, Ladress, Lname, Lcif);
+				labs.add(lab);
+			}
+	
+		}catch(Exception e) {
+			
+		}
+		return null;
+	}
+
 	
 
 }

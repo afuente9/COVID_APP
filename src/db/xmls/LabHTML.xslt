@@ -9,7 +9,7 @@
       <th>CIF</th>
       <th>Vaccines produced</th>
       <th>Selected Patients</th>
-      <xsl:for-each select="Lab">
+      <xsl:for-each select="LabList/labs">
       <xsl:sort select="@name" />
          <tr>
          	<td><i><xsl:value-of select="@name" /></i></td>
@@ -18,7 +18,7 @@
          	<td><xsl:value-of select = "vaccines_produce" /></td>
             </tr>
       </xsl:for-each>
-   	  <xsl:for-each select="Lab/Patients/Patient">
+   	  <xsl:for-each select="LabList/labs/Patients/Patient">
 		<xsl:sort select = "@name"/>
 			<tr>
 				<td><i><xsl:value-of select = "@name"/></i></td>

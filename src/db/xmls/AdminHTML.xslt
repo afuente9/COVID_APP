@@ -6,7 +6,7 @@
    <table border = "1">
    	<th>Govern</th>
    	<th>vaccines</th>
-   	<xsl:for-each select = "Administration">
+   	<xsl:for-each select = "AdminList/governs">
    	<xsl:sort select = "@name"/>
    		<tr>
    			<td><i><xsl:value-of select="@name" /></i></td>

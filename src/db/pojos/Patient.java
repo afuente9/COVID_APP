@@ -112,7 +112,6 @@ public class Patient implements Serializable{
 		this.bloodType = bloodType;
 		this.medication=medication;
 		this.other_pathologies=other_pathologies;
-		
 	}
 
 

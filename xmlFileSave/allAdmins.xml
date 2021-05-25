@@ -1,2 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Administration id="3" name="Germany" vaccines="234"/>
+<AdminList>
+    <governs id="1" name="Spain">
+        <vaccines>1600</vaccines>
+    </governs>
+    <governs id="2" name="France">
+        <vaccines>214</vaccines>
+    </governs>
+    <governs id="3" name="Germany">
+        <vaccines>234</vaccines>
+    </governs>
+    <governs id="5" name="Italy">
+        <vaccines>0</vaccines>
+    </governs>
+    <governs id="9" name="Argentina">
+        <vaccines>0</vaccines>
+    </governs>
+    <governs id="18" name="Canada">
+        <vaccines>0</vaccines>
+    </governs>
+    <governs id="22" name="USA">
+        <vaccines>254</vaccines>
+    </governs>
+</AdminList>

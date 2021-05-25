@@ -36,7 +36,7 @@ public class Lab implements Serializable{
 	byte[] image;
 	
 	@XmlElement(name="patients")
-//	@XmlElementWrapper(name="patients")
+	@XmlElementWrapper(name="patients")
 	private List<Patient> patients;
 
 	public Lab() {

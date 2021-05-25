@@ -248,6 +248,8 @@ public class Menu {
 	private static void xmlgen() throws Exception{
 		
 		jx.getXMLforLab();
+		jx.getXMLforAdministration();
+		jx.getXMLforDoc();
 		
 	}
 	

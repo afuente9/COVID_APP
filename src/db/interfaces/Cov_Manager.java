@@ -55,6 +55,7 @@ public interface Cov_Manager {
 	public List<Patient> getAllPatient();
 	public List<Other_Pathologies> getAllPatho();
 	public List<Lab> showLabs();
+	public List<Lab> getAllLabsXML();
 
 
 	//Create tables
