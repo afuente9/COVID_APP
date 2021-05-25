@@ -8,26 +8,11 @@
    <!ELEMENT cif (#PCDATA)>
    <!ELEMENT vaccines_produce (#PCDATA)>
    <!ELEMENT patients (Patient+)>
-   <!ELEMENT Patient ( hos_location ,  birthday ,  social_security ,  height ,  weight ,  sex 
-		,  infected ,  alive ,  hospital ,  Vaccinated ,  bloodType ,  DateIntroduced ,  govId )>
-	<!ATTLIST Patient name CDATA #REQUIRED
-                  	   id CDATA #REQUIRED>
-   <!ELEMENT hos_location (#PCDATA)>
+   <!ELEMENT Patient ( birthday, sex)>
+	<!ATTLIST Patient   height (#PCDATA) #REQUIRED
+                  	    weight (#PCDATA) #REQUIRED
+                  	    govId  (#PCDATA) #REQUIRED>
    <!ELEMENT birthday (#PCDATA)>
-   <!ELEMENT social_security (#PCDATA)>
-   <!ELEMENT height (#PCDATA)>
-   <!ELEMENT weight (#PCDATA)>
    <!ELEMENT sex (#PCDATA)>
-   <!ELEMENT alive (#PCDATA)>
-   <!ELEMENT hospital (#PCDATA)>
-   <!ELEMENT Vaccinated (#PCDATA)>
-   <!ELEMENT bloodType (#PCDATA)>
-   <!ELEMENT DateIntroduced (#PCDATA)>
-   <!ELEMENT govId (#PCDATA)>
-   <!ELEMENT speciality (#PCDATA)>
-   <!ELEMENT birthday (#PCDATA)>
-   <!ELEMENT collegiate_number (#PCDATA)>
-   <!ELEMENT sex (#PCDATA)>
-   
-   
+
 ]>

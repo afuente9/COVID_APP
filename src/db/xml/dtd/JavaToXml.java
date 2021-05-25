@@ -38,7 +38,7 @@ public class JavaToXml {
 			
 			File file = new File("./xmlFileSave/allAdmins.xml"); 
 			file.createNewFile();
-			AdminList governs = new AdminList(inter.getAllAdmins());
+			AdminList governs = new AdminList(inter.getAllGovermentsXML());
 			admin_marshaller.marshal(governs, file);
 			
 		} catch (Exception e) {

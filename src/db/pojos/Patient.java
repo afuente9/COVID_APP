@@ -19,9 +19,7 @@ import db.xml.utils.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Patient")
-@XmlType(propOrder = { "id", "name", "hos_location", "birthday", "social_security", "height", "weight", "sex"
-		, "infected", "alive", "hospital", "Vaccinated", "bloodType", "medication"
-		, "other_pathologies", "doctors", "govId"})
+@XmlType(propOrder = { "birthday", "height", "weight", "sex", "govId"})
 
 public class Patient implements Serializable{
 	
@@ -30,16 +28,16 @@ public class Patient implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@XmlAttribute
+	@XmlTransient
 	private Integer id;
-	@XmlElement
+	@XmlTransient
 	private String hos_location;
-	@XmlAttribute
+	@XmlTransient
 	private String name;
-	//@XmlElement
-	//@XmlJavaTypeAdapter(SQLDateAdapter.class)
-	private Date birthday;
 	@XmlElement
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
+	private Date birthday;
+	@XmlTransient
 	private String social_security;
 	@XmlAttribute
 	private float height;
@@ -48,32 +46,29 @@ public class Patient implements Serializable{
 	@XmlElement
 	@XmlJavaTypeAdapter(SexAdapter.class)
 	private Sex sex;
-	@XmlElement
+	@XmlTransient
 	private boolean infected;
-	@XmlElement
+	@XmlTransient
 	private boolean alive;
-	@XmlElement
+	@XmlTransient
 	private String hospital;
 	@XmlTransient
 	private Float score;
-	@XmlElement
+	@XmlTransient
 	private boolean Vaccinated;
-	@XmlElement
+	@XmlTransient
 	private String bloodType;	
 	@XmlTransient
 	private Date DateIntroduced;
 	
-	@XmlElement(name = "Medication")
-    @XmlElementWrapper(name = "medication")
+	@XmlTransient
 	private List<Medication> medication;
 	
-	@XmlElement(name = "Other_Pathologies")
-    @XmlElementWrapper(name = "other_pathologies")
+	@XmlTransient
 	private List<Other_Pathologies> other_pathologies;
 	
 
-	@XmlElement(name = "Doctor")
-    @XmlElementWrapper(name = "doctors")
+	@XmlTransient
 	private List<Doctor> doctors;
 	
 	@XmlTransient
@@ -91,12 +86,13 @@ public class Patient implements Serializable{
 	}
 	
 	
-	public Patient(Date birthday, Sex sex, float height, float weight) {
+	public Patient(Date birthday, Sex sex, float height, float weight, int govId) {
 		super();
 		this.birthday = birthday;
 		this.height = height;
 		this.weight = weight;
 		this.sex = sex;
+		this.govId = govId;
 	}
 	
 	public Patient(Sex sex, float height, float weight) {

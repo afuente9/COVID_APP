@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
@@ -18,7 +19,7 @@ import db.xml.utils.SexAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Doctor")
-@XmlType(propOrder = { "id", "name", "speciality", "birthday", "collegiate_number", "sex", "hospital"})
+@XmlType(propOrder = { "id", "name", "speciality", "birthday", "collegiate_number", "sex", "hospital", "patients"})
 
 public class Doctor implements Serializable{
 
@@ -42,7 +43,8 @@ public class Doctor implements Serializable{
 	
 	@XmlTransient
 	private byte[] image;
-	@XmlTransient
+	@XmlElement(name="patients")
+	@XmlElementWrapper(name="Patient")
 	private List<Patient> patients;
 
 	public Doctor() {

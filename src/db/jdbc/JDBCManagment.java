@@ -2939,7 +2939,7 @@ public class JDBCManagment implements Cov_Manager {
 		List<Patient> pats = new ArrayList<Patient>();
 
 		try {
-			String sql = "SELECT p.birthday, p.sex, p.height, p.weight FROM patients AS p "
+			String sql = "SELECT p.birthday, p.sex, p.height, p.weight, p.id_adm FROM patients AS p "
 					+ "JOIN pat_lab AS pl ON p.id = pl.id_pat JOIN lab AS l ON pl.id_lab = l.id WHERE l.id = ? ";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, Lid);
@@ -2955,7 +2955,8 @@ public class JDBCManagment implements Cov_Manager {
 				}
 				Float height = rs.getFloat("height");
 				Float weight = rs.getFloat("weight");
-				Patient p = new Patient(birthday, sexo, height, weight);
+				int govId = rs.getInt("id_adm");
+				Patient p = new Patient(birthday, sexo, height, weight, govId);
 
 				pats.add(p);
 
@@ -2999,14 +3000,14 @@ public class JDBCManagment implements Cov_Manager {
 		List<Patient> pats = new ArrayList<Patient>();
 
 		try {
-			String sql = "SELECT p.birthday, p.sex, p.height, p.weight FROM patients AS p "
+			String sql = "SELECT p.birthday, p.sex, p.height, p.weight, p.id_adm FROM patients AS p "
 					+ "JOIN pat_doc AS pd ON p.id = pd.id_pat JOIN doctors AS d ON pd.id_doc = d.id WHERE d.id = ? ";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, Did);
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
 
-				//Date birthday = rs.getDate("birthday");
+				Date birthday = rs.getDate("birthday");
 				Sex sexo;
 				if (rs.getString("sex").equalsIgnoreCase("m")) {
 					sexo = Sex.Male;
@@ -3015,7 +3016,8 @@ public class JDBCManagment implements Cov_Manager {
 				}
 				Float height = rs.getFloat("height");
 				Float weight = rs.getFloat("weight");
-				Patient p = new Patient(/*birthday,*/ sexo, height, weight);
+				int govId = rs.getInt("id_adm");
+				Patient p = new Patient(birthday, sexo, height, weight, govId);
 
 				pats.add(p);
 
@@ -3059,6 +3061,28 @@ public class JDBCManagment implements Cov_Manager {
 			e.printStackTrace();
 		}
 		return docs;
+	}
+
+	@Override
+	public List<Administration> getAllGovermentsXML() {
+		List<Administration> govs = new ArrayList<Administration>();
+		try {
+			String sql = "SELECT id, nameCountry, total_vacciness FROM administration WHERE nameCountry LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, '%'+""+'%');
+			ResultSet rs = prep.executeQuery();
+			while(rs.next()) {
+				int Gid = rs.getInt("id");
+				String Gname = rs.getString("nameCountry");
+				int Gvacciness = rs.getInt("total_vacciness");
+				Administration gov = new Administration(Gname, Gvacciness);
+				govs.add(gov);
+			}
+	
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return govs;
 	}
 
 	

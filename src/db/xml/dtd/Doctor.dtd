@@ -1,11 +1,17 @@
 <!DOCTYPE Doctor [
    <!ELEMENT Doctor ( speciality ,  birthday ,  collegiate_number ,  sex ,  hospital )>
-   <!ATTLIST Doctor name CDATA #REQUIRED
-                  	  id CDATA #REQUIRED>
+   <!ATTLIST Doctor name CDATA #REQUIRE>
    <!ELEMENT speciality (#PCDATA)>
    <!ELEMENT birthday (#PCDATA)>
    <!ELEMENT collegiate_number (#PCDATA)>
    <!ELEMENT sex (#PCDATA)>
    <!ELEMENT hospital (#PCDATA)>
+   <!ELEMENT patients (Patient+)>
+   <!ELEMENT Patient ( birthday, sex)>
+	<!ATTLIST Patient   height (#PCDATA) #REQUIRED
+                  	    weight (#PCDATA) #REQUIRED
+                  	    govId  (#PCDATA) #REQUIRED>
+   <!ELEMENT birthday (#PCDATA)>
+   <!ELEMENT sex (#PCDATA)>
    
 ]>

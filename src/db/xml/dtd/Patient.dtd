@@ -1,39 +1,8 @@
 <!DOCTYPE Patient [
-   <!ELEMENT Patient ( hos_location ,  birthday ,  social_security ,  height ,  weight ,  sex 
-		,  infected ,  alive ,  hospital ,  Vaccinated ,  bloodType ,  medication 
-		,  other_pathologies ,  doctors ,  govId )>
-	<!ATTLIST Patient name CDATA #REQUIRED
-                  	   id CDATA #REQUIRED>
-   <!ELEMENT hos_location (#PCDATA)>
+   <!ELEMENT Patient ( "birthday", "sex")>
+	<!ATTLIST Patient   height (#PCDATA) #REQUIRED
+                  	    weight (#PCDATA) #REQUIRED
+                  	    govId  (#PCDATA) #REQUIRED>
    <!ELEMENT birthday (#PCDATA)>
-   <!ELEMENT social_security (#PCDATA)>
-   <!ELEMENT height (#PCDATA)>
-   <!ELEMENT weight (#PCDATA)>
    <!ELEMENT sex (#PCDATA)>
-   <!ELEMENT hospital (#PCDATA)>
-   <!ELEMENT Vaccinated (#PCDATA)>
-   <!ELEMENT bloodType (#PCDATA)>
-   <!ELEMENT govId (#PCDATA)>
-   <!ELEMENT speciality (#PCDATA)>
-   
-   <!ELEMENT doctors (Doctor+)>
-   <!ELEMENT Doctor ( speciality ,  birthday ,  collegiate_number ,  sex ,  hospital )>
-   <!ATTLIST Doctor name CDATA #REQUIRED
-                  	  id CDATA #REQUIRED>
-   <!ELEMENT speciality (#PCDATA)>
-   <!ELEMENT birthday (#PCDATA)>
-   <!ELEMENT collegiate_number (#PCDATA)>
-   <!ELEMENT sex (#PCDATA)>
-   <!ELEMENT hospital (#PCDATA)>
-   
-   <!ELEMENT medication (Medication+)>
-   <!ELEMENT Medication (id, name)>
-   <!ELEMENT id (#PCDATA)>
-   <!ELEMENT name (#PCDATA)>
-   
-   <!ELEMENT other_pathologies (Other_Pathologies+)>
-   <!ELEMENT Other_Pathologies (id, Name)>
-   <!ELEMENT id (#PCDATA)>
-   <!ELEMENT name (#PCDATA)>
-   
 ]>

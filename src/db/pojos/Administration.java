@@ -49,6 +49,11 @@ public class Administration implements Serializable{
 		this.name = name;
 	}
 
+	public Administration(String name, int vaccines) {
+		super();
+		this.vaccines = vaccines;
+		this.name = name;
+	}
 
 	public Administration(Integer id, int vaccines, String name, byte[] image) {
 		super();
@@ -57,7 +62,6 @@ public class Administration implements Serializable{
 		this.name = name;
 		this.image = image;
 	}
-
 
 	public Administration(String name2) {
 		this.name= name2;	}

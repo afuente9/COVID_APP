@@ -8,7 +8,6 @@
       <th>Address</th>
       <th>CIF</th>
       <th>Vaccines produced</th>
-      <th>Selected Patients</th>
       <xsl:for-each select="LabList/labs">
       <xsl:sort select="@name" />
          <tr>
@@ -17,14 +16,6 @@
          	<td><xsl:value-of select = "cif" /></td>
          	<td><xsl:value-of select = "vaccines_produce" /></td>
          </tr>
-         <xsl:for-each select="LabList/labs/Patients/Patient">
-		 <xsl:sort select = "sex"/>
-			<tr>
-				<td><i><xsl:value-of select = "sex"/></i></td>
-				<td><xsl:value-of select="height" /></td>
-         		<td><xsl:value-of select = "weight" /></td>
-			</tr>	 	
-     	 </xsl:for-each>
       </xsl:for-each>
    </table>
    </html>
