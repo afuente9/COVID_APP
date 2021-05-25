@@ -164,7 +164,7 @@ public class StatisticsController implements Initializable {
 
 					if (typeofpatient.getValue().equals("Alive") == true) {
 						// did it like that so it works well
-						plotTittle.setText("Dead people per day");
+						plotTittle.setText("Deceased people per day");
 
 						this.alive = false;
 						lineChart.setVisible(true);
@@ -480,8 +480,8 @@ for (int i = 0; i < Hospitals.size(); i++) {
 
 	private void loadData() {
 		list.removeAll(list);
-		String a = "Dead";
-		String b = "Alive";
+		String a = "Deceased";
+		String b = "Infected";
 
 		list.addAll(a, b);
 		typeofpatient.getItems().addAll(list);

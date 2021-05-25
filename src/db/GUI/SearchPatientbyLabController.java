@@ -41,7 +41,8 @@ public class SearchPatientbyLabController implements Initializable {
  private Label numberofpatients;
  Lab lab;
  boolean firsttime=true;
- 
+ @FXML
+ private Button usetable;
  
     @FXML
     private ChoiceBox<String> SearchOptions;
@@ -89,7 +90,8 @@ public class SearchPatientbyLabController implements Initializable {
 
     @FXML
     private TableColumn colVaccinated;
-
+    @FXML
+    private Label searchbylabel;
     @FXML
     private TableColumn colMedica;
 
@@ -111,7 +113,42 @@ public class SearchPatientbyLabController implements Initializable {
     	Stage stage = (Stage) this.SearchOptions.getScene().getWindow();
     	stage.close();
     }
-
+    @FXML
+    void usethetable(ActionEvent event) {
+    	this.tablePatients.setDisable(false);
+    	
+    	this.usetable.setDisable(true);
+    	this.usetable.setVisible(false);
+    	this.SearchOptions.setDisable(false);
+    	this.typeTextfield.setDisable(false);
+    	this.SearchButton.setDisable(false);
+    	this.searchbylabel.setDisable(false);
+    
+    	
+    	SearchOptions.setValue("Select an option");
+    	int numberpatients= Main.getInter().getNumberofPatients();
+    	numberofpatients.setText("There are "+numberpatients+" patients");
+    	patientsTableList = FXCollections.observableArrayList();
+        this.colName.setCellValueFactory(new PropertyValueFactory("name"));
+        this.colBirth.setCellValueFactory(new PropertyValueFactory("birthday"));
+        this.colSex.setCellValueFactory(new PropertyValueFactory("sex"));
+        this.colHeight.setCellValueFactory(new PropertyValueFactory("height"));
+        this.colWeight.setCellValueFactory(new PropertyValueFactory("weight"));
+        this.colSSnum.setCellValueFactory(new PropertyValueFactory("social_security"));
+        this.colHos.setCellValueFactory(new PropertyValueFactory("hospital"));
+        this.colInfected.setCellValueFactory(new PropertyValueFactory("infected"));
+        this.colAlive.setCellValueFactory(new PropertyValueFactory("alive"));
+        this.colBloodType.setCellValueFactory(new PropertyValueFactory("bloodType"));
+        this.colVaccinated.setCellValueFactory(new PropertyValueFactory("Vaccinated"));
+        this.colMedica.setCellValueFactory(new PropertyValueFactory("medication"));
+        this.colPatho.setCellValueFactory(new PropertyValueFactory("other_pathologies"));
+        this.colDateIntroduced.setCellValueFactory(new PropertyValueFactory("DateIntroduced"));
+        
+        
+       	List <Patient> allpatients= Main.getInter().getPatientsOfLab(lab.getId());
+    	this.patientsTableList.addAll(allpatients);
+    	this.tablePatients.setItems(patientsTableList);
+    }
     @FXML
     void ModifySearch(ActionEvent event) {
 
@@ -122,38 +159,6 @@ public class SearchPatientbyLabController implements Initializable {
 		if (!type.equals("") && !feature.equals("Select an option")){
 	    
 			
-			if(firsttime==true) {
-
-				loadData();
-		    	SearchOptions.setValue("Select an option");
-		    	int numberpatients= Main.getInter().getNumberofPatients();
-		    	numberofpatients.setText("There are "+numberpatients+" patients");
-		    	patientsTableList = FXCollections.observableArrayList();
-		        this.colName.setCellValueFactory(new PropertyValueFactory("name"));
-		        this.colBirth.setCellValueFactory(new PropertyValueFactory("birthday"));
-		        this.colSex.setCellValueFactory(new PropertyValueFactory("sex"));
-		        this.colHeight.setCellValueFactory(new PropertyValueFactory("height"));
-		        this.colWeight.setCellValueFactory(new PropertyValueFactory("weight"));
-		        this.colSSnum.setCellValueFactory(new PropertyValueFactory("social_security"));
-		        this.colHos.setCellValueFactory(new PropertyValueFactory("hospital"));
-		        this.colInfected.setCellValueFactory(new PropertyValueFactory("infected"));
-		        this.colAlive.setCellValueFactory(new PropertyValueFactory("alive"));
-		        this.colBloodType.setCellValueFactory(new PropertyValueFactory("bloodType"));
-		        this.colVaccinated.setCellValueFactory(new PropertyValueFactory("Vaccinated"));
-		        this.colMedica.setCellValueFactory(new PropertyValueFactory("medication"));
-		        this.colPatho.setCellValueFactory(new PropertyValueFactory("other_pathologies"));
-		        this.colDateIntroduced.setCellValueFactory(new PropertyValueFactory("DateIntroduced"));
-		        
-		        
-
-		    	List <Patient> allpatients= Main.getInter().getPatientsOfLab(lab.getId());
-		    	this.patientsTableList.addAll(allpatients);
-		    	this.tablePatients.setItems(patientsTableList);
-		    	
-		    	
-				
-			}
-			else if (firsttime==false){
 				
 			
 		
@@ -212,7 +217,7 @@ public class SearchPatientbyLabController implements Initializable {
 			this.patientsTableList.addAll(result);
 	    	this.tablePatients.setItems(patientsTableList);  
 	    	typeTextfield.setText("");
-		}
+	
     }
 		}
 	else {
