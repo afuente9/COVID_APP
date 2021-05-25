@@ -28,6 +28,8 @@ public interface Cov_Manager {
 	public List <Patient> searchPatientByName(String name);
 //en pruebas
 	public List <Patient> searchPatientGeneric(String feature, String type);
+	public List<Patient> getPatientsfromLab(int Lid);
+	public List<Patient> getPatientsfromDoc(int Did);
 		
 	// Add a new doctor
 	public void addDoctor(Doctor d);
@@ -56,6 +58,7 @@ public interface Cov_Manager {
 	public List<Other_Pathologies> getAllPatho();
 	public List<Lab> showLabs();
 	public List<Lab> getAllLabsXML();
+	public List<Doctor> getAllDoctorsXML();
 
 
 	//Create tables

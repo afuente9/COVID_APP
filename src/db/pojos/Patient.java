@@ -92,8 +92,15 @@ public class Patient implements Serializable{
 	}
 	
 	
-	
+	public Patient(Date birthday, Sex sex, float height, float weight) {
+		super();
+		this.birthday = birthday;
+		this.height = height;
+		this.weight = weight;
+		this.sex = sex;
+	}
 
+	
 	public Patient(Integer id,String hos_location, String name, Date birthday, String social_security, float height, float weight,
 			Sex sex, boolean infected, boolean alive, String hospital, boolean Vaccinated, String bloodType,List<Medication> medication,List<Other_Pathologies> other_pathologies) {
 		super();

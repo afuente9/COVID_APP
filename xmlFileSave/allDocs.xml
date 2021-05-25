@@ -140,4 +140,11 @@
         <sex>M</sex>
         <hospital>1</hospital>
     </docs>
+    <docs id="21" name="clara">
+        <speciality>cardio</speciality>
+        <birthday>2000-09-09</birthday>
+        <collegiate_number>213423321</collegiate_number>
+        <sex>F</sex>
+        <hospital>la paz</hospital>
+    </docs>
 </DocList>

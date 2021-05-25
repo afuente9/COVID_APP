@@ -426,7 +426,7 @@ public class Menu {
 				addPatient();
 				break;
 			case 2:
-				searchPatientGeneric();
+				searchPatients();
 				break;
 			case 3:
 				modifyDoctor();

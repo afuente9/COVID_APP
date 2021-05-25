@@ -16,14 +16,14 @@
          	<td><xsl:value-of select="address" /></td>
          	<td><xsl:value-of select = "cif" /></td>
          	<td><xsl:value-of select = "vaccines_produce" /></td>
-            </tr>
-      </xsl:for-each>
-   	  <xsl:for-each select="LabList/labs/Patients/Patient">
-		<xsl:sort select = "@name"/>
+         </tr>
+         <xsl:for-each select="LabList/labs/Patients/Patient">
+		 <xsl:sort select = "@name"/>
 			<tr>
 				<td><i><xsl:value-of select = "@name"/></i></td>
 			</tr>	 	
-     </xsl:for-each>
+     	 </xsl:for-each>
+      </xsl:for-each>
    </table>
    </html>
 </xsl:template>

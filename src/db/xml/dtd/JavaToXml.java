@@ -22,7 +22,7 @@ public class JavaToXml {
 			lab_marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
 			File file = new File("./xmlFileSave/allLabs.xml"); 
 			file.createNewFile();
-			LabList labos= new LabList(inter.showLabs());
+			LabList labos= new LabList(inter.getAllLabsXML());
 			lab_marshaller.marshal(labos, file);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -55,7 +55,7 @@ public class JavaToXml {
 			
 			File file = new File("./xmlFileSave/allDocs.xml"); 
 			file.createNewFile();
-			DocList doctors = new DocList(inter.getAllDoctors());
+			DocList doctors = new DocList(inter.getAllDoctorsXML());
 			doc_marshaller.marshal(doctors, file);
 			
 		} catch (Exception e) {

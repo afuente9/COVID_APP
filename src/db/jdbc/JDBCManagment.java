@@ -559,8 +559,10 @@ public class JDBCManagment implements Cov_Manager {
 				String blood = rs.getString("bloodType");
 				boolean vaccin = rs.getBoolean("vaccinated");
 				Date dateIntroduced = rs.getDate("dateIntroduced");
-				List<Medication> medicationPatient = Main.getInter().getMedicationfromPatient(id);
-				List<Other_Pathologies> Other_Pathologies = Main.getInter().getPathofromPatient(id);
+				List<Medication> medicationPatient = getMedicationfromPatient(id);
+				List<Other_Pathologies> Other_Pathologies = getPathofromPatient(id);
+				//List<Medication> medicationPatient = Main.getInter().getMedicationfromPatient(id);
+				//List<Other_Pathologies> Other_Pathologies = Main.getInter().getPathofromPatient(id);
 
 				Patient patient = new Patient(id, loc_hosp, patientname, birthday, social_security, height, weight,
 						sexo, infec, alive, hosp, vaccin, blood, dateIntroduced, medicationPatient, Other_Pathologies);
@@ -2695,8 +2697,6 @@ public class JDBCManagment implements Cov_Manager {
 		return labs;
 	}
 	
-	
-	
 	@Override
 	public List<Administration> getAllAdmins() {
 		List<Administration> admins = new ArrayList<Administration>();
@@ -2922,8 +2922,6 @@ public class JDBCManagment implements Cov_Manager {
 		return false;
 	}
 
-
-
 	@Override
 	public User getUserbydoctor(Doctor d) {
 		// TODO Auto-generated method stub
@@ -2936,30 +2934,131 @@ public class JDBCManagment implements Cov_Manager {
 		return null;
 	}
 
+	
+	public List<Patient> getPatientsfromLab(int Lid) {
+		List<Patient> pats = new ArrayList<Patient>();
+
+		try {
+			String sql = "SELECT p.birthday, p.sex, p.height, p.weight FROM patients AS p "
+					+ "JOIN pat_lab AS pl ON p.id = pl.id_pat JOIN lab AS l ON pl.id_lab = l.id WHERE l.id = ? ";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, Lid);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+
+				Date birthday = rs.getDate("birthday");
+				Sex sexo;
+				if (rs.getString("sex").equalsIgnoreCase("m")) {
+					sexo = Sex.Male;
+				} else {
+					sexo = Sex.Female;
+				}
+				Float height = rs.getFloat("height");
+				Float weight = rs.getFloat("weight");
+				Patient p = new Patient(birthday, sexo, height, weight);
+
+				pats.add(p);
+
+			}
+
+			rs.close();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return pats;
+	}
+	
 	@Override
 	public List<Lab> getAllLabsXML() {
-		List<Lab> labs = null;
+		List<Lab> labs = new ArrayList<Lab>();
 		try {
-			String sql = "SELECT l.name, l.adress, l.cif, l.vacciness, p.birthday, p.sex, p.height,"
-					+ " p.weight FROM lab AS l JOIN pat_lab AS pl ON l.id=pl.id_lab JOIN patients AS p ON p.id = pl.id_pat WHERE l.name LIKE ?";
+			String sql = "SELECT id, name, adress, cif, vacciness FROM lab WHERE name LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, '%'+""+'%');
 			ResultSet rs = prep.executeQuery();
 			while(rs.next()) {
-				String Lname = rs.getString("l.name");
-				String Ladress = rs.getString("l.adress");
-				String Lcif = rs.getString("l.cif");
-				int Lvacciness = rs.getInt("l.vacciness");
-				List<Patient> pats = new ArrayList<Patient>();
-				
-				Lab lab = new Lab(Lvacciness, Ladress, Lname, Lcif);
+				int Lid = rs.getInt("id");
+				String Lname = rs.getString("name");
+				String Ladress = rs.getString("adress");
+				String Lcif = rs.getString("cif");
+				int Lvacciness = rs.getInt("vacciness");
+				List<Patient> pats = getPatientsfromLab(Lid);
+				Lab lab = new Lab(Lvacciness, Ladress, Lname, Lcif, pats);
 				labs.add(lab);
 			}
 	
 		}catch(Exception e) {
-			
+			e.printStackTrace();
 		}
-		return null;
+		return labs;
+	}
+
+	@Override
+	public List<Patient> getPatientsfromDoc(int Did) {
+		List<Patient> pats = new ArrayList<Patient>();
+
+		try {
+			String sql = "SELECT p.birthday, p.sex, p.height, p.weight FROM patients AS p "
+					+ "JOIN pat_doc AS pd ON p.id = pd.id_pat JOIN doctors AS d ON pd.id_doc = d.id WHERE d.id = ? ";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, Did);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+
+				Date birthday = rs.getDate("birthday");
+				Sex sexo;
+				if (rs.getString("sex").equalsIgnoreCase("m")) {
+					sexo = Sex.Male;
+				} else {
+					sexo = Sex.Female;
+				}
+				Float height = rs.getFloat("height");
+				Float weight = rs.getFloat("weight");
+				Patient p = new Patient(birthday, sexo, height, weight);
+
+				pats.add(p);
+
+			}
+
+			rs.close();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return pats;
+	}
+
+	@Override
+	public List<Doctor> getAllDoctorsXML() {
+		List<Doctor> docs = new ArrayList<Doctor>();
+		try {
+			String sql = "SELECT id, name, speciality, birth_date, collegiate_number, sex, hospital FROM doctors WHERE name LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, '%'+""+'%');
+			ResultSet rs = prep.executeQuery();
+			while(rs.next()) {
+				int Did = rs.getInt("id");
+				String Dname = rs.getString("name");
+				String Dspeciality = rs.getString("speciality");
+				Date Dbirth = rs.getDate("birth_date");
+				String Dcollegiate = rs.getString("collegiate_number");
+				Sex Dsexo;
+				if (rs.getString("sex").equalsIgnoreCase("m")) {
+					Dsexo = Sex.Male;
+				} else {
+					Dsexo = Sex.Female;
+				}
+				String Dhospital = rs.getString("hospital");
+				List<Patient> pats = getPatientsfromDoc(Did);
+				Doctor doc = new Doctor(Dname, Dspeciality, Dbirth, Dcollegiate, Dsexo, Dhospital, pats);
+				docs.add(doc);
+			}
+	
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return docs;
 	}
 
 	

@@ -56,7 +56,17 @@ public class Doctor implements Serializable{
 		this.name = name;
 	}
 
-	
+	public Doctor(String name, String speciality, Date birthday, String collegiate_number, Sex sex,
+			String hospital, List<Patient> pats) {
+		super();
+		this.name = name;
+		this.speciality = speciality;
+		this.birthday = birthday;
+		this.collegiate_number = collegiate_number;
+		this.sex = sex;
+		this.hospital = hospital;
+		this.patients = pats;
+	}
 
 
 	public Doctor(Integer id, String speciality, String name, Date birthday, String collegiate_number, Sex sex,

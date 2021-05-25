@@ -43,6 +43,14 @@ public class Lab implements Serializable{
 		super();
 		this.patients = new ArrayList<Patient>();
 	}
+	
+	public Lab(int vaccines, String address, String name, String cif, List<Patient> pats) {
+		super();
+		this.vaccines_produce = vaccines;
+		this.address = address;
+		this.name = name;
+		this.patients = pats;
+	}
 
 	public Lab(int id, int vaccines_produce, String address, String name, String cif) {
 		super();
