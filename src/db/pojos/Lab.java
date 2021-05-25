@@ -49,6 +49,7 @@ public class Lab implements Serializable{
 		this.vaccines_produce = vaccines;
 		this.address = address;
 		this.name = name;
+		this.cif = cif;
 		this.patients = pats;
 	}
 
