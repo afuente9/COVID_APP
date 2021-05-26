@@ -162,7 +162,7 @@
   </package>  
   <class id="20" language="java" name="db.jdbc.JDBCManagment" project="CovidApp" 
     file="/CovidApp/src/db/jdbc/JDBCManagment.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="63" y="985"/>    
+    <position height="-1" width="-1" x="85" y="1166"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
