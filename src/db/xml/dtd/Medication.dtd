@@ -1,5 +1,0 @@
-<!DOCTYPE Medication [
-   <!ELEMENT Medication (id, name)>
-   <!ELEMENT id (#PCDATA)>
-   <!ELEMENT name (#PCDATA)>
-]>

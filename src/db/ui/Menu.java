@@ -228,9 +228,9 @@ public class Menu {
 	
 
 	private static void htmlgen() throws Exception{
-		XmlToHtml.createHTML("./xmlFileSave/allLabs.xml", "/Users/alvaro/Desktop/Covid_App/COVID_APP/src/db/xmls/LabHTML.xslt", "./xmlFileSave/labResult.html");
-		XmlToHtml.createHTML("./xmlFileSave/allAdmins.xml", "/Users/alvaro/Desktop/Covid_App/COVID_APP/src/db/xmls/AdminHTML.xslt", "./xmlFileSave/adminResult.html");
-		XmlToHtml.createHTML("./xmlFileSave/allDocs.xml", "/Users/alvaro/Desktop/Covid_App/COVID_APP/src/db/xmls/DoctorHTML.xslt", "./xmlFileSave/docResult.html");
+		XmlToHtml.createHTML("./xmlFileSave/allLabs.xml", "W:\\DOCS\\java-2020-12\\COVID_APP\\src\\db\\xmls\\LabHTML.xslt", "./xmlFileSave/labResult.html");
+		XmlToHtml.createHTML("./xmlFileSave/allAdmins.xml", "W:\\DOCS\\java-2020-12\\COVID_APP\\src\\db\\xmls\\AdminHTML.xslt", "./xmlFileSave/adminResult.html");
+		XmlToHtml.createHTML("./xmlFileSave/allDocs.xml", "W:\\DOCS\\java-2020-12\\COVID_APP\\src\\db\\xmls\\DoctorHTML.xslt", "./xmlFileSave/docResult.html");
 	}
 
 	private static void addFromXml() throws Exception{

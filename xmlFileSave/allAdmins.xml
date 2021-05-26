@@ -10,15 +10,15 @@
         <vaccines>234</vaccines>
     </governs>
     <governs name="Italy">
-        <vaccines>0</vaccines>
+        <vaccines>235</vaccines>
     </governs>
     <governs name="Argentina">
-        <vaccines>0</vaccines>
+        <vaccines>2342</vaccines>
     </governs>
     <governs name="Canada">
-        <vaccines>0</vaccines>
+        <vaccines>424</vaccines>
     </governs>
     <governs name="USA">
-        <vaccines>254</vaccines>
+        <vaccines>354</vaccines>
     </governs>
 </AdminList>
