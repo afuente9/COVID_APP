@@ -162,7 +162,7 @@ public class StatisticsController implements Initializable {
 					series = new XYChart.Series();
 					lineChart.setTitle("");
 
-					if (typeofpatient.getValue().equals("Alive") == true) {
+					if (typeofpatient.getValue().equals("Infected") == true) {
 						// did it like that so it works well
 						plotTittle.setText("Deceased people per day");
 
@@ -179,7 +179,7 @@ public class StatisticsController implements Initializable {
 
 						lineChart.getData().addAll(series);
 
-					} else if (typeofpatient.getValue().toString().equals("Dead") == true) {
+					} else if (typeofpatient.getValue().toString().equals("Deceased") == true) {
 						// did it like that so it works well
 						plotTittle.setText("Infected people per day");
 						this.alive = true;
