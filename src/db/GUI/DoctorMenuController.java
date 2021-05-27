@@ -211,7 +211,6 @@ import javafx.stage.Stage;
 	    	if(file.isFile() && file.getName().contains(".jpg")) {
 	    		String thumbURL = file.toURI().toURL().toString();
 	    		Image imgLoad= new Image(thumbURL,500,300,true,true,true);
-	    		System.out.println("fnriuferiusiaoiasdfj");
 	    		this.DoctorPic.setImage(imgLoad);
 	    		 BufferedImage bImage = ImageIO.read(file);
 	    	      ByteArrayOutputStream bos = new ByteArrayOutputStream();
