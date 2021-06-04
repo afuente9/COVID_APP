@@ -28,6 +28,9 @@ import db.pojos.Other_Pathologies;
 import db.pojos.Patient;
 import db.pojos.Sex;
 import db.pojos.users.User;
+import db.xml.dtd.JavaToXml;
+import db.xml.dtd.XmlToHtml;
+import db.xml.dtd.XmlToJava;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
@@ -1300,4 +1303,40 @@ stage.setTitle(title);
 
 		return max;
 	}
+	@FXML
+    void ondeleteaccount(MouseEvent event) {
+		String name = "deleteacView.fxml";
+		deleteacController controller = null;
+		try {
+			Pane root0 = (Pane) this.PasswordTextField.getScene().getRoot();
+
+			 ColorAdjust adj = new ColorAdjust(0, -0.9, -0.5, 0);
+
+			 GaussianBlur blur = new GaussianBlur(10); 
+			    adj.setInput(blur);
+			 root0.setEffect(adj);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+			Parent root;
+
+			root = loader.load();
+			controller = loader.getController();
+
+			Scene scene = new Scene(root);
+			Stage stage = new Stage();
+			stage.setResizable(false);
+			stage.setTitle("Covidist");
+stage.setTitle("Delete account");				
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.setScene(scene);
+			stage.getIcons().add(new Image("https://image.flaticon.com/icons/png/512/2833/2833315.png"));
+
+			stage.showAndWait();
+			root0.setEffect(null);
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+    }
+	
+}
 }

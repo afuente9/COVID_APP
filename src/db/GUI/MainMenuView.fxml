@@ -105,6 +105,11 @@
                   <Font name="Times New Roman" size="13.0" />
                </font>
             </Label>
+            <Label layoutX="397.0" layoutY="315.0" onMouseClicked="#ondeleteaccount" prefHeight="19.0" prefWidth="88.0" text="Delete user..." textFill="#35657f">
+               <font>
+                  <Font name="Times New Roman" size="16.0" />
+               </font>
+            </Label>
       </children>
     </AnchorPane>
   </children>

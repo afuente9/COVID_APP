@@ -116,6 +116,11 @@ public class SignUpDoctorController implements Initializable {
 		for (int i = 0; i < ascciNumsName.size(); i++) {
 			if (!(ascciNumsName.get(i) >= 65 && ascciNumsName.get(i) <= 122)) {
 				correctData = false;
+				if(ascciNumsName.get(i)==32){
+					correctData = true;
+
+					
+				}
 
 			}
 
@@ -218,11 +223,9 @@ public class SignUpDoctorController implements Initializable {
 						// añadir doctor a la lista de doctores
 						Main.getInter().addDoctorUser(d_new, u);
 						Doctor dlast= Main.getInter().getLastDoctor();
-						System.out.println(""+dlast);
 		              	List<Patient> allpatients= Main.getInter().getAllPatient();
 		              	
 						for (int i=0;i<allpatients.size();i++) {
-							System.out.println("hola");
 							
 							Main.getInter().assignPattoDoc(allpatients.get(i).getId(), dlast);
 						}

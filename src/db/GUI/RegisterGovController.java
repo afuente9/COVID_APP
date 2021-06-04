@@ -51,13 +51,18 @@ public class RegisterGovController {
 			return ascciNumsName;
 
 		}
-	    public boolean validateName(String name) {
+		public boolean validateName(String name) {
 			boolean correctData = true;
 			List<Integer> ascciNumsName = ConvertAscii(NameTextField.getText());
 
 			for (int i = 0; i < ascciNumsName.size(); i++) {
 				if (!(ascciNumsName.get(i) >= 65 && ascciNumsName.get(i) <= 122)) {
 					correctData = false;
+					if(ascciNumsName.get(i)==32){
+						correctData = true;
+
+						
+					}
 
 				}
 

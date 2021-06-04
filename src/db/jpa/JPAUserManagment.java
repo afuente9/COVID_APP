@@ -105,17 +105,25 @@ public class JPAUserManagment implements UserManager{
 	@Override
 	public void deleteUser(String mail, String password) {
 		try {
+			System.out.println("el usuario");
+
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			md.update(password.getBytes());
 			byte[] hash = md.digest();
 			Query q = em.createNativeQuery("SELECT * FROM users WHERE email = ? AND password = ?", User.class);
 			q.setParameter(1, mail);
 			q.setParameter(2, hash);
-			User u = (User) q.getSingleResult();
+			if (q.getResultList().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Wrong user name or password.");
 
-			em.getTransaction().begin();
-			em.remove(u);
-			em.getTransaction().commit();
+			}else {
+				User u = (User) q.getSingleResult();
+
+				em.getTransaction().begin();
+				em.remove(u);
+				em.getTransaction().commit();	
+			}
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
