@@ -28,7 +28,6 @@ public class Menu {
 	private static Connection c;
 	private static XmlToJava xj = new XmlToJava();
 	private static JavaToXml jx = new JavaToXml();
-	private static XmlToHtml xh = new XmlToHtml();
 	private static Cov_Manager inter = new JDBCManagment();
 	private static UserManager userman = new JPAUserManagment();
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -215,7 +214,7 @@ public class Menu {
 				htmlgen();
 				break;
 			case 0:
-				//TODO ESTO PARA LA GUI?
+				System.out.println("Have a nice day :)");
 				inter.disconnect();
 				userman.disconnect();
 				System.exit(0);
@@ -228,9 +227,24 @@ public class Menu {
 	
 
 	private static void htmlgen() throws Exception{
-		XmlToHtml.createHTML("./xmlFileSave/allLabs.xml", "W:\\DOCS\\java-2020-12\\COVID_APP\\src\\db\\xmls\\LabHTML.xslt", "./xmlFileSave/labResult.html");
-		XmlToHtml.createHTML("./xmlFileSave/allAdmins.xml", "W:\\DOCS\\java-2020-12\\COVID_APP\\src\\db\\xmls\\AdminHTML.xslt", "./xmlFileSave/adminResult.html");
-		XmlToHtml.createHTML("./xmlFileSave/allDocs.xml", "W:\\DOCS\\java-2020-12\\COVID_APP\\src\\db\\xmls\\DoctorHTML.xslt", "./xmlFileSave/docResult.html");
+		System.out.println("1. Generate HTML for Lab: ");
+		System.out.println("2. Generate HTML for Govern: ");
+		System.out.println("3. Generate HTML for Doc: ");
+		int op = Integer.parseInt(reader.readLine());
+		if (op==1) {
+			System.out.println("Indicate the directory: ");
+			XmlToHtml.createHTML(reader.readLine(), "W:\\DOCS\\java-2020-12\\COVID_APP\\src\\db\\xmls\\LabHTML.xslt", "./xmlFileSave/labResult.html");
+			System.out.println("File labResult.html created in the proyect's folder xmlFileSave ");
+		} else if (op==2) {
+			System.out.println("Indicate the directory: ");
+			XmlToHtml.createHTML(reader.readLine(), "W:\\DOCS\\java-2020-12\\COVID_APP\\src\\db\\xmls\\AdminHTML.xslt", "./xmlFileSave/adminResult.html");
+			System.out.println("File adminResult.html created in the proyect's folder xmlFileSave ");
+		} else if (op == 3) {
+			System.out.println("Indicate the directory: ");
+			XmlToHtml.createHTML(reader.readLine(), "W:\\DOCS\\java-2020-12\\COVID_APP\\src\\db\\xmls\\DoctorHTML.xslt", "./xmlFileSave/docResult.html");
+			System.out.println("File docResult.html created in the proyect's folder xmlFileSave ");
+		}
+		
 	}
 
 	private static void addFromXml() throws Exception{
@@ -239,9 +253,14 @@ public class Menu {
 		System.out.println("3. Insert Doc: ");
 		int op = Integer.parseInt(reader.readLine());
 		if (op==1) {
-			xj.getLabFromXml("erereergegerg");
+			System.out.println("Indicate the directory: ");
+			xj.getLabFromXml(reader.readLine());
 		} else if (op==2) {
-			xj.getAdminFromXml("Spain");
+			System.out.println("Indicate the directory: ");
+			xj.getAdminFromXml(reader.readLine());
+		} else if (op == 3) {
+			System.out.println("Indicate the directory: ");
+			xj.getDocFromXml(reader.readLine());
 		}
 	}
 

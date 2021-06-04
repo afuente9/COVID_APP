@@ -1089,7 +1089,6 @@ public class JDBCManagment implements Cov_Manager {
 			prep.setBoolean(1, alive);
 			ResultSet rs = prep.executeQuery();
 			while (rs.next()) {
-				// System.out.println("el nombre del paciente es"+ rs.getInt("id"));
 				times++;
 			}
 
