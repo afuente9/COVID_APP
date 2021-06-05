@@ -20,6 +20,7 @@ public class ModifyLaboratoryController {
 
 	public void setLmodif(Lab lmodif) {
 		this.lmodif = lmodif;
+		
 	}
 
 	
