@@ -44,6 +44,9 @@ public class AddPatientController {
     @FXML
     private Label medicationslabel;
 
+    
+    
+    
     @FXML
     private Label place;
 
